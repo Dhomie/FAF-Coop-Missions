@@ -43,14 +43,20 @@ local Player2                    = ScenarioInfo.Player2
 local Player3                    = ScenarioInfo.Player3
 local Player4                    = ScenarioInfo.Player4
 local Players = {ScenarioInfo.Player1, ScenarioInfo.Player2, ScenarioInfo.Player3, ScenarioInfo.Player4}
+local AIs = {ScenarioInfo.UEF}
+--Table of unit categories for the buffing functions
+local BuffCategories = {
+	BuildPower = (categories.FACTORY * categories.STRUCTURE) + categories.ENGINEER,
+	Economy = categories.ECONOMIC,
+}
 
  -- reminder timers:
-local Reminder_M1P1_Initial            = 2000
-local Reminder_M1P1_Subsequent         = 800
-local Reminder_M2P1_Initial            = 1300
+local Reminder_M1P1_Initial            = 2100
+local Reminder_M1P1_Subsequent         = 700
+local Reminder_M2P1_Initial            = 1200
 local Reminder_M2P1_Subsequent         = 600
-local Reminder_M2P2_Initial            = 400
-local Reminder_M2P2_Subsequent         = 800
+local Reminder_M2P2_Initial            = 600
+local Reminder_M2P2_Subsequent         = 300
 local Reminder_M3P1_Initial            = 1200
 local Reminder_M3P1_Subsequent         = 600
 
@@ -62,19 +68,13 @@ ScenarioInfo.M3P1Complete               = false
 local M1_GeneratorsDestroyed            = 0
 local M1_NavalPromptPlayed              = false
 
- -- m1 attack growth, easy/normal difficulty
-local M1_FirstAttacks                   = 600   -- 600   #Delay before UEF will buzz the players base, leading to attacks commencing.
-local M1_FirstAttacksIncrease           = 950   -- 950   #increase the stage one attacks to full strength
-local M1_SecondAttacks                  = 1350  -- 1350   #Delay between mission start and the second stage of attacks
-local M1_ThirdAttacks                   = 1900  -- 1900  #"         "           "
-local M1_PostStage3LandAssaultDelay     = 200   -- Pause after start of the 3rd attack stage that we send in the single "warning" land assault
-local M1_PostStage3NavalDelay           = 190   -- Pause after start of the 3rd attack stage that we send in the naval attack
-
- -- m1 attack growth, hard difficulty
-local M1_FirstAttacks_HARD              = 360   -- 360   #Delay before UEF will buzz the players base, leading to attacks commencing.
-local M1_FirstAttacksIncrease_HARD      = 690   -- 710   #increase the stage one attacks to full strength
-local M1_SecondAttacks_HARD             = 990   -- 1110  #Delay between mission start and the second stage of attacks
-local M1_ThirdAttacks_HARD              = 1200  -- 1660  #"         "           "
+ -- m1 attack growth, tables for difficulty scaling
+local M1_FirstAttacks                   = {600, 480, 360}		-- Delay before UEF will buzz the players' base, leading to attacks commencing.
+local M1_FirstAttacksIncrease           = {960, 780, 690}   	-- Increase the stage one attacks to full strength.
+local M1_SecondAttacks                  = {1360, 1180, 1000}	-- Delay between mission start and the second stage of attacks.
+local M1_ThirdAttacks                   = {1800 , 1500, 1200} 	-- Delay between mission start and the third stage of attacks.
+local M1_PostStage3LandAssaultDelay     = 240   				-- Pause after start of the 3rd attack stage that we send in the single "warning" land assault.
+local M1_PostStage3NavalDelay           = 180   				-- Pause after start of the 3rd attack stage that we send in the single naval attack.
 
 local M1_TransportAttackDone            = false
 
@@ -106,24 +106,85 @@ local M2_OffmapAttack_Air_Delay2                    =   400
 ScenarioInfo.M2_OffmapAirDead                       =   0
 ScenarioInfo.M2_Hard_OffmapAir_Count                =   0
 
-ScenarioInfo.VarTable['M1_NumEngineers']            = AdjustDifficulty ({2,6,8})
-ScenarioInfo.VarTable['M2_Air_NumEngineers']        = AdjustDifficulty ({7,19,27})
-ScenarioInfo.VarTable['M2_Naval_NumEngineers']      = AdjustDifficulty ({3,9,15})
-ScenarioInfo.VarTable['M2_SW_NumEngineers']         = AdjustDifficulty ({2,6,12})
-ScenarioInfo.VarTable['M2_North_NumEngineers']      = AdjustDifficulty ({4,12,18})
-ScenarioInfo.VarTable['M3_Air_NumEngineers']        = AdjustDifficulty ({8,16,28})
-ScenarioInfo.VarTable['M3_Main_NumEngineers']       = AdjustDifficulty ({9,18,34})
-ScenarioInfo.VarTable['M1_GunshipGroupsPer']        = AdjustDifficulty ({1,2,3})
+ScenarioInfo.VarTable['M1_UEFAttackBegin']          = false		--Part 1, first stage of attacks, no off-map units
+ScenarioInfo.VarTable['M1_UEFAttackBeginIncrease']  = false		--Part 1, first stage escalates, no off-map units
+ScenarioInfo.VarTable['M1_UEFAttackBegin2']         = false		--Part 1, second stage of attacks, off-map air attacks begin.
+ScenarioInfo.VarTable['M1_UEFAttackBegin3']         = false		--Part 1, third, and final stage of attacks, off-map naval, and transport attacks begin.
+ScenarioInfo.VarTable['M2_DelayedNaval']            = false		--Used for scripted spawns
+ScenarioInfo.VarTable['M3_VirusUpload']             = false		--Part 3, secondary objective flag if completed
+ScenarioInfo.VarTable['M3_PlayerAtUEFMainBase']     = false		--Used by the vanilla PBM to build additional base defenses, currently not used.
 
-ScenarioInfo.VarTable['M1_UEFAttackBegin']          = false
-ScenarioInfo.VarTable['M1_UEFAttackBeginIncrease']  = false
-ScenarioInfo.VarTable['M1_UEFAttackBegin2']         = false
-ScenarioInfo.VarTable['M1_UEFAttackBegin3']         = false
-ScenarioInfo.VarTable['M2_DelayedNaval']            = false
-ScenarioInfo.VarTable['M3_VirusUpload']             = false
-ScenarioInfo.VarTable['M3_PlayerAtUEFMainBase']     = false
+ScenarioInfo.OperationEnding        = false						--Flag used to ensure only 1 method of completing the operation is being focused on.
+																--The 2 methods are either killing Hex5's prison building near Godwyn's main base, or killing Godwyn himself.
 
-ScenarioInfo.OperationEnding        = false
+------------------------
+-- AI buffing functions
+------------------------
+---Comments:
+---ACUs and sACUs belong to both ECONOMIC and ENGINEER categories.
+
+--Buffs AI factory structures, and engineer units
+function BuffAIBuildPower()
+	--Build Rate multiplier values, depending on the Difficulty
+	local Rate = {1.0, 2.0, 3.0}
+	--Buff definitions
+	buffDef = Buffs['CheatBuildRate']
+	buffAffects = buffDef.Affects
+	buffAffects.BuildRate.Mult = Rate[Difficulty]
+
+	while true do
+		for i, j in AIs do
+			if table.getn(AIs) > 0 then
+				local buildpower = ArmyBrains[j]:GetListOfUnits(BuffCategories.BuildPower, false)
+				--Check if there is anything to buff
+				if table.getn(buildpower) > 0 then
+					for k, v in buildpower do
+						--Apply buff to the entity if it hasn't been buffed yet
+						if not v.BuildBuffed then
+							Buff.ApplyBuff( v, 'CheatBuildRate' )
+							--New Entity flag which is true if the entity has already been buffed
+							v.BuildBuffed = true
+						end
+					end
+				end
+			end
+		end
+		--Do this again after 60 seconds
+		WaitSeconds(60)
+	end
+end
+
+--Buffs resource producing structures, (and ACU variants.)
+function BuffAIEconomy()
+	--Resource production multipliers, depending on the Difficulty
+	local Rate = {2.0, 3.0, 5.0}
+	--Buff definitions
+	buffDef = Buffs['CheatIncome']
+	buffAffects = buffDef.Affects
+	buffAffects.EnergyProduction.Mult = Rate[Difficulty]
+	buffAffects.MassProduction.Mult = Rate[Difficulty]
+	
+	while true do
+		for i, j in AIs do
+			if table.getn(AIs) > 0 then
+				local economy = ArmyBrains[j]:GetListOfUnits(BuffCategories.Economy, false)
+				--Check if there is anything to buff
+				if table.getn(economy) > 0 then
+					for k, v in economy do
+				--Apply buff to the entity if it hasn't been buffed yet
+						if not v.EcoBuffed then
+					Buff.ApplyBuff( v, 'CheatIncome' )
+					--New Entity flag which is true if the entity has already been buffed
+					v.EcoBuffed = true
+						end
+					end
+				end
+			end
+		end
+		--Do this again after 60 seconds
+		WaitSeconds(60)
+	end
+end
 ----------------------
 -- Starter Functions
 ----------------------
@@ -248,9 +309,9 @@ function M1UnitsForStart()
 	-- M2 Area South Western Omni Base: factories and walls, it will build transport attacks from the start.
 	M2UEFAI.UEFM2OmniBaseSouthWestAI()
 	
-	--Enabled here only for debug purposes:
-		--M3UEFAI.UEFM3AirBaseAI()
-		--M3UEFAI.UEFM3MainBaseAI()
+	--AI buffing functions, forkthreaded, they act as coroutines, we want to check for units to buff every 60 seconds.
+	ForkThread(BuffAIBuildPower)
+	ForkThread(BuffAIEconomy)
 end
 
 
@@ -286,7 +347,6 @@ function BeginOperation()
 			end
         end
     )
-    ScenarioInfo.M1P1:AddProgressCallback(M1_GeneratorProgressTaunt)
     ScenarioFramework.Dialogue(ScenarioStrings.NewPObj)
 
     -- Dialogue and Objective timers/assign
@@ -301,28 +361,14 @@ function BeginOperation()
     ScenarioFramework.CreateArmyIntelTrigger( M1_UEFSpotsPlayer, ArmyBrains[UEF], 'LOSNow', false, true, categories.ALLUNITS, true, ArmyBrains[Player1] )
 
     -- TIMING FRAMEWORK for mission. 3 major types of attacks, with the first transitioning in in two steps.
-    if Difficulty == 3 then
-        ScenarioFramework.CreateTimerTrigger (M1_BeginFirstAttacks, M1_FirstAttacks_HARD )
-        ScenarioFramework.CreateTimerTrigger (M1_ExpandFirstAttacks, M1_FirstAttacksIncrease_HARD )
-        ScenarioFramework.CreateTimerTrigger (M1_BeginSecondAttacks, M1_SecondAttacks_HARD )
-        ScenarioFramework.CreateTimerTrigger (M1_BeginThirdAttacks, M1_ThirdAttacks_HARD )
-    else
-        ScenarioFramework.CreateTimerTrigger (M1_BeginFirstAttacks, M1_FirstAttacks )
-        ScenarioFramework.CreateTimerTrigger (M1_ExpandFirstAttacks, M1_FirstAttacksIncrease )
-        ScenarioFramework.CreateTimerTrigger (M1_BeginSecondAttacks, M1_SecondAttacks )
-        ScenarioFramework.CreateTimerTrigger (M1_BeginThirdAttacks, M1_ThirdAttacks )
-    end
+        ScenarioFramework.CreateTimerTrigger (M1_BeginFirstAttacks, M1_FirstAttacks[Difficulty])
+        ScenarioFramework.CreateTimerTrigger (M1_ExpandFirstAttacks, M1_FirstAttacksIncrease[Difficulty])
+        ScenarioFramework.CreateTimerTrigger (M1_BeginSecondAttacks, M1_SecondAttacks[Difficulty])
+        ScenarioFramework.CreateTimerTrigger (M1_BeginThirdAttacks, M1_ThirdAttacks[Difficulty])
 
     -- Taunt when 5th naval unit killed
     ScenarioFramework.CreateArmyStatTrigger( M1_NavalProgressTaunt, ArmyBrains[Player1], 'TauntTrigger',
         {{ StatType = 'Enemies_Killed', CompareType = 'GreaterThan', Value = 4, Category = categories.NAVAL * categories.UEF, },} ) -- 5 uef naval
-end
-
-function M1_GeneratorProgressTaunt()
-    M1_GeneratorsDestroyed = M1_GeneratorsDestroyed + 1
-    if M1_GeneratorsDestroyed == 3 then
-        ScenarioFramework.Dialogue(OpStrings.TAUNT4)
-    end
 end
 
 function M1_PromptObjectiveDialogue()
@@ -351,8 +397,7 @@ function M1_UEFSpotsPlayerThread()
     ScenarioFramework.Dialogue(OpStrings.C05_M01_040)
 end
 
- --- First Stage of attacks: scouts, tell pbm to begin building weak attacks
-
+ -- First Stage of attacks, only triggered by the timer, we don't want players to be rushed in the first few minutes just because they might have sent a scout very early.
 function M1_BeginFirstAttacks()
     ForkThread(M1_SpawnUEFScoutsThread)
 end
@@ -381,19 +426,20 @@ function M1_ExpandFirstAttacks()
     ScenarioInfo.VarTable['M1_UEFAttackBeginIncrease'] = true
 end
 
- --- Second Stage of attacks: attack strength/frequency increase, naval attack (if units from attacking subgroup are remaining) occurs
-
+ -- Second Stage of attacks: attack strength/frequency increase, naval attack (if units from attacking subgroup are remaining) occurs
 function M1_BeginSecondAttacks()
     -- Tell pbm to begin building second attacks
-    --ScenarioInfo.VarTable['M1_UEFAttackBegin'] = false
     ScenarioInfo.VarTable['M1_UEFAttackBegin2'] = true
 end
 
 
- --- Third Stage of attacks: offmap airbase begins gunship attacks, offmap transport base begins landing land units, offmap naval base begins naval attacks
-
+ -- Third Stage of attacks: offmap airbase begins gunship attacks, offmap transport bases begin landing land units, offmap naval base begins naval attacks
 function M1_BeginThirdAttacks()
     ScenarioInfo.VarTable['M1_UEFAttackBegin3'] = true
+	
+	--Taunt 4 moved here.
+	--'Godwyn: There is more here than meets the eye.'
+	ScenarioFramework.Dialogue(OpStrings.TAUNT4)
 
     ScenarioFramework.CreateTimerTrigger(M1_NavalAttack, M1_PostStage3NavalDelay)
 
@@ -479,7 +525,7 @@ function BeginMission2()
         }
     )
 	
-	--OpAI will rebuild their bases, gotta check unit types inside the specified area at all times
+	--UEF rebuilds their bases, gotta check unit types inside the specified area at all times
 	ScenarioInfo.M2S1 = Objectives.CategoriesInArea(	--Destroy naval base
         'primary',                    	-- type
         'incomplete',               	-- status
@@ -855,10 +901,9 @@ function M2_GunshipAttackDefeated()
     end
 end
 
- --- Hard difficulty M2 offmap attacks
+-- Hard difficulty M2 offmap attacks
 
- --- Land (west)
-
+-- Land (west)
 function M2_Hard_OffmapAttack_Counter()
     ScenarioInfo.M2_OffmapPlatoonsDead = ScenarioInfo.M2_OffmapPlatoonsDead + 1
     if ScenarioInfo.M2_OffmapPlatoonsDead == 4 then
@@ -915,7 +960,7 @@ function M2_Hard_Offmap_AddEscort(escort, transport)
     ScenarioFramework.PlatoonPatrolChain( escort, 'M2_UEFGunshipAttack_Chain2' )
 end
 
- --- Air (South)
+-- Air (South)
 
 function M2_Hard_OffmapAirAttack_Counter()
     -- increment counter for each platoon death
@@ -1004,7 +1049,7 @@ function BeginMission3()
             M3_UEFCommanderDestroyed()
         end
     )
-
+	--TODO: Rewrite this from Objectives.Basic to Objectives.Capture
     ScenarioInfo.M3S1 = Objectives.Basic(    -- Gunship Virus, secondary
         'secondary',
         'incomplete',
@@ -1166,9 +1211,6 @@ end
 function M3_PlayerAtUEFBackBase()
     -- Tell PBM to start making patrols for the backbase area
     ScenarioInfo.VarTable['M3_PlayerAtUEFMainBase'] = true
-
-    -- Add new back-base turrets to the base template
-    AIBuildStructures.AppendBuildingTemplate( ArmyBrains[UEF], 'UEF', ('M3_UEFMainBase_ExpandBase'), 'M3_UEFMainBaseMaintainBase')
 end
 
  --- Gunship Virus functions

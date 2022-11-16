@@ -110,7 +110,28 @@ function UEFM2OmniBaseEastAirAttacks()
         {'default_brain','M1_UEFAttackBegin2'})
 	
 	--Part 2 attacks
-	--TODO
+	
+	--Gunship attack
+	quantity = {3, 6, 9}
+	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M2_UEFOmniBaseEast_Air_Platoon_1',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 130,
+        }
+    )
+    opai:SetChildQuantity('Gunships', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2})
+	
+	--Heavy Gunship attack
+	quantity = {3, 6, 9}
+	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M2_UEFOmniBaseEast_Air_Platoon_2',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 130,
+        }
+    )
+    opai:SetChildQuantity('HeavyGunships', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2})
 end
 
 --Eastern Omni Base maintains air defenses for itself, and the naval base.
