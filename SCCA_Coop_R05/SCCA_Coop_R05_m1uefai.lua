@@ -53,9 +53,7 @@ function UEFM1BaseAirAttacks()
     local quantity = {}
 	local ChildType = {'Interceptors', 'Bombers', 'Gunships'}
 	
-	--Base patrols
-	
-	--Maintains [4, 10, 18] [Air Superiority Fighters, Heavy Gunships, Strategic Bombers]
+	--Maintains [3, 4, 5] units defined in ChildType
 	quantity = {3, 4, 5}
 	for k = 1, table.getn(ChildType) do
 		opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Base_AirDefense' .. ChildType[k],
