@@ -23,6 +23,8 @@ local M1UEFAI = import ('/maps/SCCA_Coop_R05/SCCA_Coop_R05_m1uefai.lua')
 local M2UEFAI = import ('/maps/SCCA_Coop_R05/SCCA_Coop_R05_m2uefai.lua')
 local M3UEFAI = import ('/maps/SCCA_Coop_R05/SCCA_Coop_R05_m3uefai.lua')
 
+local Buff = import('/lua/sim/Buff.lua')
+
 ---------
 -- Globals
 ---------
