@@ -5,9 +5,6 @@
 --  Summary  : UEF army AI for Mission 1 - SCCA_Coop_R05
 ------------------------------------------------------------------
 local BaseManager = import('/lua/ai/opai/basemanager.lua')
-local ScenarioFramework = import('/lua/ScenarioFramework.lua')
-local ScenarioPlatoonAI = import('/lua/ScenarioPlatoonAI.lua')
-local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 ---------
 -- Locals
@@ -15,8 +12,6 @@ local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 local UEF = 2
 local Difficulty = ScenarioInfo.Options.Difficulty
 local SPAIFileName = '/lua/ScenarioPlatoonAI.lua'
-local FileName = '/maps/SCCA_Coop_R05/SCCA_Coop_R05_m1uefai.lua'
-local MainScript = '/maps/SCCA_Coop_R05/SCCA_Coop_R05_script.lua'
 
 ----------------
 -- Base Managers

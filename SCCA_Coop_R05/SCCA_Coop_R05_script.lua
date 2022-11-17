@@ -16,7 +16,6 @@ local ScenarioPlatoonAI = import('/lua/ScenarioPlatoonAI.lua')
 local Cinematics = import('/lua/cinematics.lua')
 local OpStrings   = import('/maps/SCCA_Coop_R05/SCCA_Coop_R05_Strings.lua')
 local ScenarioStrings = import('/lua/ScenarioStrings.lua')
-local AIBuildStructures = import('/lua/ai/aibuildstructures.lua')
 local VizMarker = import('/lua/sim/VizMarker.lua').VizMarker
 local Utilities = import('/lua/utilities.lua')
 local M1UEFAI = import ('/maps/SCCA_Coop_R05/SCCA_Coop_R05_m1uefai.lua')
@@ -67,7 +66,6 @@ ScenarioInfo.M2P1Complete               = false
 ScenarioInfo.M2P2Complete               = false
 ScenarioInfo.M3P1Complete               = false
 
-local M1_GeneratorsDestroyed            = 0
 local M1_NavalPromptPlayed              = false
 
  -- m1 attack growth, tables for difficulty scaling
@@ -128,7 +126,7 @@ ScenarioInfo.OperationEnding        = false						--Flag used to ensure only 1 me
 --Buffs AI factory structures, and engineer units
 function BuffAIBuildPower()
 	--Build Rate multiplier values, depending on the Difficulty
-	local Rate = {1.0, 2.0, 3.0}
+	local Rate = {1.0, 1.5, 2.0}
 	--Buff definitions
 	buffDef = Buffs['CheatBuildRate']
 	buffAffects = buffDef.Affects
@@ -159,7 +157,7 @@ end
 --Buffs resource producing structures, (and ACU variants.)
 function BuffAIEconomy()
 	--Resource production multipliers, depending on the Difficulty
-	local Rate = {2.0, 3.0, 5.0}
+	local Rate = {2.0, 4.0, 6.0}
 	--Buff definitions
 	buffDef = Buffs['CheatIncome']
 	buffAffects = buffDef.Affects
@@ -272,7 +270,7 @@ function M1UnitsForStart()
     if ScenarioInfo.Options.Difficulty == 2 then DifficultyConc = 'Medium' end
     if ScenarioInfo.Options.Difficulty == 3 then DifficultyConc = 'Strong' end
 
-    -- UEF Resource Base and generators, initial assist engineers. assign engineers to factories.
+    -- UEF Resource Base and generators
 	M1UEFAI.UEFM1BaseAI()
     ScenarioInfo.UEFGenerators = ScenarioUtils.CreateArmyGroup ( 'UEF', 'M1_UEFGenerators' )
 

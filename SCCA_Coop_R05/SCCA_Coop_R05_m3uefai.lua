@@ -5,9 +5,6 @@
 --  Summary  : UEF army AI for Mission 3 - SCCA_Coop_R05
 ------------------------------------------------------------------
 local BaseManager = import('/lua/ai/opai/basemanager.lua')
-local ScenarioFramework = import('/lua/ScenarioFramework.lua')
-local ScenarioPlatoonAI = import('/lua/ScenarioPlatoonAI.lua')
-local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 ---------
 -- Locals
@@ -123,6 +120,29 @@ function UEFM3AirBaseAirAttacks()
     )
     opai:SetChildQuantity('StratBombers', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
+	
+	--Filler units when gunships are restricted, otherwise just 2 platoons of air are built
+	--Bombers attack
+	quantity = {4, 8, 12}
+	opai = UEFM3AirBase:AddOpAI('AirAttacks', 'M3_UEFAirBase_Air_Platoon_5',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 110,
+        }
+    )
+    opai:SetChildQuantity('Bombers', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
+	
+	--Interceptors attack
+	quantity = {4, 8, 12}
+	opai = UEFM3AirBase:AddOpAI('AirAttacks', 'M3_UEFAirBase_Air_Platoon_6',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 110,
+        }
+    )
+    opai:SetChildQuantity('Interceptors', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 end
 
 --------------------
@@ -188,7 +208,7 @@ end
 function UEFM3MainBaseLandAttacks()
 	local opai = nil
 	local quantity = {}
-	local ChildType = {'SiegeBots', 'MobileHeavyArtillery', 'HeavyTanks', 'MobileFlak'}
+	local ChildType = {'SiegeBots', 'MobileHeavyArtillery', 'HeavyTanks', 'MobileMissiles', 'MobileFlak'}
 	
 	--Generic base patrols
     quantity = {2, 4, 6}
@@ -283,6 +303,29 @@ function UEFM3MainBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('StratBombers', quantity[Difficulty])
+	
+	--Filler units when gunships are restricted, otherwise just 2 platoons of air are built
+	--Bombers attack
+	quantity = {3, 6, 9}
+	opai = UEFM3MainBase:AddOpAI('AirAttacks', 'M3_UEFMainBase_Air_Platoon_5',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 110,
+        }
+    )
+    opai:SetChildQuantity('Bombers', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
+	
+	--Interceptors attack
+	quantity = {3, 6, 9}
+	opai = UEFM3MainBase:AddOpAI('AirAttacks', 'M3_UEFMainBase_Air_Platoon_6',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 110,
+        }
+    )
+    opai:SetChildQuantity('Interceptors', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 end
 
 function UEFM3MainBaseTransportAttacks()
