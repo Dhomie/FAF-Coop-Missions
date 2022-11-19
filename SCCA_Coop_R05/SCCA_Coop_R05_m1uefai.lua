@@ -65,7 +65,6 @@ function UEFM1BaseAirAttacks()
 	end
 	
 	--Air attacks
-	
 	--Bomber attack
 	quantity = {3, 4, 5}
 	opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Air_Platoon_1',
@@ -190,7 +189,6 @@ function UEFM1BaseLandAttacks()
     opai:SetChildQuantity({'MobileMissiles', 'LightArtillery'}, quantity[Difficulty])
 	
 	--Land attacks
-	
 	--Light attack
 	quantity = {4, 6, 8}
     opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_Attack_Platoon_1',
