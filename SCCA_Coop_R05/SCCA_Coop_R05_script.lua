@@ -258,8 +258,8 @@ function CreateCommander_Thread()
 end
 
 function M1UnitsForStart()
-    SetArmyUnitCap(UEF, 1200)
-    ScenarioFramework.SetSharedUnitCap(480)
+    SetArmyUnitCap(UEF, 1500)
+    ScenarioFramework.SetSharedUnitCap(540)
 
     for i = 2, table.getn(ArmyBrains) do
         SetIgnorePlayableRect(i, true)
@@ -505,7 +505,7 @@ end
 --------------
 
 function BeginMission2()
-    ScenarioFramework.SetSharedUnitCap(660)
+    ScenarioFramework.SetSharedUnitCap(720)
     M2_CreateUnitsForMission()
     M2_BuildCategories()
     ScenarioInfo.MissionNumber = 2
@@ -620,6 +620,22 @@ function M2_CreateUnitsForMission()
 
     -- Create an offmap generator for Hex5, so when he comes onto the map, he has the power to run his Stealth.
     ScenarioInfo.Hex5_Offmap_Generator = ScenarioUtils.CreateArmyUnit ( 'Hex5', 'M2_Hex_Temporary_Generator' )
+	
+	--Part 3 UEF bases are spawned at part 2, we want them to build off-map units, and also finish their patrol platoons by the time the map expands.
+	--UEF Main Base
+	M3UEFAI.UEFM3MainBaseAI()
+	
+	--UEF Air Base
+	M3UEFAI.UEFM3AirBaseAI()
+	
+	--CDR with a shield, death trigger, patrol
+    ScenarioInfo.M3_UEFMainBase_Commander = ScenarioUtils.CreateArmyUnit ( 'UEF', 'M3_UEFMainBase_Commander' )
+    ScenarioInfo.M3_UEFMainBase_Commander:CreateEnhancement( 'ShieldGeneratorField' )
+    ScenarioInfo.M3_UEFMainBase_Commander:CreateEnhancement( 'ResourceAllocation' )
+    ScenarioInfo.M3_UEFMainBase_Commander:CreateEnhancement( 'DamageStabilization' )
+    ScenarioInfo.M3_UEFMainBase_Commander:SetCustomName(LOC '{i R05_UEFCommander}')
+	ScenarioInfo.M3_UEFMainBase_Commander:SetAutoOvercharge(true)
+    ScenarioFramework.PauseUnitDeath( ScenarioInfo.M3_UEFMainBase_Commander )
 end
 
 function M2_EnemyBanterFourMins()
@@ -1025,7 +1041,7 @@ end
 --------------
 
 function BeginMission3()
-    ScenarioFramework.SetSharedUnitCap(720)
+    ScenarioFramework.SetSharedUnitCap(960)
     M3_CreateUnitsForMission()
     ScenarioInfo.MissionNumber = 3
     ScenarioFramework.SetPlayableArea( ScenarioUtils.AreaToRect('M3_PlayableArea') )
@@ -1082,22 +1098,7 @@ function BeginMission3()
     ScenarioFramework.CreateAreaTrigger( M2_ColonyDialogue, ScenarioUtils.AreaToRect('M3_PrisonColonyArea'), categories.ALLUNITS, true, false, ArmyBrains[Player1], 1, false)
 end
 
-function M3_CreateUnitsForMission()
-	--UEF Main Base
-	M3UEFAI.UEFM3MainBaseAI()
-	
-	--UEF Air Base
-	M3UEFAI.UEFM3AirBaseAI()
-	
-	--CDR with a shield, death trigger, patrol
-    ScenarioInfo.M3_UEFMainBase_Commander = ScenarioUtils.CreateArmyUnit ( 'UEF', 'M3_UEFMainBase_Commander' )
-    ScenarioInfo.M3_UEFMainBase_Commander:CreateEnhancement( 'ShieldGeneratorField' )
-    ScenarioInfo.M3_UEFMainBase_Commander:CreateEnhancement( 'ResourceAllocation' )
-    ScenarioInfo.M3_UEFMainBase_Commander:CreateEnhancement( 'DamageStabilization' )
-    ScenarioInfo.M3_UEFMainBase_Commander:SetCustomName(LOC '{i R05_UEFCommander}')
-	ScenarioInfo.M3_UEFMainBase_Commander:SetAutoOvercharge(true)
-    ScenarioFramework.PauseUnitDeath( ScenarioInfo.M3_UEFMainBase_Commander )
-	
+function M3_CreateUnitsForMission()	
     -- Spawn 3 smallish groups of gunships, so we definitely see gunships early
     for i=1,3 do
         local gunshipPlatoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF' ,'M3_UEF_GunshipAttack_'..i..'_'..DifficultyConc ,'NoFormation')

@@ -105,7 +105,6 @@ function UEFM2OmniBaseEastAirAttacks()
         {'default_brain','M1_UEFAttackBegin2'})
 	
 	--Part 2 attacks
-	
 	--Gunship attack
 	quantity = {3, 6, 9}
 	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M2_UEFOmniBaseEast_Air_Platoon_1',
@@ -544,7 +543,7 @@ function UEFM2NavalBaseNavalAttacks()
         BuilderName = 'M2_UEF_Naval_Attack_Builder',
         PlatoonTemplate = Temp,
         InstanceCount = Difficulty,
-        Priority = 110,
+        Priority = 150,
         PlatoonType = 'Sea',
         RequiresConstruction = true,
         LocationType = 'M2_UEF_Naval_Base',
