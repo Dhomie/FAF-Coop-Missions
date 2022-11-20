@@ -232,6 +232,9 @@ function IntroSequenceThread()
 end
 
 function CreateCommander_Thread()
+	--Use only for debug purposes:
+	--ScenarioUtils.CreateArmyGroup('Player1', 'PlayerStartingBase')
+	
     ScenarioInfo.PlayerCommander = ScenarioUtils.CreateArmyUnit ( 'Player1', 'M1_PlayerCDR' )
     ScenarioInfo.PlayerCommander:PlayCommanderWarpInEffect()
     ScenarioInfo.PlayerCommander:SetCustomName(ArmyBrains[Player1].Nickname)
@@ -1571,6 +1574,7 @@ function M2_BuildCategories()
     ScenarioFramework.RemoveRestrictionForAllHumans(
         categories.urb2108 + -- Tactical Missile Launcher
         categories.urb2304 + -- T3 SAM Launcher
+		categories.url0303 + -- Siege Assault Bot
         categories.ura0304   -- Strategic Bomber
     )
 
@@ -1579,7 +1583,7 @@ function M2_BuildCategories()
         categories.ueb2108 + -- Tactical Missile Launcher
         categories.ueb2108 + -- Tactical Missile Launcher
         categories.ueb2304 + -- T3 SAM Launcher
-        categories.uea0304 + -- Strategic Bomber
+		categories.uel0303 +  -- Siege Assault Bot
 
         -- UEF enable for M2+ UEF units:
         categories.uea0304 + -- Strategic Bomber
@@ -1593,14 +1597,8 @@ function M2_BuildCategories2()
 end
 
 function M3_BuildCategories()
-    ScenarioFramework.RemoveRestrictionForAllHumans(
+    --[[ScenarioFramework.RemoveRestrictionForAllHumans(
         categories.url0303 + -- Siege Assault Bot
         categories.uel0303   -- Siege Assault Bot
-    )
-
-     -- UEF enable for M3, UEF units:
-    --ScenarioFramework.RemoveRestriction( UEF,    categories.uel0303 ) -- Siege Assault Bot
-
-    -- Unlock strategic bombers for the uef, on hard dif
-    ScenarioFramework.RemoveRestriction( UEF, categories.uea0304 ) -- Strategic Bomber
+    )]]
 end
