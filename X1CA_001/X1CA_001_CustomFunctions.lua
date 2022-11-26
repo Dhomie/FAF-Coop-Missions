@@ -341,7 +341,7 @@ function FatBoyBehavior(self)
             -- Wait to get in range
             local pos = experimental:GetPosition()
             while VDist2(pos[1], pos[3], lastBase[1], lastBase[3]) > weaponRange + Distance
-                and not experimental.Dead and not experimental:IsIdleState() and not InWaterCheck(self) do
+                and not experimental.Dead and not experimental:IsIdleState() or InWaterCheck(self) == true do
 				WaitSeconds(5)
             end
 
