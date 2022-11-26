@@ -117,8 +117,7 @@ function FatBoyBehavior(self)
 			LOG('DEBUG: Fatboy found a target, commencing attack.')
             IssueClearCommands({experimental})
 
-            local useMove = InWaterCheck(self)
-            if useMove then
+            if InWaterCheck(self) then
 				IssueMove({experimental}, lastBase)	--Move to the location if we're under water
             else
 				IssueAggressiveMove({experimental}, lastBase)	--Attack-Move to the location if we're on the surface.
@@ -127,7 +126,7 @@ function FatBoyBehavior(self)
             -- Wait to get in range
             local pos = experimental:GetPosition()
             while VDist2(pos[1], pos[3], lastBase[1], lastBase[3]) > weaponRange + Distance
-                and not experimental.Dead and not experimental:IsIdleState() do
+                and not experimental.Dead and not experimental:IsIdleState() or InWaterCheck(self) == true do
 				WaitSeconds(5)
             end
 
