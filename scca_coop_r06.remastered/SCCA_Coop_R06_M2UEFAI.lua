@@ -27,14 +27,14 @@ function M2UEFControlCenterExpansion()
 end
 
 function M2DefensiveLineExpansion()
-	UEFControlCenterBase:AddExpansionBase('M2_UEF_DefensiveLine', Difficulty)
+	UEFControlCenterBase:AddExpansionBase('M2_UEF_DefensiveLine', Difficulty * 2)
 end
 
 function UEFControlCenterAI()
-    -- ------------------------------------------------------------------------------------------
+    -- -------------------------------------
     -- Black Sun Control Center Expansion.
-	-- Major defensive line for the UEF. This base will send attacks during Phase 2
-    -- -----------------------------------------------------------------------------------------
+	-- Major defensive line for the UEF.
+    -- -------------------------------------
     UEFControlCenterBase:InitializeDifficultyTables(ArmyBrains[UEF], 'UEF_Control_Center_Base', 'ControlCenter', 45,
         {
 			ControlCenterDefensesPreBuilt = 150,
@@ -42,17 +42,13 @@ function UEFControlCenterAI()
     )
 	UEFControlCenterBase:StartNonZeroBase({4, 6, 8})
 	UEFControlCenterBase:SetMaximumConstructionEngineers(8)
-	
-	UEFControlCenterBase:SetSupportACUCount(1)
-	UEFControlCenterBase:SetSACUUpgrades({'Shield', 'AdvancedCoolingUpgrade', 'ResourceAllocation'}, false)
 end
 
 function UEFDefensiveLineBaseAI()
-    -- ----------------------------------------------------------------------------------------
+    -- ---------------------------------------------------
     -- Black Sun Control Center Defensive Line Expansion.
 	-- Minor defensive line for the UEF. 
-	-- The UEF Control Center Base will send 1-3 engineer(s) here depending on the Difficulty.
-    -- ----------------------------------------------------------------------------------------
+    -- ---------------------------------------------------
     UEFDefensiveLineBase:InitializeDifficultyTables(ArmyBrains[UEF], 'M2_UEF_DefensiveLine', 'M2_DefensiveLine_Base_Marker', 60,
         {
 			M2DefensiveLine = 100,

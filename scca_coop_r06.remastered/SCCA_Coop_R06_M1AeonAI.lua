@@ -85,7 +85,7 @@ function AeonMainAirAttacks()
 	local quantity = {}
 	local trigger = {}
 		
-	--Part 1 air attacks
+	--Phase 1 air attacks
 	quantity = {4, 10, 12}
 	opai = AeonMainBase:AddOpAI('AirAttacks', 'M1_Aeon_Gunship_Attack',
         {
@@ -142,6 +142,7 @@ function AeonMainAirAttacks()
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], categories.NAVAL * categories.MOBILE, '>='})
 	
+	--Phase 2-3 air attacks
 	--Sends random amounts of Gunships, Air Superiority Fighters, and Strategic Bombers.
 	for i = 1, Difficulty do
 	opai = AeonMainBase:AddOpAI('AirAttacks', 'M2_Aeon_General_Air_Attack' .. i,
@@ -216,7 +217,21 @@ function AeonMainNavalAttacks()
 	local T2Quantity = {2, 4, 6}
 	local T1Quantity = {3, 6, 9}
 	
-	--Large Aeon Naval Fleet for attacking the players
+	--Phase 1 Aeon fleet to keep the players busy
+	opai = AeonMainBase:AddOpAI('NavalAttacks', 'M1_Aeon_Main_Naval_Fleet',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
+            PlatoonData = {
+                PatrolChains = {
+                    'PlayerNavalAttack_Chain',
+                },
+            },
+            Priority = 100,
+        }
+    )
+    opai:SetChildQuantity({'Battleships', 'Destroyers', 'Cruisers', 'Frigates', 'Submarines'}, {1, 2, 2, 3, 15})
+	
+	--Large Aeon Naval Fleet for attacking the players from Phase 2
 	local Temp = {
         'M2_Aeon_Main_Naval_Fleet',
         'NoPlan',
@@ -235,7 +250,7 @@ function AeonMainNavalAttacks()
         RequiresConstruction = true,
         LocationType = 'M1_Aeon_Main_Base',
 		BuildConditions = {
-			--{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2}},
+			{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PatrolThread'},
 		PlatoonData = {
@@ -367,9 +382,9 @@ function AeonMainTransportAttacks()
             'NoPlan',
             {'ual0303', 1, 2, 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
             {'ual0304', 1, 2, 'Artillery', 'AttackFormation'}, -- T3 Artillery
-            {'ual0202', 1, 3, 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
-            {'ual0205', 1, 3, 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
-            {'ual0307', 1, 3, 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
+            {'ual0202', 1, 2, 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
+            {'ual0205', 1, 2, 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
+            {'ual0307', 1, 2, 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
         },
         InstanceCount = 2,
         Priority = 300,

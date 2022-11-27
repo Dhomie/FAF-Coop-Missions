@@ -32,7 +32,7 @@ function M3AeonSouthEasternBaseAI()
 	M3AeonSouthEasternBase:StartNonZeroBase({3, 6, 10})
 	M3AeonSouthEasternBase:SetMaximumConstructionEngineers(10)
 	
-	--M3AeonSouthEasternBase:SetSACUUpgrades({'EngineeringFocusingModule', 'Shield', 'ShieldHeavy', 'ResourceAllocation'}, false)
+	M3AeonSouthEasternBase:SetSupportACUCount(1)
 	
 	M3AeonSouthEasternBase:SetActive('AirScouting', true)
     M3AeonSouthEasternBase:SetActive('LandScouting', true)
@@ -257,10 +257,10 @@ end
 
 function M3AeonSouthEasternAirDefense()
     local opai = nil
-	local quantity = {4, 10, 18}	--Air Factories = [2, 4, 6] depending on the Difficulty
+	local quantity = {2, 4, 6}	--Air Factories = [2, 4, 6] depending on the Difficulty
 	local ChildType = {'AirSuperiority', 'StratBombers'}
 	
-	--Maintains [4, 10, 18] units defined in ChildType
+	--Maintains [2, 4, 6] units defined in ChildType
 	for k = 1, table.getn(ChildType) do
 		opai = M3AeonSouthEasternBase:AddOpAI('AirAttacks', 'M3_Aeon_SouthEastern_AirDefense' .. ChildType[k],
 			{

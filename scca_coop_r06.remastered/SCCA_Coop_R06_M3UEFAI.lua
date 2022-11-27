@@ -94,7 +94,7 @@ function UEFMainAirDefense()
 	
 	--Maintains [4, 10, 18] units defined in ChildType
 	for k = 1, table.getn(ChildType) do
-		opai = UEFMainBase:AddOpAI('AirAttacks', 'M3UEFMain_AirDefense_' .. ChildType[k],	--Example: 'M3UEFMain_AirDefense_AirSuperiority'
+		opai = UEFMainBase:AddOpAI('AirAttacks', 'M3UEFMain_AirDefense_' .. ChildType[k],
 			{
 				MasterPlatoonFunction = {SPAIFileName, 'RandomDefensePatrolThread'},
 					PlatoonData = {
@@ -121,12 +121,12 @@ function UEFMainAirAttacks()
 	local Builder = {
         BuilderName = 'M3_UEF_Main_AirForce_Builder',
         PlatoonTemplate = {
-        'M3_UEF_Main_AirForce_Template',
-        'NoPlan',
-        { 'uea0305', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Heavy Gunship
-        { 'uea0304', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
-        { 'uea0303', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
-		{ 'uea0203', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Gunship
+			'M3_UEF_Main_AirForce_Template',
+			'NoPlan',
+			{ 'uea0305', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Heavy Gunship
+			{ 'uea0304', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
+			{ 'uea0303', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
+			{ 'uea0203', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Gunship
 		},
         InstanceCount = Difficulty * 2,
         Priority = 130,
@@ -228,14 +228,13 @@ function UEFMainLandAttacks()
 	local quantity = {}
 	
 	--UEF Control Center Expansion Engineer platoon
-	--Base Manager Build Conditions used to check if the disbanded units are actually where we want them to be, and if they are actually needed.
-	quantity = {2, 4, 6}
+	quantity = {4, 6, 8}
 	local Builder = {
         BuilderName = 'UEF_Black_Sun_Control_Center_Expansion_Engineers',
         PlatoonTemplate = {
-        'UEF_Black_Sun_Control_Center_Expansion_Engineers',
-        'NoPlan',
-        { 'uel0309', 1, quantity[Difficulty], 'Attack', 'AttackFormation' },	-- T3 Engineers
+			'UEF_Black_Sun_Control_Center_Expansion_Engineers',
+			'NoPlan',
+			{ 'uel0309', 1, quantity[Difficulty], 'Attack', 'AttackFormation' },	-- T3 Engineers
 		},
 		InstanceCount = 1,
         Priority = 250,
@@ -244,7 +243,7 @@ function UEFMainLandAttacks()
 		LocationType = 'UEF_Main_Base',
 		BuildConditions = {
                     {BMBC, 'BaseEngineersEnabled', {'UEF_Control_Center_Base'}},
-                    {BMBC, 'NumUnitsLessNearBase', {'UEF_Control_Center_Base', categories.uel0309 + (categories.FACTORY * categories.STRUCTURE), 1}}, -- Data --> Base name, unit category like: categories.ENGINEER, variable name, or exact number.
+                    {BMBC, 'NumUnitsLessNearBase', {'UEF_Control_Center_Base', categories.uel0309 + (categories.FACTORY * categories.STRUCTURE), 1}},
                     {BMBC, 'BaseActive', {'UEF_Control_Center_Base'}},
                 },
 		PlatoonAIFunction = {CustomFunctions, 'EngineersMoveToThread'},
@@ -256,15 +255,14 @@ function UEFMainLandAttacks()
     ArmyBrains[UEF]:PBMAddPlatoon( Builder )
 	
 	--UEF Main Naval Base Expansion Engineer platoon
-	--Base Manager Build Conditions used to check if the disbanded units are actually where we want them to be, and if they are actually needed.
 	--Naval Base is very close to the Main UEF Base, so checking for Engineer count isn't a solution, gotta check only Naval Factory count instead.
 	quantity = {3, 6, 9}
 	Builder = {
         BuilderName = 'UEF_Main_Base_Naval_Expansion_Engineers',
         PlatoonTemplate = {
-        'UEF_Main_Base_Naval_Expansion_Engineers',
-        'NoPlan',
-        { 'uel0309', 1, quantity[Difficulty], 'Attack', 'AttackFormation' },	-- T3 Engineers
+			'UEF_Main_Base_Naval_Expansion_Engineers',
+			'NoPlan',
+			{ 'uel0309', 1, quantity[Difficulty], 'Attack', 'AttackFormation' },	-- T3 Engineers
 		},
 		InstanceCount = 1,
         Priority = 250,
@@ -273,7 +271,7 @@ function UEFMainLandAttacks()
 		LocationType = 'UEF_Main_Base',
 		BuildConditions = {
                     {BMBC, 'BaseEngineersEnabled', {'UEF_Main_Naval_Base'}},
-                    {BMBC, 'NumUnitsLessNearBase', {'UEF_Main_Naval_Base', categories.FACTORY * categories.NAVAL, 1}}, -- Data --> Base name; unit category like: categories.ENGINEER; variable name, or exact number.
+                    {BMBC, 'NumUnitsLessNearBase', {'UEF_Main_Naval_Base', categories.FACTORY * categories.NAVAL, 1}},
                     {BMBC, 'BaseActive', {'UEF_Main_Naval_Base'}},
                 },
 		PlatoonAIFunction = {CustomFunctions, 'EngineersMoveToThread'},
@@ -284,7 +282,7 @@ function UEFMainLandAttacks()
 	}
     ArmyBrains[UEF]:PBMAddPlatoon( Builder )
 	
-	-- Sends random [T2]
+	-- Sends random [T2] from Phase 2
 	for i = 1, Difficulty do
 	opai = UEFMainBase:AddOpAI('BasicLandAttack', 'M2_UEFMain_T2_LandAttack_' .. i,
         {
@@ -303,7 +301,7 @@ function UEFMainLandAttacks()
 	end
 	
 	for i = 1, Difficulty * 2 do
-    -- Sends random [T3]
+    -- Sends random [T3] from Phase 3
     opai = UEFMainBase:AddOpAI('BasicLandAttack', 'M3_UEFMain_T3_LandAttack_' .. i,
         {
              MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
@@ -544,7 +542,6 @@ function M3UEFSouthWesternNavalAttacks()
         },
     }
     ArmyBrains[UEF]:PBMAddPlatoon( Builder )
-	
 end
 
 function M3UEFSouthWesternLandAttacks()
@@ -569,14 +566,13 @@ function M3UEFSouthWesternTransportAttacks()
 	local quantity = {2, 4, 6}
 	
 	--Temporary T2 Transport Platoon
-	local Temp = {
-        'M3_UEF_SouthWestern_Transport_Platoon',
-        'NoPlan',
-        { 'uea0104', 1, quantity[Difficulty], 'Attack', 'None' }, -- T2 Transport
-    }
 	local Builder = {
         BuilderName = 'M3_UEF_SouthWestern_Transport_Platoon',
-        PlatoonTemplate = Temp,
+        PlatoonTemplate = {
+			'M3_UEF_SouthWestern_Transport_Platoon',
+			'NoPlan',
+			{ 'uea0104', 1, quantity[Difficulty], 'Attack', 'None' }, -- T2 Transport
+		},
         InstanceCount = 12, -- Just in case only 1 transport remains alive from the platoons
         Priority = 250,
         PlatoonType = 'Air',
@@ -612,7 +608,6 @@ function M3UEFSouthWesternTransportAttacks()
 	end
 	
 	--Sends random amounts of [T3]
-	--BasicLandAttack is missing a single-unit T3 UEF MML template, it won't be built.
 	for i = 1, Difficulty do	
 		opai = M3UEFSouthWesternBase:AddOpAI('BasicLandAttack', 'M3_UEF_TransportAttacks_Northern_T3_' .. i,
             {
@@ -644,25 +639,22 @@ function M3UEFSouthWesternAirAttacks()
 	
 	--UEF general air template, builds faster than the random composition, which isn't that random anyhow.
 	--Difference with this, is that it won't send all 3 platoons at once, but sends each one faster, and more consistently
-	local Temp = {
-        'M3_UEF_SouthWestern_AirForce_Template',
-        'NoPlan',
-        { 'uea0305', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Heavy Gunship
-        { 'uea0304', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
-        { 'uea0303', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
-		{ 'uea0203', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Gunship
-	
-    }
 	local Builder = {
         BuilderName = 'M3_UEF_SouthWestern_AirForce_Builder',
-        PlatoonTemplate = Temp,
+        PlatoonTemplate = {
+			'M3_UEF_SouthWestern_AirForce_Template',
+			'NoPlan',
+			{ 'uea0305', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Heavy Gunship
+			{ 'uea0304', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
+			{ 'uea0303', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
+			{ 'uea0203', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Gunship
+		},
         InstanceCount = Difficulty * 2,
         Priority = 100,
         PlatoonType = 'Air',
         RequiresConstruction = true,
         LocationType = 'M3_UEF_SouthWestern_Base',
 		BuildConditions = {
-			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
     }
@@ -748,12 +740,12 @@ end
 
 function M3UEFSouthWesternAirDefense()
     local opai = nil
-	local quantity = {4, 10, 18}	--Air Factories = [2, 4, 6] depending on the Difficulty
+	local quantity = {2, 4, 6}	--Air Factories = [2, 4, 6] depending on the Difficulty
 	local ChildType = {'AirSuperiority', 'HeavyGunships', 'StratBombers'}
 		
-	--Maintains [4, 10, 18] units defined in ChildType
+	--Maintains [2, 4, 6] units defined in ChildType
 	for k = 1, table.getn(ChildType) do
-		opai = M3UEFSouthWesternBase:AddOpAI('AirAttacks', 'M3_UEF_SouthWestern_AirDefense' .. ChildType[k], --Example: 'M3_UEF_SouthWestern_AirDefense_AirSuperiority'
+		opai = M3UEFSouthWesternBase:AddOpAI('AirAttacks', 'M3_UEF_SouthWestern_AirDefense' .. ChildType[k],
 			{
 				MasterPlatoonFunction = {SPAIFileName, 'RandomDefensePatrolThread'},
 					PlatoonData = {

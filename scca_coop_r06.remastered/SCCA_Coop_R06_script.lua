@@ -34,8 +34,6 @@ ScenarioInfo.Player2 = 6
 ScenarioInfo.Player3 = 7
 ScenarioInfo.Player4 = 8
 
-ScenarioInfo.VarTable = {}
-
 local Player1 = ScenarioInfo.Player1
 local Aeon = ScenarioInfo.Aeon
 local UEF = ScenarioInfo.UEF
@@ -45,8 +43,10 @@ local Player2 = ScenarioInfo.Player2
 local Player3 = ScenarioInfo.Player3
 local Player4 = ScenarioInfo.Player4
 
-local Players = {ScenarioInfo.Player1, ScenarioInfo.Player2, ScenarioInfo.Player3, ScenarioInfo.Player4}
 local Difficulty = ScenarioInfo.Options.Difficulty
+
+local LeaderFaction
+local LocalFaction
 
 --Variables for the buffing functions
 local AIs = {ScenarioInfo.Aeon, ScenarioInfo.UEF, ScenarioInfo.BlackSun, ScenarioInfo.Cybran}
@@ -74,7 +74,6 @@ local SkipIntro = false
 ------------------------
 -- AI buffing functions
 ------------------------
----Comments:
 ---ACUs and sACUs belong to both ECONOMIC and ENGINEER categories.
 
 --Buffs AI factory structures, and engineer units
@@ -140,50 +139,30 @@ function BuffAIEconomy()
 	end
 end
 
----------
+----------
 -- Startup
----------
+----------
 function OnPopulate(scenario)
     ScenarioUtils.InitializeScenarioArmies()
     LeaderFaction, LocalFaction = ScenarioFramework.GetLeaderAndLocalFactions()
 	Weather.CreateWeather()
 	
-	--Added in-game option to enable a debug/testing mode
-	if ScenarioInfo.Options.opt_Coop_Debug_Mode == 2 then
+	if DEBUG then
 		ForkThread(SpawnDebugPlayer)
-	elseif ScenarioInfo.Options.opt_Coop_Debug_Mode == 1 then
+	else
 		ForkThread(SpawnPlayer)
 	end
-	--UEF and Aeon are initialized the same way for both debug and normal modes
+	--UEF and Aeon are initialized
     SpawnUEF()
     SpawnAeon()
 end
 
---Dummy AI takes the players' initial base, used for debug/testing purposes
+--Dummy AI base is spawned in instead of the player base.
 function SpawnDebugPlayer()
-	 -- Player Base
-	local DebugStartingBase
+
+	--Dummy AI base
+	DebugStartingBase = ScenarioUtils.CreateArmyGroup('Cybran', 'Allied_Debug_Base_D' .. Difficulty)
 	
-	--Debug base is first spawned for the player, size chosen during map selection
-	if ScenarioInfo.Options.opt_Coop_Initial_Base == 4  then
-		DebugStartingBase = ScenarioUtils.CreateArmyGroup('Player1', 'Base_D' .. Difficulty)
-	else
-		DebugStartingBase = ScenarioUtils.CreateArmyGroup('Player1', 'Base_D' .. ScenarioInfo.Options.opt_Coop_Initial_Base)
-	end
-	
-	--If the base exists, it gets transferred to the AI
-	if DebugStartingBase then
-		for k, v in DebugStartingBase do
-            ScenarioFramework.GiveUnitToArmy(v, Cybran)
-        end
-	else
-		error('*MAIN SCRIPT/OPTIONS ERROR: DebugStartingBase is invalid/doesn\'t exist.', 2)
-	end
-	
-	--Build rate buff
-	ForkThread(BuffAIBuildPower)
-	--Eco buff
-	ForkThread(BuffAIEconomy)
 	--Cybran dummy AI
 	M1CybranAI.M1CybranDebugBaseAI()
 	
@@ -202,7 +181,6 @@ function SpawnPlayer()
 	ScenarioUtils.CreateArmyGroup('Player1', 'Base_D' .. Difficulty)
 	
     -- Jericho
-    -- Jericho
 	ScenarioInfo.Jericho = ScenarioFramework.SpawnCommander('Player1', 'Jericho', false, LOC('{i sCDR_Jericho}'), false, JerichoKilled,
         {'ResourceAllocation', 'NaniteMissileSystem', 'Switchback'})
     ScenarioFramework.CreateUnitGivenTrigger(JerichoGiven, ScenarioInfo.Jericho)
@@ -210,28 +188,22 @@ function SpawnPlayer()
 	local sonar = ScenarioUtils.CreateArmyUnit('Player1', 'MobileSonar')
     ScenarioFramework.GroupPatrolChain({sonar}, 'Player_Subs_Patrol_Chain')
 
-    -- Only for Easy Difficulty
-	--if Difficulty == 1 then
-	 -- Player Engineers
-		local engineers = ScenarioUtils.CreateArmyGroup('Player1', 'Engineers')
-		--ScenarioFramework.GroupPatrolChain(engineers, 'Player_Jericho_Patrol_Chain')
+	-- Player Engineers
+	local engineers = ScenarioUtils.CreateArmyGroup('Player1', 'Engineers')
+	ScenarioFramework.GroupPatrolChain(engineers, 'Player_Jericho_Patrol_Chain')
 		
     -- Player Mobile Defense
-		local subs = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'Subs', 'AttackFormation')
-		ScenarioFramework.PlatoonPatrolChain(subs, 'Player_Subs_Patrol_Chain')
+	local subs = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'Subs', 'AttackFormation')
+	ScenarioFramework.PlatoonPatrolChain(subs, 'Player_Subs_Patrol_Chain')
 
-		local landPatrol1 = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'LandPatrol1', 'AttackFormation')
-		ScenarioFramework.PlatoonPatrolChain(landPatrol1, 'Player_Land_Patrol_Chain')
+	local landPatrol1 = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'LandPatrol1', 'AttackFormation')
+	ScenarioFramework.PlatoonPatrolChain(landPatrol1, 'Player_Land_Patrol_Chain')
 
-		local landPatrol2 = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'LandPatrol2', 'AttackFormation')
-		ScenarioFramework.PlatoonPatrolChain(landPatrol2, 'Player_Land_Patrol_Chain')
+	local landPatrol2 = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'LandPatrol2', 'AttackFormation')
+	ScenarioFramework.PlatoonPatrolChain(landPatrol2, 'Player_Land_Patrol_Chain')
 	
-		local airPatrol = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'AirPatrol', 'ChevronFormation')
-		ScenarioFramework.PlatoonPatrolChain(airPatrol, 'Player_Base_Patrol_Chain')
-	--end
-	
-	--AIs will get buffed eco from the start, but not build power.
-	ForkThread(BuffAIEconomy)
+	local airPatrol = ScenarioUtils.CreateArmyGroupAsPlatoon('Player1', 'AirPatrol', 'ChevronFormation')
+	ScenarioFramework.PlatoonPatrolChain(airPatrol, 'Player_Base_Patrol_Chain')
 end
 
 function SpawnUEF()
@@ -283,9 +255,7 @@ function SpawnAeon()
 	
 	--Single Galactic Colossus
     ScenarioInfo.Colossus = ScenarioUtils.CreateArmyUnit('Aeon', 'M2_GC_1')
-    for i = 1, 4 do
-        IssuePatrol({ScenarioInfo.Colossus}, ScenarioUtils.MarkerToPosition('AeonBase_Patrol' .. i))
-    end
+	ScenarioFramework.GroupPatrolChain({ScenarioInfo.Colossus}, 'AeonBase_Chain')
 	
 	--Engineer spawned in to make the scripted triggers work, but the BaseManager actually assigns this one to start building it.
     ScenarioInfo.CzarEngineer = ScenarioUtils.CreateArmyUnit('Aeon', 'CzarEngineer')
@@ -310,6 +280,24 @@ function SpawnAeon()
 end
 
 function OnStart(self)
+	--Army colors
+	-- Army colors
+    ScenarioFramework.SetCybranColor(Player1)
+	ScenarioFramework.SetCybranNeutralColor(Cybran)
+    ScenarioFramework.SetAeonColor(Aeon)
+    ScenarioFramework.SetUEFColor(UEF)
+    ScenarioFramework.SetUEFAllyColor(BlackSun)
+    local colors = {
+        ['Player2'] = {183, 101, 24}, 
+        ['Player3'] = {255, 135, 62}, 
+        ['Player4'] = {255, 191, 128}
+    }
+    local tblArmy = ListArmies()
+    for army, color in colors do
+        if tblArmy[ScenarioInfo[army]] then
+            ScenarioFramework.SetArmyColor(ScenarioInfo[army], unpack(color))
+        end
+    end
 	-- Adjust buildable categories for Players
     ScenarioFramework.AddRestrictionForAllHumans(
         -- All non vanilla units
@@ -358,26 +346,14 @@ function OnStart(self)
     ScenarioFramework.SetSharedUnitCap(480)
     SetArmyUnitCap(Aeon, 2000)
     SetArmyUnitCap(UEF, 2000)
+	
+	if not SkipIntro then
+        ScenarioFramework.SetPlayableArea('M1Area', false)
 
-    -- Army colors
-    ScenarioFramework.SetCybranColor(Player1)
-	ScenarioFramework.SetCybranNeutralColor(Cybran)
-    ScenarioFramework.SetAeonColor(Aeon)
-    ScenarioFramework.SetUEFColor(UEF)
-    ScenarioFramework.SetUEFAllyColor(BlackSun)
-    local colors = {
-        ['Player2'] = {183, 101, 24}, 
-        ['Player3'] = {255, 135, 62}, 
-        ['Player4'] = {255, 191, 128}
-    }
-    local tblArmy = ListArmies()
-    for army, color in colors do
-        if tblArmy[ScenarioInfo[army]] then
-            ScenarioFramework.SetArmyColor(ScenarioInfo[army], unpack(color))
-        end
+        ScenarioFramework.StartOperationJessZoom('CDRZoom', IntroMission1)
+    else
+        IntroMission1()
     end
-
-    ScenarioFramework.StartOperationJessZoom('CDRZoom', IntroMission1)
 end
 
 function JerichoKilled()
@@ -420,24 +396,27 @@ function IntroMission1()
 
     -- Jericho strut
     IssueMove({ScenarioInfo.Jericho}, ScenarioUtils.MarkerToPosition('JerichoDestination'))
-	--ScenarioFramework.GroupPatrolChain({ScenarioInfo.Jericho}, 'Player_Jericho_Patrol_Chain')
+	ScenarioFramework.GroupPatrolChain({ScenarioInfo.Jericho}, 'Player_Jericho_Patrol_Chain')
 	
     -- After 2 minutes: Jericho VO trigger
     ScenarioFramework.CreateTimerTrigger(M1JerichoVO, 120)
 
     -- Cybran in Aeon LOS VO trigger
-    ScenarioFramework.CreateArmyIntelTrigger(CybranSpotted, ArmyBrains[Aeon], 'LOSNow',
-        false, true, categories.ALLUNITS, true, ArmyBrains[Player1])
+    ScenarioFramework.CreateArmyIntelTrigger(CybranSpotted, ArmyBrains[Aeon], 'LOSNow', false, true, categories.ALLUNITS, true, ArmyBrains[Player1])
+	
 	ScenarioFramework.Dialogue(OpStrings.C06_M01_010, StartMission1)
 end
 
 function StartMission1()
     ScenarioFramework.CreateTimerTrigger(Taunt, Random(200, 300))
 
-    -- Primary Objective 1
 	--Trigger if the Czar is killed during construction
     ScenarioFramework.CreateArmyStatTrigger(CzarDefeated, ArmyBrains[Aeon], 'CzarDefeated1',
         {{StatType = 'Units_Killed', CompareType = 'GreaterThanOrEqual', Value = 1, Category = categories.uaa0310}})
+		
+	--------------------------------
+    -- Primary Objective - Kill Czar
+    --------------------------------
     ScenarioInfo.M1P1 = Objectives.Basic(
         'primary',                          -- type
         'incomplete',                       -- complete
@@ -466,8 +445,7 @@ function CybranSpotted()
 end
 
 function CzarFullyBuilt()
-    ScenarioInfo.CzarFullyBuilt = true
-
+	--Expand playable area
     ScenarioFramework.SetPlayableArea('M2Area')
 	
 	--Control Center base will build additional defenses
@@ -496,7 +474,7 @@ function CzarAI(platoon)
                     table.insert(units, unit)
                 end
             end
-            IssueTransportLoad(ScenarioInfo.CzarBombers:GetPlatoonUnits(), ScenarioInfo.Czar[1])
+            IssueTransportLoad(units, ScenarioInfo.Czar[1])
             WaitSeconds(5)
         end
     end
@@ -595,9 +573,9 @@ function IntroMission2()
 		M2UEFAI.M2UEFControlCenterExpansion()
 	end
 	
-	--Build Power buff is first called once Phase 2 starts in normal mode
+	--AI buffs from part 2
 	ForkThread(BuffAIBuildPower)
-	ForkThread(M2MobileFactoriesThread)
+	ForkThread(BuffAIEconomy)
 	
 	-----------------------
 	-- M2 UEF AI functions
@@ -605,75 +583,54 @@ function IntroMission2()
 	M2UEFAI.UEFDefensiveLineBaseAI()
 	M2UEFAI.M2DefensiveLineExpansion()
 	M3UEFAI.M3UEFMainExpansion()
+	ForkThread(M2MobileFactoriesThread)
+	
+	local platoon = nil
 
     -- UEF Land Attack
     for i = 1, 3 do
         platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M2LandPatrol_D1_' .. i, 'AttackFormation')
-        platoon.PlatoonData = {}
-        platoon.PlatoonData.PatrolChain = 'M2LandAttack_Chain' .. i
-        platoon:ForkAIThread(ScenarioPlatoonAI.PatrolThread)
+        ScenarioFramework.PlatoonPatrolChain(platoon, 'M2LandAttack_Chain' .. i)
     end
     if(Difficulty >= 2) then
         for i = 1, 2 do
             platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M2LandPatrol_D2_' .. i, 'AttackFormation')
-            platoon.PlatoonData = {}
-            platoon.PlatoonData.PatrolChain = 'M2LandAttack_Chain' .. i
-            platoon:ForkAIThread(ScenarioPlatoonAI.PatrolThread)
+            ScenarioFramework.PlatoonPatrolChain(platoon, 'M2LandAttack_Chain' .. i)
         end
     end
     if(Difficulty == 3) then
         for i = 1, 3 do
             platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M2LandPatrol_D3_' .. i, 'AttackFormation')
-            platoon.PlatoonData = {}
-            platoon.PlatoonData.PatrolChain = 'M2LandAttack_Chain' .. i
-            platoon:ForkAIThread(ScenarioPlatoonAI.PatrolThread)
+           ScenarioFramework.PlatoonPatrolChain(platoon, 'M2LandAttack_Chain' .. i)
         end
     end
 
     -- UEF Air Attack
-	-- Spawned 2x, 3x times for Normal, Hard
-	--for k = 1, Difficulty do
 		for i = 1, 2 do
-			local group = ScenarioUtils.CreateArmyGroup('UEF', 'M2AirPatrol_D1_' .. i)
-			for k, v in group do
-				platoon = ArmyBrains[UEF]:MakePlatoon('','')
-				ArmyBrains[UEF]:AssignUnitsToPlatoon(platoon, {v}, 'attack', 'NoFormation')
-				platoon.PlatoonData = {}
-				platoon.PlatoonData.PatrolChain = 'ControlCenterAir_Chain'
-				platoon:ForkAIThread(ScenarioPlatoonAI.RandomPatrolThread)
+			platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M2AirPatrol_D1_' .. i, 'NoFormation')
+			for _, unit in platoon:GetPlatoonUnits() do
+				ScenarioFramework.GroupPatrolRoute({unit}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('ControlCenterAir_Chain')))
 			end
 		end
 		if(Difficulty >= 2) then
-			local group = ScenarioUtils.CreateArmyGroup('UEF', 'M2AirPatrol_D2_1')
-			for k, v in group do
-				platoon = ArmyBrains[UEF]:MakePlatoon('','')
-				ArmyBrains[UEF]:AssignUnitsToPlatoon(platoon, {v}, 'attack', 'NoFormation')
-				platoon.PlatoonData = {}
-				platoon.PlatoonData.PatrolChain = 'ControlCenterAir_Chain'
-				platoon:ForkAIThread(ScenarioPlatoonAI.RandomPatrolThread)
+			platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M2AirPatrol_D2_1', 'NoFormation')
+			for _, unit in platoon:GetPlatoonUnits() do
+				ScenarioFramework.GroupPatrolRoute({unit}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('ControlCenterAir_Chain')))
 			end
 		end
 		if(Difficulty >= 3) then
 			for i = 1, 2 do
-				local group = ScenarioUtils.CreateArmyGroup('UEF', 'M2AirPatrol_D3_' .. i)
-				for k, v in group do
-					platoon = ArmyBrains[UEF]:MakePlatoon('','')
-					ArmyBrains[UEF]:AssignUnitsToPlatoon(platoon, {v}, 'attack', 'NoFormation')
-					platoon.PlatoonData = {}
-					platoon.PlatoonData.PatrolChain = 'ControlCenterAir_Chain'
-					platoon:ForkAIThread(ScenarioPlatoonAI.RandomPatrolThread)
+				platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M2AirPatrol_D3_' .. i, 'NoFormation')
+				for _, unit in platoon:GetPlatoonUnits() do
+					ScenarioFramework.GroupPatrolRoute({unit}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('ControlCenterAir_Chain')))
 				end
 			end
 		end
-	--end
 
-	
     -- Colossus Attack
     if(ScenarioInfo.Colossus and not ScenarioInfo.Colossus:IsDead()) then
         IssueClearCommands({ScenarioInfo.Colossus})
-        IssuePatrol({ScenarioInfo.Colossus}, ScenarioUtils.MarkerToPosition('M2LandAttack_Patrol2'))
-        IssuePatrol({ScenarioInfo.Colossus}, ScenarioUtils.MarkerToPosition('M2LandAttack_Patrol3'))
-        IssuePatrol({ScenarioInfo.Colossus}, ScenarioUtils.MarkerToPosition('M2LandAttack_Patrol1'))
+		ScenarioFramework.GroupPatrolChain({ScenarioInfo.Colossus}, 'Aeon_AttackChain')
     end
 
 	ScenarioFramework.RemoveRestrictionForAllHumans(
@@ -958,9 +915,9 @@ end
 -----------
 function IntroMission3()
     ScenarioInfo.MissionNumber = 3
-	---------------------
-	--M3 UEF AI functions
-	---------------------
+	----------------------
+	-- M3 UEF AI functions
+	----------------------
 	M3UEFAI.M3UEFBuildStrategicMissileLaunchers()
 	M3UEFAI.M3UEFMainBuildHeavyArtillery()
 	EnableUEFNukeAI()
@@ -973,14 +930,28 @@ function IntroMission3()
         {'Shield', 'HeavyAntiMatterCannon', 'T3Engineering'})
 	ScenarioInfo.Blake:SetAutoOvercharge(true)
 	
+	--M3 UEF Southern air patrols
+	local M3UEFSouthAirPatrol = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M3_UEF_Southern_Air_Patrol_D' .. Difficulty, 'NoFormation')
+	for _, v in M3UEFSouthAirPatrol:GetPlatoonUnits() do
+        ScenarioFramework.GroupPatrolRoute({v}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('M3_UEF_SouthWestern_Base_Patrol_Chain')))
+    end
+	
 	-------------------------
-	--M3Aeon Southern Base AI
+	-- M3Aeon Southern Base AI
 	-------------------------
 	M3AeonAI.M3AeonSouthEasternBaseAI()
 	ScenarioInfo.Blake = ScenarioFramework.SpawnCommander('Aeon', 'Matilda_sACU', false, 'sCDR Matilda', false, false,
         {'ShieldHeavy', 'EngineeringFocusingModule', 'ResourceAllocation'})
 	
+	--M3 Aeon Southern air patrols
+	local M3AeonSouthAirPatrol = ScenarioUtils.CreateArmyGroupAsPlatoon('Aeon', 'M3_Aeon_Southern_Air_Patrol_D' .. Difficulty, 'NoFormation')
+	for _, v in M3AeonSouthAirPatrol:GetPlatoonUnits() do
+        ScenarioFramework.GroupPatrolRoute({v}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('M3_Aeon_SouthEastern_Base_Patrol_Chain')))
+    end
+	
+	-------------------
     -- Atlantis Assault
+	-------------------
 	local platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M3NavyFleet_D' .. Difficulty, 'GrowthFormation')
 	ScenarioFramework.PlatoonPatrolChain(platoon, 'M3_UEF_Main_Naval_Attack_Chain')
 	
@@ -1223,7 +1194,7 @@ function PlayAikoTaunt()
 	if ScenarioInfo.Aiko and not ScenarioInfo.Aiko.Dead then
 		ScenarioFramework.Dialogue(OpStrings['TAUNT' .. aikoTaunt])
 		--Start over with the taunts if needed
-		if aikoTaunt > 8 then
+		if aikoTaunt >= 8 then
 			aikoTaunt = 1
 		else
 			aikoTaunt = aikoTaunt + 1
@@ -1238,7 +1209,7 @@ function PlayArnoldTaunt()
 	if ScenarioInfo.Arnold and not ScenarioInfo.Arnold.Dead then
 		ScenarioFramework.Dialogue(OpStrings['TAUNT' .. arnoldTaunt])
 		--Start over with the taunts if needed
-		if arnoldTaunt > 16 then
+		if arnoldTaunt >= 16 then
 			arnoldTaunt = 9
 		else
 			arnoldTaunt = arnoldTaunt + 1
@@ -1253,7 +1224,7 @@ function PlayBlakeTaunt()
 	if ScenarioInfo.MissionNumber == 3 and ScenarioInfo.Blake and not ScenarioInfo.Blake.Dead then
 		ScenarioFramework.Dialogue(OpStrings['TAUNT' .. blakeTaunt])
 		--Start over with the taunts if needed
-		if blakeTaunt > 22 then
+		if blakeTaunt >= 22 then
 			blakeTaunt = 17
 		else
 			blakeTaunt = blakeTaunt + 1
@@ -1344,8 +1315,6 @@ function OnCtrlF3()
 end
 
 --Debug function to remove reclaimables, it does 1500 damage to all reclaimables, including most props, on the whole map.
---Don't use this for normal gameplay
 function OnCtrlF4()
-	LOG('*DEBUG: Starting')
 	CustomFunctions.AreaReclaimCleanUp()
 end

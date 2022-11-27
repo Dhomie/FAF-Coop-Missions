@@ -1,10 +1,9 @@
---****************************************************************************
---**
---**  File     : /maps/SCCA_Coop_R06.remastered/SCCA_Coop_R06_M1CybranAI.lua
---**  Author(s): Dhomie42
---**
---**  Summary  : Cybran Debug army AI for Mission 1 - SCCA_Coop_R06
---****************************************************************************
+------------------------------------------------------------------------------
+--  File     : /maps/SCCA_Coop_R06.remastered/SCCA_Coop_R06_M1CybranAI.lua
+--  Author(s): Dhomie42
+--
+--  Summary  : Cybran Debug army AI for Mission 1 - SCCA_Coop_R06
+------------------------------------------------------------------------------
 local BaseManager = import('/maps/SCCA_Coop_R06.remastered/SCCA_Coop_R06_BaseManager.lua')
 
 -- ------
