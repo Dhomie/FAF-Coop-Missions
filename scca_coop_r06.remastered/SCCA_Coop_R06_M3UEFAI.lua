@@ -391,9 +391,9 @@ function UEFMainNavalAttacks()
 	Temp = {
         'M2_UEF_Main_Naval_Force',
         'NoPlan',
-        { 'ues0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
+        { 'ues0201', 1, Difficulty, 'Attack', 'AttackFormation' }, -- T2 Destroyer
+        { 'ues0202', 1, Difficulty, 'Attack', 'AttackFormation' }, -- T2 Cruiser
+		{ 'ues0103', 1, Difficulty*2, 'Attack', 'AttackFormation' }, -- T1 Frigate
     }
 	
 	Builder = {
