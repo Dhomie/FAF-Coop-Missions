@@ -159,7 +159,6 @@ end
 
 --Dummy AI base is spawned in instead of the player base.
 function SpawnDebugPlayer()
-
 	--Dummy AI base
 	DebugStartingBase = ScenarioUtils.CreateArmyGroup('Cybran', 'Allied_Debug_Base_D' .. Difficulty)
 	
@@ -176,7 +175,6 @@ end
 
 --Used for normal gameplay
 function SpawnPlayer()
-
 	--Player base
 	ScenarioUtils.CreateArmyGroup('Player1', 'Base_D' .. Difficulty)
 	
@@ -256,10 +254,8 @@ function SpawnAeon()
 	--Single Galactic Colossus
     ScenarioInfo.Colossus = ScenarioUtils.CreateArmyUnit('Aeon', 'M2_GC_1')
 	ScenarioFramework.GroupPatrolChain({ScenarioInfo.Colossus}, 'AeonBase_Chain')
+	ScenarioFramework.CreateUnitDeathTrigger(M1AeonAI.AeonMainColossusDefense, ScenarioInfo.Colossus)
 	
-	--Engineer spawned in to make the scripted triggers work, but the BaseManager actually assigns this one to start building it.
-    ScenarioInfo.CzarEngineer = ScenarioUtils.CreateArmyUnit('Aeon', 'CzarEngineer')
-
     -- Aeon Czar units
     ScenarioInfo.CzarBombers = ScenarioUtils.CreateArmyGroupAsPlatoon('Aeon', 'CzarBombers_D' .. Difficulty, 'NoFormation')
     for _, v in ScenarioInfo.CzarBombers:GetPlatoonUnits() do
@@ -408,12 +404,9 @@ function IntroMission1()
 end
 
 function StartMission1()
-    ScenarioFramework.CreateTimerTrigger(Taunt, Random(200, 300))
+	ScenarioFramework.CreateTimerTrigger(Taunt, Random(300, 450))
+	BuildCZAR()
 
-	--Trigger if the Czar is killed during construction
-    ScenarioFramework.CreateArmyStatTrigger(CzarDefeated, ArmyBrains[Aeon], 'CzarDefeated1',
-        {{StatType = 'Units_Killed', CompareType = 'GreaterThanOrEqual', Value = 1, Category = categories.uaa0310}})
-		
 	--------------------------------
     -- Primary Objective - Kill Czar
     --------------------------------
@@ -427,9 +420,6 @@ function StartMission1()
             -- Category = categories.uaa0310,
         }
     )
-
-    -- M1P1 Objective Reminder
-    ScenarioFramework.CreateTimerTrigger(M1P1Reminder1, ObjectiveReminderTime)
 end
 
 function M1JerichoVO()
@@ -444,7 +434,60 @@ function CybranSpotted()
     ScenarioFramework.Dialogue(OpStrings.C06_M01_030)
 end
 
+-- CZAR, AI builds it, it gets loaded with units and attacks the Control Center
+function BuildCZAR()
+    ScenarioInfo.CzarEngineer = ScenarioUtils.CreateArmyUnit('Aeon', 'CzarEngineer')
+
+    -- Trigger to kill the Tempest if the engineer dies
+    ScenarioFramework.CreateUnitDestroyedTrigger(CzarEngineerDefeated, ScenarioInfo.CzarEngineer)
+
+    local platoon = ArmyBrains[Aeon]:MakePlatoon('', '')
+    platoon.PlatoonData = {
+        NamedUnitBuild = {'Czar'},
+        NamedUnitBuildReportCallback = CzarBuildProgressUpdate,
+        NamedUnitFinishedCallback = CzarFullyBuilt,
+    }
+
+    ArmyBrains[Aeon]:AssignUnitsToPlatoon(platoon, {ScenarioInfo.CzarEngineer}, 'Support', 'None')
+
+    platoon:ForkAIThread(ScenarioPlatoonAI.StartBaseEngineerThread)
+end
+
+local LastUpdate = 0
+function CzarBuildProgressUpdate(unit, eng)
+    if unit.Dead then
+        return
+    end
+
+    if not unit.UnitPassedToScript then
+        unit.UnitPassedToScript = true
+        ScenarioInfo.M1P1:AddUnitTarget(unit)
+        ScenarioFramework.CreateUnitDeathTrigger(CzarDefeated, unit)
+    end
+
+    local fractionComplete = unit:GetFractionComplete()
+    if math.floor(fractionComplete * 100) > math.floor(LastUpdate * 100) then
+        LastUpdate = fractionComplete
+        CZARBuildPercentUpdate(math.floor(LastUpdate * 100))
+    end
+end
+
+function CZARBuildPercentUpdate(percent)
+    if percent == 25 and not ScenarioInfo.CZAR25Dialogue then
+        ScenarioInfo.CZAR25Dialogue = true
+        ScenarioFramework.Dialogue(OpStrings.C06_M01_070)
+    elseif percent == 50 and not ScenarioInfo.CZAR50Dialogue then
+        ScenarioInfo.CZAR50Dialogue = true
+        ScenarioFramework.Dialogue(OpStrings.C06_M01_076)
+    elseif percent == 75 and not ScenarioInfo.CZARDialogue then
+        ScenarioInfo.CZARDialogue = true
+        ScenarioFramework.Dialogue(OpStrings.C06_M01_075)
+    end
+end
+
 function CzarFullyBuilt()
+	ScenarioInfo.CzarFullyBuilt = true
+	ForkThread(CzarAI)
 	--Expand playable area
     ScenarioFramework.SetPlayableArea('M2Area')
 	
@@ -457,12 +500,7 @@ function CzarFullyBuilt()
 end
 
 function CzarAI(platoon)
-	--Update mission state first
-	ScenarioInfo.Czar = platoon:GetPlatoonUnits()
-	if(table.getn(ScenarioInfo.Czar) > 0) then
-        ScenarioInfo.M1P1:AddUnitTarget(ScenarioInfo.Czar[1])
-		CzarFullyBuilt()
-	end
+	ScenarioInfo.Czar = ArmyBrains[Aeon]:GetListOfUnits(categories.uaa0310, false)
 	
 	--Load squadron into the Czar
     if ArmyBrains[Aeon]:PlatoonExists(ScenarioInfo.CzarBombers) then
@@ -484,6 +522,19 @@ function CzarAI(platoon)
     ScenarioFramework.Dialogue(OpStrings.C06_M01_050)
 	--Release squadron on taking damage
     ScenarioFramework.CreateUnitDamagedTrigger(ReleaseBombers, ScenarioInfo.Czar[1])
+end
+
+function CzarEngineerDefeated()
+    if not ScenarioInfo.CzarFullyBuilt and ScenarioInfo.CzarEngineer.UnitBeingBuilt then
+        ScenarioInfo.CzarEngineer.UnitBeingBuilt:Kill()
+    end
+end
+
+function CzarOverLand()
+    if(ScenarioInfo.M1P1.Active) then
+        ScenarioFramework.Dialogue(OpStrings.C06_M01_060)
+    end
+    ForkThread(ReleaseBombers)
 end
 
 function ReleaseBombers()
@@ -510,6 +561,9 @@ function CzarDefeated()
     ScenarioInfo.ControlCenter:SetCanTakeDamage(false)
     ScenarioInfo.ControlCenter:SetCanBeKilled(false)
     ScenarioInfo.ControlCenter:SetDoNotTarget(true)
+	
+	-- Rebuild the CZAR to attack player's base
+    M1AeonAI.AeonMainCzarBuilder()
 
     if ScenarioInfo.Czar then
         -- Show the Czar dying, if the Czar was completely built when the player killed it
@@ -528,35 +582,6 @@ function CzarDefeated()
         ScenarioFramework.Dialogue(OpStrings.C06_M01_110, IntroMission2)
     else
         ScenarioFramework.Dialogue(OpStrings.C06_M01_100, IntroMission2)
-    end
-end
-
---Called if the Czar is near the Control Center
-function CzarOverLand()
-    if(ScenarioInfo.M1P1.Active) then
-        ScenarioFramework.Dialogue(OpStrings.C06_M01_060)
-    end
-    ForkThread(ReleaseBombers)
-end
-
-function M1P1Reminder1()
-    if(ScenarioInfo.M1P1.Active) then
-        ScenarioFramework.Dialogue(OpStrings.C06_M01_070)
-        ScenarioFramework.CreateTimerTrigger(M1P1Reminder2, SubsequentTime)
-    end
-end
-
-function M1P1Reminder2()
-    if(ScenarioInfo.M1P1.Active) then
-        ScenarioFramework.Dialogue(OpStrings.C06_M01_075)
-        ScenarioFramework.CreateTimerTrigger(M1P1Reminder3, SubsequentTime)
-    end
-end
-
-function M1P1Reminder3()
-    if(ScenarioInfo.M1P1.Active) then
-        ScenarioFramework.Dialogue(OpStrings.C06_M01_076)
-        ScenarioFramework.CreateTimerTrigger(M1P1Reminder1, SubsequentTime)
     end
 end
 
