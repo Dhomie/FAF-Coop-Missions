@@ -55,7 +55,6 @@ function AeonMainBaseAI()
 	AeonMainTransportAttacks()
 	AeonMainExperimentalNavalAttacks()
 	AeonMainExperimentalAttacks()
-	M1CzarBuilder()
 	M2AeonMainExpansion()
 end
 
@@ -213,9 +212,9 @@ function AeonMainNavalAttacks()
 	local opai = nil
 	local PatrolDestroyerQuantity = {1, 2, 4}
 	local PatrolCruiserQuantity = {1, 1, 2}
-	local T3Quantity = {1, 2, 3}
-	local T2Quantity = {2, 4, 6}
-	local T1Quantity = {3, 6, 9}
+	local T3Quantity = {1, 1, 2}
+	local T2Quantity = {1, 2, 4}
+	local T1Quantity = {2, 4, 6}
 	
 	--Phase 1 Aeon fleet to keep the players busy
 	opai = AeonMainBase:AddOpAI('NavalAttacks', 'M1_Aeon_Main_Naval_Fleet',
@@ -244,7 +243,7 @@ function AeonMainNavalAttacks()
 	local Builder = {
         BuilderName = 'M2_Aeon_Main_Naval_Fleet_Builder',
         PlatoonTemplate = Temp,
-        InstanceCount = Difficulty,
+        InstanceCount = Difficulty + 1,
         Priority = 100,
         PlatoonType = 'Sea',
         RequiresConstruction = true,
@@ -353,7 +352,7 @@ function AeonMainTransportAttacks()
             'M1_Aeon_Main_Land_Assault_1',
             'NoPlan',
             {'ual0303', 1, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
-            {'ual0304', 1, T3Quantity[Difficulty], 'Artillery', 'AttackFormation'}, -- T3 Artillery
+            {'ual0304', 1, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
             {'ual0202', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
             {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
             {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
@@ -381,7 +380,7 @@ function AeonMainTransportAttacks()
             'M2_Aeon_Main_Land_Assault_1',
             'NoPlan',
             {'ual0303', 1, 2, 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
-            {'ual0304', 1, 2, 'Artillery', 'AttackFormation'}, -- T3 Artillery
+            {'ual0304', 1, 2, 'Artillery', 'GrowthFormation'}, -- T3 Artillery
             {'ual0202', 1, 2, 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
             {'ual0205', 1, 2, 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
             {'ual0307', 1, 2, 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
@@ -436,19 +435,36 @@ function AeonMainExperimentalNavalAttacks()
 	
 end
 
---Czar for Phase 1, built only once.
-function M1CzarBuilder()
+--Czar builder once Phase 2 starts
+function AeonMainCzarBuilder()
 	local opai = nil
 
 	opai = AeonMainBase:AddOpAI('Czar',
         {
             Amount = 1,
-            KeepAlive = false,
-			--Unit's function is defined in the main script
-            PlatoonAIFunction = {MainScript, 'CzarAI'},
-            MaxAssist = 1,
-			--This Czar is only for the first objective, so we don't want it to be built again
-            Retry = false,
+            KeepAlive = true,
+            PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            MaxAssist = Difficulty,
+            Retry = true,
+        }
+    )
+end
+
+--Galactic Colossus defense
+function AeonMainColossusDefense()
+	local opai = nil
+	
+	-- GCs to guard the base
+    opai = AeonMainBase:AddOpAI('M2_GC_1',
+        {
+            Amount = Difficulty,
+            KeepAlive = true,
+            PlatoonAIFunction = {SPAIFileName, 'RandomDefensePatrolThread'},
+            PlatoonData = {
+                PatrolChain = 'AeonBase_Chain',
+            },
+            MaxAssist = Difficulty,
+            Retry = true,
         }
     )
 end
