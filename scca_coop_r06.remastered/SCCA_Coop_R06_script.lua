@@ -68,7 +68,7 @@ local SubsequentTime = 300
 --------------
 -- Debug Only!
 --------------
-local DEBUG = true
+local DEBUG = false
 local SkipIntro = false
 
 ------------------------
