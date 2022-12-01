@@ -417,7 +417,53 @@ function UEFMainNavalAttacks()
     ArmyBrains[UEF]:PBMAddPlatoon( Builder )
 	
 end
+--Fatboy factory platoon 1 for Phase 2
+function UEFMainFatboyFactory1()
+	opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
+            {
+                Amount = 1,
+                KeepAlive = true,
+                PlatoonAIFunction = {CustomFunctions, 'AddMobileFactory'},
+                PlatoonData = {
+					BaseName = 'MobileFactory1',
+					BaseMarker = 'UEF_Mobile_Factory_Marker_1',
+					BaseRadius = 20,
+					RallyPoint = 'UEF_Mobile_Factory_Rally_1',
+					MoveRoute = {'MobileFactoryMove1'},
+				},
+				BuildCondition = {
+					{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual',
+						{2}}
+				},
+                MaxAssist = 3,
+                Retry = true,
+            }
+    )
+end
 
+--Fatboy factory platoon 2 for Phase 2
+function UEFMainFatboyFactory2()
+	opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
+            {
+                Amount = 1,
+                KeepAlive = true,
+                PlatoonAIFunction = {CustomFunctions, 'AddMobileFactory'},
+                PlatoonData = {
+					BaseName = 'MobileFactory2',
+					BaseMarker = 'UEF_Mobile_Factory_Marker_2',
+					BaseRadius = 20,
+					RallyPoint = 'UEF_Mobile_Factory_Rally_2',
+					MoveRoute = {'MobileFactoryMove2'},
+				},
+				BuildCondition = {
+					{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual',
+						{2}}
+				},
+                MaxAssist = 3,
+                Retry = true,
+            }
+    )
+end
 -- Fatboy platoon for Phase 3
 function UEFMainExperimentalAttacks()
     local opai = nil
