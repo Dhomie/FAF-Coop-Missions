@@ -68,7 +68,7 @@ local SubsequentTime = 300
 --------------
 -- Debug Only!
 --------------
-local DEBUG = false
+local DEBUG = true
 local SkipIntro = false
 
 ------------------------
@@ -499,23 +499,25 @@ function CzarFullyBuilt()
     ScenarioFramework.CreateAreaTrigger(CzarOverLand, 'CzarOverLand', categories.uaa0310, true, false, ArmyBrains[Aeon])
 end
 
-function CzarAI(platoon)
+function CzarAI()
 	ScenarioInfo.Czar = ArmyBrains[Aeon]:GetListOfUnits(categories.uaa0310, false)
-	
-	--Load squadron into the Czar
-    if ArmyBrains[Aeon]:PlatoonExists(ScenarioInfo.CzarBombers) then
-		if table.getn(ScenarioInfo.CzarBombers:GetPlatoonUnits()) > 0 then
-            ScenarioInfo.CzarBombers:Stop()
-			local units = {}
-            for _, unit in ScenarioInfo.CzarBombers:GetPlatoonUnits() do
-				if not unit.Dead and not unit:IsUnitState('Attached') then
-                    table.insert(units, unit)
-                end
-            end
-            IssueTransportLoad(units, ScenarioInfo.Czar[1])
-            WaitSeconds(5)
-        end
-    end
+	--Check if the Czar actually exists, because this is called even if the Czar is prematurely killed, and throws an error otherwise
+	if ScenarioInfo.Czar then
+		--Load squadron into the Czar
+		if ArmyBrains[Aeon]:PlatoonExists(ScenarioInfo.CzarBombers) then
+			if table.getn(ScenarioInfo.CzarBombers:GetPlatoonUnits()) > 0 then
+				ScenarioInfo.CzarBombers:Stop()
+				local units = {}
+				for _, unit in ScenarioInfo.CzarBombers:GetPlatoonUnits() do
+					if not unit.Dead and not unit:IsUnitState('Attached') then
+						table.insert(units, unit)
+					end
+				end
+				IssueTransportLoad(units, ScenarioInfo.Czar[1])
+				WaitSeconds(5)
+			end
+		end
+	end
 	--Attack the Control Center
     IssueAttack(ScenarioInfo.Czar, ScenarioInfo.ControlCenter)
 	--VO to warn of its take-off.
@@ -856,15 +858,19 @@ function DownloadFinished()
     ScenarioFramework.CreateTimerTrigger(M2P3Reminder1, ObjectiveReminderTime)
 end
 
---The 2 fatboys are sent near the Control Center, and no longer act as factories
+--The 2 fatboys are sent near the Control Center, and act as factories
 function M2MobileFactoriesThread()
+	local fatboys = {}
     -- Mobile Factories
     for i = 1, 2 do
-        local fatboy = ScenarioUtils.CreateArmyUnit('UEF', 'MobileFactory' .. i)
-        IssueMove({fatboy}, ScenarioUtils.MarkerToPosition('MobileFactoryMove' .. i))
+		fatboys[i] = ScenarioUtils.CreateArmyUnit('UEF', 'MobileFactory' .. i)
+        IssueMove({fatboys[i]}, ScenarioUtils.MarkerToPosition('MobileFactoryMove' .. i))
 
-        M2UEFAI.MobileFactoryAI(fatboy, i)
+        M2UEFAI.MobileFactoryAI(fatboys[i], i)
     end
+	--Triggers to begin rebuilding factories if they die
+	ScenarioFramework.CreateUnitDeathTrigger(M3UEFAI.UEFMainFatboyFactory1, fatboys[1])
+	ScenarioFramework.CreateUnitDeathTrigger(M3UEFAI.UEFMainFatboyFactory2, fatboys[2])
 end
 
 function M2JerichoVO()
