@@ -1,12 +1,11 @@
--- ****************************************************************************
--- **
--- **  File     : /maps/scca_coop_r06.remastered/SCCA_Coop_R06_script.lua
--- **  Author(s): Jessica St. Croix
--- **
--- **  Summary  :
--- **
--- **  Copyright © 2006 Gas Powered Games, Inc.  All rights reserved.
--- ****************************************************************************
+-------------------------------------------------------------------------------
+--	File     : /maps/scca_coop_r06.remastered/SCCA_Coop_R06_script.lua
+-- 	Author(s): Jessica St. Croix
+--
+-- 	Summary  : Main mission flow script for SCCA_Coop_R06
+--
+-- 	Copyright © 2006 Gas Powered Games, Inc.  All rights reserved.
+-------------------------------------------------------------------------------
 local Objectives = import('/lua/ScenarioFramework.lua').Objectives
 local OpStrings = import('/maps/scca_coop_r06.remastered/SCCA_Coop_R06_strings.lua')
 local ScenarioFramework = import('/lua/scenarioframework.lua')
@@ -51,7 +50,7 @@ local LocalFaction
 --Variables for the buffing functions
 local AIs = {ScenarioInfo.Aeon, ScenarioInfo.UEF, ScenarioInfo.BlackSun, ScenarioInfo.Cybran}
 local BuffCategories = {
-	BuildPower = (categories.FACTORY * categories.STRUCTURE) + categories.ENGINEER,
+	BuildPower = categories.FACTORY  + categories.ENGINEER,
 	Economy = categories.ECONOMIC,
 }
 
@@ -110,7 +109,7 @@ end
 --Buffs resource producing structures, (and ACU variants.)
 function BuffAIEconomy()
 	--Resource production multipliers, depending on the Difficulty
-	local Rate = {2.0, 4.0, 6.0}
+	local Rate = {2.0, 4.0, 8.0}
 	--Buff definitions
 	buffDef = Buffs['CheatIncome']
 	buffAffects = buffDef.Affects
@@ -124,11 +123,11 @@ function BuffAIEconomy()
 				--Check if there is anything to buff
 				if table.getn(economy) > 0 then
 					for k, v in economy do
-				--Apply buff to the entity if it hasn't been buffed yet
+						--Apply buff to the entity if it hasn't been buffed yet
 						if not v.EcoBuffed then
-					Buff.ApplyBuff( v, 'CheatIncome' )
-					--New Entity flag which is true if the entity has already been buffed
-					v.EcoBuffed = true
+							Buff.ApplyBuff( v, 'CheatIncome' )
+							--New Entity flag which is true if the entity has already been buffed
+							v.EcoBuffed = true
 						end
 					end
 				end
@@ -499,29 +498,31 @@ function CzarFullyBuilt()
     ScenarioFramework.CreateAreaTrigger(CzarOverLand, 'CzarOverLand', categories.uaa0310, true, false, ArmyBrains[Aeon])
 end
 
-function CzarAI(platoon)
+function CzarAI()
 	ScenarioInfo.Czar = ArmyBrains[Aeon]:GetListOfUnits(categories.uaa0310, false)
-	
-	--Load squadron into the Czar
-    if ArmyBrains[Aeon]:PlatoonExists(ScenarioInfo.CzarBombers) then
-		if table.getn(ScenarioInfo.CzarBombers:GetPlatoonUnits()) > 0 then
-            ScenarioInfo.CzarBombers:Stop()
-			local units = {}
-            for _, unit in ScenarioInfo.CzarBombers:GetPlatoonUnits() do
-				if not unit.Dead and not unit:IsUnitState('Attached') then
-                    table.insert(units, unit)
-                end
-            end
-            IssueTransportLoad(units, ScenarioInfo.Czar[1])
-            WaitSeconds(5)
-        end
-    end
+	--Check if the Czar actually exists, because this is called even if the Czar is prematurely killed, and throws an error otherwise
+	if ScenarioInfo.Czar[1] and not ScenarioInfo.Czar[1].Dead then
+		--Load squadron into the Czar
+		if ArmyBrains[Aeon]:PlatoonExists(ScenarioInfo.CzarBombers) then
+			if table.getn(ScenarioInfo.CzarBombers:GetPlatoonUnits()) > 0 then
+				ScenarioInfo.CzarBombers:Stop()
+				local units = {}
+				for _, unit in ScenarioInfo.CzarBombers:GetPlatoonUnits() do
+					if not unit.Dead and not unit:IsUnitState('Attached') then
+						table.insert(units, unit)
+					end
+				end
+				IssueTransportLoad(units, ScenarioInfo.Czar[1])
+			end
+		end
+
 	--Attack the Control Center
     IssueAttack(ScenarioInfo.Czar, ScenarioInfo.ControlCenter)
 	--VO to warn of its take-off.
     ScenarioFramework.Dialogue(OpStrings.C06_M01_050)
 	--Release squadron on taking damage
     ScenarioFramework.CreateUnitDamagedTrigger(ReleaseBombers, ScenarioInfo.Czar[1])
+	end
 end
 
 function CzarEngineerDefeated()
@@ -543,15 +544,20 @@ function ReleaseBombers()
     end
 	ScenarioInfo.BombersReleased = true
 	
-	ForkThread(function()
-        IssueClearCommands(ScenarioInfo.Czar)
-        IssueTransportUnload(ScenarioInfo.Czar, ScenarioInfo.ControlCenter:GetPosition())
-        IssueAttack(ScenarioInfo.Czar, ScenarioInfo.ControlCenter)
-        if(ScenarioInfo.CzarBombers and table.getn(ScenarioInfo.CzarBombers:GetPlatoonUnits()) > 0) then
-            ScenarioInfo.CzarBombers:Stop()
-            ScenarioInfo.CzarBombers:AggressiveMoveToLocation(ScenarioInfo.ControlCenter:GetPosition())
-        end
-	end)
+    IssueClearCommands(ScenarioInfo.Czar)
+    IssueTransportUnload(ScenarioInfo.Czar, ScenarioInfo.Czar[1]:GetPosition())
+	for _, unit in ScenarioInfo.CzarBombers:GetPlatoonUnits() do
+		while not unit.Dead and unit:IsUnitState('Attached') do
+			WaitSeconds(0.5)
+		end
+	end
+	if ScenarioInfo.Czar[1] and not ScenarioInfo.Czar[1].Dead then
+		IssueAttack(ScenarioInfo.Czar, ScenarioInfo.ControlCenter)
+	end
+    if(ScenarioInfo.CzarBombers and table.getn(ScenarioInfo.CzarBombers:GetPlatoonUnits()) > 0) then
+        ScenarioInfo.CzarBombers:Stop()
+        ScenarioInfo.CzarBombers:AggressiveMoveToLocation(ScenarioInfo.ControlCenter:GetPosition())
+    end
 end
 
 function CzarDefeated()
@@ -562,7 +568,7 @@ function CzarDefeated()
     ScenarioInfo.ControlCenter:SetCanBeKilled(false)
     ScenarioInfo.ControlCenter:SetDoNotTarget(true)
 	
-	-- Rebuild the CZAR to attack player's base
+	-- Rebuild the CZAR to attack players' base
     M1AeonAI.AeonMainCzarBuilder()
 
     if ScenarioInfo.Czar then
@@ -856,15 +862,19 @@ function DownloadFinished()
     ScenarioFramework.CreateTimerTrigger(M2P3Reminder1, ObjectiveReminderTime)
 end
 
---The 2 fatboys are sent near the Control Center, and no longer act as factories
+--The 2 fatboys are sent near the Control Center, and act as factories
 function M2MobileFactoriesThread()
+	local fatboys = {}
     -- Mobile Factories
     for i = 1, 2 do
-        local fatboy = ScenarioUtils.CreateArmyUnit('UEF', 'MobileFactory' .. i)
-        IssueMove({fatboy}, ScenarioUtils.MarkerToPosition('MobileFactoryMove' .. i))
+		fatboys[i] = ScenarioUtils.CreateArmyUnit('UEF', 'MobileFactory' .. i)
+        IssueMove({fatboys[i]}, ScenarioUtils.MarkerToPosition('MobileFactoryMove' .. i))
 
-        M2UEFAI.MobileFactoryAI(fatboy, i)
+        M2UEFAI.MobileFactoryAI(fatboys[i], i)
     end
+	--Triggers to begin rebuilding factories if they die
+	ScenarioFramework.CreateUnitDeathTrigger(M3UEFAI.UEFMainFatboyFactory1, fatboys[1])
+	ScenarioFramework.CreateUnitDeathTrigger(M3UEFAI.UEFMainFatboyFactory2, fatboys[2])
 end
 
 function M2JerichoVO()
@@ -948,7 +958,7 @@ function IntroMission3()
 	EnableUEFNukeAI()
 	M3UEFAI.M3UEFSouthWesternBaseAI()
 	--M3 UEF sACU for the South Western island.
-	ScenarioInfo.Blake = ScenarioFramework.SpawnCommander('UEF', 'Michael_sACU', false, 'sCDR Michael', false, false,
+	ScenarioInfo.SouthernUEF_sACU = ScenarioFramework.SpawnCommander('UEF', 'Michael_sACU', false, 'sCDR Michael', false, false,
         {'Shield', 'AdvancedCoolingUpgrade', 'ResourceAllocation'})
 	--M3 UEF Commander for the South Western island
 	ScenarioInfo.Blake = ScenarioFramework.SpawnCommander('UEF', 'Blake_ACU', false, 'CDR Blake', false, BlakeDestroyed,
@@ -961,11 +971,11 @@ function IntroMission3()
         ScenarioFramework.GroupPatrolRoute({v}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('M3_UEF_SouthWestern_Base_Patrol_Chain')))
     end
 	
-	-------------------------
+	--------------------------
 	-- M3Aeon Southern Base AI
-	-------------------------
+	--------------------------
 	M3AeonAI.M3AeonSouthEasternBaseAI()
-	ScenarioInfo.Blake = ScenarioFramework.SpawnCommander('Aeon', 'Matilda_sACU', false, 'sCDR Matilda', false, false,
+	ScenarioInfo.SouthernAeon_sACU = ScenarioFramework.SpawnCommander('Aeon', 'Matilda_sACU', false, 'sCDR Matilda', false, false,
         {'ShieldHeavy', 'EngineeringFocusingModule', 'ResourceAllocation'})
 	
 	--M3 Aeon Southern air patrols
@@ -974,12 +984,18 @@ function IntroMission3()
         ScenarioFramework.GroupPatrolRoute({v}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('M3_Aeon_SouthEastern_Base_Patrol_Chain')))
     end
 	
+	--------------------
+    -- UEF Naval Fleets
+	--------------------
+	local platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M3_UEF_Main_Naval_Fleet_D' .. Difficulty, 'GrowthFormation')
+	ScenarioFramework.PlatoonPatrolChain(platoon, 'M3_UEF_Main_Naval_Attack_Chain')
+	
+	platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M3_UEF_Southern_Naval_Fleet_D' .. Difficulty, 'AttackFormation')
+	ScenarioFramework.PlatoonPatrolChain(platoon, 'M3_UEF_Southern_Naval_Attack_Chain')
+	
 	-------------------
     -- Atlantis Assault
 	-------------------
-	local platoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M3NavyFleet_D' .. Difficulty, 'GrowthFormation')
-	ScenarioFramework.PlatoonPatrolChain(platoon, 'M3_UEF_Main_Naval_Attack_Chain')
-	
     ScenarioInfo.AtlantisPlanes = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M3AtlantisPlanes_D' .. Difficulty, 'StaggeredChevronFormation')
     ScenarioInfo.Atlantis = ScenarioUtils.CreateArmyUnit('UEF', 'Atlantis')
 	

@@ -13,6 +13,7 @@ local Aeon = 2
 local Difficulty = ScenarioInfo.Options.Difficulty
 local SPAIFileName = '/lua/ScenarioPlatoonAI.lua'
 local CustomFunctions = '/maps/scca_coop_r06.remastered/SCCA_Coop_R06_CustomFunctions.lua'
+local AIBehaviors = '/maps/scca_coop_r06.remastered/SCCA_Coop_R06_AIBehaviors.lua'	--Our own modified version of AIBehaviors.lua, with only the functions we actually use
 -- -------------
 -- Base Managers
 -- -------------
@@ -42,6 +43,7 @@ function M3AeonSouthEasternBaseAI()
 	--M3AeonSouthEasternTransportAttacks()
 	M3AeonSouthEasternAirAttacks()
 	M3AeonSouthEasternAirDefense()
+	M3AeonSouthEasternExperimentalAttacks()
 end
 
 function M3AeonSouthEasternNavalAttacks()
@@ -241,6 +243,28 @@ function M3AeonSouthEasternAirAttacks()
     )
     opai:SetChildQuantity('Gunships', quantity[Difficulty])
 	
+	--Aeon general air template
+	quantity = {4, 5, 6}
+	local Builder = {
+        BuilderName = 'M3_Aeon_Main_AirForce_Builder',
+        PlatoonTemplate = {
+			'M3_Aeon_Main_AirForce_Template',
+			'NoPlan',
+			{ 'uaa0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
+			{ 'uaa0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
+			{ 'uaa0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation' }, -- T2 Gunship
+		},
+        InstanceCount = Difficulty * 2,
+        Priority = 100,
+        PlatoonType = 'Air',
+        RequiresConstruction = true,
+        LocationType = 'M3_Aeon_SouthEastern_Base',
+		BuildConditions = {
+		},
+        PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
+    }
+    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+	
 	--Sends random amounts of Gunships, Air Superiority Fighters, and Strategic Bombers.
 	for i = 1, Difficulty do
 	opai = M3AeonSouthEasternBase:AddOpAI('AirAttacks', 'M3_Aeon_SouthEastern_General_Air_Attack' .. i,
@@ -274,4 +298,45 @@ function M3AeonSouthEasternAirDefense()
 		opai:SetChildQuantity(ChildType[k], quantity[Difficulty])
 		opai:SetLockingStyle('DeathRatio', {Ratio = 0.5})
 	end
+end
+
+function M3AeonSouthEasternExperimentalAttacks()
+	local opai = nil
+	local quantity = {2, 4, 6}
+	
+	--Tempest with advanced behavior
+	opai = M3AeonSouthEasternBase:AddOpAI('M3_Aeon_South_Eastern_Tempest',
+        {
+            Amount = 1,
+            KeepAlive = true,
+            PlatoonAIFunction = {AIBehaviors, 'TempestBehavior'},
+            PlatoonData = {
+				BuildTable = {
+					'uas0103',	--T1 Frigate
+					'uas0201',	--T2 Destroyer
+					'uas0202',	--T2 Cruiser
+				},
+				Formation = 'NoFormation',
+				SitDistance = 90,
+				UnitCount = quantity[Difficulty],
+				},
+            MaxAssist = Difficulty,
+            Retry = true,
+        }
+    )
+	
+	--GCs to guard the base
+	quantity = {1, 1, 2}
+    opai = M3AeonSouthEasternBase:AddOpAI('M3_Aeon_South_Western_GC',
+        {
+            Amount = quantity[Difficulty],
+            KeepAlive = true,
+            PlatoonAIFunction = {SPAIFileName, 'RandomDefensePatrolThread'},
+            PlatoonData = {
+                PatrolChain = 'M3_Aeon_SouthEastern_Base_Patrol_Chain',
+            },
+            MaxAssist = Difficulty,
+            Retry = true,
+        }
+    )
 end

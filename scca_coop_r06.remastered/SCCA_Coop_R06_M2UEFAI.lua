@@ -35,7 +35,7 @@ function UEFControlCenterAI()
     -- Black Sun Control Center Expansion.
 	-- Major defensive line for the UEF.
     -- -------------------------------------
-    UEFControlCenterBase:InitializeDifficultyTables(ArmyBrains[UEF], 'UEF_Control_Center_Base', 'ControlCenter', 45,
+    UEFControlCenterBase:InitializeDifficultyTables(ArmyBrains[UEF], 'UEF_Control_Center_Base', 'ControlCenter', 25,
         {
 			ControlCenterDefensesPreBuilt = 150,
         }
@@ -64,7 +64,6 @@ function MobileFactoryAI(unit, i)
     -- Adding build location for AI
     ArmyBrains[UEF]:PBMAddBuildLocation('UEF_Mobile_Factory_Marker_' .. i, 20, 'MobileFactory' .. i)
 
-    local Carrier = ScenarioInfo.M1_Order_Carrier
     for num, loc in ArmyBrains[UEF].PBM.Locations do
         if loc.LocationType == 'MobileFactory' .. i then
             loc.PrimaryFactories.Land = unit
@@ -85,9 +84,9 @@ function MobileFactoryAttacks(i)
     if i == 1 then
 		--1st Fatboy platoon, heavy attacks
         local Builder = {
-        BuilderName = 'M2_UEF_Heavy_Fatboy_Attack',
+        BuilderName = 'M2_UEF_Heavy_Fatboy_Attack_Builder',
         PlatoonTemplate = {
-        'M2_UEF_Fatboy_2_Attack',
+        'M2_UEF_Fatboy_Heavy_Attack_Platoon_Template',
         'NoPlan',
         { 'uel0303', 1, DirectQuantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Siege Bot
         { 'uel0304', 1, SupportQuantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Mobile Artillery
@@ -116,9 +115,9 @@ function MobileFactoryAttacks(i)
     elseif i == 2 then
 		--2nd Fatboy platoon, light attacks
 		local Builder = {
-        BuilderName = 'M2_UEF_Medium_Fatboy_Attack',
+        BuilderName = 'M2_UEF_Medium_Fatboy_Attack_Builder',
         PlatoonTemplate = {
-        'M2_UEF_Fatboy_1_Attack',
+        'M2_UEF_Fatboy_Medium_Attack_Platoon_Template',
         'NoPlan',
         { 'uel0201', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Tank
         { 'uel0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Artillery

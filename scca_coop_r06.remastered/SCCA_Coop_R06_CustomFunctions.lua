@@ -89,21 +89,22 @@ function EnableStealthOnAir()
 end
 ----------------------------------------------------------------------------------------------------------
 --  EngineersMoveToThread
---      Moves to a set of locations, then disbands if desired
---		Designed for custom Engineer platoons (including sACUs) to move to an expansion base, then disband
---  PlatoonData
---      MoveRoute - List of locations to move to
---      MoveChain - Chain of locations to move
---      UseTransports - boolean, if true, use transports to move
---		DisbandAfterArrival - boolean, if true, platoon disbands at the destination.
---  function: MoveToThread = AddFunction
---      parameter 0: string: platoon = "default_platoon"
+--      Description: Moves to a set of locations, then disbands if desired
+--			Designed for custom Engineer platoons (including sACUs) to move to an expansion base, then disband
+--  @PlatoonData
+--      -MoveRoute - List of locations to move to
+--      -MoveChain - Chain of locations to move
+--      -UseTransports - boolean, if true, use transports to move
+--		-DisbandAfterArrival - boolean, if true, platoon disbands at the destination.
+--  @param platoon Platoon
 -----------------------------------------------------------------------------------------------------------
 function EngineersMoveToThread(platoon)
 
 	local cmd = false
     local data = platoon.PlatoonData
 	local aiBrain = platoon:GetBrain()
+	
+	platoon:Stop()
 
     if data then
         if data.MoveRoute or data.MoveChain then
@@ -149,11 +150,55 @@ function EngineersMoveToThread(platoon)
 	end
 end
 
+--Checks if a base with the given name already exists for the given AI
+function GetBaseLocation(brain, locationName)
+    for _, v in brain.PBM.Locations do
+        if v.LocationType == locationName then
+            return v
+        end
+    end
+    return false
+end
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Function: AddMobileFactory
+-- 		Description: Adds a Fatboy as the primary factory for an AI build location
+--	@PlatoonData:
+--		-BaseName - String, base name we send the Fatboy to, if it doesn't exist, it will be automatically created.
+--		-RallyPoint - String, rally point name for the Fatboy to send its built units to
+--		-MoveRoute - String, chain of locations the Fatboy will use to move to its destination
+--			-The below PlatoonData are only needed if the base doesn't exist yet
+--				-BaseMarker - String, marker name of a new base we want to initially create
+--				-BaseRadius - Number, radius of a new base we want to initially create
+-- 	@param platoon Platoon
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+function AddMobileFactory(platoon)
+	local aiBrain = platoon:GetBrain()
+	local data = platoon.PlatoonData
+	local unit = platoon:GetPlatoonUnits() --Single-unit platoon
+	
+	--Add build location if it doesn't exist yet
+	if not GetBaseLocation(aiBrain, data.BaseName) then
+		LOG('Creating' .. data.BaseName .. 'because it doesn\'t exist yet.')
+		aiBrain:PBMAddBuildLocation(data.BaseMarker, data.BaseRadius, data.BaseName)
+	end
+	
+	--Generic chain of move orders to get the Fatboy where we want it
+	ScenarioFramework.PlatoonMoveRoute(platoon, data.MoveRoute)
+	
+	--Add the Fatboy as the primary land factory
+	for num, loc in aiBrain.PBM.Locations do
+		if loc.LocationType == data.BaseName then
+			loc.PrimaryFactories.Land = unit[1]
+			break
+		end
+	end
+	
+	IssueFactoryRallyPoint({unit[1]}, ScenarioUtils.MarkerToPosition(data.RallyPoint))
+end
+
 --Function for removing wreckages, useful for long in-game testing to avoid simspeed slowdowns due to wreckage counts
---It should only be used for debug/testing purposes
 function AreaReclaimCleanUp()
-	--Define the area (rectangle) we want reclaimables to "decay" inside of
-    local rect = ScenarioUtils.AreaToRect('M3NewArea')
 	
 	--Define a table for the reclaimables
 	local Reclaimables = GetReclaimablesInRect(ScenarioUtils.AreaToRect('M3NewArea'))
