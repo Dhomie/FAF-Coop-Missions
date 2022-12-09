@@ -33,11 +33,11 @@ Scenario = {
         ['CDRZoom'] = {
             ['rectangle'] = RECTANGLE( 784.5, 137.5, 832.5, 169.5 ),
         },
-        ['Death2'] = {
-            ['rectangle'] = RECTANGLE( 20.5, 197.5, 204.5, 363.5 ),
+        ['Death3'] = {
+            ['rectangle'] = RECTANGLE( 0.5, 0.5, 457.5, 387.5 ),
         },
-        ['M3NewArea'] = {
-            ['rectangle'] = RECTANGLE( 0.5, 0.5, 1022, 1022 ),
+        ['CzarOverLand'] = {
+            ['rectangle'] = RECTANGLE( 445.5, 419.5, 633.5, 519.5 ),
         },
         ['KillArea'] = {
             ['rectangle'] = RECTANGLE( 0.5, 0.5, 457.5, 387.5 ),
@@ -51,11 +51,11 @@ Scenario = {
         ['Death4Old'] = {
             ['rectangle'] = RECTANGLE( 0.5, 0.5, 870.5, 814.5 ),
         },
-        ['CzarOverLand'] = {
-            ['rectangle'] = RECTANGLE( 445.5, 419.5, 633.5, 519.5 ),
+        ['M3NewArea'] = {
+            ['rectangle'] = RECTANGLE( 0.5, 0.5, 1022, 1022 ),
         },
-        ['Death3'] = {
-            ['rectangle'] = RECTANGLE( 0.5, 0.5, 457.5, 387.5 ),
+        ['Death2'] = {
+            ['rectangle'] = RECTANGLE( 20.5, 197.5, 204.5, 363.5 ),
         },
         ['UEFBaseArea'] = {
             ['rectangle'] = RECTANGLE( 370, 635, 515, 800 ),
@@ -1063,31 +1063,6 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 508.736, 18.11829, 483.359 ),
                 },
-                ['ControlCenter_Patrol4'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 549.5, 19.07929, 517.5 ),
-                },
-                ['Mass 11'] = {
-                    ['size'] = FLOAT( 1.000000 ),
-                    ['resource'] = BOOLEAN( true ),
-                    ['amount'] = FLOAT( 100.000000 ),
-                    ['color'] = STRING( 'ff808080' ),
-                    ['editorIcon'] = STRING( '/textures/editor/marker_mass.bmp' ),
-                    ['type'] = STRING( 'Mass' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Mass_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 764.5, 17.89562, 160.5 ),
-                },
-                ['Gather1'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 570.063, 17.97846, 385.051 ),
-                },
                 ['NavalRallyPoint_04'] = {
                     ['color'] = STRING( 'ff00FFFF' ),
                     ['hint'] = BOOLEAN( true ),
@@ -1095,60 +1070,6 @@ Scenario = {
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 679.5, 17.5, 123.5 ),
-                },
-                ['Mass 21'] = {
-                    ['size'] = FLOAT( 1.000000 ),
-                    ['resource'] = BOOLEAN( true ),
-                    ['amount'] = FLOAT( 100.000000 ),
-                    ['color'] = STRING( 'ff808080' ),
-                    ['editorIcon'] = STRING( '/textures/editor/marker_mass.bmp' ),
-                    ['type'] = STRING( 'Mass' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Mass_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 398.5, 18.08704, 718.5001 ),
-                },
-                ['AtlantisAttack7'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 429.755, 14.4615, 322.204 ),
-                },
-                ['AeonNaval_Patrol6'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 266.84, 13.96459, 449.679 ),
-                },
-                ['AtlantisAttack3'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 918.388, 12.64891, 505.161 ),
-                },
-                ['AeonNaval_Patrol2'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 359.5, 13.84459, 333.5 ),
-                },
-                ['M3_Aeon_SouthEastern_Base_Marker'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 930.4999, 17.98547, 924.5001 ),
-                },
-                ['AeonMain_Rally'] = {
-                    ['color'] = STRING( 'FF808000' ),
-                    ['hint'] = BOOLEAN( true ),
-                    ['type'] = STRING( 'Rally Point' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Defensive_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 123.5, 17.98547, 278.5 ),
                 },
                 ['Nuke4'] = {
                     ['color'] = STRING( 'ff800080' ),
@@ -1168,6 +1089,24 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 84.5, 17.98547, 288.5 ),
                 },
+                ['ControlCenter_Patrol4'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 549.5, 19.07929, 517.5 ),
+                },
+                ['Mass 21'] = {
+                    ['size'] = FLOAT( 1.000000 ),
+                    ['resource'] = BOOLEAN( true ),
+                    ['amount'] = FLOAT( 100.000000 ),
+                    ['color'] = STRING( 'ff808080' ),
+                    ['editorIcon'] = STRING( '/textures/editor/marker_mass.bmp' ),
+                    ['type'] = STRING( 'Mass' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Mass_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 398.5, 18.08704, 718.5001 ),
+                },
                 ['PlayerAir_Patrol1'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
@@ -1175,7 +1114,7 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 752.5, 18.005, 186.5 ),
                 },
-                ['Mass 31'] = {
+                ['Mass 28'] = {
                     ['size'] = FLOAT( 1.000000 ),
                     ['resource'] = BOOLEAN( true ),
                     ['amount'] = FLOAT( 100.000000 ),
@@ -1184,14 +1123,75 @@ Scenario = {
                     ['type'] = STRING( 'Mass' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 1003.5, 17.98547, 874.5001 ),
+                    ['position'] = VECTOR3( 942.5, 17.98547, 944.5001 ),
                 },
-                ['M2LandAttack_Patrol0'] = {
+                ['UEFBase_Patrol4'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 770.5, 24.30617, 277.5 ),
+                    ['position'] = VECTOR3( 450.373, 18.46113, 673.285 ),
+                },
+                ['MobileFactoryMove2'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 576.5, 20.11451, 498.5 ),
+                },
+                ['AeonNaval_Patrol8'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 39.5608, 4.332322, 111.607 ),
+                },
+                ['M2LandAttack_Patrol3'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 894.5, 17.89172, 169.5 ),
+                },
+                ['Mass 11'] = {
+                    ['size'] = FLOAT( 1.000000 ),
+                    ['resource'] = BOOLEAN( true ),
+                    ['amount'] = FLOAT( 100.000000 ),
+                    ['color'] = STRING( 'ff808080' ),
+                    ['editorIcon'] = STRING( '/textures/editor/marker_mass.bmp' ),
+                    ['type'] = STRING( 'Mass' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Mass_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 764.5, 17.89562, 160.5 ),
+                },
+                ['Gather1'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 570.063, 17.97846, 385.051 ),
+                },
+                ['AtlantisAttack7'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 429.755, 14.4615, 322.204 ),
+                },
+                ['AeonNaval_Patrol6'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 266.84, 13.96459, 449.679 ),
+                },
+                ['AeonMain_Rally'] = {
+                    ['color'] = STRING( 'FF808000' ),
+                    ['hint'] = BOOLEAN( true ),
+                    ['type'] = STRING( 'Rally Point' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Defensive_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 123.5, 17.98547, 278.5 ),
                 },
                 ['AeonNaval_Patrol9'] = {
                     ['color'] = STRING( 'ff800080' ),
@@ -1208,24 +1208,6 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 551.5, 18.95428, 505.5 ),
                 },
-                ['M2LandAttack_Patrol3'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 894.5, 17.89172, 169.5 ),
-                },
-                ['Mass 28'] = {
-                    ['size'] = FLOAT( 1.000000 ),
-                    ['resource'] = BOOLEAN( true ),
-                    ['amount'] = FLOAT( 100.000000 ),
-                    ['color'] = STRING( 'ff808080' ),
-                    ['editorIcon'] = STRING( '' ),
-                    ['type'] = STRING( 'Mass' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 942.5, 17.98547, 944.5001 ),
-                },
                 ['Mass 06'] = {
                     ['size'] = FLOAT( 1.000000 ),
                     ['resource'] = BOOLEAN( true ),
@@ -1237,35 +1219,6 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 148.5, 17.98547, 236.5 ),
                 },
-                ['NavalRallyPoint_02'] = {
-                    ['color'] = STRING( 'ff00FFFF' ),
-                    ['hint'] = BOOLEAN( true ),
-                    ['type'] = STRING( 'Naval Rally Point' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 143.5, 11.83276, 859.5001 ),
-                },
-                ['AeonNaval_Patrol8'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 39.5608, 4.332322, 111.607 ),
-                },
-                ['MobileFactoryMove2'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 576.5, 20.11451, 498.5 ),
-                },
-                ['UEFBase_Patrol4'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 450.373, 18.46113, 673.285 ),
-                },
                 ['Mass 20'] = {
                     ['size'] = FLOAT( 1.000000 ),
                     ['resource'] = BOOLEAN( true ),
@@ -1276,6 +1229,53 @@ Scenario = {
                     ['prop'] = STRING( '/env/common/props/markers/M_Mass_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 434.5, 18.6691, 679.5001 ),
+                },
+                ['M2LandAttack_Patrol0'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 770.5, 24.30617, 277.5 ),
+                },
+                ['NavalRallyPoint_02'] = {
+                    ['color'] = STRING( 'ff00FFFF' ),
+                    ['hint'] = BOOLEAN( true ),
+                    ['type'] = STRING( 'Naval Rally Point' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 158.5, 17.5, 874.5001 ),
+                },
+                ['M3_Aeon_SouthEastern_Base_Marker'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 930.4999, 17.98547, 924.5001 ),
+                },
+                ['AeonNaval_Patrol2'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 359.5, 13.84459, 333.5 ),
+                },
+                ['AtlantisAttack3'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 918.388, 12.64891, 505.161 ),
+                },
+                ['Mass 31'] = {
+                    ['size'] = FLOAT( 1.000000 ),
+                    ['resource'] = BOOLEAN( true ),
+                    ['amount'] = FLOAT( 100.000000 ),
+                    ['color'] = STRING( 'ff808080' ),
+                    ['editorIcon'] = STRING( '' ),
+                    ['type'] = STRING( 'Mass' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 1003.5, 17.98547, 874.5001 ),
                 },
                 ['AeonNavalBaseN'] = {
                     ['color'] = STRING( 'ff800080' ),
@@ -1717,6 +1717,20 @@ Scenario = {
                 "M3_UEF_SouthWestern_Base1",
             },
         },
+        ['M3_UEFMain_To_AeonSouthEast_Naval_Chain'] = {
+            Markers = {
+                "M3_Aeon_SouthEastern_Base3",
+                "M3_Aeon_SouthEastern_Base4",
+                "M3_Aeon_SouthEastern_Base5",
+                "Blank Marker 11",
+                "AtlantisAttack3",
+                "AtlantisAttack4",
+                "PlayerNaval2",
+                "AtlantisAttack6",
+                "AeonNaval_Patrol1",
+                "AeonNaval_Patrol7",
+            },
+        },
         ['AeonNaval_North_Chain'] = {
             Markers = {
                 "AeonNaval_Patrol4",
@@ -1750,10 +1764,8 @@ Scenario = {
                 "M3_UEF_SouthWestern_Base3",
             },
         },
-        ['M2LandAttack_Chain1'] = {
+        ['Aeon_AttackChain'] = {
             Markers = {
-                "Gather1",
-                "M2LandAttack_Patrol0",
                 "M2LandAttack_Patrol1",
                 "M2LandAttack_Patrol3",
                 "M2LandAttack_Patrol2",
@@ -1788,16 +1800,8 @@ Scenario = {
                 "AeonNaval_Patrol7",
             },
         },
-        ['Aeon_AttackChain'] = {
+        ['M2LandAttack_Chain1'] = {
             Markers = {
-                "M2LandAttack_Patrol1",
-                "M2LandAttack_Patrol3",
-                "M2LandAttack_Patrol2",
-            },
-        },
-        ['M2LandAttack_Chain4'] = {
-            Markers = {
-                "MobileFacGather1",
                 "Gather1",
                 "M2LandAttack_Patrol0",
                 "M2LandAttack_Patrol1",
@@ -1815,17 +1819,28 @@ Scenario = {
                 "M2LandAttack_Patrol1",
             },
         },
-        ['M3_AeonToUEF_Naval_Chain'] = {
+        ['M2LandAttack_Chain4'] = {
             Markers = {
-                "AtlantisAttack8",
+                "MobileFacGather1",
+                "Gather1",
+                "M2LandAttack_Patrol0",
+                "M2LandAttack_Patrol1",
+                "M2LandAttack_Patrol3",
+                "M2LandAttack_Patrol2",
+            },
+        },
+        ['M3_UEF_Southern_Naval_Attack_Chain'] = {
+            Markers = {
                 "AtlantisAttack9",
-                "AtlantisAttack1",
-                "AtlantisAttack2",
-                "AtlantisAttack3",
-                "AtlantisAttack4",
-                "PlayerNaval2",
+                "AtlantisAttack8",
+                "AtlantisAttack7",
                 "AtlantisAttack6",
-                "AeonNaval_Patrol5",
+                "AtlantisAttack5",
+                "AtlantisAttack4",
+                "AtlantisAttack3",
+                "M3_Aeon_SouthEastern_Base5",
+                "M3_Aeon_SouthEastern_Base4",
+                "M3_Aeon_SouthEastern_Base3",
             },
         },
         ['Player_Base_Patrol_Chain'] = {
@@ -1988,24 +2003,23 @@ Scenario = {
                 "UEFBase_Patrol5",
             },
         },
-        ['M3_UEFMain_To_AeonSouthEast_Naval_Chain'] = {
-            Markers = {
-                "M3_Aeon_SouthEastern_Base3",
-                "M3_Aeon_SouthEastern_Base4",
-                "M3_Aeon_SouthEastern_Base5",
-                "Blank Marker 11",
-                "AtlantisAttack3",
-                "AtlantisAttack4",
-                "PlayerNaval2",
-                "AtlantisAttack6",
-                "AeonNaval_Patrol1",
-                "AeonNaval_Patrol7",
-            },
-        },
         ['Player_Subs_Patrol_Chain'] = {
             Markers = {
                 "PlayerSub_Patrol1",
                 "PlayerSub_Patrol2",
+            },
+        },
+        ['M3_AeonToUEF_Naval_Chain'] = {
+            Markers = {
+                "AtlantisAttack8",
+                "AtlantisAttack9",
+                "AtlantisAttack1",
+                "AtlantisAttack2",
+                "AtlantisAttack3",
+                "AtlantisAttack4",
+                "PlayerNaval2",
+                "AtlantisAttack6",
+                "AeonNaval_Patrol5",
             },
         },
     },
@@ -2292,11 +2306,11 @@ Scenario = {
                                                 Position = { 831.5, 18.63786, 177.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_622'] = {
-                                                type = 'urb3104',
+                                            ['UNIT_643'] = {
+                                                type = 'urb2205',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 808.5, 18.80584, 175.5 },
+                                                Position = { 842.5, 17.5, 84.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_633'] = {
@@ -2306,11 +2320,11 @@ Scenario = {
                                                 Position = { 769, 17.5, 119 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_632'] = {
-                                                type = 'urb0301',
+                                            ['UNIT_645'] = {
+                                                type = 'urb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 826.5, 18.29408, 158.5 },
+                                                Position = { 831.5, 18.62614, 181.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_628'] = {
@@ -2320,25 +2334,25 @@ Scenario = {
                                                 Position = { 825.5, 18.6027, 171.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_631'] = {
-                                                type = 'urb0302',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 790.5, 18.25111, 158.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_643'] = {
+                                            ['UNIT_646'] = {
                                                 type = 'urb2205',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 842.5, 17.5, 84.5 },
+                                                Position = { 743.5, 17.5, 109.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_645'] = {
-                                                type = 'urb2301',
+                                            ['UNIT_622'] = {
+                                                type = 'urb3104',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 831.5, 18.62614, 181.5 },
+                                                Position = { 808.5, 18.80584, 175.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_632'] = {
+                                                type = 'urb0301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 826.5, 18.29408, 158.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_624'] = {
@@ -2390,18 +2404,11 @@ Scenario = {
                                                 Position = { 790.5, 18.4855, 166.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_646'] = {
-                                                type = 'urb2205',
+                                            ['UNIT_631'] = {
+                                                type = 'urb0302',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 743.5, 17.5, 109.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_629'] = {
-                                                type = 'urb1105',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 821.5, 18.67302, 169.5 },
+                                                Position = { 790.5, 18.25111, 158.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_625'] = {
@@ -2409,6 +2416,13 @@ Scenario = {
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 790.5, 17.76671, 138.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_629'] = {
+                                                type = 'urb1105',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 821.5, 18.67302, 169.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_639'] = {
@@ -2469,18 +2483,18 @@ Scenario = {
                                         Position = { 819.5, 18.7824, 171.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_663'] = {
-                                        type = 'urb2304',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 785.4999, 18.16517, 161.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
                                     ['UNIT_668'] = {
                                         type = 'urb1105',
                                         orders = '',
                                         platoon = '',
                                         Position = { 821.4999, 18.82537, 173.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_663'] = {
+                                        type = 'urb2304',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 785.4999, 18.16517, 161.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_670'] = {
@@ -2721,11 +2735,11 @@ Scenario = {
                                 Position = { 806.4999, 18.65349, 162.5 },
                                 Orientation = { 0, 0, 0 },
                             },
-                            ['UNIT_7342'] = {
+                            ['UNIT_7339'] = {
                                 type = 'url0309',
                                 orders = '',
                                 platoon = '',
-                                Position = { 804.5, 18.63395, 160.5 },
+                                Position = { 812.5, 18.45425, 160.5 },
                                 Orientation = { 0, 0, 0 },
                             },
                             ['UNIT_7341'] = {
@@ -2735,11 +2749,11 @@ Scenario = {
                                 Position = { 810.4999, 18.59879, 162.5 },
                                 Orientation = { 0, 0, 0 },
                             },
-                            ['UNIT_7339'] = {
+                            ['UNIT_7342'] = {
                                 type = 'url0309',
                                 orders = '',
                                 platoon = '',
-                                Position = { 812.5, 18.45425, 160.5 },
+                                Position = { 804.5, 18.63395, 160.5 },
                                 Orientation = { 0, 0, 0 },
                             },
                         },
@@ -3073,18 +3087,18 @@ Scenario = {
                                                         Position = { 984.5, 12.15699, 983.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_742'] = {
-                                                        type = 'uaa0203',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 974.5, 12.32106, 983.5001 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
                                                     ['UNIT_746'] = {
                                                         type = 'uaa0203',
                                                         orders = '',
                                                         platoon = '',
                                                         Position = { 982.5, 12.18433, 983.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_742'] = {
+                                                        type = 'uaa0203',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 974.5, 12.32106, 983.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_736'] = {
@@ -3386,6 +3400,38 @@ Scenario = {
                                     },
                                 },
                             },
+                            ['M3_Aeon_Experimentals'] = GROUP {
+                                orders = '',
+                                platoon = '',
+                                Units = {
+                                    ['Aeon_Tempests'] = GROUP {
+                                        orders = '',
+                                        platoon = '',
+                                        Units = {
+                                            ['M3_Aeon_South_Eastern_Tempest'] = {
+                                                type = 'uas0401',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 975.4999, 12.5, 818.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                        },
+                                    },
+                                    ['Aeon_GCs'] = GROUP {
+                                        orders = '',
+                                        platoon = '',
+                                        Units = {
+                                            ['M3_Aeon_South_Western_GC'] = {
+                                                type = 'ual0401',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 995.4999, 17.98547, 886.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
                     ['M2'] = GROUP {
@@ -3640,11 +3686,11 @@ Scenario = {
                                                 Position = { 59.5, 11.00848, 431.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_430'] = {
-                                                type = 'uaa0304',
+                                            ['UNIT_406'] = {
+                                                type = 'uaa0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 62.5, 11.09052, 429.5 },
+                                                Position = { 56.5, 10.98114, 434.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_428'] = {
@@ -3654,11 +3700,11 @@ Scenario = {
                                                 Position = { 59.5, 11.1413, 429.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_404'] = {
+                                            ['UNIT_409'] = {
                                                 type = 'uaa0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 59.5, 10.90301, 434.5 },
+                                                Position = { 59.5, 10.75847, 437.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_421'] = {
@@ -3682,11 +3728,11 @@ Scenario = {
                                                 Position = { 56.5, 10.54752, 443.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_406'] = {
-                                                type = 'uaa0303',
+                                            ['UNIT_430'] = {
+                                                type = 'uaa0304',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 56.5, 10.98114, 434.5 },
+                                                Position = { 62.5, 11.09052, 429.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_420'] = {
@@ -3738,11 +3784,11 @@ Scenario = {
                                                 Position = { 65.5, 10.92254, 431.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_429'] = {
+                                            ['UNIT_426'] = {
                                                 type = 'uaa0304',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 56.5, 11.18818, 429.5 },
+                                                Position = { 62.5, 10.98895, 431.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_431'] = {
@@ -3752,11 +3798,11 @@ Scenario = {
                                                 Position = { 65.5, 11.03192, 429.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_426'] = {
+                                            ['UNIT_429'] = {
                                                 type = 'uaa0304',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 62.5, 10.98895, 431.5 },
+                                                Position = { 56.5, 11.18818, 429.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_414'] = {
@@ -3794,11 +3840,11 @@ Scenario = {
                                                 Position = { 65.5, 10.58658, 437.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_409'] = {
+                                            ['UNIT_404'] = {
                                                 type = 'uaa0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 59.5, 10.75847, 437.5 },
+                                                Position = { 59.5, 10.90301, 434.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                         },
@@ -4082,24 +4128,6 @@ Scenario = {
                                         platoon = '',
                                         Position = { 80.5, 10.35219, 437.5 },
                                         Orientation = { 0, 0, 0 },
-                                    },
-                                },
-                            },
-                            ['Engineers_D3'] = GROUP {
-                                orders = '',
-                                platoon = '',
-                                Units = {
-                                    ['Engineers_D2'] = GROUP {
-                                        orders = '',
-                                        platoon = '',
-                                        Units = {
-                                            ['Engineers_D1'] = GROUP {
-                                                orders = '',
-                                                platoon = '',
-                                                Units = {
-                                                },
-                                            },
-                                        },
                                     },
                                 },
                             },
@@ -4826,18 +4854,18 @@ Scenario = {
                                                                                 Position = { 55.5, 17.89562, 304.5 },
                                                                                 Orientation = { 0, 0, 0 },
                                                                             },
-                                                                            ['UNIT_9004'] = {
-                                                                                type = 'uab2204',
-                                                                                orders = '',
-                                                                                platoon = '',
-                                                                                Position = { 72.5, 17.98547, 326.5 },
-                                                                                Orientation = { 0, 0, 0 },
-                                                                            },
                                                                             ['UNIT_8993'] = {
                                                                                 type = 'uab2304',
                                                                                 orders = '',
                                                                                 platoon = '',
                                                                                 Position = { 62.5, 17.98547, 314.5 },
+                                                                                Orientation = { 0, 0, 0 },
+                                                                            },
+                                                                            ['UNIT_9004'] = {
+                                                                                type = 'uab2204',
+                                                                                orders = '',
+                                                                                platoon = '',
+                                                                                Position = { 72.5, 17.98547, 326.5 },
                                                                                 Orientation = { 0, 0, 0 },
                                                                             },
                                                                             ['UNIT_9044'] = {
@@ -5182,13 +5210,6 @@ Scenario = {
                                                                         Position = { 95.5, 17.98547, 283.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_818'] = {
-                                                                        type = 'uab1301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 126.5, 17.98547, 250.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_9085'] = {
                                                                         type = 'uab1201',
                                                                         orders = '',
@@ -5208,6 +5229,13 @@ Scenario = {
                                                                         orders = '',
                                                                         platoon = '',
                                                                         Position = { 167.5, 17.98547, 219.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_818'] = {
+                                                                        type = 'uab1301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 126.5, 17.98547, 250.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_9086'] = {
@@ -6522,27 +6550,83 @@ Scenario = {
                                                         Position = { 228.5, 17.5, 393.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
+                                                    ['UNIT_1002'] = {
+                                                        type = 'uas0103',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 216.5, 17.5, 375.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_1003'] = {
+                                                        type = 'uas0201',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 216.5, 17.5, 386.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_1004'] = {
+                                                        type = 'uas0203',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 216.5, 16, 381.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_1005'] = {
+                                                        type = 'uas0102',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 216.5, 17.5, 370.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_1006'] = {
+                                                        type = 'uas0202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 216.5, 17.5, 393.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_1007'] = {
+                                                        type = 'uas0103',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 218.5, 17.5, 375.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_1008'] = {
+                                                        type = 'uas0203',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 218.5, 16, 381.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_1009'] = {
+                                                        type = 'uas0102',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 218.5, 17.5, 370.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
                                                 },
                                             },
                                             ['UNIT_487'] = {
                                                 type = 'uas0103',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 296.5, 17.5, 322.5 },
+                                                Position = { 295.5, 17.5, 322.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_492'] = {
                                                 type = 'uas0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 296.5, 16, 328.5 },
+                                                Position = { 295.5, 16, 328.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_488'] = {
                                                 type = 'uas0103',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 298.5, 17.5, 322.5 },
+                                                Position = { 297.5, 17.5, 322.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_489'] = {
@@ -6570,7 +6654,7 @@ Scenario = {
                                                 type = 'uas0302',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 295.5, 17.5, 353.5 },
+                                                Position = { 296.5, 17.5, 353.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_499'] = {
@@ -6584,14 +6668,14 @@ Scenario = {
                                                 type = 'uas0102',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 298.5, 17.5, 318.5 },
+                                                Position = { 297.5, 17.5, 318.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_570'] = {
                                                 type = 'uas0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 289.5, 16, 328.5 },
+                                                Position = { 287.5, 16, 328.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_498'] = {
@@ -6605,42 +6689,42 @@ Scenario = {
                                                 type = 'uas0102',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 289.5, 17.5, 318.5 },
+                                                Position = { 287.5, 17.5, 318.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_491'] = {
                                                 type = 'uas0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 291.5, 16, 328.5 },
+                                                Position = { 289.5, 16, 328.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_573'] = {
                                                 type = 'uas0102',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 296.5, 17.5, 318.5 },
+                                                Position = { 295.5, 17.5, 318.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_569'] = {
                                                 type = 'uas0103',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 289.5, 17.5, 322.5 },
+                                                Position = { 287.5, 17.5, 322.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_572'] = {
                                                 type = 'uas0102',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 291.5, 17.5, 318.5 },
+                                                Position = { 289.5, 17.5, 318.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_486'] = {
                                                 type = 'uas0103',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 291.5, 17.5, 322.5 },
+                                                Position = { 289.5, 17.5, 322.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_496'] = {
@@ -6654,7 +6738,28 @@ Scenario = {
                                                 type = 'uas0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 298.5, 16, 328.5 },
+                                                Position = { 297.5, 16, 328.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_1010'] = {
+                                                type = 'uas0202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 286.5, 17.5, 340.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_1011'] = {
+                                                type = 'uas0201',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 286.5, 17.5, 333.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_1012'] = {
+                                                type = 'uas0302',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 288.5, 17.5, 353.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                         },
@@ -7361,11 +7466,11 @@ Scenario = {
                                                 Position = { 73.5, 4.515901, 82.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9298'] = {
-                                                type = 'uaa0303',
+                                            ['UNIT_9287'] = {
+                                                type = 'uaa0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 67.5, 4.140877, 59.5 },
+                                                Position = { 67.5, 4.246353, 73.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9286'] = {
@@ -7396,11 +7501,11 @@ Scenario = {
                                                 Position = { 73.5, 4.199475, 67.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9287'] = {
-                                                type = 'uaa0203',
+                                            ['UNIT_9298'] = {
+                                                type = 'uaa0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 67.5, 4.246353, 73.5 },
+                                                Position = { 67.5, 4.140877, 59.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9297'] = {
@@ -7650,11 +7755,11 @@ Scenario = {
                                         Position = { 88.49999, 4.316669, 63.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_9342'] = {
-                                        type = 'uaa0203',
+                                    ['UNIT_9309'] = {
+                                        type = 'uaa0303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 85.5, 4.285421, 79.5 },
+                                        Position = { 91.5, 4.25807, 59.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_9313'] = {
@@ -7671,6 +7776,27 @@ Scenario = {
                                         Position = { 91.5, 4.390893, 63.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
+                                    ['UNIT_9310'] = {
+                                        type = 'uaa0203',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 91.5, 4.480742, 85.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_9342'] = {
+                                        type = 'uaa0203',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 85.5, 4.285421, 79.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_9340'] = {
+                                        type = 'uaa0304',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 85.5, 4.625283, 99.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
                                     ['UNIT_9344'] = {
                                         type = 'uaa0203',
                                         orders = '',
@@ -7683,27 +7809,6 @@ Scenario = {
                                         orders = '',
                                         platoon = '',
                                         Position = { 89.5, 4.61747, 99.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_9309'] = {
-                                        type = 'uaa0303',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 91.5, 4.25807, 59.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_9310'] = {
-                                        type = 'uaa0203',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 91.5, 4.480742, 85.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_9340'] = {
-                                        type = 'uaa0304',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 85.5, 4.625283, 99.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_9346'] = {
@@ -7748,18 +7853,6 @@ Scenario = {
                                         Position = { 85.5, 4.187755, 59.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                },
-                            },
-                        },
-                    },
-                    ['M3_Aeon_Threat'] = GROUP {
-                        orders = '',
-                        platoon = '',
-                        Units = {
-                            ['M3_Aeon_Experimentals'] = GROUP {
-                                orders = '',
-                                platoon = '',
-                                Units = {
                                 },
                             },
                         },
@@ -7839,6 +7932,13 @@ Scenario = {
                                                 Position = { 954.5, 17.82921, 950.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
+                                            ['UNIT_895'] = {
+                                                type = 'uab1105',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 930.4999, 17.98547, 940.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
                                             ['UNIT_9386'] = {
                                                 type = 'uab3104',
                                                 orders = '',
@@ -7860,11 +7960,25 @@ Scenario = {
                                                 Position = { 923.5, 17.98547, 943.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
+                                            ['UNIT_887'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 1003.5, 17.98547, 872.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
                                             ['UNIT_9419'] = {
                                                 type = 'uab1101',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 985.4999, 17.98547, 898.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_883'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 940.4999, 17.98547, 944.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9410'] = {
@@ -7888,6 +8002,13 @@ Scenario = {
                                                 Position = { 987.5, 17.98547, 894.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
+                                            ['UNIT_896'] = {
+                                                type = 'uab1105',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 926.4999, 17.98547, 936.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
                                             ['UNIT_9401'] = {
                                                 type = 'uab2304',
                                                 orders = '',
@@ -7902,6 +8023,13 @@ Scenario = {
                                                 Position = { 904.5, 17.95422, 939.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
+                                            ['UNIT_9356'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 944.5, 17.98547, 944.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
                                             ['UNIT_9382'] = {
                                                 type = 'uab0302',
                                                 orders = '',
@@ -7909,11 +8037,25 @@ Scenario = {
                                                 Position = { 976.4999, 17.98547, 903.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
+                                            ['UNIT_893'] = {
+                                                type = 'uab1101',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 928.5, 17.98547, 940.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
                                             ['UNIT_9435'] = {
                                                 type = 'uab2205',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 955.5, 17.5, 838.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9406'] = {
+                                                type = 'uab1301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 931.4999, 17.98547, 935.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9398'] = {
@@ -7937,102 +8079,18 @@ Scenario = {
                                                 Position = { 910.4999, 17.92687, 974.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
+                                            ['UNIT_9405'] = {
+                                                type = 'uab2205',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 896.4999, 17.5, 869.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
                                             ['UNIT_9393'] = {
                                                 type = 'uab1303',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 908.5, 17.98547, 942.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9390'] = {
-                                                type = 'uab1302',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 1006.5, 17.98157, 924.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9368'] = {
-                                                type = 'uab1106',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 1008.5, 17.98157, 924.5001 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9397'] = {
-                                                type = 'uab4301',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 1003.5, 17.97766, 878.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9418'] = {
-                                                type = 'uab2303',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 925.5, 17.95422, 911.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9356'] = {
-                                                type = 'uab1106',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 944.5, 17.98547, 944.5001 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9436'] = {
-                                                type = 'uab2205',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 1000.5, 17.5, 828.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9377'] = {
-                                                type = 'uab1301',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 996.4999, 17.98547, 877.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9381'] = {
-                                                type = 'uab2205',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 938.5, 17.5, 860.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9406'] = {
-                                                type = 'uab1301',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 931.4999, 17.98547, 935.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9385'] = {
-                                                type = 'uab2205',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 876.4999, 17.5, 898.5001 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9438'] = {
-                                                type = 'uab2205',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 808.5, 17.5, 932.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9424'] = {
-                                                type = 'uab0302',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 990.4999, 17.98547, 901.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9429'] = {
-                                                type = 'uab2303',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 955.5, 17.98547, 895.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9387'] = {
@@ -8042,11 +8100,11 @@ Scenario = {
                                                 Position = { 1010.5, 17.98547, 877.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9439'] = {
-                                                type = 'uab2205',
+                                            ['UNIT_9390'] = {
+                                                type = 'uab1302',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 804.5, 17.5, 936.5 },
+                                                Position = { 1006.5, 17.98157, 924.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9395'] = {
@@ -8063,11 +8121,151 @@ Scenario = {
                                                 Position = { 934.5, 17.98547, 914.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9433'] = {
+                                            ['UNIT_9411'] = {
+                                                type = 'uab1302',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 906.5, 17.84484, 976.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_884'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 904.5, 17.82531, 976.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9368'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 1008.5, 17.98157, 924.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9430'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 906.4999, 17.87999, 974.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9397'] = {
+                                                type = 'uab4301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 1003.5, 17.97766, 878.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9424'] = {
+                                                type = 'uab0302',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 990.4999, 17.98547, 901.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9412'] = {
                                                 type = 'uab2304',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 989.5, 17.98547, 922.5 },
+                                                Position = { 940.4999, 17.98547, 908.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_892'] = {
+                                                type = 'uab1101',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 950.4999, 17.98547, 922.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9409'] = {
+                                                type = 'uab1201',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 958.5, 17.98547, 926.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9377'] = {
+                                                type = 'uab1301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 996.4999, 17.98547, 877.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9381'] = {
+                                                type = 'uab2205',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 938.5, 17.5, 860.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9389'] = {
+                                                type = 'uab4301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 983.5, 17.98547, 902.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9385'] = {
+                                                type = 'uab2205',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 876.4999, 17.5, 898.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9438'] = {
+                                                type = 'uab2205',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 808.5, 17.5, 932.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_890'] = {
+                                                type = 'uab1105',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 956.4999, 17.98547, 930.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9429'] = {
+                                                type = 'uab2303',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 955.5, 17.98547, 895.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9431'] = {
+                                                type = 'uab2303',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 903.5, 17.93469, 937.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9439'] = {
+                                                type = 'uab2205',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 804.5, 17.5, 936.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9357'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 942.5, 17.98547, 946.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9404'] = {
+                                                type = 'uab1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 957.5, 17.98547, 889.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9392'] = {
+                                                type = 'uab1303',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 966.4999, 17.98547, 932.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9355'] = {
@@ -8084,11 +8282,11 @@ Scenario = {
                                                 Position = { 986.5, 17.96594, 877.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9411'] = {
-                                                type = 'uab1302',
+                                            ['UNIT_9391'] = {
+                                                type = 'uab1101',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 906.5, 17.84484, 976.5 },
+                                                Position = { 981.4999, 17.98547, 906.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9374'] = {
@@ -8119,11 +8317,11 @@ Scenario = {
                                                 Position = { 1005.5, 17.98547, 874.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9423'] = {
-                                                type = 'uab1302',
+                                            ['UNIT_882'] = {
+                                                type = 'uab1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 1003.5, 17.98547, 874.5001 },
+                                                Position = { 942.5, 17.98547, 942.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9432'] = {
@@ -8133,18 +8331,18 @@ Scenario = {
                                                 Position = { 953.5, 17.86046, 948.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9403'] = {
-                                                type = 'uab1106',
+                                            ['UNIT_9359'] = {
+                                                type = 'uab1301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 1001.5, 17.98547, 874.5001 },
+                                                Position = { 907.5, 17.98547, 949.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9391'] = {
-                                                type = 'uab1101',
+                                            ['UNIT_9399'] = {
+                                                type = 'uab1301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 981.4999, 17.98547, 906.5 },
+                                                Position = { 951.4999, 17.98547, 917.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9363'] = {
@@ -8189,25 +8387,32 @@ Scenario = {
                                                 Position = { 944.5, 17.98547, 918.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9409'] = {
-                                                type = 'uab1201',
+                                            ['UNIT_9384'] = {
+                                                type = 'uab0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 958.5, 17.98547, 926.5 },
+                                                Position = { 850, 17.5, 960 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9389'] = {
-                                                type = 'uab4301',
+                                            ['UNIT_9408'] = {
+                                                type = 'uab1303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 983.5, 17.98547, 902.5 },
+                                                Position = { 972.5, 17.98547, 926.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9426'] = {
+                                            ['UNIT_9420'] = {
+                                                type = 'uab2303',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 1005.5, 17.95031, 860.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9423'] = {
                                                 type = 'uab1302',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 959.5, 17.98547, 889.5 },
+                                                Position = { 1003.5, 17.98547, 874.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9396'] = {
@@ -8217,18 +8422,11 @@ Scenario = {
                                                 Position = { 938.5, 17.98547, 912.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9357'] = {
-                                                type = 'uab1106',
+                                            ['UNIT_894'] = {
+                                                type = 'uab1101',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 942.5, 17.98547, 946.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9365'] = {
-                                                type = 'uab5202',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 1003.5, 17.98547, 884.5001 },
+                                                Position = { 926.4999, 17.98547, 938.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9402'] = {
@@ -8245,46 +8443,46 @@ Scenario = {
                                                 Position = { 942.5, 17.98547, 944.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9404'] = {
+                                            ['UNIT_9365'] = {
+                                                type = 'uab5202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 1003.5, 17.98547, 884.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_9426'] = {
+                                                type = 'uab1302',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 959.5, 17.98547, 889.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_886'] = {
                                                 type = 'uab1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 957.5, 17.98547, 889.5001 },
+                                                Position = { 1006.5, 17.98547, 922.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9405'] = {
-                                                type = 'uab2205',
+                                            ['UNIT_9421'] = {
+                                                type = 'uab2304',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 896.4999, 17.5, 869.5001 },
+                                                Position = { 956.5, 17.98547, 897.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9399'] = {
-                                                type = 'uab1301',
+                                            ['UNIT_888'] = {
+                                                type = 'uab1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 951.4999, 17.98547, 917.5 },
+                                                Position = { 976.4999, 17.98547, 928.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9359'] = {
-                                                type = 'uab1301',
+                                            ['UNIT_9403'] = {
+                                                type = 'uab1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 907.5, 17.98547, 949.5001 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9384'] = {
-                                                type = 'uab0303',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 850, 17.5, 960 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_9408'] = {
-                                                type = 'uab1303',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 972.5, 17.98547, 926.5 },
+                                                Position = { 1001.5, 17.98547, 874.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9422'] = {
@@ -8294,11 +8492,11 @@ Scenario = {
                                                 Position = { 827.5, 17.5, 902.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9431'] = {
-                                                type = 'uab2303',
+                                            ['UNIT_889'] = {
+                                                type = 'uab1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 903.5, 17.93469, 937.5 },
+                                                Position = { 968.5, 17.98547, 928.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9370'] = {
@@ -8308,11 +8506,11 @@ Scenario = {
                                                 Position = { 925.4999, 17.98547, 958.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9420'] = {
-                                                type = 'uab2303',
+                                            ['UNIT_9433'] = {
+                                                type = 'uab2304',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 1005.5, 17.95031, 860.5 },
+                                                Position = { 989.5, 17.98547, 922.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9371'] = {
@@ -8329,32 +8527,32 @@ Scenario = {
                                                 Position = { 985.5, 17.94641, 875.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9421'] = {
-                                                type = 'uab2304',
+                                            ['UNIT_891'] = {
+                                                type = 'uab1101',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 956.5, 17.98547, 897.5 },
+                                                Position = { 948.5, 17.98547, 924.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9392'] = {
-                                                type = 'uab1303',
+                                            ['UNIT_9436'] = {
+                                                type = 'uab2205',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 966.4999, 17.98547, 932.5 },
+                                                Position = { 1000.5, 17.5, 828.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9412'] = {
-                                                type = 'uab2304',
+                                            ['UNIT_9418'] = {
+                                                type = 'uab2303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 940.4999, 17.98547, 908.5001 },
+                                                Position = { 925.5, 17.95422, 911.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_9430'] = {
+                                            ['UNIT_885'] = {
                                                 type = 'uab1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 906.4999, 17.87999, 974.5001 },
+                                                Position = { 1004.5, 17.98157, 924.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_9407'] = {
@@ -8386,13 +8584,6 @@ Scenario = {
                                                 Orientation = { 0, 0, 0 },
                                             },
                                         },
-                                    },
-                                    ['UNIT_9441'] = {
-                                        type = 'zab9503',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 828, 17.5, 952 },
-                                        Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_9450'] = {
                                         type = 'uab2304',
@@ -8457,11 +8648,18 @@ Scenario = {
                                         Position = { 938.5, 17.5, 864.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_9443'] = {
-                                        type = 'uab2303',
+                                    ['UNIT_9456'] = {
+                                        type = 'uab2304',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 902.5, 17.91125, 939.5001 },
+                                        Position = { 928.5, 17.98547, 946.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_823'] = {
+                                        type = 'zab9603',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 828, 17.5, 952 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_9463'] = {
@@ -8471,11 +8669,11 @@ Scenario = {
                                         Position = { 980.4999, 17.98547, 895.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_9456'] = {
-                                        type = 'uab2304',
+                                    ['UNIT_9443'] = {
+                                        type = 'uab2303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 928.5, 17.98547, 946.5 },
+                                        Position = { 902.5, 17.91125, 939.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_9445'] = {
@@ -8492,13 +8690,6 @@ Scenario = {
                                         Position = { 1004.5, 17.96594, 862.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_9452'] = {
-                                        type = 'uab2304',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 811.4999, 17.5, 975.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
                                     ['UNIT_9442'] = {
                                         type = 'uab2304',
                                         orders = '',
@@ -8506,11 +8697,18 @@ Scenario = {
                                         Position = { 920.4999, 17.98547, 938.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_9464'] = {
+                                    ['UNIT_9452'] = {
                                         type = 'uab2304',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 896.4999, 17.5, 873.5001 },
+                                        Position = { 811.4999, 17.5, 975.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_9448'] = {
+                                        type = 'zab9601',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 926.5, 17.98547, 951.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_9444'] = {
@@ -8527,18 +8725,18 @@ Scenario = {
                                         Position = { 955.5, 17.86047, 948.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
+                                    ['UNIT_9464'] = {
+                                        type = 'uab2304',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 896.4999, 17.5, 873.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
                                     ['UNIT_9459'] = {
                                         type = 'uab2304',
                                         orders = '',
                                         platoon = '',
                                         Position = { 959.5, 17.5, 838.5001 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_9448'] = {
-                                        type = 'zab9601',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 926.5, 17.98547, 951.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_9457'] = {
@@ -8599,8 +8797,8 @@ Scenario = {
                                 Position = { 994.5, 17.98547, 909.5001 },
                                 Orientation = { 0, 0, 0 },
                             },
-                            ['UNIT_9467'] = {
-                                type = 'zab9503',
+                            ['UNIT_824'] = {
+                                type = 'zab9603',
                                 orders = '',
                                 platoon = '',
                                 Position = { 843, 17.5, 927 },
@@ -8620,12 +8818,6 @@ Scenario = {
                                 Position = { 915.4999, 17.98547, 941.5 },
                                 Orientation = { 0, 0, 0 },
                             },
-                        },
-                    },
-                    ['Aeon_OffMap_Factories'] = GROUP {
-                        orders = '',
-                        platoon = '',
-                        Units = {
                         },
                     },
                     ['M2_GC_1'] = {
@@ -8696,6 +8888,346 @@ Scenario = {
                                         orders = '',
                                         platoon = '',
                                         Position = { 104.5, 17.97375, 952.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                },
+                            },
+                            ['M3_UEF_Southern_Naval_Fleet_D3'] = GROUP {
+                                orders = '',
+                                platoon = '',
+                                Units = {
+                                    ['M3_UEF_Southern_Naval_Fleet_D2'] = GROUP {
+                                        orders = '',
+                                        platoon = '',
+                                        Units = {
+                                            ['M3_UEF_Southern_Naval_Fleet_D1'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['UNIT_842'] = {
+                                                        type = 'ues0202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 341.5, 17.5, 860.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_858'] = {
+                                                        type = 'ues0201',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 322.5, 17.5, 861.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_859'] = {
+                                                        type = 'ues0202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 335.5, 17.5, 860.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_838'] = {
+                                                        type = 'ues0201',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 319.5, 17.5, 861.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_844'] = {
+                                                        type = 'ues0203',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 307.5, 16, 861.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_836'] = {
+                                                        type = 'ues0203',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 309.5, 16, 861.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_837'] = {
+                                                        type = 'ues0203',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 311.5, 16, 861.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_840'] = {
+                                                        type = 'ues0201',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 316.5, 17.5, 861.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_839'] = {
+                                                        type = 'ues0103',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 351.5, 17.5, 860.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_843'] = {
+                                                        type = 'ues0103',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 345.5, 17.5, 860.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_846'] = {
+                                                        type = 'ues0202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 338.5, 17.5, 860.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_841'] = {
+                                                        type = 'ues0103',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 348.5, 17.5, 860.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_845'] = {
+                                                        type = 'ues0302',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 329.5, 17.5, 860.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                },
+                                            },
+                                            ['UNIT_825'] = {
+                                                type = 'ues0201',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 320.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_860'] = {
+                                                type = 'ues0202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 336.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_828'] = {
+                                                type = 'ues0203',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 316.5, 16, 888.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_831'] = {
+                                                type = 'ues0202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 340.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_827'] = {
+                                                type = 'ues0103',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 344.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_829'] = {
+                                                type = 'ues0203',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 314.5, 16, 888.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_834'] = {
+                                                type = 'ues0103',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 346.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_832'] = {
+                                                type = 'ues0103',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 342.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_833'] = {
+                                                type = 'ues0202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 338.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_830'] = {
+                                                type = 'ues0302',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 329.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_861'] = {
+                                                type = 'ues0202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 334.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_826'] = {
+                                                type = 'ues0203',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 312.5, 16, 888.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_835'] = {
+                                                type = 'ues0201',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 318.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_863'] = {
+                                                type = 'ues0201',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 324.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_862'] = {
+                                                type = 'ues0201',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 322.5, 17.5, 887.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                        },
+                                    },
+                                    ['UNIT_852'] = {
+                                        type = 'ues0302',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 329.5, 17.5, 923.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_848'] = {
+                                        type = 'ues0203',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 311.5, 16, 925.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_865'] = {
+                                        type = 'ues0201',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 316.5, 17.5, 918.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_850'] = {
+                                        type = 'ues0103',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 345.5, 17.5, 917.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_849'] = {
+                                        type = 'ues0103',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 345.5, 17.5, 923.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_856'] = {
+                                        type = 'ues0201',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 319.5, 17.5, 925.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_851'] = {
+                                        type = 'ues0201',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 316.5, 17.5, 925.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_864'] = {
+                                        type = 'ues0201',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 319.5, 17.5, 918.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_869'] = {
+                                        type = 'ues0203',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 309.5, 16, 918.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_853'] = {
+                                        type = 'ues0202',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 338.5, 17.5, 923.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_857'] = {
+                                        type = 'ues0203',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 309.5, 16, 925.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_867'] = {
+                                        type = 'ues0202',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 338.5, 17.5, 917.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_847'] = {
+                                        type = 'ues0203',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 311.5, 16, 918.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_854'] = {
+                                        type = 'ues0103',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 348.5, 17.5, 923.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_870'] = {
+                                        type = 'ues0302',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 329.5, 17.5, 909.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_855'] = {
+                                        type = 'ues0202',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 341.5, 17.5, 923.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_868'] = {
+                                        type = 'ues0103',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 348.5, 17.5, 917.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_866'] = {
+                                        type = 'ues0202',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 341.5, 17.5, 917.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                 },
@@ -8842,11 +9374,11 @@ Scenario = {
                                                         Position = { 30.5, 14.48526, 986.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_370'] = {
+                                                    ['UNIT_45'] = {
                                                         type = 'uea0303',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 38.5, 14.52432, 992.5 },
+                                                        Position = { 36.5, 14.50479, 990.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_588'] = {
@@ -8877,11 +9409,11 @@ Scenario = {
                                                         Position = { 32.5, 14.27431, 990.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_45'] = {
+                                                    ['UNIT_370'] = {
                                                         type = 'uea0303',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 36.5, 14.50479, 990.5 },
+                                                        Position = { 38.5, 14.52432, 992.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_593'] = {
@@ -8984,11 +9516,11 @@ Scenario = {
                                                 Position = { 50.5, 15.27437, 986.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_696'] = {
+                                            ['UNIT_698'] = {
                                                 type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 50.5, 15.20405, 988.5001 },
+                                                Position = { 52.5, 15.28218, 988.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_699'] = {
@@ -9054,11 +9586,11 @@ Scenario = {
                                                 Position = { 52.5, 15.20796, 990.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_698'] = {
+                                            ['UNIT_696'] = {
                                                 type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 52.5, 15.28218, 988.5001 },
+                                                Position = { 50.5, 15.20405, 988.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_606'] = {
@@ -9305,6 +9837,26 @@ Scenario = {
                                             },
                                         },
                                     },
+                                    ['UEF_Atlantises'] = GROUP {
+                                        orders = '',
+                                        platoon = '',
+                                        Units = {
+                                            ['M3_UEF_SouthEastern_Atlantis'] = {
+                                                type = 'ues0401',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 234.5, 13.9, 926.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['M3_UEFMain_Atlantis'] = {
+                                                type = 'ues0401',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 554.5, 13.9, 857.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                        },
+                                    },
                                 },
                             },
                             ['M3_UEF_SMLs'] = GROUP {
@@ -9348,15 +9900,15 @@ Scenario = {
                                     },
                                 },
                             },
-                            ['M3NavyFleet_D3'] = GROUP {
+                            ['M3_UEF_Main_Naval_Fleet_D3'] = GROUP {
                                 orders = '',
                                 platoon = '',
                                 Units = {
-                                    ['M3NavyFleet_D2'] = GROUP {
+                                    ['M3_UEF_Main_Naval_Fleet_D2'] = GROUP {
                                         orders = '',
                                         platoon = '',
                                         Units = {
-                                            ['M3NavyFleet_D1'] = GROUP {
+                                            ['M3_UEF_Main_Naval_Fleet_D1'] = GROUP {
                                                 orders = '',
                                                 platoon = '',
                                                 Units = {
@@ -9439,13 +9991,6 @@ Scenario = {
                                                     },
                                                 },
                                             },
-                                            ['UNIT_7463'] = {
-                                                type = 'ues0203',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 465.5, 16, 970.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
                                             ['UNIT_7461'] = {
                                                 type = 'ues0203',
                                                 orders = '',
@@ -9474,11 +10019,11 @@ Scenario = {
                                                 Position = { 472.5, 17.5, 970.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_7457'] = {
-                                                type = 'ues0103',
+                                            ['UNIT_7463'] = {
+                                                type = 'ues0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 504.5, 17.5, 968.5001 },
+                                                Position = { 465.5, 16, 970.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_7455'] = {
@@ -9486,6 +10031,13 @@ Scenario = {
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 497.5, 17.5, 968.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_7457'] = {
+                                                type = 'ues0103',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 504.5, 17.5, 968.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_7465'] = {
@@ -9553,13 +10105,6 @@ Scenario = {
                                         Position = { 472.5, 17.5, 935.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7474'] = {
-                                        type = 'ues0302',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 485.5, 17.5, 933.5001 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
                                     ['UNIT_7475'] = {
                                         type = 'ues0202',
                                         orders = '',
@@ -9572,6 +10117,13 @@ Scenario = {
                                         orders = '',
                                         platoon = '',
                                         Position = { 509.5, 17.5, 933.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_7474'] = {
+                                        type = 'ues0302',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 485.5, 17.5, 933.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_7471'] = {
@@ -9648,21 +10200,21 @@ Scenario = {
                                                         type = 'uea0203',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 400.5, 14.41104, 892.5 },
+                                                        Position = { 510.5, 14.20399, 894.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7366'] = {
                                                         type = 'uea0103',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 400.5, 14.43838, 888.5001 },
+                                                        Position = { 510.5, 14.2704, 890.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7383'] = {
-                                                        type = 'uea0102',
+                                                    ['UNIT_7369'] = {
+                                                        type = 'uea0203',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 516.5, 14.23133, 888.5001 },
+                                                        Position = { 522.5, 14.00867, 896.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7365'] = {
@@ -9714,18 +10266,18 @@ Scenario = {
                                                         Position = { 522.5, 14.2079, 886.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7381'] = {
+                                                    ['UNIT_7358'] = {
                                                         type = 'uea0103',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 516.5, 14.19227, 890.5 },
+                                                        Position = { 516.5, 14.15321, 892.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7356'] = {
                                                         type = 'uea0102',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 400.5, 14.46182, 884.5001 },
+                                                        Position = { 510.5, 14.31728, 886.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7355'] = {
@@ -9788,35 +10340,35 @@ Scenario = {
                                                         type = 'uea0103',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 400.5, 14.42666, 890.5 },
+                                                        Position = { 510.5, 14.23915, 892.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7358'] = {
+                                                    ['UNIT_7381'] = {
                                                         type = 'uea0103',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 516.5, 14.15321, 892.5 },
+                                                        Position = { 516.5, 14.19227, 890.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7371'] = {
                                                         type = 'uea0102',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 400.5, 14.4501, 886.5 },
+                                                        Position = { 510.5, 14.29774, 888.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7380'] = {
                                                         type = 'uea0203',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 400.5, 14.39931, 894.5001 },
+                                                        Position = { 510.5, 14.16493, 896.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7369'] = {
-                                                        type = 'uea0203',
+                                                    ['UNIT_7383'] = {
+                                                        type = 'uea0102',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 522.5, 14.00867, 896.5 },
+                                                        Position = { 516.5, 14.23133, 888.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                 },
@@ -9849,19 +10401,19 @@ Scenario = {
                                                 Position = { 542.5, 13.43832, 897.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_7395'] = {
-                                                type = 'uea0203',
+                                            ['UNIT_560'] = {
+                                                type = 'uea0305',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 542.5, 13.68443, 887.5 },
+                                                Position = { 536.5, 13.56333, 897.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_549'] = {
-                                                type = 'uea0303',
+                                            ['UNIT_561'] = {
+                                                type = 'uea0305',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 533.5, 13.78209, 893.5001 },
-                                                Orientation = { 0, -0.008727, 0 },
+                                                Position = { 530.5, 13.80162, 897.5 },
+                                                Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_7412'] = {
                                                 type = 'uea0203',
@@ -9884,11 +10436,11 @@ Scenario = {
                                                 Position = { 533.5, 13.7274, 895.5 },
                                                 Orientation = { 0, -0.008727, 0 },
                                             },
-                                            ['UNIT_560'] = {
-                                                type = 'uea0305',
+                                            ['UNIT_7395'] = {
+                                                type = 'uea0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 536.5, 13.56333, 897.5 },
+                                                Position = { 542.5, 13.68443, 887.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_552'] = {
@@ -9912,12 +10464,12 @@ Scenario = {
                                                 Position = { 533.5, 13.82897, 891.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_7399'] = {
-                                                type = 'uea0203',
+                                            ['UNIT_548'] = {
+                                                type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 542.5, 13.58286, 891.5 },
-                                                Orientation = { 0, 0, 0 },
+                                                Position = { 542.5, 13.53598, 893.5001 },
+                                                Orientation = { 0, -0.008727, 0 },
                                             },
                                             ['UNIT_7392'] = {
                                                 type = 'uea0203',
@@ -9926,12 +10478,12 @@ Scenario = {
                                                 Position = { 539.5, 13.74303, 887.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_548'] = {
-                                                type = 'uea0303',
+                                            ['UNIT_7399'] = {
+                                                type = 'uea0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 542.5, 13.53598, 893.5001 },
-                                                Orientation = { 0, -0.008727, 0 },
+                                                Position = { 542.5, 13.58286, 891.5 },
+                                                Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_547'] = {
                                                 type = 'uea0303',
@@ -10010,12 +10562,12 @@ Scenario = {
                                                 Position = { 542.5, 13.4891, 895.5 },
                                                 Orientation = { 0, -0.008727, 0 },
                                             },
-                                            ['UNIT_561'] = {
-                                                type = 'uea0305',
+                                            ['UNIT_549'] = {
+                                                type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 530.5, 13.80162, 897.5 },
-                                                Orientation = { 0, 0, 0 },
+                                                Position = { 533.5, 13.78209, 893.5001 },
+                                                Orientation = { 0, -0.008727, 0 },
                                             },
                                             ['UNIT_550'] = {
                                                 type = 'uea0303',
@@ -10047,11 +10599,11 @@ Scenario = {
                                         Position = { 560.5, 13.29769, 891.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7422'] = {
+                                    ['UNIT_7442'] = {
                                         type = 'uea0305',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 548.5, 13.37972, 897.5 },
+                                        Position = { 557.5, 13.16096, 900.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_7414'] = {
@@ -10068,18 +10620,18 @@ Scenario = {
                                         Position = { 551.5, 13.42269, 894.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7417'] = {
-                                        type = 'uea0305',
+                                    ['UNIT_7439'] = {
+                                        type = 'uea0304',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 557.5, 13.243, 897.5 },
+                                        Position = { 560.5, 13.22737, 894.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7431'] = {
+                                    ['UNIT_7443'] = {
                                         type = 'uea0303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 551.5, 13.6063, 886.5 },
+                                        Position = { 560.5, 13.368, 888.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_7415'] = {
@@ -10117,11 +10669,11 @@ Scenario = {
                                         Position = { 554.5, 13.56333, 886.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7443'] = {
+                                    ['UNIT_7431'] = {
                                         type = 'uea0303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 560.5, 13.368, 888.5001 },
+                                        Position = { 551.5, 13.6063, 886.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_7423'] = {
@@ -10173,18 +10725,18 @@ Scenario = {
                                         Position = { 548.5, 13.53208, 891.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7429'] = {
-                                        type = 'uea0305',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 554.5, 13.30941, 897.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
                                     ['UNIT_7425'] = {
                                         type = 'uea0304',
                                         orders = '',
                                         platoon = '',
                                         Position = { 557.5, 13.39144, 891.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_7429'] = {
+                                        type = 'uea0305',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 554.5, 13.30941, 897.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_7426'] = {
@@ -10208,11 +10760,11 @@ Scenario = {
                                         Position = { 551.5, 13.26253, 900.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7442'] = {
+                                    ['UNIT_7422'] = {
                                         type = 'uea0305',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 557.5, 13.16096, 900.5 },
+                                        Position = { 548.5, 13.37972, 897.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_7441'] = {
@@ -10229,11 +10781,11 @@ Scenario = {
                                         Position = { 557.5, 13.46176, 888.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_7439'] = {
-                                        type = 'uea0304',
+                                    ['UNIT_7417'] = {
+                                        type = 'uea0305',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 560.5, 13.22737, 894.5001 },
+                                        Position = { 557.5, 13.243, 897.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_7436'] = {
@@ -10270,19 +10822,26 @@ Scenario = {
                                                 orders = '',
                                                 platoon = '',
                                                 Units = {
-                                                    ['UNIT_8317'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 46.5, 17.96203, 888.5001 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
                                                     ['UNIT_8285'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
                                                         Position = { 110.5, 17.98547, 965.5 },
                                                         Orientation = { 0, 3.371748E-07, 0 },
+                                                    },
+                                                    ['UNIT_919'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 48.5, 17.77062, 880.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_970'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 190.5, 17.66123, 981.5 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8261'] = {
                                                         type = 'ueb5101',
@@ -10291,75 +10850,33 @@ Scenario = {
                                                         Position = { 76.5, 17.93078, 914.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8306'] = {
+                                                    ['UNIT_912'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 182.5, 17.89562, 985.5 },
-                                                        Orientation = { 0, -1.570796, 0 },
-                                                    },
-                                                    ['UNIT_8267'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 110.5, 17.98547, 968.5001 },
-                                                        Orientation = { 0, 3.371748E-07, 0 },
-                                                    },
-                                                    ['UNIT_8273'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 47.5, 17.95422, 888.5001 },
+                                                        Position = { 43.5, 17.74718, 878.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8269'] = {
+                                                    ['UNIT_903'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 181.5, 17.88781, 984.5001 },
-                                                        Orientation = { 0, -1.570796, 0 },
+                                                        Position = { 22.5, 17.69249, 880.5 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8314'] = {
+                                                    ['UNIT_923'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 110.5, 17.98547, 971.5 },
-                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                        Position = { 51.5, 17.78234, 881.5 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8255'] = {
+                                                    ['UNIT_931'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 110.5, 17.98547, 967.5 },
-                                                        Orientation = { 0, 3.371748E-07, 0 },
-                                                    },
-                                                    ['UNIT_8258'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 178.5, 17.9425, 990.5 },
-                                                        Orientation = { 0, -1.570796, 0 },
-                                                    },
-                                                    ['UNIT_8297'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 180.5, 17.87219, 983.5001 },
-                                                        Orientation = { 0, -1.570796, 0 },
-                                                    },
-                                                    ['UNIT_8290'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 178.5, 17.85656, 982.5 },
-                                                        Orientation = { 0, -1.570796, 0 },
-                                                    },
-                                                    ['UNIT_8274'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 112.5, 17.97766, 964.5001 },
-                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                        Position = { 22.5, 17.71592, 884.5001 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8279'] = {
                                                         type = 'ueb5101',
@@ -10368,11 +10885,11 @@ Scenario = {
                                                         Position = { 113.5, 17.97766, 964.5001 },
                                                         Orientation = { 0, 3.371748E-07, 0 },
                                                     },
-                                                    ['UNIT_8268'] = {
+                                                    ['UNIT_978'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 48.5, 17.96203, 890.5 },
+                                                        Position = { 184.5, 17.68859, 979.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8275'] = {
@@ -10386,7 +10903,7 @@ Scenario = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 179.5, 17.93469, 990.5 },
+                                                        Position = { 193.5, 17.71592, 994.5001 },
                                                         Orientation = { 0, -1.570796, 0 },
                                                     },
                                                     ['UNIT_8264'] = {
@@ -10396,67 +10913,67 @@ Scenario = {
                                                         Position = { 76.5, 17.95422, 918.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8282'] = {
+                                                    ['UNIT_977'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 44.5, 17.97766, 888.5001 },
+                                                        Position = { 185.5, 17.66905, 979.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8270'] = {
+                                                    ['UNIT_976'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 110.5, 17.98157, 964.5001 },
-                                                        Orientation = { 0, 3.371748E-07, 0 },
-                                                    },
-                                                    ['UNIT_8260'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 76.5, 17.95031, 917.5 },
+                                                        Position = { 186.5, 17.64952, 979.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8280'] = {
+                                                    ['UNIT_975'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 180.5, 17.84875, 982.5 },
-                                                        Orientation = { 0, -1.570796, 0 },
+                                                        Position = { 186.5, 17.70421, 980.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_974'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 187.5, 17.68467, 980.5 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8311'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 47.5, 17.96203, 889.5001 },
+                                                        Position = { 35.5, 17.8214, 874.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8259'] = {
+                                                    ['UNIT_973'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 76.5, 17.96203, 919.5001 },
+                                                        Position = { 188.5, 17.66514, 980.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8286'] = {
+                                                    ['UNIT_972'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 69.5, 17.95813, 914.5001 },
+                                                        Position = { 189.5, 17.6378, 980.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8301'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 43.5, 17.98547, 889.5001 },
+                                                        Position = { 29.5, 17.80968, 874.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8283'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 180.5, 17.93469, 990.5 },
+                                                        Position = { 193.5, 17.75889, 993.5001 },
                                                         Orientation = { 0, -1.570796, 0 },
                                                     },
                                                     ['UNIT_8281'] = {
@@ -10466,53 +10983,53 @@ Scenario = {
                                                         Position = { 114.5, 17.97375, 964.5001 },
                                                         Orientation = { 0, 3.371748E-07, 0 },
                                                     },
-                                                    ['UNIT_8312'] = {
+                                                    ['UNIT_904'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 49.5, 17.96203, 891.5 },
+                                                        Position = { 22.5, 17.71202, 882.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8315'] = {
+                                                    ['UNIT_8304'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 49.5, 17.95422, 890.5 },
+                                                        Position = { 76.5, 17.96985, 921.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8298'] = {
+                                                    ['UNIT_925'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 74.5, 17.93469, 914.5001 },
+                                                        Position = { 52.5, 17.78234, 882.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8289'] = {
+                                                    ['UNIT_957'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 182.5, 17.91125, 987.5 },
-                                                        Orientation = { 0, -1.570796, 0 },
+                                                        Position = { 190.5, 17.85265, 994.5001 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8316'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 49.5, 17.96594, 892.5 },
+                                                        Position = { 39.5, 17.81749, 876.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8272'] = {
+                                                    ['UNIT_911'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 76.5, 17.93469, 915.5 },
+                                                        Position = { 42.5, 17.78625, 878.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8299'] = {
+                                                    ['UNIT_969'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 70.5, 17.95032, 914.5001 },
+                                                        Position = { 191.5, 17.63389, 981.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8256'] = {
@@ -10522,32 +11039,32 @@ Scenario = {
                                                         Position = { 111.5, 17.98157, 964.5001 },
                                                         Orientation = { 0, 3.371748E-07, 0 },
                                                     },
-                                                    ['UNIT_8277'] = {
+                                                    ['UNIT_927'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 45.5, 17.96985, 888.5001 },
+                                                        Position = { 53.5, 17.73546, 882.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8287'] = {
+                                                    ['UNIT_8259'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 116.5, 17.96594, 964.5001 },
+                                                        Position = { 76.5, 17.96203, 919.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8255'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 110.5, 17.98547, 967.5 },
                                                         Orientation = { 0, 3.371748E-07, 0 },
                                                     },
-                                                    ['UNIT_8296'] = {
+                                                    ['UNIT_967'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 41.5, 17.98547, 890.5 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                    ['UNIT_8313'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 43.5, 17.98157, 888.5001 },
+                                                        Position = { 185.5, 17.75499, 999.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8307'] = {
@@ -10561,7 +11078,140 @@ Scenario = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 41.5, 17.98547, 891.5 },
+                                                        Position = { 26.5, 17.76671, 875.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_898'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 24.5, 17.72764, 876.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_966'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 185.5, 17.80186, 998.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_965'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 186.5, 17.7628, 998.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_964'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 187.5, 17.71201, 998.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_963'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 187.5, 17.77843, 997.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_961'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 188.5, 17.80187, 996.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_962'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 187.5, 17.82531, 996.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_905'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 22.5, 17.7042, 881.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8280'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 192.5, 17.73546, 984.5001 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_8263'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 110.5, 17.98547, 970.5 },
+                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                    },
+                                                    ['UNIT_8293'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 72.5, 17.94641, 914.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_899'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 24.5, 17.75499, 877.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8318'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 193.5, 17.81359, 991.5 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_959'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 190.5, 17.7589, 996.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8303'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 192.5, 17.68859, 983.5001 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_958'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 190.5, 17.8214, 995.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_909'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 41.5, 17.77843, 877.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_916'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 46.5, 17.74328, 879.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_979'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 183.5, 17.6964, 979.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8295'] = {
@@ -10571,26 +11221,341 @@ Scenario = {
                                                         Position = { 76.5, 17.96594, 920.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8309'] = {
+                                                    ['UNIT_8276'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 182.5, 17.91906, 988.5001 },
-                                                        Orientation = { 0, -1.570796, 0 },
-                                                    },
-                                                    ['UNIT_8293'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 72.5, 17.94641, 914.5001 },
+                                                        Position = { 75.5, 17.93078, 914.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8294'] = {
+                                                    ['UNIT_929'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 180.5, 17.88781, 984.5001 },
+                                                        Position = { 54.5, 17.77843, 884.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8317'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 33.5, 17.82531, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8291'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 27.5, 17.74718, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_928'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 54.5, 17.72375, 883.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_968'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 191.5, 17.67686, 982.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8302'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 73.5, 17.9386, 914.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8273'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 34.5, 17.82531, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8269'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 194.5, 17.68077, 985.5 },
                                                         Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_971'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 189.5, 17.68858, 981.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_924'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 51.5, 17.81749, 882.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8258'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 192.5, 17.77843, 994.5001 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_907'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 40.5, 17.78234, 876.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8290'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 192.5, 17.64561, 982.5 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_918'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 48.5, 17.71202, 879.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_922'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 51.5, 17.72765, 880.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8268'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 37.5, 17.79797, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8266'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 25.5, 17.73155, 875.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_900'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 23.5, 17.72374, 878.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_897'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 25.5, 17.77062, 876.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_920'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 49.5, 17.76671, 880.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_926'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 54.5, 17.66514, 882.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8260'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 76.5, 17.95031, 917.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_913'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 44.5, 17.71593, 878.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8305'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 194.5, 17.76671, 988.5001 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_914'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 44.5, 17.78234, 879.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8282'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 31.5, 17.82531, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_908'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 41.5, 17.73546, 876.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_901'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 22.5, 17.68077, 879.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8297'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 192.5, 17.77452, 985.5 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_956'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 191.5, 17.8253, 994.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8315'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 38.5, 17.77062, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8270'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 110.5, 17.98157, 964.5001 },
+                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                    },
+                                                    ['UNIT_902'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 23.5, 17.73546, 879.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_921'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 50.5, 17.75109, 880.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8306'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 194.5, 17.74327, 987.5 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_8286'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 69.5, 17.95813, 914.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8312'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 39.5, 17.78624, 875.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8267'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 110.5, 17.98547, 968.5001 },
+                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                    },
+                                                    ['UNIT_8289'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 194.5, 17.78234, 989.5001 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_8272'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 76.5, 17.93469, 915.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8308'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 71.5, 17.95032, 914.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8277'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 32.5, 17.82531, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8314'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 110.5, 17.98547, 971.5 },
+                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                    },
+                                                    ['UNIT_8287'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 116.5, 17.96594, 964.5001 },
+                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                    },
+                                                    ['UNIT_8274'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 112.5, 17.97766, 964.5001 },
+                                                        Orientation = { 0, 3.371748E-07, 0 },
+                                                    },
+                                                    ['UNIT_910'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 42.5, 17.73546, 877.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8257'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 28.5, 17.77062, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8300'] = {
                                                         type = 'ueb5101',
@@ -10603,71 +11568,71 @@ Scenario = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 182.5, 17.88, 984.5001 },
+                                                        Position = { 194.5, 17.71593, 986.5 },
                                                         Orientation = { 0, -1.570796, 0 },
                                                     },
-                                                    ['UNIT_8308'] = {
+                                                    ['UNIT_917'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 71.5, 17.95032, 914.5001 },
+                                                        Position = { 47.5, 17.73156, 879.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8284'] = {
+                                                    ['UNIT_8309'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 47.5, 17.96594, 890.5 },
+                                                        Position = { 194.5, 17.78624, 990.5 },
+                                                        Orientation = { 0, -1.570796, 0 },
+                                                    },
+                                                    ['UNIT_8298'] = {
+                                                        type = 'ueb5101',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 74.5, 17.93469, 914.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8257'] = {
+                                                    ['UNIT_8296'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 43.5, 17.98547, 890.5 },
+                                                        Position = { 26.5, 17.71593, 874.5001 },
                                                         Orientation = { 0, 0, 0 },
-                                                    },
-                                                    ['UNIT_8263'] = {
-                                                        type = 'ueb5101',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 110.5, 17.98547, 970.5 },
-                                                        Orientation = { 0, 3.371748E-07, 0 },
                                                     },
                                                     ['UNIT_8310'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 180.5, 17.93078, 989.5001 },
+                                                        Position = { 193.5, 17.79015, 992.5 },
                                                         Orientation = { 0, -1.570796, 0 },
                                                     },
-                                                    ['UNIT_8302'] = {
+                                                    ['UNIT_960'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 73.5, 17.9386, 914.5001 },
+                                                        Position = { 189.5, 17.78234, 996.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8318'] = {
+                                                    ['UNIT_8294'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 180.5, 17.93469, 988.5001 },
+                                                        Position = { 193.5, 17.73155, 985.5 },
                                                         Orientation = { 0, -1.570796, 0 },
                                                     },
-                                                    ['UNIT_8304'] = {
+                                                    ['UNIT_930'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 76.5, 17.96985, 921.5 },
+                                                        Position = { 22.5, 17.71593, 883.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8303'] = {
+                                                    ['UNIT_8313'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 179.5, 17.85265, 982.5 },
-                                                        Orientation = { 0, -1.570796, 0 },
+                                                        Position = { 30.5, 17.81359, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8288'] = {
                                                         type = 'ueb5101',
@@ -10676,26 +11641,26 @@ Scenario = {
                                                         Position = { 76.5, 17.94641, 916.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8266'] = {
+                                                    ['UNIT_906'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 41.5, 17.98547, 892.5 },
+                                                        Position = { 38.5, 17.81359, 875.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8291'] = {
+                                                    ['UNIT_8299'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 42.5, 17.98547, 890.5 },
+                                                        Position = { 70.5, 17.95032, 914.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8305'] = {
+                                                    ['UNIT_8284'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 182.5, 17.90734, 986.5 },
-                                                        Orientation = { 0, -1.570796, 0 },
+                                                        Position = { 36.5, 17.80968, 874.5001 },
+                                                        Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8292'] = {
                                                         type = 'ueb5101',
@@ -10704,21 +11669,280 @@ Scenario = {
                                                         Position = { 110.5, 17.98547, 966.5 },
                                                         Orientation = { 0, 3.371748E-07, 0 },
                                                     },
-                                                    ['UNIT_8276'] = {
+                                                    ['UNIT_915'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 75.5, 17.93078, 914.5001 },
+                                                        Position = { 45.5, 17.7589, 879.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8265'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 181.5, 17.92297, 988.5001 },
+                                                        Position = { 194.5, 17.77062, 991.5 },
                                                         Orientation = { 0, -1.570796, 0 },
                                                     },
                                                 },
+                                            },
+                                            ['UNIT_8322'] = {
+                                                type = 'ueb1105',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 160.5, 17.94641, 983.5001 },
+                                                Orientation = { 0, -1.570796, 0 },
+                                            },
+                                            ['UNIT_8344'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 25.5, 17.84093, 884.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8359'] = {
+                                                type = 'ueb1303',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 43.5, 17.96984, 914.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8370'] = {
+                                                type = 'ueb4301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 46.5, 17.98547, 908.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_935'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 39.5, 17.87219, 878.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8320'] = {
+                                                type = 'ueb1105',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 50.5, 17.98547, 902.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8345'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 51.5, 17.90344, 886.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_873'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 146.5, 17.92297, 976.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_940'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 24.5, 17.80577, 882.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8377'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 224.5, 17.5, 944.5001 },
+                                                Orientation = { 0, -3.141593, 0 },
+                                            },
+                                            ['UNIT_8353'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 114.5, 17.97766, 966.5 },
+                                                Orientation = { 0, 3.371748E-07, 0 },
+                                            },
+                                            ['UNIT_8338'] = {
+                                                type = 'ueb1201',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 46.5, 17.98547, 902.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_932'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 28.5, 17.83312, 876.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8350'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 112.5, 17.98547, 968.5001 },
+                                                Orientation = { 0, 3.371748E-07, 0 },
+                                            },
+                                            ['UNIT_8347'] = {
+                                                type = 'ueb1301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 155.5, 17.93469, 980.5 },
+                                                Orientation = { 0, -1.570796, 0 },
+                                            },
+                                            ['UNIT_8340'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 47.5, 17.98547, 898.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_943'] = {
+                                                type = 'ueb2204',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 32.5, 17.90344, 878.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8335'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 183.5, 17.89953, 996.5 },
+                                                Orientation = { 0, 4.245976E-07, 0 },
+                                            },
+                                            ['UNIT_933'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 36.5, 17.86437, 876.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8358'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 182.5, 17.80187, 981.5 },
+                                                Orientation = { 0, 4.245976E-07, 0 },
+                                            },
+                                            ['UNIT_8364'] = {
+                                                type = 'ueb1303',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 148.5, 17.95813, 990.5 },
+                                                Orientation = { 0, -1.570796, 0 },
+                                            },
+                                            ['UNIT_8343'] = {
+                                                type = 'ueb4302',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 117.5, 17.98547, 971.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8360'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 70.5, 17.92297, 944.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8351'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 45.5, 17.98547, 898.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_993'] = {
+                                                type = 'ueb2204',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 186.5, 17.89562, 994.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_992'] = {
+                                                type = 'ueb2204',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 185.5, 17.82922, 983.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_991'] = {
+                                                type = 'ueb2204',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 188.5, 17.8175, 984.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_872'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 135.5, 17.96594, 986.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8342'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 64.5, 17.96985, 914.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_990'] = {
+                                                type = 'ueb2204',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 188.5, 17.89562, 992.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_989'] = {
+                                                type = 'ueb2204',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 190.5, 17.88, 990.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8346'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 144.5, 17.95032, 978.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_981'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 192.5, 17.84093, 989.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8330'] = {
+                                                type = 'ueb4301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 154.5, 17.98157, 987.5 },
+                                                Orientation = { 0, -1.570796, 0 },
+                                            },
+                                            ['UNIT_8373'] = {
+                                                type = 'ueb0301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 97.5, 17.9425, 939.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_875'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 64.5, 17.95422, 910.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_985'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 188.5, 17.87609, 994.5001 },
+                                                Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8365'] = {
                                                 type = 'ueb0303',
@@ -10727,12 +11951,19 @@ Scenario = {
                                                 Position = { 121.5, 17.5, 887.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8322'] = {
-                                                type = 'ueb1105',
+                                            ['UNIT_8376'] = {
+                                                type = 'ueb3104',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 162.5, 17.93078, 982.5 },
-                                                Orientation = { 0, -1.570796, 0 },
+                                                Position = { 92.5, 17.98547, 944.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_984'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 187.5, 17.77061, 982.5 },
+                                                Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8328'] = {
                                                 type = 'ueb1106',
@@ -10745,42 +11976,56 @@ Scenario = {
                                                 type = 'ueb5202',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 170.5, 17.94641, 986.5 },
+                                                Position = { 168.5, 17.95813, 987.5 },
                                                 Orientation = { 0, -1.570796, 0 },
                                             },
-                                            ['UNIT_8330'] = {
-                                                type = 'ueb4301',
+                                            ['UNIT_983'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 156.5, 17.97375, 986.5 },
-                                                Orientation = { 0, -1.570796, 0 },
-                                            },
-                                            ['UNIT_8348'] = {
-                                                type = 'ueb1106',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 72.5, 17.9425, 942.5 },
+                                                Position = { 190.5, 17.78234, 984.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8359'] = {
-                                                type = 'ueb1303',
+                                            ['UNIT_947'] = {
+                                                type = 'ueb2204',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 42.5, 17.90734, 920.5 },
+                                                Position = { 26.5, 17.86047, 882.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_980'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 192.5, 17.81749, 987.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_982'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 191.5, 17.85656, 992.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_946'] = {
+                                                type = 'ueb2204',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 50.5, 17.87609, 884.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8325'] = {
                                                 type = 'ueb1105',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 41.5, 17.98157, 908.5001 },
+                                                Position = { 42.5, 17.98547, 902.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8339'] = {
                                                 type = 'ueb1201',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 162.5, 17.96594, 986.5 },
+                                                Position = { 160.5, 17.97375, 987.5 },
                                                 Orientation = { 0, -1.570796, 0 },
                                             },
                                             ['UNIT_8323'] = {
@@ -10797,18 +12042,18 @@ Scenario = {
                                                 Position = { 72.5, 17.95422, 916.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8320'] = {
-                                                type = 'ueb1105',
+                                            ['UNIT_945'] = {
+                                                type = 'ueb2204',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 49.5, 17.98547, 908.5001 },
+                                                Position = { 44.5, 17.89172, 882.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8368'] = {
                                                 type = 'ueb1303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 48.5, 17.96985, 920.5 },
+                                                Position = { 49.5, 17.98547, 914.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8331'] = {
@@ -10825,26 +12070,26 @@ Scenario = {
                                                 Position = { 78.5, 17.5, 814.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8376'] = {
-                                                type = 'ueb3104',
+                                            ['UNIT_880'] = {
+                                                type = 'ueb1101',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 92.5, 17.98547, 944.5001 },
+                                                Position = { 90.5, 17.98547, 952.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8345'] = {
-                                                type = 'ueb2304',
+                                            ['UNIT_944'] = {
+                                                type = 'ueb2204',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 47.5, 17.98547, 896.5 },
+                                                Position = { 37.5, 17.88781, 878.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8342'] = {
-                                                type = 'ueb1106',
+                                            ['UNIT_8333'] = {
+                                                type = 'ueb2205',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 64.5, 17.96985, 914.5001 },
-                                                Orientation = { 0, 0, 0 },
+                                                Position = { 220.5, 17.5, 952.5 },
+                                                Orientation = { 0, -3.141593, 0 },
                                             },
                                             ['UNIT_8356'] = {
                                                 type = 'ueb1101',
@@ -10867,25 +12112,25 @@ Scenario = {
                                                 Position = { 144.5, 17.93078, 976.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8377'] = {
-                                                type = 'ueb2304',
+                                            ['UNIT_941'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 224.5, 17.5, 944.5001 },
-                                                Orientation = { 0, -3.141593, 0 },
+                                                Position = { 32.5, 17.87609, 876.5 },
+                                                Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8353'] = {
-                                                type = 'ueb2304',
+                                            ['UNIT_939'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 114.5, 17.97766, 966.5 },
-                                                Orientation = { 0, 3.371748E-07, 0 },
+                                                Position = { 52.5, 17.85265, 884.5001 },
+                                                Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8338'] = {
-                                                type = 'ueb1201',
+                                            ['UNIT_938'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 45.5, 17.98547, 908.5001 },
+                                                Position = { 49.5, 17.84093, 882.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8334'] = {
@@ -10895,46 +12140,46 @@ Scenario = {
                                                 Position = { 228.5, 17.5, 944.5001 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_8344'] = {
-                                                type = 'ueb2304',
+                                            ['UNIT_881'] = {
+                                                type = 'ueb1101',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 43.5, 17.98547, 896.5 },
+                                                Position = { 84.5, 17.98547, 946.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8350'] = {
-                                                type = 'ueb2304',
+                                            ['UNIT_876'] = {
+                                                type = 'ueb1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 112.5, 17.98547, 968.5001 },
-                                                Orientation = { 0, 3.371748E-07, 0 },
+                                                Position = { 62.5, 17.96594, 912.5 },
+                                                Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8319'] = {
                                                 type = 'ueb1105',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 162.5, 17.97766, 990.5 },
+                                                Position = { 160.5, 17.97375, 991.5 },
                                                 Orientation = { 0, -1.570796, 0 },
                                             },
-                                            ['UNIT_8346'] = {
+                                            ['UNIT_877'] = {
                                                 type = 'ueb1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 144.5, 17.95032, 978.5001 },
+                                                Position = { 68.5, 17.92297, 942.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8347'] = {
-                                                type = 'ueb1301',
+                                            ['UNIT_988'] = {
+                                                type = 'ueb2204',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 157.5, 17.91516, 979.5001 },
-                                                Orientation = { 0, -1.570796, 0 },
+                                                Position = { 190.5, 17.84093, 986.5 },
+                                                Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8340'] = {
-                                                type = 'ueb2304',
+                                            ['UNIT_8348'] = {
+                                                type = 'ueb1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 46.5, 17.98547, 904.5001 },
+                                                Position = { 72.5, 17.9425, 942.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8337'] = {
@@ -10951,11 +12196,11 @@ Scenario = {
                                                 Position = { 87.5, 17.98547, 941.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8336'] = {
-                                                type = 'ueb2205',
+                                            ['UNIT_934'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 74.5, 17.5, 818.5001 },
+                                                Position = { 25.5, 17.8175, 879.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8349'] = {
@@ -10969,35 +12214,35 @@ Scenario = {
                                                 type = 'ueb1303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 150.5, 17.96594, 983.5001 },
+                                                Position = { 148.5, 17.97375, 984.5001 },
                                                 Orientation = { 0, -1.570796, 0 },
                                             },
-                                            ['UNIT_8326'] = {
-                                                type = 'ueb1106',
+                                            ['UNIT_8372'] = {
+                                                type = 'ueb1301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 135.5, 17.93859, 990.5 },
+                                                Position = { 53.5, 17.98547, 907.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8357'] = {
                                                 type = 'ueb1301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 157.5, 17.9425, 993.5001 },
+                                                Position = { 155.5, 17.92297, 994.5001 },
                                                 Orientation = { 0, -1.570796, 0 },
                                             },
-                                            ['UNIT_8335'] = {
-                                                type = 'ueb2304',
+                                            ['UNIT_942'] = {
+                                                type = 'ueb2204',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 174.5, 17.95813, 988.5001 },
-                                                Orientation = { 0, -1.570796, 0 },
+                                                Position = { 27.5, 17.85265, 878.5001 },
+                                                Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8366'] = {
-                                                type = 'ueb1301',
+                                            ['UNIT_874'] = {
+                                                type = 'ueb1106',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 38.5, 17.93859, 913.5001 },
+                                                Position = { 144.5, 17.90734, 974.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8332'] = {
@@ -11007,81 +12252,11 @@ Scenario = {
                                                 Position = { 142.5, 17.93859, 976.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8358'] = {
-                                                type = 'ueb2304',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 174.5, 17.91125, 984.5001 },
-                                                Orientation = { 0, -1.570796, 0 },
-                                            },
-                                            ['UNIT_8364'] = {
-                                                type = 'ueb1303',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 150.5, 17.96594, 989.5001 },
-                                                Orientation = { 0, -1.570796, 0 },
-                                            },
-                                            ['UNIT_8343'] = {
-                                                type = 'ueb4302',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 117.5, 17.98547, 971.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_8351'] = {
-                                                type = 'ueb2304',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 44.5, 17.98547, 904.5001 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_8360'] = {
-                                                type = 'ueb1106',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 70.5, 17.92297, 944.5001 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_8372'] = {
-                                                type = 'ueb1301',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 52.5, 17.98547, 913.5001 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_8369'] = {
-                                                type = 'ueb5202',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 45.5, 17.98547, 900.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_8363'] = {
-                                                type = 'ueb1302',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 70.5, 17.93469, 942.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
                                             ['UNIT_8361'] = {
                                                 type = 'ueb0303',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 141.5, 17.5, 907.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_8333'] = {
-                                                type = 'ueb2205',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 220.5, 17.5, 952.5 },
-                                                Orientation = { 0, -3.141593, 0 },
-                                            },
-                                            ['UNIT_8352'] = {
-                                                type = 'ueb2304',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 74.5, 17.5, 822.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8362'] = {
@@ -11091,11 +12266,81 @@ Scenario = {
                                                 Position = { 224.5, 17.5, 948.5001 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
+                                            ['UNIT_8366'] = {
+                                                type = 'ueb1301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 39.5, 17.96594, 907.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
                                             ['UNIT_8355'] = {
                                                 type = 'ueb2304',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 78.5, 17.5, 818.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8352'] = {
+                                                type = 'ueb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 74.5, 17.5, 822.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8336'] = {
+                                                type = 'ueb2205',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 74.5, 17.5, 818.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8369'] = {
+                                                type = 'ueb5202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 46.5, 17.98547, 894.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8363'] = {
+                                                type = 'ueb1302',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 70.5, 17.93469, 942.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8371'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 133.5, 17.95422, 988.5001 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8326'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 135.5, 17.93859, 990.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_878'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 70.5, 17.9425, 940.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_987'] = {
+                                                type = 'ueb2301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 184.5, 17.77843, 981.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_871'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 137.5, 17.95813, 988.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8367'] = {
@@ -11105,18 +12350,18 @@ Scenario = {
                                                 Position = { 95.5, 17.98547, 949.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8370'] = {
-                                                type = 'ueb4301',
+                                            ['UNIT_986'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 45.5, 17.98157, 914.5001 },
+                                                Position = { 185.5, 17.86828, 996.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8371'] = {
-                                                type = 'ueb1106',
+                                            ['UNIT_936'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 133.5, 17.95422, 988.5001 },
+                                                Position = { 42.5, 17.85656, 880.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8341'] = {
@@ -11133,14 +12378,21 @@ Scenario = {
                                                 Position = { 94.5, 17.98547, 944.5001 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8373'] = {
-                                                type = 'ueb0301',
+                                            ['UNIT_937'] = {
+                                                type = 'ueb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 97.5, 17.9425, 939.5001 },
+                                                Position = { 46.5, 17.83703, 881.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                         },
+                                    },
+                                    ['UNIT_952'] = {
+                                        type = 'ueb2303',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 37.5, 17.98547, 890.5 },
+                                        Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_8400'] = {
                                         type = 'zeb9602',
@@ -11170,6 +12422,104 @@ Scenario = {
                                         Position = { 124.5, 17.5, 819.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
+                                    ['UNIT_8397'] = {
+                                        type = 'ueb2304',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 124.5, 17.5, 823.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_994'] = {
+                                        type = 'ueb2303',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 182.5, 17.91906, 988.5001 },
+                                        Orientation = { 0, 3.371748E-07, 0 },
+                                    },
+                                    ['UNIT_995'] = {
+                                        type = 'ueb2303',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 182.5, 17.90734, 986.5 },
+                                        Orientation = { 0, 3.371748E-07, 0 },
+                                    },
+                                    ['UNIT_8394'] = {
+                                        type = 'ueb2205',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 204.5, 17.5, 894.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_8395'] = {
+                                        type = 'zeb9601',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 124.5, 17.97375, 972.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_8391'] = {
+                                        type = 'ueb2304',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 200.5, 17.5, 898.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_8385'] = {
+                                        type = 'ueb2205',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 124.5, 17.5, 815.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_29'] = {
+                                        type = 'ueb4203',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 102.5, 17.98157, 956.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_8399'] = {
+                                        type = 'zeb9602',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 116.5, 17.97766, 978.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_8387'] = {
+                                        type = 'ueb2303',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 33.5, 17.95813, 884.5001 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_955'] = {
+                                        type = 'ueb4301',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 37.5, 17.98157, 886.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_949'] = {
+                                        type = 'ueb2303',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 33.5, 17.97375, 887.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_998'] = {
+                                        type = 'ueb2303',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 184.5, 17.92297, 992.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_8398'] = {
+                                        type = 'ueb2205',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 204.5, 17.5, 902.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
                                     ['UNIT_8393'] = {
                                         type = 'ueb2303',
                                         orders = '',
@@ -11184,20 +12534,6 @@ Scenario = {
                                         Position = { 128.5, 17.5, 819.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_8379'] = {
-                                        type = 'zeb9503',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 101.5, 17.5, 867.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_8394'] = {
-                                        type = 'ueb2205',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 204.5, 17.5, 894.5001 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
                                     ['UNIT_8381'] = {
                                         type = 'ueb2304',
                                         orders = '',
@@ -11205,60 +12541,46 @@ Scenario = {
                                         Position = { 204.5, 17.5, 898.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_8395'] = {
-                                        type = 'zeb9601',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 124.5, 17.97375, 972.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_8398'] = {
-                                        type = 'ueb2205',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 204.5, 17.5, 902.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_8386'] = {
+                                    ['UNIT_996'] = {
                                         type = 'ueb2303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 180.5, 17.92297, 986.5 },
-                                        Orientation = { 0, -1.570796, 0 },
-                                    },
-                                    ['UNIT_8384'] = {
-                                        type = 'ueb2303',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 112.5, 17.98157, 966.5 },
+                                        Position = { 182.5, 17.92297, 990.5 },
                                         Orientation = { 0, 3.371748E-07, 0 },
+                                    },
+                                    ['UNIT_997'] = {
+                                        type = 'ueb4202',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 186.5, 17.89172, 988.5001 },
+                                        Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_8389'] = {
                                         type = 'ueb2304',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 166.5, 17.96203, 987.5 },
+                                        Position = { 164.5, 17.97375, 988.5001 },
                                         Orientation = { 0, -1.570796, 0 },
                                     },
                                     ['UNIT_8382'] = {
                                         type = 'ueb2304',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 166.5, 17.94641, 985.5 },
+                                        Position = { 164.5, 17.95813, 986.5 },
                                         Orientation = { 0, -1.570796, 0 },
                                     },
-                                    ['UNIT_8397'] = {
-                                        type = 'ueb2304',
+                                    ['UNIT_879'] = {
+                                        type = 'ueb4202',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 124.5, 17.5, 823.5001 },
+                                        Position = { 88.49999, 17.98547, 948.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_8391'] = {
-                                        type = 'ueb2304',
+                                    ['UNIT_950'] = {
+                                        type = 'ueb2303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 200.5, 17.5, 898.5001 },
+                                        Position = { 41.5, 17.95032, 884.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_28'] = {
@@ -11268,11 +12590,11 @@ Scenario = {
                                         Position = { 80.5, 17.98547, 934.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_29'] = {
-                                        type = 'ueb4203',
+                                    ['UNIT_820'] = {
+                                        type = 'zeb9603',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 102.5, 17.98157, 956.5 },
+                                        Position = { 101.5, 17.5, 867.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                     ['UNIT_8392'] = {
@@ -11282,41 +12604,48 @@ Scenario = {
                                         Position = { 208.5, 17.5, 898.5001 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_8399'] = {
-                                        type = 'zeb9602',
+                                    ['UNIT_8384'] = {
+                                        type = 'ueb2303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 116.5, 17.97766, 978.5001 },
-                                        Orientation = { 0, 0, 0 },
+                                        Position = { 112.5, 17.98157, 966.5 },
+                                        Orientation = { 0, 3.371748E-07, 0 },
                                     },
-                                    ['UNIT_8385'] = {
-                                        type = 'ueb2205',
-                                        orders = '',
-                                        platoon = '',
-                                        Position = { 124.5, 17.5, 815.5 },
-                                        Orientation = { 0, 0, 0 },
-                                    },
-                                    ['UNIT_8383'] = {
-                                        type = 'zeb9503',
+                                    ['UNIT_819'] = {
+                                        type = 'zeb9603',
                                         orders = '',
                                         platoon = '',
                                         Position = { 161.5, 17.5, 927.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
-                                    ['UNIT_8387'] = {
+                                    ['UNIT_951'] = {
                                         type = 'ueb2303',
                                         orders = '',
                                         platoon = '',
-                                        Position = { 45.5, 17.98157, 890.5 },
+                                        Position = { 41.5, 17.98157, 887.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_948'] = {
+                                        type = 'ueb2303',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 37.5, 17.9425, 882.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                 },
                             },
-                            ['UNIT_8410'] = {
-                                type = 'ueb2303',
+                            ['UNIT_954'] = {
+                                type = 'ueb2304',
                                 orders = '',
                                 platoon = '',
-                                Position = { 47.5, 17.97766, 892.5 },
+                                Position = { 39.5, 17.93078, 882.5 },
+                                Orientation = { 0, 0, 0 },
+                            },
+                            ['UNIT_1000'] = {
+                                type = 'ueb2304',
+                                orders = '',
+                                platoon = '',
+                                Position = { 184.5, 17.91516, 994.5001 },
                                 Orientation = { 0, 0, 0 },
                             },
                             ['UNIT_8431'] = {
@@ -11368,11 +12697,11 @@ Scenario = {
                                 Position = { 112.5, 17.98547, 970.5 },
                                 Orientation = { 0, 3.371748E-07, 0 },
                             },
-                            ['UNIT_8423'] = {
-                                type = 'zeb9503',
+                            ['UNIT_8429'] = {
+                                type = 'ueb2303',
                                 orders = '',
                                 platoon = '',
-                                Position = { 81.5, 17.5, 847.5 },
+                                Position = { 70.5, 17.96203, 916.5 },
                                 Orientation = { 0, 0, 0 },
                             },
                             ['UNIT_8432'] = {
@@ -11382,12 +12711,12 @@ Scenario = {
                                 Position = { 250.5, 17.5, 912.5 },
                                 Orientation = { 0, -3.141593, 0 },
                             },
-                            ['UNIT_8412'] = {
-                                type = 'ueb2205',
+                            ['UNIT_822'] = {
+                                type = 'zeb9603',
                                 orders = '',
                                 platoon = '',
-                                Position = { 214.5, 17.5, 862.5 },
-                                Orientation = { 0, -1.570796, 0 },
+                                Position = { 81.5, 17.5, 847.5 },
+                                Orientation = { 0, 0, 0 },
                             },
                             ['UNIT_8415'] = {
                                 type = 'ueb2205',
@@ -11438,19 +12767,12 @@ Scenario = {
                                 Position = { 174.5, 17.5, 823.5001 },
                                 Orientation = { 0, 0, 0 },
                             },
-                            ['UNIT_8414'] = {
-                                type = 'ueb2303',
+                            ['UNIT_953'] = {
+                                type = 'ueb2304',
                                 orders = '',
                                 platoon = '',
-                                Position = { 43.5, 17.98547, 892.5 },
+                                Position = { 35.5, 17.94641, 882.5 },
                                 Orientation = { 0, 0, 0 },
-                            },
-                            ['UNIT_8428'] = {
-                                type = 'ueb2205',
-                                orders = '',
-                                platoon = '',
-                                Position = { 218.5, 17.5, 858.5001 },
-                                Orientation = { 0, -1.570796, 0 },
                             },
                             ['UNIT_8411'] = {
                                 type = 'ueb2205',
@@ -11466,19 +12788,19 @@ Scenario = {
                                 Position = { 214.5, 17.5, 858.5001 },
                                 Orientation = { 0, -1.570796, 0 },
                             },
-                            ['UNIT_8419'] = {
-                                type = 'ueb2303',
-                                orders = '',
-                                platoon = '',
-                                Position = { 178.5, 17.89562, 984.5001 },
-                                Orientation = { 0, -1.570796, 0 },
-                            },
                             ['UNIT_8433'] = {
                                 type = 'ueb2303',
                                 orders = '',
                                 platoon = '',
                                 Position = { 116.5, 17.97375, 966.5 },
                                 Orientation = { 0, 3.371748E-07, 0 },
+                            },
+                            ['UNIT_1001'] = {
+                                type = 'ueb2304',
+                                orders = '',
+                                platoon = '',
+                                Position = { 180.5, 17.93469, 988.5001 },
+                                Orientation = { 0, 0, 0 },
                             },
                             ['UNIT_8418'] = {
                                 type = 'ueb2205',
@@ -11487,8 +12809,22 @@ Scenario = {
                                 Position = { 114.5, 17.5, 788.5001 },
                                 Orientation = { 0, 0, 0 },
                             },
-                            ['UNIT_8420'] = {
-                                type = 'zeb9503',
+                            ['UNIT_999'] = {
+                                type = 'ueb2304',
+                                orders = '',
+                                platoon = '',
+                                Position = { 183.5, 17.85265, 983.5001 },
+                                Orientation = { 0, 0, 0 },
+                            },
+                            ['UNIT_8412'] = {
+                                type = 'ueb2205',
+                                orders = '',
+                                platoon = '',
+                                Position = { 214.5, 17.5, 862.5 },
+                                Orientation = { 0, -1.570796, 0 },
+                            },
+                            ['UNIT_821'] = {
+                                type = 'zeb9603',
                                 orders = '',
                                 platoon = '',
                                 Position = { 181.5, 17.5, 948.5001 },
@@ -11501,13 +12837,6 @@ Scenario = {
                                 Position = { 174.5, 17.5, 819.5001 },
                                 Orientation = { 0, 0, 0 },
                             },
-                            ['UNIT_8422'] = {
-                                type = 'ueb2303',
-                                orders = '',
-                                platoon = '',
-                                Position = { 74.5, 17.96594, 920.5 },
-                                Orientation = { 0, 0, 0 },
-                            },
                             ['UNIT_8421'] = {
                                 type = 'ueb2304',
                                 orders = '',
@@ -11515,12 +12844,12 @@ Scenario = {
                                 Position = { 250.5, 17.5, 908.5001 },
                                 Orientation = { 0, -3.141593, 0 },
                             },
-                            ['UNIT_8426'] = {
+                            ['UNIT_8422'] = {
                                 type = 'ueb2303',
                                 orders = '',
                                 platoon = '',
-                                Position = { 178.5, 17.9386, 988.5001 },
-                                Orientation = { 0, -1.570796, 0 },
+                                Position = { 74.5, 17.96594, 920.5 },
+                                Orientation = { 0, 0, 0 },
                             },
                             ['UNIT_8406'] = {
                                 type = 'ueb2304',
@@ -11529,12 +12858,12 @@ Scenario = {
                                 Position = { 118.5, 17.5, 788.5001 },
                                 Orientation = { 0, 0, 0 },
                             },
-                            ['UNIT_8429'] = {
-                                type = 'ueb2303',
+                            ['UNIT_8428'] = {
+                                type = 'ueb2205',
                                 orders = '',
                                 platoon = '',
-                                Position = { 70.5, 17.96203, 916.5 },
-                                Orientation = { 0, 0, 0 },
+                                Position = { 218.5, 17.5, 858.5001 },
+                                Orientation = { 0, -1.570796, 0 },
                             },
                         },
                     },
@@ -12250,11 +13579,11 @@ Scenario = {
                                                                 Position = { 477.5, 18.10657, 447.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7908'] = {
+                                                            ['UNIT_7966'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 458.5, 18.07141, 465.5 },
+                                                                Position = { 539.5, 18.44253, 452.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7956'] = {
@@ -12264,11 +13593,11 @@ Scenario = {
                                                                 Position = { 567.5, 19.91918, 454.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7949'] = {
+                                                            ['UNIT_7970'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 591.5, 20.38406, 455.5 },
+                                                                Position = { 507.5, 18.14564, 458.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7955'] = {
@@ -12327,18 +13656,18 @@ Scenario = {
                                                                 Position = { 576.5, 19.84496, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7831'] = {
-                                                                type = 'ueb5101',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 507.5, 18.14173, 454.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
                                                             ['UNIT_7818'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
                                                                 Position = { 483.5, 18.0636, 440.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_7831'] = {
+                                                                type = 'ueb5101',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 507.5, 18.14173, 454.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7950'] = {
@@ -12383,11 +13712,11 @@ Scenario = {
                                                                 Position = { 448.5, 18.16126, 476.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7987'] = {
+                                                            ['UNIT_7882'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 567.5, 20.03638, 453.5 },
+                                                                Position = { 481.5, 18.08704, 442.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7884'] = {
@@ -12439,25 +13768,25 @@ Scenario = {
                                                                 Position = { 595.5, 20.63017, 459.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7961'] = {
+                                                            ['UNIT_7829'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 537.5, 18.42691, 452.5 },
+                                                                Position = { 595.5, 20.56766, 457.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7963'] = {
+                                                            ['UNIT_7815'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 548.5, 18.71208, 455.5 },
+                                                                Position = { 453.5, 18.11439, 471.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7960'] = {
+                                                            ['UNIT_7977'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 575.5, 19.81371, 455.5 },
+                                                                Position = { 473.5, 18.07923, 452.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7988'] = {
@@ -12488,11 +13817,11 @@ Scenario = {
                                                                 Position = { 521.5, 18.25502, 454.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7856'] = {
+                                                            ['UNIT_7844'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 482.5, 18.08704, 442.5 },
+                                                                Position = { 459.5, 18.01672, 462.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7980'] = {
@@ -12502,11 +13831,11 @@ Scenario = {
                                                                 Position = { 554.5, 19.66136, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7815'] = {
+                                                            ['UNIT_7963'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 453.5, 18.11439, 471.5 },
+                                                                Position = { 548.5, 18.71208, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7776'] = {
@@ -12523,11 +13852,11 @@ Scenario = {
                                                                 Position = { 472.5, 18.07141, 452.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7829'] = {
+                                                            ['UNIT_7961'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 595.5, 20.56766, 457.5 },
+                                                                Position = { 537.5, 18.42691, 452.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7901'] = {
@@ -12565,11 +13894,11 @@ Scenario = {
                                                                 Position = { 571.5, 19.72386, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7977'] = {
+                                                            ['UNIT_7960'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 473.5, 18.07923, 452.5 },
+                                                                Position = { 575.5, 19.81371, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7886'] = {
@@ -12614,11 +13943,11 @@ Scenario = {
                                                                 Position = { 514.5, 18.20814, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7975'] = {
+                                                            ['UNIT_7777'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 586.5, 20.15358, 455.5 },
+                                                                Position = { 595.5, 20.49344, 453.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7909'] = {
@@ -12712,11 +14041,11 @@ Scenario = {
                                                                 Position = { 489.5, 17.97375, 432.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7968'] = {
+                                                            ['UNIT_7914'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 478.5, 18.11048, 444.5 },
+                                                                Position = { 577.5, 19.87231, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7895'] = {
@@ -12747,18 +14076,18 @@ Scenario = {
                                                                 Position = { 468.5, 18.005, 453.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7793'] = {
-                                                                type = 'ueb5101',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 587.5, 20.19264, 455.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
                                                             ['UNIT_7780'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
                                                                 Position = { 551.5, 19.0246, 452.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_7793'] = {
+                                                                type = 'ueb5101',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 587.5, 20.19264, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7915'] = {
@@ -12775,11 +14104,11 @@ Scenario = {
                                                                 Position = { 525.5, 18.28627, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7924'] = {
+                                                            ['UNIT_7812'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 507.5, 18.14173, 453.5 },
+                                                                Position = { 553.5, 19.53635, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7822'] = {
@@ -12845,11 +14174,11 @@ Scenario = {
                                                                 Position = { 451.5, 18.1222, 472.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7812'] = {
+                                                            ['UNIT_7924'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 553.5, 19.53635, 455.5 },
+                                                                Position = { 507.5, 18.14173, 453.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7877'] = {
@@ -12880,11 +14209,11 @@ Scenario = {
                                                                 Position = { 448.5, 18.17299, 477.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7914'] = {
+                                                            ['UNIT_7968'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 577.5, 19.87231, 455.5 },
+                                                                Position = { 478.5, 18.11048, 444.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7943'] = {
@@ -12943,11 +14272,11 @@ Scenario = {
                                                                 Position = { 511.5, 18.1847, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7777'] = {
+                                                            ['UNIT_7975'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 595.5, 20.49344, 453.5 },
+                                                                Position = { 586.5, 20.15358, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7990'] = {
@@ -12985,11 +14314,11 @@ Scenario = {
                                                                 Position = { 561.5, 19.927, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7844'] = {
+                                                            ['UNIT_7856'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 459.5, 18.01672, 462.5 },
+                                                                Position = { 482.5, 18.08704, 442.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7848'] = {
@@ -13027,11 +14356,11 @@ Scenario = {
                                                                 Position = { 483.5, 18.07141, 441.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7882'] = {
+                                                            ['UNIT_7987'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 481.5, 18.08704, 442.5 },
+                                                                Position = { 567.5, 20.03638, 453.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7938'] = {
@@ -13083,18 +14412,18 @@ Scenario = {
                                                                 Position = { 553.5, 19.49728, 453.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7970'] = {
+                                                            ['UNIT_7949'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 507.5, 18.14564, 458.5 },
+                                                                Position = { 591.5, 20.38406, 455.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
-                                                            ['UNIT_7966'] = {
+                                                            ['UNIT_7908'] = {
                                                                 type = 'ueb5101',
                                                                 orders = '',
                                                                 platoon = '',
-                                                                Position = { 539.5, 18.44253, 452.5 },
+                                                                Position = { 458.5, 18.07141, 465.5 },
                                                                 Orientation = { 0, 0, 0 },
                                                             },
                                                             ['UNIT_7803'] = {
@@ -13721,11 +15050,11 @@ Scenario = {
                                                                         Position = { 560.5, 19.30196, 470.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8134'] = {
+                                                                    ['UNIT_8166'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 563.5, 19.34493, 491.5 },
+                                                                        Position = { 539.5, 18.77458, 479.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8128'] = {
@@ -13770,11 +15099,11 @@ Scenario = {
                                                                         Position = { 561.5, 19.34884, 470.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8166'] = {
+                                                                    ['UNIT_8134'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 539.5, 18.77458, 479.5 },
+                                                                        Position = { 563.5, 19.34493, 491.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8149'] = {
@@ -13917,11 +15246,11 @@ Scenario = {
                                                                         Position = { 551.5, 18.95037, 465.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8086'] = {
+                                                                    ['UNIT_8170'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 554.5, 19.07929, 470.5 },
+                                                                        Position = { 532.5, 18.33315, 481.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8093'] = {
@@ -13966,18 +15295,18 @@ Scenario = {
                                                                         Position = { 540.5, 18.7863, 494.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8135'] = {
+                                                                    ['UNIT_8148'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 532.5, 18.32924, 483.5 },
+                                                                        Position = { 548.5, 19.06757, 494.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8138'] = {
+                                                                    ['UNIT_8088'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 539.5, 18.69255, 476.5 },
+                                                                        Position = { 533.5, 18.37612, 486.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8089'] = {
@@ -14050,11 +15379,11 @@ Scenario = {
                                                                         Position = { 570.5, 19.59104, 485.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8148'] = {
+                                                                    ['UNIT_8135'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 548.5, 19.06757, 494.5 },
+                                                                        Position = { 532.5, 18.32924, 483.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8142'] = {
@@ -14099,11 +15428,11 @@ Scenario = {
                                                                         Position = { 556.5, 19.14179, 470.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8110'] = {
+                                                                    ['UNIT_8050'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 562.5, 19.47384, 485.5 },
+                                                                        Position = { 563.5, 19.47384, 471.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8080'] = {
@@ -14113,11 +15442,11 @@ Scenario = {
                                                                         Position = { 554.5, 19.02069, 501.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8050'] = {
+                                                                    ['UNIT_8110'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 563.5, 19.47384, 471.5 },
+                                                                        Position = { 562.5, 19.47384, 485.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8155'] = {
@@ -14127,18 +15456,18 @@ Scenario = {
                                                                         Position = { 563.5, 19.29805, 493.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8085'] = {
-                                                                        type = 'ueb5101',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 554.5, 19.18867, 493.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_8152'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
                                                                         Position = { 563.5, 19.59104, 479.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8085'] = {
+                                                                        type = 'ueb5101',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 554.5, 19.18867, 493.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8125'] = {
@@ -14183,11 +15512,11 @@ Scenario = {
                                                                         Position = { 559.5, 19.2082, 494.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8106'] = {
+                                                                    ['UNIT_8117'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 563.5, 19.59104, 476.5 },
+                                                                        Position = { 544.5, 18.95819, 494.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8154'] = {
@@ -14197,11 +15526,11 @@ Scenario = {
                                                                         Position = { 547.5, 18.91912, 501.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8117'] = {
+                                                                    ['UNIT_8106'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 544.5, 18.95819, 494.5 },
+                                                                        Position = { 563.5, 19.59104, 476.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8092'] = {
@@ -14218,11 +15547,11 @@ Scenario = {
                                                                         Position = { 532.5, 18.34487, 479.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8112'] = {
+                                                                    ['UNIT_8102'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 552.5, 18.99725, 501.5 },
+                                                                        Position = { 539.5, 18.84099, 490.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8120'] = {
@@ -14253,11 +15582,11 @@ Scenario = {
                                                                         Position = { 547.5, 18.79021, 465.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8102'] = {
+                                                                    ['UNIT_8112'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 539.5, 18.84099, 490.5 },
+                                                                        Position = { 552.5, 18.99725, 501.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8055'] = {
@@ -14302,11 +15631,11 @@ Scenario = {
                                                                         Position = { 540.5, 18.64567, 470.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8088'] = {
+                                                                    ['UNIT_8138'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 533.5, 18.37612, 486.5 },
+                                                                        Position = { 539.5, 18.69255, 476.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8156'] = {
@@ -14351,11 +15680,11 @@ Scenario = {
                                                                         Position = { 551.5, 18.98163, 501.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8170'] = {
+                                                                    ['UNIT_8086'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 532.5, 18.33315, 481.5 },
+                                                                        Position = { 554.5, 19.07929, 470.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8164'] = {
@@ -14421,18 +15750,18 @@ Scenario = {
                                                                         Position = { 539.5, 18.63395, 472.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8101'] = {
-                                                                        type = 'ueb5101',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 549.5, 18.95819, 501.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_8132'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
                                                                         Position = { 548.5, 19.09882, 493.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8101'] = {
+                                                                        type = 'ueb5101',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 549.5, 18.95819, 501.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8174'] = {
@@ -14762,11 +16091,11 @@ Scenario = {
                                                         Position = { 374.5, 17.5, 828.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8220'] = {
+                                                    ['UNIT_8205'] = {
                                                         type = 'ueb2205',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 588.5, 17.5, 844.5001 },
+                                                        Position = { 270.5, 17.5, 684.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8219'] = {
@@ -14811,11 +16140,11 @@ Scenario = {
                                                         Position = { 310.5, 17.5, 772.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_8205'] = {
+                                                    ['UNIT_8220'] = {
                                                         type = 'ueb2205',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 270.5, 17.5, 684.5001 },
+                                                        Position = { 588.5, 17.5, 844.5001 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_8208'] = {
@@ -15083,12 +16412,6 @@ Scenario = {
                             },
                         },
                     },
-                    ['UEF_OffMap_Factories'] = GROUP {
-                        orders = '',
-                        platoon = '',
-                        Units = {
-                        },
-                    },
                     ['Base'] = GROUP {
                         orders = '',
                         platoon = '',
@@ -15338,12 +16661,12 @@ Scenario = {
                                                                         Position = { 448.5, 18.09485, 744.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8457'] = {
+                                                                    ['UNIT_8466'] = {
                                                                         type = 'ueb2301',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 466.5, 18.11048, 729.5 },
-                                                                        Orientation = { 0, -6.274458, 0 },
+                                                                        Position = { 490.5, 17.92688, 729.5 },
+                                                                        Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8441'] = {
                                                                         type = 'ueb2301',
@@ -15380,12 +16703,12 @@ Scenario = {
                                                                         Position = { 463.5, 18.23158, 684.5001 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8466'] = {
+                                                                    ['UNIT_8457'] = {
                                                                         type = 'ueb2301',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 490.5, 17.92688, 729.5 },
-                                                                        Orientation = { 0, 0, 0 },
+                                                                        Position = { 466.5, 18.11048, 729.5 },
+                                                                        Orientation = { 0, -6.274458, 0 },
                                                                     },
                                                                     ['UNIT_8449'] = {
                                                                         type = 'ueb2301',
@@ -15708,13 +17031,6 @@ Scenario = {
                                                                 orders = '',
                                                                 platoon = '',
                                                                 Units = {
-                                                                    ['UNIT_1'] = {
-                                                                        type = 'ueb0301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 445.5, 18.14173, 750.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_2'] = {
                                                                         type = 'ueb0301',
                                                                         orders = '',
@@ -15722,11 +17038,11 @@ Scenario = {
                                                                         Position = { 445.5, 18.11439, 760.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_0'] = {
+                                                                    ['UNIT_1'] = {
                                                                         type = 'ueb0301',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 435.5, 18.09876, 750.5 },
+                                                                        Position = { 445.5, 18.14173, 750.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_3'] = {
@@ -15734,6 +17050,13 @@ Scenario = {
                                                                         orders = '',
                                                                         platoon = '',
                                                                         Position = { 435.5, 18.10267, 760.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_0'] = {
+                                                                        type = 'ueb0301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 435.5, 18.09876, 750.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                 },
@@ -16425,18 +17748,18 @@ Scenario = {
                                                                         Position = { 376.5, 18.04798, 670.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8584'] = {
-                                                                        type = 'ueb5101',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 374.5, 18.02454, 671.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_8535'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
                                                                         Position = { 458.5, 18.11048, 646.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8584'] = {
+                                                                        type = 'ueb5101',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 374.5, 18.02454, 671.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8606'] = {
@@ -16572,11 +17895,11 @@ Scenario = {
                                                                         Position = { 382.5, 18.17299, 664.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8660'] = {
+                                                                    ['UNIT_8609'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 481.5, 18.13392, 650.5 },
+                                                                        Position = { 504.5, 18.04798, 674.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8638'] = {
@@ -16719,11 +18042,11 @@ Scenario = {
                                                                         Position = { 386.5, 18.1847, 659.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8609'] = {
+                                                                    ['UNIT_8660'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 504.5, 18.04798, 674.5 },
+                                                                        Position = { 481.5, 18.13392, 650.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8626'] = {
@@ -16921,12 +18244,12 @@ Scenario = {
                                                                         Position = { 465.5, 18.14955, 697.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8679'] = {
+                                                                    ['UNIT_8713'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 465.5, 18.25502, 682.5 },
-                                                                        Orientation = { 0, 0, 0 },
+                                                                        Position = { 451.5, 18.34487, 685.5 },
+                                                                        Orientation = { 0, -6.274458, 0 },
                                                                     },
                                                                     ['UNIT_8721'] = {
                                                                         type = 'ueb5101',
@@ -16998,18 +18321,18 @@ Scenario = {
                                                                         Position = { 462.5, 18.15736, 701.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8714'] = {
-                                                                        type = 'ueb5101',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 453.5, 18.24721, 705.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_8720'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
                                                                         Position = { 467.5, 18.2394, 682.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8714'] = {
+                                                                        type = 'ueb5101',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 453.5, 18.24721, 705.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8688'] = {
@@ -17089,13 +18412,6 @@ Scenario = {
                                                                         Position = { 446.5, 18.29018, 704.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8722'] = {
-                                                                        type = 'ueb5101',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 468.5, 18.14955, 689.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_8689'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
@@ -17103,11 +18419,18 @@ Scenario = {
                                                                         Position = { 468.5, 18.21205, 682.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8704'] = {
+                                                                    ['UNIT_8722'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 465.5, 18.15736, 699.5 },
+                                                                        Position = { 468.5, 18.14955, 689.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8726'] = {
+                                                                        type = 'ueb5101',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 449.5, 18.34487, 687.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8698'] = {
@@ -17124,11 +18447,11 @@ Scenario = {
                                                                         Position = { 449.5, 18.33706, 689.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8726'] = {
+                                                                    ['UNIT_8704'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 449.5, 18.34487, 687.5 },
+                                                                        Position = { 465.5, 18.15736, 699.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8680'] = {
@@ -17145,11 +18468,11 @@ Scenario = {
                                                                         Position = { 453.5, 18.33706, 683.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8715'] = {
+                                                                    ['UNIT_8701'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 461.5, 18.16517, 701.5 },
+                                                                        Position = { 447.5, 18.29799, 704.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8690'] = {
@@ -17159,18 +18482,18 @@ Scenario = {
                                                                         Position = { 468.5, 18.18861, 685.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8718'] = {
-                                                                        type = 'ueb5101',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 453.5, 18.32534, 685.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
                                                                     ['UNIT_8729'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
                                                                         Position = { 446.5, 18.25502, 699.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8718'] = {
+                                                                        type = 'ueb5101',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 453.5, 18.32534, 685.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8703'] = {
@@ -17180,11 +18503,11 @@ Scenario = {
                                                                         Position = { 469.5, 18.14173, 689.5001 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8701'] = {
+                                                                    ['UNIT_8715'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 447.5, 18.29799, 704.5 },
+                                                                        Position = { 461.5, 18.16517, 701.5 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8733'] = {
@@ -17278,12 +18601,12 @@ Scenario = {
                                                                         Position = { 470.5, 18.13392, 689.5001 },
                                                                         Orientation = { 0, 0, 0 },
                                                                     },
-                                                                    ['UNIT_8713'] = {
+                                                                    ['UNIT_8679'] = {
                                                                         type = 'ueb5101',
                                                                         orders = '',
                                                                         platoon = '',
-                                                                        Position = { 451.5, 18.34487, 685.5 },
-                                                                        Orientation = { 0, -6.274458, 0 },
+                                                                        Position = { 465.5, 18.25502, 682.5 },
+                                                                        Orientation = { 0, 0, 0 },
                                                                     },
                                                                     ['UNIT_8735'] = {
                                                                         type = 'ueb5101',
@@ -17751,6 +19074,615 @@ Scenario = {
                                             },
                                         },
                                     },
+                                    ['AirStaging'] = GROUP {
+                                        orders = '',
+                                        platoon = '',
+                                        Units = {
+                                            ['UNIT_8896'] = {
+                                                type = 'ueb5202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 433.5, 18.77849, 668.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8897'] = {
+                                                type = 'ueb5202',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 445.5, 18.5441, 668.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                        },
+                                    },
+                                    ['BaseStructuresPostBuilt_D2'] = GROUP {
+                                        orders = '',
+                                        platoon = '',
+                                        Units = {
+                                            ['Defense'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['Land'] = GROUP {
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Units = {
+                                                            ['UNIT_8804'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 482.5, 18.15736, 652.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8806'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 380.5, 18.1222, 668.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8802'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 490.5, 18.04407, 660.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8795'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 498.5, 18.05579, 668.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8801'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 486.5, 18.09485, 656.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8796'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 502.5, 18.08314, 672.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8798'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 376.5, 18.03235, 672.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8797'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 392.5, 18.22767, 656.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8803'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 388.5, 18.18861, 660.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8799'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 494.5, 18.04798, 664.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8805'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 396.5, 18.2433, 652.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8800'] = {
+                                                                type = 'ueb2301',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 384.5, 18.1847, 664.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                            ['Shields'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['UNIT_8807'] = {
+                                                        type = 'ueb4202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 490.5, 17.96594, 668.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8808'] = {
+                                                        type = 'ueb4202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 388.5, 18.1847, 668.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                },
+                                            },
+                                            ['BaseStructuresPostBuilt_D1'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['Defense'] = GROUP {
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Units = {
+                                                            ['AA'] = GROUP {
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Units = {
+                                                                    ['UNIT_8810'] = {
+                                                                        type = 'ueb2204',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 464.5, 18.18861, 654.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8809'] = {
+                                                                        type = 'ueb2204',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 414.5, 18.32924, 650.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8811'] = {
+                                                                        type = 'ueb2204',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 414.5, 18.38003, 654.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8812'] = {
+                                                                        type = 'ueb2204',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 464.5, 18.14955, 650.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                },
+                                                            },
+                                                            ['Land'] = GROUP {
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Units = {
+                                                                    ['UNIT_8817'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 470.5, 18.09095, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8814'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 408.5, 18.25111, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8819'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 420.5, 18.32924, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8816'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 462.5, 18.1183, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8813'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 466.5, 18.1222, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8818'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 416.5, 18.32924, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8815'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 412.5, 18.29018, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_8820'] = {
+                                                                        type = 'ueb2301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 458.5, 18.1183, 648.5001 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                    ['Mass_Storage'] = GROUP {
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Units = {
+                                                            ['UNIT_8845'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 398.5, 18.1222, 716.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8825'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 436.5, 18.61441, 679.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8822'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 416.5, 18.31362, 718.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8835'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 432.5, 18.63785, 679.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8829'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 467.5, 18.3644, 770.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8851'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 463.5, 18.34487, 770.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8823'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 486.5, 18.05579, 690.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8843'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 418.5, 18.29408, 716.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8831'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 465.5, 18.32534, 768.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8833'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 484.5, 17.98938, 666.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8827'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 470.5, 18.15736, 742.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8836'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 470.5, 18.16126, 746.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8834'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 434.5, 18.72771, 677.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8837'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 488.5, 18.03235, 692.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8821'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 468.5, 18.15345, 744.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8839'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 472.5, 18.14955, 744.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8826'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 465.5, 18.37222, 772.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8848'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 418.5, 18.30581, 720.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8824'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 394.5, 18.20814, 666.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8840'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 420.5, 18.32143, 718.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8852'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 398.5, 18.06751, 720.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8838'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 486.5, 18.0636, 694.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8841'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 484.5, 18.09095, 692.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8849'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 394.5, 18.21986, 662.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8844'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 484.5, 18.01672, 662.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8842'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 396.5, 18.07923, 718.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8846'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 396.5, 18.21986, 664.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8850'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 392.5, 18.20033, 664.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8832'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 482.5, 18.01672, 664.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8828'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 434.5, 18.55973, 681.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8847'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 400.5, 18.08704, 718.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8830'] = {
+                                                                type = 'ueb1106',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 486.5, 17.99719, 664.5001 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                        },
+                                                    },
+                                                    ['Energy_Storage'] = GROUP {
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Units = {
+                                                            ['UNIT_8860'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 435.5, 18.49722, 656.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8853'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 399.5, 18.2433, 666.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8859'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 429.5, 18.57145, 656.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8855'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 443.5, 18.32534, 656.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8856'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 449.5, 18.3644, 666.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8854'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 449.5, 18.2394, 656.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8857'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 429.5, 18.68083, 666.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                            ['UNIT_8858'] = {
+                                                                type = 'ueb1105',
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Position = { 407.5, 18.27455, 666.5 },
+                                                                Orientation = { 0, 0, 0 },
+                                                            },
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                            ['AirStaging'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['UNIT_8861'] = {
+                                                        type = 'ueb5202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 459.5, 18.41128, 777.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8863'] = {
+                                                        type = 'ueb5202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 422.5, 18.26674, 727.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8862'] = {
+                                                        type = 'ueb5202',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 475.5, 18.02844, 664.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                },
+                                            },
+                                            ['Energy'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['UNIT_8864'] = {
+                                                        type = 'ueb1301',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 418.5, 18.34096, 661.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8865'] = {
+                                                        type = 'ueb1301',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 460.5, 18.09485, 661.5 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                },
+                                            },
+                                            ['Factories'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['UNIT_9'] = {
+                                                        type = 'zeb9601',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 440.5, 18.11439, 768.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                    ['UNIT_8'] = {
+                                                        type = 'zeb9602',
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Position = { 478.5, 18.13392, 734.5001 },
+                                                        Orientation = { 0, 0, 0 },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
                                     ['Energy_Storage'] = GROUP {
                                         orders = '',
                                         platoon = '',
@@ -17925,615 +19857,6 @@ Scenario = {
                                             },
                                         },
                                     },
-                                    ['BaseStructuresPostBuilt_D2'] = GROUP {
-                                        orders = '',
-                                        platoon = '',
-                                        Units = {
-                                            ['Defense'] = GROUP {
-                                                orders = '',
-                                                platoon = '',
-                                                Units = {
-                                                    ['Land'] = GROUP {
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Units = {
-                                                            ['UNIT_8804'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 482.5, 18.15736, 652.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8806'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 380.5, 18.1222, 668.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8802'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 490.5, 18.04407, 660.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8795'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 498.5, 18.05579, 668.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8801'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 486.5, 18.09485, 656.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8796'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 502.5, 18.08314, 672.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8798'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 376.5, 18.03235, 672.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8800'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 384.5, 18.1847, 664.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8803'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 388.5, 18.18861, 660.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8799'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 494.5, 18.04798, 664.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8805'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 396.5, 18.2433, 652.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8797'] = {
-                                                                type = 'ueb2301',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 392.5, 18.22767, 656.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                        },
-                                                    },
-                                                },
-                                            },
-                                            ['Shields'] = GROUP {
-                                                orders = '',
-                                                platoon = '',
-                                                Units = {
-                                                    ['UNIT_8807'] = {
-                                                        type = 'ueb4202',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 490.5, 17.96594, 668.5001 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                    ['UNIT_8808'] = {
-                                                        type = 'ueb4202',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 388.5, 18.1847, 668.5001 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                },
-                                            },
-                                            ['BaseStructuresPostBuilt_D1'] = GROUP {
-                                                orders = '',
-                                                platoon = '',
-                                                Units = {
-                                                    ['Defense'] = GROUP {
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Units = {
-                                                            ['AA'] = GROUP {
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Units = {
-                                                                    ['UNIT_8810'] = {
-                                                                        type = 'ueb2204',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 464.5, 18.18861, 654.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8809'] = {
-                                                                        type = 'ueb2204',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 414.5, 18.32924, 650.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8811'] = {
-                                                                        type = 'ueb2204',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 414.5, 18.38003, 654.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8812'] = {
-                                                                        type = 'ueb2204',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 464.5, 18.14955, 650.5 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                },
-                                                            },
-                                                            ['Land'] = GROUP {
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Units = {
-                                                                    ['UNIT_8817'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 470.5, 18.09095, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8814'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 408.5, 18.25111, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8819'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 420.5, 18.32924, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8816'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 462.5, 18.1183, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8813'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 466.5, 18.1222, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8818'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 416.5, 18.32924, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8815'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 412.5, 18.29018, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                    ['UNIT_8820'] = {
-                                                                        type = 'ueb2301',
-                                                                        orders = '',
-                                                                        platoon = '',
-                                                                        Position = { 458.5, 18.1183, 648.5001 },
-                                                                        Orientation = { 0, 0, 0 },
-                                                                    },
-                                                                },
-                                                            },
-                                                        },
-                                                    },
-                                                    ['Mass_Storage'] = GROUP {
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Units = {
-                                                            ['UNIT_8845'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 398.5, 18.1222, 716.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8825'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 436.5, 18.61441, 679.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8823'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 486.5, 18.05579, 690.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8835'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 432.5, 18.63785, 679.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8829'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 467.5, 18.3644, 770.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8851'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 463.5, 18.34487, 770.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8822'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 416.5, 18.31362, 718.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8834'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 434.5, 18.72771, 677.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8831'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 465.5, 18.32534, 768.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8833'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 484.5, 17.98938, 666.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8827'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 470.5, 18.15736, 742.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8836'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 470.5, 18.16126, 746.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8843'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 418.5, 18.29408, 716.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8837'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 488.5, 18.03235, 692.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8821'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 468.5, 18.15345, 744.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8839'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 472.5, 18.14955, 744.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8828'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 434.5, 18.55973, 681.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8848'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 418.5, 18.30581, 720.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8824'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 394.5, 18.20814, 666.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8840'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 420.5, 18.32143, 718.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8852'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 398.5, 18.06751, 720.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8838'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 486.5, 18.0636, 694.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8841'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 484.5, 18.09095, 692.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8849'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 394.5, 18.21986, 662.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8844'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 484.5, 18.01672, 662.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8842'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 396.5, 18.07923, 718.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8846'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 396.5, 18.21986, 664.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8850'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 392.5, 18.20033, 664.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8832'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 482.5, 18.01672, 664.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8826'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 465.5, 18.37222, 772.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8847'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 400.5, 18.08704, 718.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8830'] = {
-                                                                type = 'ueb1106',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 486.5, 17.99719, 664.5001 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                        },
-                                                    },
-                                                    ['Energy_Storage'] = GROUP {
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Units = {
-                                                            ['UNIT_8860'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 435.5, 18.49722, 656.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8853'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 399.5, 18.2433, 666.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8859'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 429.5, 18.57145, 656.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8855'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 443.5, 18.32534, 656.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8856'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 449.5, 18.3644, 666.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8854'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 449.5, 18.2394, 656.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8857'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 429.5, 18.68083, 666.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                            ['UNIT_8858'] = {
-                                                                type = 'ueb1105',
-                                                                orders = '',
-                                                                platoon = '',
-                                                                Position = { 407.5, 18.27455, 666.5 },
-                                                                Orientation = { 0, 0, 0 },
-                                                            },
-                                                        },
-                                                    },
-                                                },
-                                            },
-                                            ['AirStaging'] = GROUP {
-                                                orders = '',
-                                                platoon = '',
-                                                Units = {
-                                                    ['UNIT_8861'] = {
-                                                        type = 'ueb5202',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 459.5, 18.41128, 777.5 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                    ['UNIT_8863'] = {
-                                                        type = 'ueb5202',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 422.5, 18.26674, 727.5 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                    ['UNIT_8862'] = {
-                                                        type = 'ueb5202',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 475.5, 18.02844, 664.5001 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                },
-                                            },
-                                            ['Energy'] = GROUP {
-                                                orders = '',
-                                                platoon = '',
-                                                Units = {
-                                                    ['UNIT_8864'] = {
-                                                        type = 'ueb1301',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 418.5, 18.34096, 661.5 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                    ['UNIT_8865'] = {
-                                                        type = 'ueb1301',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 460.5, 18.09485, 661.5 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                },
-                                            },
-                                            ['Factories'] = GROUP {
-                                                orders = '',
-                                                platoon = '',
-                                                Units = {
-                                                    ['UNIT_9'] = {
-                                                        type = 'zeb9601',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 440.5, 18.11439, 768.5001 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                    ['UNIT_8'] = {
-                                                        type = 'zeb9602',
-                                                        orders = '',
-                                                        platoon = '',
-                                                        Position = { 478.5, 18.13392, 734.5001 },
-                                                        Orientation = { 0, 0, 0 },
-                                                    },
-                                                },
-                                            },
-                                        },
-                                    },
-                                    ['AirStaging'] = GROUP {
-                                        orders = '',
-                                        platoon = '',
-                                        Units = {
-                                            ['UNIT_8896'] = {
-                                                type = 'ueb5202',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 433.5, 18.77849, 668.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_8897'] = {
-                                                type = 'ueb5202',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 445.5, 18.5441, 668.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                        },
-                                    },
                                     ['Mass_Storage'] = GROUP {
                                         orders = '',
                                         platoon = '',
@@ -18552,18 +19875,18 @@ Scenario = {
                                                 Position = { 414.5, 17.94641, 743.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_8892'] = {
-                                                type = 'ueb1106',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 410.5, 18.07923, 729.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
                                             ['UNIT_8891'] = {
                                                 type = 'ueb1106',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 412.5, 17.93469, 743.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_8892'] = {
+                                                type = 'ueb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 410.5, 18.07923, 729.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_8895'] = {
@@ -18632,11 +19955,11 @@ Scenario = {
                                                 Position = { 568.5, 17.96985, 568.5 },
                                                 Orientation = { 0, -3.159046, 0 },
                                             },
-                                            ['UNIT_7485'] = {
+                                            ['UNIT_7487'] = {
                                                 type = 'uea0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 564.5, 17.93469, 568.5 },
+                                                Position = { 562.5, 17.93469, 570.5 },
                                                 Orientation = { 0, -3.159046, 0 },
                                             },
                                             ['UNIT_7481'] = {
@@ -18660,11 +19983,11 @@ Scenario = {
                                                 Position = { 570.5, 18.02063, 570.5 },
                                                 Orientation = { 0, -3.159046, 0 },
                                             },
-                                            ['UNIT_7487'] = {
+                                            ['UNIT_7485'] = {
                                                 type = 'uea0203',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 562.5, 17.93469, 570.5 },
+                                                Position = { 564.5, 17.93469, 568.5 },
                                                 Orientation = { 0, -3.159046, 0 },
                                             },
                                             ['UNIT_7480'] = {
@@ -18709,18 +20032,18 @@ Scenario = {
                                                 Position = { 568.5, 17.99719, 570.5 },
                                                 Orientation = { 0, -3.159046, 0 },
                                             },
-                                            ['UNIT_7483'] = {
-                                                type = 'uea0203',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 562.5, 17.91125, 568.5 },
-                                                Orientation = { 0, -3.159046, 0 },
-                                            },
                                             ['UNIT_7482'] = {
                                                 type = 'uea0203',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 572.5, 18.0011, 568.5 },
+                                                Orientation = { 0, -3.159046, 0 },
+                                            },
+                                            ['UNIT_7483'] = {
+                                                type = 'uea0203',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 562.5, 17.91125, 568.5 },
                                                 Orientation = { 0, -3.159046, 0 },
                                             },
                                             ['UNIT_30'] = {
@@ -18849,6 +20172,19 @@ Scenario = {
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                         },
+                                    },
+                                },
+                            },
+                            ['M2_UEF_Experimentals'] = GROUP {
+                                orders = '',
+                                platoon = '',
+                                Units = {
+                                    ['M2_Fatboy_Factory'] = {
+                                        type = 'uel0401',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 444.5, 18.08704, 718.5001 },
+                                        Orientation = { 0, 0, 0 },
                                     },
                                 },
                             },
@@ -19900,11 +21236,11 @@ Scenario = {
                                                         Position = { 667.5, 22.47403, 368.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7623'] = {
+                                                    ['UNIT_7633'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 710.4999, 24.88432, 370.5 },
+                                                        Position = { 706.4999, 24.75931, 370.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7631'] = {
@@ -19928,18 +21264,18 @@ Scenario = {
                                                         Position = { 669.5, 22.61466, 369.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7634'] = {
+                                                    ['UNIT_7630'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 709.5, 24.68901, 368.5 },
+                                                        Position = { 665.4999, 22.50136, 370.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7633'] = {
+                                                    ['UNIT_7623'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 706.4999, 24.75931, 370.5 },
+                                                        Position = { 710.4999, 24.88432, 370.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7626'] = {
@@ -19949,11 +21285,11 @@ Scenario = {
                                                         Position = { 665.4999, 22.3998, 369.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
-                                                    ['UNIT_7630'] = {
+                                                    ['UNIT_7634'] = {
                                                         type = 'ueb5101',
                                                         orders = '',
                                                         platoon = '',
-                                                        Position = { 665.4999, 22.50136, 370.5 },
+                                                        Position = { 709.5, 24.68901, 368.5 },
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_7625'] = {
@@ -20005,11 +21341,11 @@ Scenario = {
                                                 Position = { 464.5, 17.89172, 568.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_810'] = {
+                                            ['UNIT_811'] = {
                                                 type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 462.5, 17.89172, 570.5 },
+                                                Position = { 466.5, 17.87609, 570.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                             ['UNIT_813'] = {
@@ -20040,11 +21376,11 @@ Scenario = {
                                                 Position = { 472.5, 17.85265, 568.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_7638'] = {
+                                            ['UNIT_7636'] = {
                                                 type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 466.5, 17.89172, 568.5 },
+                                                Position = { 462.5, 17.89172, 568.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                             ['UNIT_7643'] = {
@@ -20075,11 +21411,11 @@ Scenario = {
                                                 Position = { 476.5, 17.85265, 570.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_811'] = {
+                                            ['UNIT_810'] = {
                                                 type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 466.5, 17.87609, 570.5 },
+                                                Position = { 462.5, 17.89172, 570.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                             ['UNIT_7641'] = {
@@ -20089,11 +21425,11 @@ Scenario = {
                                                 Position = { 468.5, 17.86437, 568.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_7636'] = {
+                                            ['UNIT_7638'] = {
                                                 type = 'uea0303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 462.5, 17.89172, 568.5 },
+                                                Position = { 466.5, 17.89172, 568.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                         },
@@ -20123,11 +21459,11 @@ Scenario = {
                                                 Position = { 476.5, 17.85265, 564.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_7648'] = {
+                                            ['UNIT_805'] = {
                                                 type = 'uea0305',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 472.5, 17.85265, 564.5 },
+                                                Position = { 468.5, 17.88781, 562.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                             ['UNIT_7647'] = {
@@ -20144,11 +21480,11 @@ Scenario = {
                                                 Position = { 474.5, 17.84875, 564.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_7650'] = {
+                                            ['UNIT_809'] = {
                                                 type = 'uea0305',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 470.5, 17.85656, 564.5 },
+                                                Position = { 476.5, 17.85265, 562.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                             ['UNIT_804'] = {
@@ -20172,11 +21508,11 @@ Scenario = {
                                                 Position = { 462.5, 17.88781, 562.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_809'] = {
+                                            ['UNIT_7650'] = {
                                                 type = 'uea0305',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 476.5, 17.85265, 562.5 },
+                                                Position = { 470.5, 17.85656, 564.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                             ['UNIT_806'] = {
@@ -20207,11 +21543,11 @@ Scenario = {
                                                 Position = { 464.5, 17.89172, 562.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
-                                            ['UNIT_805'] = {
+                                            ['UNIT_7648'] = {
                                                 type = 'uea0305',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 468.5, 17.88781, 562.5 },
+                                                Position = { 472.5, 17.85265, 564.5 },
                                                 Orientation = { 0, -3.141593, 0 },
                                             },
                                         },
@@ -20296,12 +21632,12 @@ Scenario = {
                                                 Position = { 418.5, 17.88781, 542.5 },
                                                 Orientation = { 0, -3.185225, 0 },
                                             },
-                                            ['UNIT_7661'] = {
-                                                type = 'uel0111',
+                                            ['UNIT_7659'] = {
+                                                type = 'uel0202',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 412.5, 17.8214, 542.5 },
-                                                Orientation = { 0, -3.185225, 0 },
+                                                Position = { 412.5, 17.82531, 540.5 },
+                                                Orientation = { 0, -3.176499, 0 },
                                             },
                                             ['UNIT_7665'] = {
                                                 type = 'uel0111',
@@ -20310,11 +21646,11 @@ Scenario = {
                                                 Position = { 420.5, 17.95813, 542.5 },
                                                 Orientation = { 0, -3.185225, 0 },
                                             },
-                                            ['UNIT_7673'] = {
+                                            ['UNIT_7672'] = {
                                                 type = 'uel0111',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 416.5, 17.84875, 542.5 },
+                                                Position = { 422.5, 18.01282, 542.5 },
                                                 Orientation = { 0, -3.185225, 0 },
                                             },
                                             ['UNIT_7664'] = {
@@ -20324,12 +21660,12 @@ Scenario = {
                                                 Position = { 428.5, 18.1222, 540.5 },
                                                 Orientation = { 0, -3.176499, 0 },
                                             },
-                                            ['UNIT_7659'] = {
-                                                type = 'uel0202',
+                                            ['UNIT_7661'] = {
+                                                type = 'uel0111',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 412.5, 17.82531, 540.5 },
-                                                Orientation = { 0, -3.176499, 0 },
+                                                Position = { 412.5, 17.8214, 542.5 },
+                                                Orientation = { 0, -3.185225, 0 },
                                             },
                                             ['UNIT_7667'] = {
                                                 type = 'uel0202',
@@ -20359,11 +21695,11 @@ Scenario = {
                                                 Position = { 424.5, 18.04798, 540.5 },
                                                 Orientation = { 0, -3.176499, 0 },
                                             },
-                                            ['UNIT_7672'] = {
+                                            ['UNIT_7673'] = {
                                                 type = 'uel0111',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 422.5, 18.01282, 542.5 },
+                                                Position = { 416.5, 17.84875, 542.5 },
                                                 Orientation = { 0, -3.185225, 0 },
                                             },
                                         },
@@ -20623,11 +21959,11 @@ Scenario = {
                                                 Position = { 494.5, 17.86047, 542.5 },
                                                 Orientation = { 0, -3.132865, 0 },
                                             },
-                                            ['UNIT_7698'] = {
-                                                type = 'uel0205',
+                                            ['UNIT_7697'] = {
+                                                type = 'uel0202',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 498.5, 17.86047, 540.5 },
+                                                Position = { 484.5, 17.86047, 542.5 },
                                                 Orientation = { 0, -3.132865, 0 },
                                             },
                                             ['UNIT_7709'] = {
@@ -20637,11 +21973,11 @@ Scenario = {
                                                 Position = { 496.5, 17.86047, 542.5 },
                                                 Orientation = { 0, -3.132865, 0 },
                                             },
-                                            ['UNIT_7697'] = {
-                                                type = 'uel0202',
+                                            ['UNIT_7698'] = {
+                                                type = 'uel0205',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 484.5, 17.86047, 542.5 },
+                                                Position = { 498.5, 17.86047, 540.5 },
                                                 Orientation = { 0, -3.132865, 0 },
                                             },
                                             ['UNIT_7713'] = {
@@ -20893,18 +22229,18 @@ Scenario = {
                                                 Position = { 518.5, 17.82531, 544.5 },
                                                 Orientation = { 0, -3.150321, 0 },
                                             },
-                                            ['UNIT_7749'] = {
-                                                type = 'uel0203',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 530.5, 17.86047, 546.5 },
-                                                Orientation = { 0, -3.150321, 0 },
-                                            },
                                             ['UNIT_7741'] = {
                                                 type = 'uel0203',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 518.5, 17.8214, 546.5 },
+                                                Orientation = { 0, -3.150321, 0 },
+                                            },
+                                            ['UNIT_7749'] = {
+                                                type = 'uel0203',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 530.5, 17.86047, 546.5 },
                                                 Orientation = { 0, -3.150321, 0 },
                                             },
                                             ['UNIT_7740'] = {
@@ -22816,25 +24152,25 @@ Scenario = {
                                                 Position = { 815.4999, 18.59879, 196.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_280'] = {
-                                                type = 'urb5101',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 773.5, 18.11048, 199.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_93'] = {
-                                                type = 'urb2301',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 877.5, 17.9425, 147.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
                                             ['UNIT_377'] = {
                                                 type = 'urb0301',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 827.5, 18.09485, 149.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_386'] = {
+                                                type = 'urb2304',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 980.4999, 17.5, 170.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_280'] = {
+                                                type = 'urb5101',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 773.5, 18.11048, 199.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_201'] = {
@@ -22886,11 +24222,11 @@ Scenario = {
                                                 Position = { 940.4999, 17.5, 174.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_386'] = {
-                                                type = 'urb2304',
+                                            ['UNIT_93'] = {
+                                                type = 'urb2301',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 980.4999, 17.5, 170.5 },
+                                                Position = { 877.5, 17.9425, 147.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_143'] = {
@@ -23012,11 +24348,11 @@ Scenario = {
                                                 Position = { 834.5, 18.06751, 213.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_284'] = {
-                                                type = 'urb5101',
+                                            ['UNIT_186'] = {
+                                                type = 'urb2303',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 832.5, 18.07141, 213.5 },
+                                                Position = { 754.5, 17.93859, 191.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_263'] = {
@@ -23040,25 +24376,25 @@ Scenario = {
                                                 Position = { 764.5, 18.02063, 196.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_215'] = {
-                                                type = 'urb1301',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 800.4999, 18.02063, 145.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
-                                            ['UNIT_89'] = {
-                                                type = 'urb5101',
-                                                orders = '',
-                                                platoon = '',
-                                                Position = { 807.5, 18.49722, 196.5 },
-                                                Orientation = { 0, 0, 0 },
-                                            },
                                             ['UNIT_137'] = {
                                                 type = 'urb0302',
                                                 orders = '',
                                                 platoon = '',
                                                 Position = { 789.5, 18.03626, 149.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_106'] = {
+                                                type = 'urb1106',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 792.5, 17.83703, 138.5 },
+                                                Orientation = { 0, 0, 0 },
+                                            },
+                                            ['UNIT_215'] = {
+                                                type = 'urb1301',
+                                                orders = '',
+                                                platoon = '',
+                                                Position = { 800.4999, 18.02063, 145.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_99'] = {
@@ -23110,11 +24446,11 @@ Scenario = {
                                                 Position = { 778.5, 18.20814, 193.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_106'] = {
-                                                type = 'urb1106',
+                                            ['UNIT_89'] = {
+                                                type = 'urb5101',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 792.5, 17.83703, 138.5 },
+                                                Position = { 807.5, 18.49722, 196.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_255'] = {
@@ -23131,11 +24467,11 @@ Scenario = {
                                                 Position = { 843.5, 18.3019, 170.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
-                                            ['UNIT_186'] = {
-                                                type = 'urb2303',
+                                            ['UNIT_284'] = {
+                                                type = 'urb5101',
                                                 orders = '',
                                                 platoon = '',
-                                                Position = { 754.5, 17.93859, 191.5 },
+                                                Position = { 832.5, 18.07141, 213.5 },
                                                 Orientation = { 0, 0, 0 },
                                             },
                                             ['UNIT_270'] = {
