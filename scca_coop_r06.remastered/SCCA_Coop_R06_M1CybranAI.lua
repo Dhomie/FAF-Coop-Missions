@@ -82,20 +82,27 @@ function M1CybranDebugBaseLandAttacks()
 end
 
 function M1CybranDebugBaseAirAttacks()
-	local opai = nil
-		
-		opai = M1CybranDebugBase:AddOpAI('AirAttacks', 'Cybran_Debug_RandomAirAttack_1',
-        {
-            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
-            Priority = 150,
-        }
-		)
-		opai:SetChildActive('All', false)
-		opai:SetChildrenActive({'AirSuperiority', 'StratBombers', 'Gunships'})
-		opai:SetChildCount(Difficulty)
-		--opai:SetLockingStyle('BuildTimer', {LockTimer = 5 * Difficulty})
-		opai:SetLockingStyle('None')
-		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2})
+	--Custom template, builds faster than the BaseManager's random template method
+	local Builder = {
+        BuilderName = 'M1_Cybran_Debug_AirForce_Builder',
+        PlatoonTemplate = {
+			'M1_Cybran_Debug_AirForce_Template',
+			'NoPlan',
+			{ 'ura0304', 1, 5, 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
+			{ 'ura0303', 1, 5, 'Attack', 'AttackFormation' }, -- T3 ASF
+			{ 'ura0203', 1, 10, 'Attack', 'AttackFormation' }, -- T2 Gunship
+		},
+        InstanceCount = Difficulty * 2,
+        Priority = 100,
+        PlatoonType = 'Air',
+        RequiresConstruction = true,
+        LocationType = 'M1_Cybran_Debug_Base',
+		BuildConditions = {
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2}},
+		},
+        PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
+    }
+    ArmyBrains[Cybran]:PBMAddPlatoon( Builder )
 end
 
 function M1CybranDebugBaseNavaAttacks()
@@ -117,13 +124,13 @@ function M1CybranDebugBaseNavaAttacks()
 	local Builder = {
         BuilderName = 'Cybran_Debug_Naval_Attacks',
         PlatoonTemplate = Temp,
-        InstanceCount = Difficulty + 1,
+        InstanceCount = Difficulty,
         Priority = 110,
         PlatoonType = 'Sea',
         RequiresConstruction = true,
         LocationType = 'M1_Cybran_Debug_Base',
 		BuildConditions = {
-			--{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2}},
+			{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PatrolChainPickerThread'},
 		PlatoonData = {
@@ -139,10 +146,9 @@ end
 function M1CybranDebugBaseAirDefense()
     local opai = nil
 	local quantity = {5, 10, 15}	--Air Factories = 5 at all times
-	local ChildType = {'AirSuperiority', 'Gunships', 'StratBombers'}
+	local ChildType = {'AirSuperiority', 'StratBombers', 'Gunships'}
 	
 	--Maintains [5, 10, 15] units defined in ChildType
-	--Create platoons for each unit type.
 	for k = 1, table.getn(ChildType) do
 		opai = M1CybranDebugBase:AddOpAI('AirAttacks', 'M1_Cybran_Debug_AirDefense' .. ChildType[k],
 			{

@@ -85,45 +85,21 @@ function AeonMainAirAttacks()
 	local trigger = {}
 		
 	--Phase 1 air attacks
-	quantity = {4, 10, 12}
-	opai = AeonMainBase:AddOpAI('AirAttacks', 'M1_Aeon_Gunship_Attack',
-        {
-            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
-            PlatoonData = {
-                PatrolChains = {
-                    'PlayerAirAttack_Chain',
-                },
-            },
-            Priority = 100,
-        }
-    )
-    opai:SetChildQuantity('Gunships', quantity[Difficulty])
-	
 	opai = AeonMainBase:AddOpAI('AirAttacks', 'M1_Aeon_AntiGround_Attack',
         {
-            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
-            PlatoonData = {
-                PatrolChains = {
-                    'PlayerAirAttack_Chain',
-                },
-            },
-            Priority = 100,
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 110,
         }
     )
-    opai:SetChildQuantity({'StratBombers', 'Gunships', 'Bombers'}, {4, 8, 16})
+    opai:SetChildQuantity({'StratBombers', 'Gunships', 'Bombers'}, {4, 8, 12})
 
     opai = AeonMainBase:AddOpAI('AirAttacks', 'M1_Aeon_AntiAir_Attack',
         {
-            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
-            PlatoonData = {
-                PatrolChains = {
-                    'PlayerAirAttack_Chain',
-                },
-            },
-            Priority = 100,
+            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+            Priority = 110,
         }
     )
-    opai:SetChildQuantity({'AirSuperiority', 'Gunships', 'Interceptors'}, {4, 8, 16})
+    opai:SetChildQuantity({'AirSuperiority', 'Gunships', 'Interceptors'}, {4, 8, 12})
 	
 	quantity = {4, 8, 12}
 	trigger = {15, 10, 5}
@@ -140,21 +116,29 @@ function AeonMainAirAttacks()
     opai:SetChildQuantity('TorpedoBombers', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], categories.NAVAL * categories.MOBILE, '>='})
-	
-	--Phase 2-3 air attacks
-	--Sends random amounts of Gunships, Air Superiority Fighters, and Strategic Bombers.
-	for i = 1, Difficulty do
-	opai = AeonMainBase:AddOpAI('AirAttacks', 'M2_Aeon_General_Air_Attack' .. i,
-        {
-            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
-            Priority = 110,
-        }
-    )
-	opai:SetChildActive('All', false)
-	opai:SetChildrenActive({'Gunships', 'AirSuperiority', 'StratBombers'})
-	opai:SetChildCount(Difficulty + 1)
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2})
-	end
+		
+	--Aeon general air template
+	quantity = {2, 3, 4}
+	local Builder = {
+        BuilderName = 'M2_Aeon_Main_AirForce_Builder',
+        PlatoonTemplate = {
+			'M2_Aeon_Main_AirForce_Template',
+			'NoPlan',
+			{ 'uaa0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
+			{ 'uaa0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
+			{ 'uaa0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation' }, -- T2 Gunship
+		},
+        InstanceCount = Difficulty * 2,
+        Priority = 100,
+        PlatoonType = 'Air',
+        RequiresConstruction = true,
+        LocationType = 'M1_Aeon_Main_Base',
+		BuildConditions = {
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2}},
+		},
+        PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
+    }
+    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
 	
 	--Builds [4, 8, 12] Strategic Bombers if players have >= 3, 2, 1 active SMLs, T3 Artillery, etc., and attacks said structures.
 	quantity = {4, 8, 12}
@@ -453,11 +437,11 @@ end
 --Galactic Colossus defense
 function AeonMainColossusDefense()
 	local opai = nil
-	
+	local quantity = {1, 1, 2}
 	-- GCs to guard the base
     opai = AeonMainBase:AddOpAI('M2_GC_1',
         {
-            Amount = Difficulty,
+            Amount = quantity[Difficulty],
             KeepAlive = true,
             PlatoonAIFunction = {SPAIFileName, 'RandomDefensePatrolThread'},
             PlatoonData = {
