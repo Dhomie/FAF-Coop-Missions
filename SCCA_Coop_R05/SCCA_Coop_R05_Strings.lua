@@ -304,7 +304,7 @@ C05_M03_060 = {
 
 -- One minute after SO#1 is completed
 C05_M03_070 = {
-  {text = '<LOC C05_M03_070_010>[{i Godwyn}]: I don\'t know what you did to my Gunships, Chip-head, but it won\'t matter. Soon reinforcements will arrive and this matter will be settled once and for all.', vid = 'C05_Godwyn_M03_00539.sfd', bank = 'C05_VO', cue = 'C05_Godwyn_M03_00539', faction = 'UEF'},
+  {text = '<LOC C05_M03_070_010>[{i Godwyn}]: I don\'t know what you did to my Gunships, Chip-head, but it won\'t matter. Soon reinforcements will arrive and this matter will be settled once and for all!', vid = 'C05_Godwyn_M03_00539.sfd', bank = 'C05_VO', cue = 'C05_Godwyn_M03_00539', faction = 'UEF'},
 }
 
 -- If the Hidden Objective is completed. Operation ends successfully.

@@ -21,7 +21,8 @@ local T2TransportTemplate = {
 --Used for CategoryHunterPlatoonAI
 local ConditionCategories = {
 	NavalFactories = (categories.FACTORY * categories.NAVAL) - categories.TECH1,	--Tech 2 Naval Factories are the main targets
-	StrategicBombers = categories.STRATEGICBOMBER
+	StrategicBombers = categories.STRATEGICBOMBER,
+	AirUnits = categories.AIR * categories.MOBILE - categories.TECH1,	--We don't want these to be triggered by massed T1 air units.
 }
 
 ----------------
@@ -103,7 +104,8 @@ function UEFM3AirBaseAirAttacks()
 	opai:SetLockingStyle('BuildTimer', {LockTimer = 60 / Difficulty})
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
-	--ASF attack
+	--ASF attack to counter players' air force
+	trigger = {60, 50, 40}
 	quantity = {4, 8, 12}
 	opai = UEFM3AirBase:AddOpAI('AirAttacks', 'M3_UEFAirBase_ASF_Platoon',
         {
@@ -112,9 +114,12 @@ function UEFM3AirBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('AirSuperiority', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
+        'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], ConditionCategories.AirUnits, '>='})
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
-	--StratBombers attack
+	
+	--StratBomber attack
 	quantity = {4, 8, 12}
 	opai = UEFM3AirBase:AddOpAI('AirAttacks', 'M3_UEFAirBase_StratBomber_Platoon',
         {
@@ -127,7 +132,7 @@ function UEFM3AirBaseAirAttacks()
 	
 	--StratBombers for directly taking out naval factories
 	trigger = {3, 2, 1}
-	quantity = {4, 6, 8}
+	quantity = {2, 3, 4}
 	opai = UEFM3AirBase:AddOpAI('AirAttacks', 'M3_UEFAirBase_NavalFactory_Hunter_Platoon',
         {
             MasterPlatoonFunction = {SPAIFileName, 'CategoryHunterPlatoonAI'},
@@ -143,10 +148,11 @@ function UEFM3AirBaseAirAttacks()
 	end
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], ConditionCategories.NavalFactories, '>='})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 		
 	--ASFs for directly taking out Strat Bombers
 	trigger = {6, 4, 2}
-	quantity = {4, 8, 12}
+	quantity = {2, 3, 4}
 	opai = UEFM3AirBase:AddOpAI('AirAttacks', 'M3_UEFAirBase_StrategicBombers_Hunter_Platoon',
         {
             MasterPlatoonFunction = {SPAIFileName, 'CategoryHunterPlatoonAI'},
@@ -162,6 +168,7 @@ function UEFM3AirBaseAirAttacks()
 	end
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], ConditionCategories.StrategicBombers, '>='})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
 	--Bombers attack
 	quantity = {4, 8, 12}
@@ -314,6 +321,7 @@ function UEFM3MainBaseAirAttacks()
     )
     opai:SetChildQuantity('Gunships', quantity[Difficulty])
 	opai:SetLockingStyle('BuildTimer', {LockTimer = 60 / Difficulty})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
 	--Heavy Gunship attack
 	quantity = {3, 6, 9}
@@ -327,7 +335,8 @@ function UEFM3MainBaseAirAttacks()
 	opai:SetLockingStyle('BuildTimer', {LockTimer = 60 / Difficulty})
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
-	--ASF attack
+	--ASF attack to counter players' air force
+	trigger = {50, 40, 30}
 	quantity = {3, 6, 9}
 	opai = UEFM3MainBase:AddOpAI('AirAttacks', 'M3_UEFMainBase_ASF_Platoon',
         {
@@ -336,6 +345,8 @@ function UEFM3MainBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('AirSuperiority', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
+        'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], ConditionCategories.AirUnits, '>='})
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
 	--StratBombers attack
@@ -351,7 +362,7 @@ function UEFM3MainBaseAirAttacks()
 	
 	--StratBombers for directly taking out naval factories
 	trigger = {3, 2, 1}
-	quantity = {2, 4, 6}
+	quantity = {1, 2, 3}
 	opai = UEFM3MainBase:AddOpAI('AirAttacks', 'M3_UEFMainBase_NavalFactory_Hunter_Platoon',
         {
             MasterPlatoonFunction = {SPAIFileName, 'CategoryHunterPlatoonAI'},
@@ -367,10 +378,11 @@ function UEFM3MainBaseAirAttacks()
 	end
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], ConditionCategories.NavalFactories, '>='})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 		
 	--ASFs for directly taking out Strat Bombers
 	trigger = {6, 4, 2}
-	quantity = {3, 6, 9}
+	quantity = {1, 2, 3}
 	opai = UEFM3MainBase:AddOpAI('AirAttacks', 'M3_UEFMainBase_StrategicBombers_Hunter_Platoon',
         {
             MasterPlatoonFunction = {SPAIFileName, 'CategoryHunterPlatoonAI'},
@@ -386,6 +398,7 @@ function UEFM3MainBaseAirAttacks()
 	end
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {'default_brain', {'HumanPlayers'}, trigger[Difficulty], ConditionCategories.StrategicBombers, '>='})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
 	--Bombers attack
 	quantity = {3, 6, 9}
@@ -396,6 +409,7 @@ function UEFM3MainBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('Bombers', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 	
 	--Interceptors attack
 	quantity = {3, 6, 9}
@@ -406,6 +420,7 @@ function UEFM3MainBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('Interceptors', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3})
 end
 
 function UEFM3MainBaseTransportAttacks()
@@ -421,7 +436,7 @@ function UEFM3MainBaseTransportAttacks()
         RequiresConstruction = true,
         LocationType = 'M3_UEF_Main_Base',
 		BuildConditions = {
-			{'/lua/editor/unitcountbuildconditions.lua', 'HaveLessThanUnitsWithCategory', {'default_brain', 10, categories.uea0104}},
+			{'/lua/editor/unitcountbuildconditions.lua', 'HaveLessThanUnitsWithCategory', {'default_brain', 12, categories.uea0104}},
 			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 3}}
 		},
         PlatoonAIFunction = {SPAIFileName, 'TransportPool'},    

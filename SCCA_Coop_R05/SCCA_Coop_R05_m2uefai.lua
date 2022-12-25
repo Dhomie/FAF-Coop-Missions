@@ -12,11 +12,27 @@ local BaseManager = import('/lua/ai/opai/basemanager.lua')
 local UEF = 2
 local Difficulty = ScenarioInfo.Options.Difficulty
 local SPAIFileName = '/lua/ScenarioPlatoonAI.lua'
+local CustomFunctions = '/maps/SCCA_Coop_R05/SCCA_Coop_R05_CustomFunctions.lua'
 --Used by the Northen and South Western Omni bases for transport attacks.
 local T2TransportTemplate = {
     'UEF_T2_Transport_Template',
-    'NoPlan',
+    'DisbandAI',
     { 'uea0104', 1, 3, 'Attack', 'None' }, -- 3 T2 Transport
+}
+--Land platoon template that only requires a single T2 transport to ferry.
+local T2LandAssaultTemplate = {
+	'UEF_T2_Land_Assault_Force_Template',
+	'AttackForceAI',
+	{'uel0202', 1, 2, 'Attack', 'AttackFormation'},	--T2 Heavy Tank
+	{'uel0111', 1, 2, 'Artillery', 'AttackFormation'},	--T2 MML
+	{'uel0205', 1, 1, 'Support', 'AttackFormation'},	--T2 Mobile Flak
+	{'uel0307', 1, 1, 'Support', 'AttackFormation'},	--T2 Mobile Shield
+}
+--Used for build conditions
+local ConditionCategories = {
+	NavalFactories = (categories.FACTORY * categories.NAVAL) - categories.TECH1,
+	StrategicBombers = categories.STRATEGICBOMBER,
+	NavalUnits = categories.NAVAL * categories.MOBILE,
 }
 
 ----------------
@@ -53,8 +69,8 @@ function UEFM2OmniBaseEastAirAttacks()
 	local opai = nil
     local quantity = {}
 	
-	--Part 1 attacks
-	--Gunship attack
+	-- Part 1, 2nd wave attacks
+	-- Gunships
 	quantity = {3, 6, 9}
 	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M1_UEFOmniBaseEast_Air_Platoon_1',
         {
@@ -68,10 +84,9 @@ function UEFM2OmniBaseEastAirAttacks()
         }
     )
     opai:SetChildQuantity('Gunships', quantity[Difficulty])
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable',
-        {'default_brain','M1_UEFAttackBegin2'})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin2'})
 	
-	--Gunship, Bomber attack
+	-- Gunships, Bombers
 	quantity = {6, 9, 12}
 	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M1_UEFOmniBaseEast_Air_Platoon_2',
         {
@@ -85,9 +100,8 @@ function UEFM2OmniBaseEastAirAttacks()
         }
     )
     opai:SetChildQuantity({'Gunships', 'Bombers',}, quantity[Difficulty])
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable',
-        {'default_brain','M1_UEFAttackBegin2'})
-	--Gunship, Interceptor attack
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin2'})
+	-- Gunships, Interceptors
 	quantity = {6, 9, 12}
 	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M1_UEFOmniBaseEast_Air_Platoon_3',
         {
@@ -101,11 +115,10 @@ function UEFM2OmniBaseEastAirAttacks()
         }
     )
     opai:SetChildQuantity({'Gunships', 'Interceptors',}, quantity[Difficulty])
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable',
-        {'default_brain','M1_UEFAttackBegin2'})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin2'})
 	
-	--Part 2 attacks
-	--Gunship attack
+	-- Part 2 attacks
+	-- Gunship attack
 	quantity = {3, 6, 9}
 	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M2_UEFOmniBaseEast_Air_Platoon_1',
         {
@@ -116,7 +129,7 @@ function UEFM2OmniBaseEastAirAttacks()
     opai:SetChildQuantity('Gunships', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2})
 	
-	--Heavy Gunship attack
+	-- Heavy Gunship attack
 	quantity = {3, 6, 9}
 	opai = UEFM2OmniBaseEast:AddOpAI('AirAttacks', 'M2_UEFOmniBaseEast_Air_Platoon_2',
         {
@@ -165,6 +178,7 @@ function UEFM2OmniBaseEastAirDefenses()
 		)
 		opai:SetChildQuantity(NavalBaseChildType[k], quantity[Difficulty])
 		opai:SetLockingStyle('DeathRatio', {Ratio = 0.5})
+		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M2_UEF_NavalBase_Operational'})
 	end
 end
 
@@ -196,8 +210,8 @@ function UEFM2OmniBaseNorthAirAttacks()
 	
 	--Base patrols
 	
-	--Maintains [2, 4, 6] units defined in ChildType
-	quantity = {2, 4, 6}
+	--Maintains [1, 2, 3] units defined in ChildType
+	quantity = {1, 2, 3}
 	for k = 1, table.getn(ChildType) do
 		opai = UEFM2OmniBaseNorth:AddOpAI('AirAttacks', 'M2_UEFOmniBaseNorth_AirDefense' .. ChildType[k],
 			{
@@ -271,45 +285,64 @@ function UEFM2OmniBaseNorthTransportAttacks()
 		BuildConditions = {
 			{'/lua/editor/unitcountbuildconditions.lua', 'HaveLessThanUnitsWithCategory', {'default_brain', 10, categories.uea0104}},
 		},
-        PlatoonAIFunction = {SPAIFileName, 'TransportPool'},    
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
-	--Sends random amounts of [T2]
+	Builder = {
+        BuilderName = 'M2_UEFOmniBaseNorth_LandForce_Builder',
+        PlatoonTemplate = T2LandAssaultTemplate,
+        InstanceCount = Difficulty,
+        Priority = 250,
+        PlatoonType = 'Land',
+        RequiresConstruction = true,
+        LocationType = 'M2_UEF_Omni_Base_North',
+		BuildConditions = {
+			{'/lua/editor/unitcountbuildconditions.lua', 'HaveGreaterThanUnitsWithCategory', {'default_brain', 6, categories.uea0104}},
+			{'/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin3'}},
+		},
+		PlatoonData = {
+			PlatoonAIPlan = 'AttackForceAI',
+			UseFormation = 'AttackFormation',
+			MaxPlatoonSize = 6,
+			NeverMerge = true,
+        },
+    }
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
+	
+	--[[--Sends random amounts of [T2]
 	for i = 1, Difficulty do
-		opai = UEFM2OmniBaseNorth:AddOpAI('BasicLandAttack', 'M2_UEFOmniBaseNorth_TransportAttacks_T2_' .. i,
+		opai = UEFM2OmniBaseNorth:AddOpAI('BasicLandAttack', 'M2_UEFOmniBaseNorth_LandAttackForce_T2_' .. i,
             {
-                MasterPlatoonFunction = {SPAIFileName, 'LandAssaultWithTransports'},
+                MasterPlatoonFunction = {CustomFunctions, 'UsePlatoonPlan'},
                 PlatoonData = {
-                    AttackChain = 'M1_UEFResourceBaseAttack_Chain' .. Random(1, 2),
-                    LandingChain = 'M2_UEF_Transport_LZ',
-					MovePath = 'M2_UEFOmniBaseNorth_Transport_Path',
-                    TransportReturn = 'M2_OmniNorth_TransportReturn'
+					PlatoonAIPlan = 'AttackForceAI',
+					UseFormation = 'AttackFormation',
+					MaxPlatoonSize = 4 * Difficulty,
+					NeverMerge = true,
                 },
-                Priority = 150,
+                Priority = 150 - i,
             }
         )
 		opai:SetChildActive('All', false)
 		opai:SetChildrenActive({'MobileFlak', 'MobileMissiles', 'HeavyTanks', 'MobileShields'})
-		opai:SetChildCount(Difficulty + 1)
+		opai:SetChildCount(Difficulty)
 		opai:SetFormation('AttackFormation')
 		opai:AddBuildCondition('/lua/editor/unitcountbuildconditions.lua',
-            'HaveGreaterThanUnitsWithCategory', {'default_brain', 4, categories.uea0104})
+            'HaveGreaterThanUnitsWithCategory', {'default_brain', 6, categories.uea0104})
 		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin2'})
-	end
+	end]]
 	
-	--Sends random amounts of [T3]
 	for i = 1, Difficulty do	
-		opai = UEFM2OmniBaseNorth:AddOpAI('BasicLandAttack', 'M2_UEFOmniBaseNorth_TransportAttacks_T3_' .. i,
+		opai = UEFM2OmniBaseNorth:AddOpAI('BasicLandAttack', 'M2_UEFOmniBaseNorth_LandAttackForce_T3_' .. i,
             {
-                MasterPlatoonFunction = {SPAIFileName, 'LandAssaultWithTransports'},
+                MasterPlatoonFunction = {CustomFunctions, 'UsePlatoonPlan'},
                 PlatoonData = {
-                    AttackChain = 'M1_UEFResourceBaseAttack_Chain' .. Random(1, 2),
-                    LandingChain = 'M2_UEF_Transport_LZ',
-					MovePath = 'M2_UEFOmniBaseNorth_Transport_Path',
-                    TransportReturn = 'M2_OmniNorth_TransportReturn'
+					PlatoonAIPlan = 'AttackForceAI',
+					UseFormation = 'AttackFormation',
+					MaxPlatoonSize = 2 * Difficulty,
+					NeverMerge = true,
                 },
-                Priority = 160,
+                Priority = 160 - i,
             }
         )
 		opai:SetChildActive('All', false)
@@ -350,8 +383,8 @@ function UEFM2OmniBaseSouthWestAirAttacks()
 	
 	--Base patrols
 	
-	--Maintains [2, 4, 6] units defined in ChildType
-	quantity = {2, 4, 6}
+	--Maintains [1, 2, 3] units defined in ChildType
+	quantity = {1, 2, 3}
 	for k = 1, table.getn(ChildType) do
 		opai = UEFM2OmniBaseSouthWest:AddOpAI('AirAttacks', 'M2_UEFOmniBaseSouthWest_AirDefense' .. ChildType[k],
 			{
@@ -425,11 +458,78 @@ function UEFM2OmniBaseSouthWestTransportAttacks()
 		BuildConditions = {
 			{'/lua/editor/unitcountbuildconditions.lua', 'HaveLessThanUnitsWithCategory', {'default_brain', 10, categories.uea0104}},
 		},
-        PlatoonAIFunction = {SPAIFileName, 'TransportPool'},    
+        --PlatoonAIFunction = {SPAIFileName, 'TransportPool'},    
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
-	--Sends random amounts of [T2]
+	Builder = {
+        BuilderName = 'M2_UEFOmniBaseSouthWest_LandForce_Builder',
+        PlatoonTemplate = T2LandAssaultTemplate,
+        InstanceCount = Difficulty,
+        Priority = 250,
+        PlatoonType = 'Land',
+        RequiresConstruction = true,
+        LocationType = 'M2_UEF_Omni_Base_South_West',
+		BuildConditions = {
+			{'/lua/editor/unitcountbuildconditions.lua', 'HaveGreaterThanUnitsWithCategory', {'default_brain', 6, categories.uea0104}},
+			{'/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin3'}},
+		},
+		PlatoonData = {
+			PlatoonAIPlan = 'AttackForceAI',
+			UseFormation = 'AttackFormation',
+			MaxPlatoonSize = 6,
+			NeverMerge = true,
+        },
+    }
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
+	
+	--[[--Sends random amounts of [T2]
+	for i = 1, Difficulty do
+		opai = UEFM2OmniBaseSouthWest:AddOpAI('BasicLandAttack', 'M2_UEFOmniBaseSouthWest_LandAttackForce_T2_' .. i,
+            {
+                MasterPlatoonFunction = {CustomFunctions, 'UsePlatoonPlan'},
+                PlatoonData = {
+					PlatoonAIPlan = 'AttackForceAI',
+					UseFormation = 'AttackFormation',
+					MaxPlatoonSize = 4 * Difficulty,
+					NeverMerge = true,
+                },
+                Priority = 150 -i,
+            }
+        )
+		opai:SetChildActive('All', false)
+		opai:SetChildrenActive({'MobileFlak', 'MobileMissiles', 'HeavyTanks', 'MobileShields'})
+		opai:SetChildCount(Difficulty)
+		opai:SetFormation('AttackFormation')
+		opai:AddBuildCondition('/lua/editor/unitcountbuildconditions.lua',
+            'HaveGreaterThanUnitsWithCategory', {'default_brain', 6, categories.uea0104})
+		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin2'})
+	end]]
+	
+	--Sends random amounts of [T3]
+	for i = 1, Difficulty do	
+		opai = UEFM2OmniBaseSouthWest:AddOpAI('BasicLandAttack', 'M2_UEFOmniBaseSouthWest_LandAttackForce_T3_' .. i,
+            {
+                MasterPlatoonFunction = {CustomFunctions, 'UsePlatoonPlan'},
+                PlatoonData = {
+					PlatoonAIPlan = 'AttackForceAI',
+					UseFormation = 'AttackFormation',
+					MaxPlatoonSize = 2 * Difficulty,
+					NeverMerge = true,
+                },
+                Priority = 160 - i,
+            }
+        )
+		opai:SetChildActive('All', false)
+		opai:SetChildrenActive({'SiegeBots', 'MobileHeavyArtillery'})
+		opai:SetChildCount(Difficulty)
+		opai:SetFormation('AttackFormation')
+		opai:AddBuildCondition('/lua/editor/unitcountbuildconditions.lua',
+            'HaveGreaterThanUnitsWithCategory', {'default_brain', 6, categories.uea0104})
+		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2})	--T3 only after part 2
+	end
+	
+	--[[--Sends random amounts of [T2]
 	for i = 1, Difficulty do
 		opai = UEFM2OmniBaseSouthWest:AddOpAI('BasicLandAttack', 'M2_UEFOmniBaseSouthWest_TransportAttacks_T2_' .. i,
             {
@@ -473,7 +573,7 @@ function UEFM2OmniBaseSouthWestTransportAttacks()
 		opai:AddBuildCondition('/lua/editor/unitcountbuildconditions.lua',
             'HaveGreaterThanUnitsWithCategory', {'default_brain', 6, categories.uea0104})
 		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2})	--T3 only after part 2
-	end
+	end]]
 end
 
 -----------------------------
@@ -489,7 +589,6 @@ function UEFM2NavalBaseAI()
 	)
 	UEFM2NavalBase:StartNonZeroBase({2, 4, 6})
 	UEFM2NavalBase:SetMaximumConstructionEngineers(4)
-	
 	UEFM2NavalBase:SetDefaultEngineerPatrolChain('M2_UEFNavalBase_Chain')
 	
 	UEFM2NavalBase:AddBuildGroupDifficulty('M2_UEFNavalBase_Misc', 175)
@@ -499,21 +598,21 @@ end
 
 function UEFM2NavalBaseNavalAttacks()
 	local opai = nil
+	local trigger = {}
 	local T2Quantity = {1, 2, 3}
 	local T1Quantity = {2, 4, 6}
 	
-	--M1 UEF naval attacks, some minutes after the players have been spotted
-	local Temp = {
+	--M1 UEF naval units for the 3rd wave, if the players have a naval force
+	trigger = {20, 15, 10}
+	local Builder = {
+        BuilderName = 'M1_UEF_Naval_Respone_Builder',
+        PlatoonTemplate = {
         'M1_UEF_Naval_Respone_Template',
         'NoPlan',
         { 'ues0201', 1, 1, 'Attack', 'AttackFormation' }, -- T2 Destroyer
 		{ 'ues0103', 1, 2, 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'ues0203', 1, 2, 'Attack', 'AttackFormation' }, -- T1 Submarine
-	
-    }
-	local Builder = {
-        BuilderName = 'M1_UEF_Naval_Respone_Builder',
-        PlatoonTemplate = Temp,
+		{ 'ues0203', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
+		},
         InstanceCount = Difficulty,
         Priority = 100,
         PlatoonType = 'Sea',
@@ -521,6 +620,8 @@ function UEFM2NavalBaseNavalAttacks()
         LocationType = 'M2_UEF_Naval_Base',
 		BuildConditions = {
 			{'/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin3'}},
+			{'/lua/editor/otherarmyunitcountbuildconditions.lua', 'BrainsCompareNumCategory',
+				{'default_brain', {'HumanPlayers'}, trigger[Difficulty], ConditionCategories.NavalUnits, '>='}}
 		},
         PlatoonAIFunction = {SPAIFileName, 'PatrolChainPickerThread'},
 		PlatoonData = {
@@ -530,18 +631,16 @@ function UEFM2NavalBaseNavalAttacks()
     ArmyBrains[UEF]:PBMAddPlatoon( Builder )
 	
 	--M2 UEF naval attacks
-	Temp = {
+	Builder = {
+        BuilderName = 'M2_UEF_Naval_Attack_Builder',
+        PlatoonTemplate = {
         'M2_UEF_Naval_Attack_Template',
         'NoPlan',
         { 'ues0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
 		{ 'ues0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
 		{ 'ues0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
 		{ 'ues0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
-	}
-	
-	Builder = {
-        BuilderName = 'M2_UEF_Naval_Attack_Builder',
-        PlatoonTemplate = Temp,
+		},
         InstanceCount = Difficulty,
         Priority = 150,
         PlatoonType = 'Sea',

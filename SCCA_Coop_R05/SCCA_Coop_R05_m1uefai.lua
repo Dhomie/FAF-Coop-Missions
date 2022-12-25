@@ -48,8 +48,8 @@ function UEFM1BaseAirAttacks()
     local quantity = {}
 	local ChildType = {'Interceptors', 'Bombers', 'Gunships'}
 	
-	--Maintains [3, 4, 5] units defined in ChildType
-	quantity = {3, 4, 5}
+	-- Maintains [1, 2, 3] units defined in ChildType
+	quantity = {1, 2, 3}
 	for k = 1, table.getn(ChildType) do
 		opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Base_AirDefense' .. ChildType[k],
 			{
@@ -57,15 +57,15 @@ function UEFM1BaseAirAttacks()
 					PlatoonData = {
 						PatrolChain = 'M1_UEF_AirPatrol_Chain',
 					},
-					Priority = 150 - k, --Interceptors are first
+					Priority = 150 - k, -- Interceptors are first
 			}
 		)
 		opai:SetChildQuantity(ChildType[k], quantity[Difficulty])
 		opai:SetLockingStyle('DeathRatio', {Ratio = 0.5})
 	end
 	
-	--Air attacks
-	--Bomber attack
+	-- 1st wave
+	-- Bombers
 	quantity = {3, 4, 5}
 	opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Air_Platoon_1',
         {
@@ -80,7 +80,7 @@ function UEFM1BaseAirAttacks()
     opai:SetChildQuantity('Bombers', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin'})
 	
-	--Interceptor attack
+	--Interceptors
 	quantity = {3, 4, 5}
 	opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Air_Platoon_2',
         {
@@ -95,7 +95,8 @@ function UEFM1BaseAirAttacks()
     opai:SetChildQuantity('Interceptors', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin'})
 	
-	--Gunship, Bomber attack
+	-- 1st wave escalation
+	-- Gunships, bombers
 	quantity = {4, 6, 8}
 	opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Air_Platoon_3',
         {
@@ -110,7 +111,7 @@ function UEFM1BaseAirAttacks()
     opai:SetChildQuantity({'Gunships', 'Bombers',}, quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBeginIncrease'})
 	
-	--Gunship, Interceptor attack
+	-- Gunships, Interceptors
 	quantity = {4, 6, 8}
 	opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Air_Platoon_4',
         {
@@ -125,7 +126,8 @@ function UEFM1BaseAirAttacks()
     opai:SetChildQuantity({'Gunships', 'Interceptors',}, quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBeginIncrease'})
 	
-	--Gunship attack
+	-- 2nd wave
+	-- Gunships
 	quantity = {4, 5, 6}
 	opai = UEFM1Base:AddOpAI('AirAttacks', 'M1_UEF_Air_Platoon_5',
         {
@@ -145,7 +147,7 @@ function UEFM1BaseLandAttacks()
 	local opai = nil
     local quantity = {}
 	
-	--Base patrols
+	-- Base patrols
     quantity = {6, 9, 12}
     opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_Base_Land_Patrol_Platoon_1',
         {
@@ -188,10 +190,10 @@ function UEFM1BaseLandAttacks()
     )
     opai:SetChildQuantity({'MobileMissiles', 'LightArtillery'}, quantity[Difficulty])
 	
-	--Land attacks
-	--Light attack
-	quantity = {4, 6, 8}
-    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_Attack_Platoon_1',
+	-- 1st wave
+	-- T1 AA
+	quantity = {2, 3, 4}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_First_Wave_AA_Platoon',
         {
             MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
             PlatoonData = {
@@ -201,13 +203,43 @@ function UEFM1BaseLandAttacks()
             Priority = 100,
         }
     )
-	opai:SetChildQuantity({'MobileFlak', 'MobileAntiAir'}, quantity[Difficulty])
-    opai:SetFormation('AttackFormation')
+	opai:SetChildQuantity('MobileAntiAir', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin'})
 	
-	--Medium attack
-	quantity = {6, 9, 12}
-    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_Attack_Platoon_2',
+	-- T1 Tanks
+	quantity = {2, 3, 4}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_First_Wave_Tank_Platoon',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
+            PlatoonData = {
+                PatrolChains = {'M1_UEFResourceBaseAttack_Chain1',
+								'M1_UEFResourceBaseAttack_Chain2',},
+            },
+            Priority = 100,
+        }
+    )
+	opai:SetChildQuantity('LightTanks', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin'})
+	
+	-- T1 Artillery
+	quantity = {2, 3, 4}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_First_Wave_Artillery_Platoon',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
+            PlatoonData = {
+                PatrolChains = {'M1_UEFResourceBaseAttack_Chain1',
+								'M1_UEFResourceBaseAttack_Chain2',},
+            },
+            Priority = 100,
+        }
+    )
+	opai:SetChildQuantity('LightArtillery', quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin'})
+	
+	-- 1st wave escalation
+	-- Combined anti-PD
+	quantity = {2, 4, 6}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_First_Wave_Reinforced_Artillery_Platoon',
         {
             MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
             PlatoonData = {
@@ -218,12 +250,42 @@ function UEFM1BaseLandAttacks()
         }
     )
 	opai:SetChildQuantity({'MobileMissiles', 'LightArtillery'}, quantity[Difficulty])
-    opai:SetFormation('AttackFormation')
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBeginIncrease'})
 	
-	--Heavy attack
-	quantity = {6, 9, 12}
-    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_Land_Attack_Platoon_3',
+	-- Combined direct fire
+	quantity = {4, 6, 8}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_First_Wave_Reinforced_Breakthrough_Platoon',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
+            PlatoonData = {
+                PatrolChains = {'M1_UEFResourceBaseAttack_Chain1',
+								'M1_UEFResourceBaseAttack_Chain2',},
+            },
+            Priority = 110,
+        }
+    )
+	opai:SetChildQuantity({'HeavyTanks', 'LightBots'}, quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBeginIncrease'})
+	
+	-- Combined AA
+	quantity = {2, 4, 6}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_First_Wave_Reinforced_AA_Platoon',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
+            PlatoonData = {
+                PatrolChains = {'M1_UEFResourceBaseAttack_Chain1',
+								'M1_UEFResourceBaseAttack_Chain2',},
+            },
+            Priority = 110,
+        }
+    )
+    opai:SetChildQuantity({'MobileFlak', 'MobileAntiAir'}, quantity[Difficulty])
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBeginIncrease'})
+	
+	-- 2nd wave
+	-- Combined direct fire
+	quantity = {3, 6, 9}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_Third_Wave_Breakthrough_Platoon',
         {
             MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
             PlatoonData = {
@@ -234,6 +296,22 @@ function UEFM1BaseLandAttacks()
         }
     )
 	opai:SetChildQuantity({'SiegeBots', 'HeavyTanks', 'LightTanks',}, quantity[Difficulty])
+    opai:SetFormation('AttackFormation')
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin2'})
+	
+	-- Combined anti-PD
+	quantity = {3, 6, 9}
+    opai = UEFM1Base:AddOpAI('BasicLandAttack', 'M1_UEF_Third_Wave_Artillery_Platoon',
+        {
+            MasterPlatoonFunction = {SPAIFileName, 'PatrolChainPickerThread'},
+            PlatoonData = {
+                PatrolChains = {'M1_UEFResourceBaseAttack_Chain1',
+								'M1_UEFResourceBaseAttack_Chain2',},
+            },
+            Priority = 120,
+        }
+    )
+	opai:SetChildQuantity({'MobileHeavyArtillery', 'MobileMissiles', 'LightArtillery'}, quantity[Difficulty])
     opai:SetFormation('AttackFormation')
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'CheckScenarioInfoVarTable', {'default_brain','M1_UEFAttackBegin2'})
 end
