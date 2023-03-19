@@ -326,7 +326,7 @@ function AeonMainTransportAttacks()
 		BuildConditions = {
 			{'/lua/editor/unitcountbuildconditions.lua', 'HaveLessThanUnitsWithCategory', {'default_brain', 12, categories.uaa0104}},
 		},
-        PlatoonAIFunction = {SPAIFileName, 'TransportPool'},    
+        PlatoonAIFunction = {SPAIFileName, 'TransportPool'},
     }
     ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
 	

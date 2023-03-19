@@ -59,7 +59,7 @@ function UEFMainBaseAI()
 	
 	UEFMainBase:StartNonZeroBase({8, 10, 12})
 	UEFMainBase:SetMaximumConstructionEngineers(12)
-	ArmyBrains[UEF]:PBMSetCheckInterval(7)
+	ArmyBrains[UEF]:PBMSetCheckInterval(10)
 	UEFMainBase:SetDefaultEngineerPatrolChain('UEFBase_Chain')
 	
 	UEFMainBase:SetSupportACUCount(1)
@@ -269,7 +269,7 @@ function UEFMainLandAttacks()
 		LocationType = 'UEF_Main_Base',
 		BuildConditions = {
                     {BMBC, 'BaseEngineersEnabled', {'UEF_Main_Naval_Base'}},
-                    {BMBC, 'NumUnitsLessNearBase', {'UEF_Main_Naval_Base', (categories.FACTORY * categories.NAVAL), 1}},
+                    {BMBC, 'NumUnitsLessNearBase', {'UEF_Main_Naval_Base', (categories.FACTORY * categories.NAVAL * categories.STRUCTURE), 1}},
                     {BMBC, 'BaseActive', {'UEF_Main_Naval_Base'}},
                 },
 		PlatoonAIFunction = {CustomFunctions, 'EngineersMoveToThread'},
@@ -431,9 +431,10 @@ function UEFMainNavalAttacks()
         }
     )
 end
+
 --Fatboy factory platoon 1 for Phase 2
 function UEFMainFatboyFactory1()
-	opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
+	local opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
             {
                 Amount = 1,
                 KeepAlive = true,
@@ -457,7 +458,7 @@ end
 
 --Fatboy factory platoon 2 for Phase 2
 function UEFMainFatboyFactory2()
-	opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
+	local opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
             {
                 Amount = 1,
                 KeepAlive = true,
@@ -478,11 +479,13 @@ function UEFMainFatboyFactory2()
             }
     )
 end
+
 -- General Experimental attacks
 function UEFMainExperimentalAttacks()
     local opai = nil
 	local quantity = {2, 4, 8}
 	
+	--Single Fatboy with advanced behaviour
 	opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
         {
             Amount = 1,
@@ -496,7 +499,7 @@ function UEFMainExperimentalAttacks()
 					'uel0307', 	--T2 Mobile Shield
 					'uel0303',	--T3 Siege Bot
 					'uel0304', 	--T3 Mobile Heavy Artillery
-			},
+				},
 				Formation = 'AttackFormation',
 				SitDistance = 120,
 				UnitCount = quantity[Difficulty],
@@ -690,7 +693,7 @@ function M3UEFSouthWesternTransportAttacks()
         )
 		opai:SetChildActive('All', false)
 		opai:SetChildrenActive({'MobileFlak', 'MobileMissiles', 'HeavyTanks', 'MobileShields'})
-		opai:SetChildCount(Difficulty + 2)
+		opai:SetChildCount(Difficulty + 1)
 		opai:SetFormation('AttackFormation')
 		opai:AddBuildCondition('/lua/editor/unitcountbuildconditions.lua',
             'HaveGreaterThanUnitsWithCategory', {'default_brain', 6, categories.uea0104})

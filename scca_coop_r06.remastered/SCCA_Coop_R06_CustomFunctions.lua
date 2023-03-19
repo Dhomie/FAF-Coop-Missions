@@ -7,12 +7,12 @@ local UEF = 3
 local Aeon = 2
 local Difficulty = ScenarioInfo.Options.Difficulty
 
---- Merges units produced by the Base Manager conditional build into the same platoon.
--- PlatoonData = {
---		Name - String, unique name for this platoon
---		NumRequired - Number of experimentals to start moving the platoon
---		PatrolChain - Name of the chain to use
--- }
+-- Merges units produced by the Base Manager conditional build into the same platoon.
+-- @PlatoonData
+--		@Name - String, unique name for this platoon
+--		@NumRequired - Number of experimentals to start moving the platoon
+--		@PatrolChain - Name of the chain to use
+--		@PatrolChains - Table of chain names, use this if you want to randomly pick between chains
 function AddExperimentalToPlatoon(platoon)
     local brain = platoon:GetBrain()
     local data = platoon.PlatoonData
@@ -55,8 +55,7 @@ function MultipleExperimentalsPatrolThread(platoon)
 				--Works fine even if only 1 chain was given
 				if data.PatrolChains then
 					--Pick a random chain from the table
-					local chain = Random(1, table.getn(data.PatrolChains))
-					for _, v in ScenarioUtils.ChainToPositions(data.PatrolChains[chain]) do
+					for _, v in ScenarioUtils.ChainToPositions(table.random(data.PatrolChains)) do
 						platoon:Patrol(v)
 					end
 				--We received a single chain
@@ -76,28 +75,25 @@ end
 
 --Enables Stealth on Cybran ASFs, and StratBombers
 function EnableStealthOnAir()
-    local T3AirUnits = {}
     while true do
-        for _, v in ArmyBrains[Cybran]:GetListOfUnits(categories.ura0303 + categories.ura0304, false) do
-            if not ( T3AirUnits[v:GetEntityId()] or v:IsBeingBuilt() ) then
+        for _, v in ArmyBrains[Cybran]:GetListOfUnits(categories.ura0303 + categories.ura0304 + categories.ura0401, false) do
+            if not ( v.StealthEnabled or v:IsBeingBuilt() ) then
                 v:ToggleScriptBit('RULEUTC_StealthToggle')
-                T3AirUnits[v:GetEntityId()] = true
+                v.StealthEnabled = true	--Entity IDs get recycled, using a unit-specific flag instead
             end
         end
-        WaitSeconds(20)
+        WaitSeconds(30)
     end
 end
-----------------------------------------------------------------------------------------------------------
---  EngineersMoveToThread
---      Description: Moves to a set of locations, then disbands if desired
---			Designed for custom Engineer platoons (including sACUs) to move to an expansion base, then disband
+
+--  Moves to a set of locations, then disbands if desired
+--	Designed for custom Engineer platoons (including sACUs) to move to an expansion base, then disband
 --  @PlatoonData
---      -MoveRoute - List of locations to move to
---      -MoveChain - Chain of locations to move
---      -UseTransports - boolean, if true, use transports to move
---		-DisbandAfterArrival - boolean, if true, platoon disbands at the destination.
+--      @MoveRoute - List of locations to move to
+--      @MoveChain - Chain of locations to move
+--      @UseTransports - boolean, if true, use transports to move
+--		@DisbandAfterArrival - boolean, if true, platoon disbands at the destination.
 --  @param platoon Platoon
------------------------------------------------------------------------------------------------------------
 function EngineersMoveToThread(platoon)
 
 	local cmd = false
@@ -160,18 +156,15 @@ function GetBaseLocation(brain, locationName)
     return false
 end
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------
--- Function: AddMobileFactory
--- 		Description: Adds a Fatboy as the primary factory for an AI build location
---	@PlatoonData:
---		-BaseName - String, base name we send the Fatboy to, if it doesn't exist, it will be automatically created.
---		-RallyPoint - String, rally point name for the Fatboy to send its built units to
---		-MoveRoute - String, chain of locations the Fatboy will use to move to its destination
+-- Adds a unit as the primary land factory for an AI build location
+-- @PlatoonData:
+--		@BaseName - String, base name we send the Fatboy to, if it doesn't exist, it will be automatically created.
+--		@RallyPoint - String, rally point name for the Fatboy to send its built units to
+--		@MoveRoute - String, chain of locations the Fatboy will use to move to its destination
 --			-The below PlatoonData are only needed if the base doesn't exist yet
---				-BaseMarker - String, marker name of a new base we want to initially create
---				-BaseRadius - Number, radius of a new base we want to initially create
--- 	@param platoon Platoon
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+--				@BaseMarker - String, marker name of a new base we want to initially create
+--				@BaseRadius - Number, radius of a new base we want to initially create
+-- @param platoon Single-unit platoon
 function AddMobileFactory(platoon)
 	local aiBrain = platoon:GetBrain()
 	local data = platoon.PlatoonData

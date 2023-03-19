@@ -67,7 +67,7 @@ local SubsequentTime = 300
 --------------
 -- Debug Only!
 --------------
-local DEBUG = false
+local DEBUG = true
 local SkipIntro = false
 
 ------------------------
@@ -222,6 +222,7 @@ function SpawnUEF()
 	ScenarioInfo.Aiko = ScenarioFramework.SpawnCommander('UEF', 'Aiko', false, LOC('{i CDR_Aiko}'), false, AikoDestroyed,
         {'DamageStabilization', 'HeavyAntiMatterCannon', 'Shield'})
 	ScenarioInfo.Aiko:SetAutoOvercharge(true)
+	ScenarioInfo.Aiko:SetVeterancy(5)
 	
 	-- Black Sun
     ScenarioInfo.BlackSunWeapon = ScenarioUtils.CreateArmyUnit('BlackSun', 'BlackSun')
@@ -249,6 +250,7 @@ function SpawnAeon()
 	ScenarioInfo.Arnold = ScenarioFramework.SpawnCommander('Aeon', 'Arnold', false, LOC('{i CDR_Arnold}'), false, ArnoldDestroyed,
         {'Shield', 'ShieldHeavy', 'HeatSink', 'CrysalisBeam'})
 	ScenarioInfo.Arnold:SetAutoOvercharge(true)
+	ScenarioInfo.Arnold:SetVeterancy(5)
 	
 	--Single Galactic Colossus
     ScenarioInfo.Colossus = ScenarioUtils.CreateArmyUnit('Aeon', 'M2_GC_1')

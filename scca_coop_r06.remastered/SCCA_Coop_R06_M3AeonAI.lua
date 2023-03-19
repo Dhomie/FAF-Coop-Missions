@@ -264,25 +264,12 @@ function M3AeonSouthEasternAirAttacks()
         PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
     }
     ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
-	
-	--Sends random amounts of Gunships, Air Superiority Fighters, and Strategic Bombers.
-	for i = 1, Difficulty do
-	opai = M3AeonSouthEasternBase:AddOpAI('AirAttacks', 'M3_Aeon_SouthEastern_General_Air_Attack' .. i,
-        {
-            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
-            Priority = 100,
-        }
-    )
-	opai:SetChildActive('All', false)
-	opai:SetChildrenActive({'Gunships', 'AirSuperiority', 'StratBombers'})
-	opai:SetChildCount(Difficulty + 1)
-	end
 end
 
 function M3AeonSouthEasternAirDefense()
     local opai = nil
 	local quantity = {2, 4, 6}	--Air Factories = [2, 4, 6] depending on the Difficulty
-	local ChildType = {'AirSuperiority', 'StratBombers'}
+	local ChildType = {'AirSuperiority', 'StratBombers', 'Gunships'}
 	
 	--Maintains [2, 4, 6] units defined in ChildType
 	for k = 1, table.getn(ChildType) do
