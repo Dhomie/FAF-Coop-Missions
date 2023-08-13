@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
---  File     : /maps/SCCA_Coop_E06/SCCA_Coop_E06_AeonAI
+--  File     : /maps/SCCA_Coop_E06/SCCA_Coop_E06_AeonAI.lua
 --  Author(s): Dhomie42
 --
---  Summary  : Aeon army AI for  UEF Mission 6 - SCCA_Coop_E06
+--  Summary  : Aeon army AI for UEF Mission 6 - SCCA_Coop_E06
 --------------------------------------------------------------------------------
 local BaseManager = import('/lua/ai/opai/basemanager.lua')
 
@@ -13,6 +13,7 @@ local Aeon = 3
 local Difficulty = ScenarioInfo.Options.Difficulty
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 local CustomFunctions = '/maps/scca_coop_e06/scca_coop_e06_customfunctions.lua'
+local AIAttackUtils = '/maps/scca_coop_e06/scca_coop_e06_aiattackutilities.lua'
 local AIBehaviors = '/maps/scca_coop_e06/scca_coop_e06_aibehaviors.lua'
 
 -- Used for CategoryHunterPlatoonAI
@@ -131,10 +132,6 @@ function M2AeonSEBaseNavalAttacks()
 		},
         PlatoonAIFunction = {CustomFunctions, 'NavalHuntAI'},
 		PlatoonData = {
-            PatrolChains = {
-			'Aeon_M2_Defensive_Fleets_Chain_2',
-			'Aeon_M2_Defensive_Fleets_Chain_3',
-			},
 			UseFormation = 'AttackFormation',
         },     
     }
@@ -162,12 +159,8 @@ function M2AeonSEBaseNavalAttacks()
 		BuildConditions = {
 			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {1}},
 		},
-        PlatoonAIFunction = {CustomFunctions, 'NavalHuntAI'},
+        PlatoonAIFunction = {AIAttackUtils, 'NavalForceAI'},
         PlatoonData = {
-            PatrolChains = {
-				'Aeon_M2_Defensive_Fleets_Chain_2',
-				'Aeon_M2_Defensive_Fleets_Chain_3',
-			},
 			UseFormation = 'AttackFormation',
         },
     }
@@ -217,7 +210,7 @@ function M2AeonSEBaseTransportAttacks()
             {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
             {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
         },
-        InstanceCount = 2,
+        InstanceCount = Difficulty * 2,
         Priority = 100,
         PlatoonType = 'Land',
         RequiresConstruction = true,
@@ -225,7 +218,6 @@ function M2AeonSEBaseTransportAttacks()
 		BuildConditions = {
 			{CustomFunctions, 'HaveGreaterOrEqualThanUnitsInTransportPool', {6, poolName}},
 			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}},
-			
 		},
         PlatoonAIFunction = {CustomFunctions, 'LandAssaultWithTransports'},       
         PlatoonData = {
@@ -233,12 +225,11 @@ function M2AeonSEBaseTransportAttacks()
             LandingChain = 'Aeon_M2_Land_Assault_Landing_Chain',
             TransportReturn = 'M2_Aeon_SE_Base_Marker',
 			BaseName = 'M2_Aeon_SE_Base',
-			GenerateSafePath = true,
         },
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 	
-	Builder = {
+	--[[Builder = {
         BuilderName = 'M2_Aeon_Southern_Land_Sweepers',
         PlatoonTemplate = {
             'M2_Aeon_Southern_Land_Sweepers_Template',
@@ -249,25 +240,24 @@ function M2AeonSEBaseTransportAttacks()
             {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
             {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
         },
-        InstanceCount = 2,
+        InstanceCount = 3,
         Priority = 100,
         PlatoonType = 'Land',
         RequiresConstruction = true,
         LocationType = 'M2_Aeon_SE_Base',
 		BuildConditions = {
 			{CustomFunctions, 'HaveGreaterOrEqualThanUnitsInTransportPool', {6, poolName}},
-			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}},
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {1}},
 		},
-        PlatoonAIFunction = {CustomFunctions, 'LandAssaultWithTransports'},       
+        PlatoonAIFunction = {AIAttackUtils, 'AttackForceAI'},
         PlatoonData = {
             AttackChain = 'Player_Attack_Locations_Chain',
-            LandingChain = 'Aeon_M2_Land_Assault_Landing_Chain',
+            --LandingChain = 'Aeon_M2_Land_Assault_Landing_Chain',
             TransportReturn = 'M2_Aeon_SE_Base_Marker',
 			BaseName = 'M2_Aeon_SE_Base',
-			GenerateSafePath = true,
         },
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)]]
 end
 
 function M2AeonSEBaseAirAttacks()
@@ -339,7 +329,7 @@ function M2AeonSEBaseAirAttacks()
 		},
         PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 end
 
 function M2AeonSEBaseAirDefense()

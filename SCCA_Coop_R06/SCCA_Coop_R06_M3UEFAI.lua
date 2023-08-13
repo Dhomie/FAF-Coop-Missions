@@ -328,7 +328,6 @@ function UEFMainNavalAttacks()
         { 'ues0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
 		{ 'ues0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
 		{ 'ues0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
-	
     }
 	local Builder = {
         BuilderName = 'M3_UEF_Main_Naval_Attack_To_Player',

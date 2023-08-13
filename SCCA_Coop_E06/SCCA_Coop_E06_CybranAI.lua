@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  File     : /maps/SCCA_Coop_E06/SCCA_Coop_E06_M1CybranAI.lua
+--  File     : /maps/SCCA_Coop_E06/SCCA_Coop_E06_CybranAI.lua
 --  Author(s): Dhomie42
 --
 --  Summary  : Cybran army AI for Mission 1 - SCCA_Coop_E06
@@ -554,7 +554,7 @@ function M3CybranBaseExperimentals()
 			PlatoonTemplate = {
 				'M3_Cybran_Soul_Ripper_Extra_Engineers_Builder_Template',
 				'NoPlan',
-				{ 'url0309', 1, quantity[Difficulty], 'Attack', 'NoFormation' },	-- T3 Engineers
+				{ 'url0309', 2, 2, 'Attack', 'NoFormation' },	-- T3 Engineers
 			},
 			InstanceCount = 1,
 			Priority = 250,

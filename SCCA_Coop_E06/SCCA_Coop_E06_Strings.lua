@@ -315,6 +315,12 @@ M2P4Title = '<LOC E06_M02_OBJ_010_241>Recapture Black Sun Control Center'
 -- Primary Objectives 
 M2P4Description = '<LOC E06_M02_OBJ_010_242>Do not let the Cybrans gain access to Black Sun\'s programming.'
 
+-- Secondary Objectives
+M2S1Title = '<LOC E06_M02_OBJ_010_252>Reinforce Black Sun'
+
+-- Secondary Objectives
+M2S1Description = '<LOC E06_M02_OBJ_010_253>Captain Aiko is ready to take back the South Eastern island, and reinforce your position from there. Move her sACU to the designated coordinates if you want her to take command of her own forces.'
+
 
 
 --------------------------------

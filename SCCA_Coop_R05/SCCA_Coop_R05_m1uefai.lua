@@ -11,7 +11,7 @@ local BaseManager = import('/lua/ai/opai/basemanager.lua')
 ---------
 local UEF = 2
 local Difficulty = ScenarioInfo.Options.Difficulty
-local SPAIFileName = '/lua/ScenarioPlatoonAI.lua'
+local SPAIFileName = '/lua/scenarioplatoonai.lua'
 
 ----------------
 -- Base Managers

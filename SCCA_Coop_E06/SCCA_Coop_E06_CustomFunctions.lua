@@ -43,6 +43,16 @@ function HaveLessThanUnitsInTransportPool(aiBrain, numReq, platoonName)
 	return table.getn(platoon:GetPlatoonUnits()) < numReq
 end
 
+--- Build condition used to determine if reclaim engineers need to be built
+---@param aiBrain AIBrain
+---@param mStorage number
+---@return boolean
+function LessMassStorageCurrent(aiBrain, mStorage)
+    local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
+	
+    return econ.MassStorage < mStorage
+end
+
 -------------------------------
 -- Modified Transport Functions
 -------------------------------
@@ -93,7 +103,6 @@ end
 --- Grabs a specific number of transports from the transports pool and loads units into the transport. Once ready a scenario variable can be set. Can wait on another scenario variable. Attempts to land at the location with the least threat and uses the accompanying attack chain for the units that have landed.
 --- - LandingList     - (REQUIRED or LandingChain) List of possible locations for transports to unload units
 --- - LandingChain    - (REQUIRED or LandingList) Chain of possible landing locations
---- - GenerateSafePath - Bool if you want the transports to dynamically generate a safe path to a safe landing location.
 --- - TransportReturn - Location for transports to return to (they will attack with land units if this isn't set)
 --- - AttackPoints    - (REQUIRED or AttackChain or PatrolChain) List of locations to attack. The platoon attacks the highest threat first
 --- - AttackChain     - (REQUIRED or AttackPoints or PatrolChain) Marker Chain of postitions to attack
@@ -217,7 +226,7 @@ function LandAssaultWithTransports(platoon)
 		PlatoonPosition = platoon:GetPlatoonPosition()
 		
 		-- If we are surrounded by too much air threat, then fuck it, make a run for our last landing position
-		if aiBrain:GetThreatAtPosition(platoon:GetPlatoonPosition(), 1, true, 'AntiAir') > threatMax  then
+		if aiBrain:GetThreatAtPosition(PlatoonPosition, 1, true, 'AntiAir') > threatMax  then
 			platoon:Stop()
 			cmd = platoon:UnloadAllAtLocation(landingLocation)
 			break
@@ -239,7 +248,7 @@ function LandAssaultWithTransports(platoon)
 
     -- Send transports back to base if desired, otherwise stay with the land platoon
     if data.TransportReturn then
-        ReturnTransportsToPool(platoon, data)
+        ReturnTransportsToPool(platoon)
     end
 
     if data.PatrolChain then
@@ -439,8 +448,7 @@ function SortUnitsOnTransports(transportTable, unitTable, numSlots)
 end
 
 --- Utility Function
---- Function that gets the correct number of transports for a platoon
---- If BaseName platoon data is specified, grabs transports from that platoon
+--- Function that gets the correct number of transports for a platoon, if BaseName platoon data is specified, grabs transports from that platoon
 ---@param platoon Platoon
 ---@return number
 function GetTransportsThread(platoon)
@@ -587,7 +595,7 @@ function GetTransportsThread(platoon)
                     end
                 end
                 if not unitFound then
-                    ReturnTransportsToPool(platoon, data)
+                    ReturnTransportsToPool(platoon)
                     return false
                 end
             end
@@ -664,19 +672,19 @@ end
 --- Takes transports in platoon, returns them to pool, flies them back to return location
 ---@param platoon Platoon
 ---@param data table
-function ReturnTransportsToPool(platoon, data)
+function ReturnTransportsToPool(platoon)
     -- Put transports back in TPool
     local aiBrain = platoon:GetBrain()
     local transports = platoon:GetSquadUnits('Scout')
-	local poolName
+	local data = platoon.PlatoonData
 	
-	-- If base name is specified in platoon data, pick that first over actual base of origin (LocationType)
+	-- Default transport platoon to grab from
+	local poolName = 'TransportPool'
 	local BaseName = data.BaseName
 	
+	-- If base name is specified in platoon data, use that instead
 	if BaseName then 
 		poolName = BaseName .. '_TransportPool'
-	else
-		poolName = 'TransportPool'
 	end
 
     if table.empty(transports) then
@@ -715,7 +723,7 @@ end
 ---@param threatType BrainThreatType
 ---@return Vector
 function BrainChooseLowestThreatLocation(aiBrain, locationList, ringSize, threatType)
-	-- GetThreatAtPosition() goes nuts if a 5th parameter given to it is nil, and otherwise it calculates overall threat by default
+	-- GetThreatAtPosition() goes nuts if a parameter given to it is nil
 	if not threatType then
 		threatType = false
 	end
@@ -745,7 +753,7 @@ end
 ---@param threatType BrainThreatType
 ---@return Vector
 function BrainChooseHighestThreatLocation(aiBrain, locationList, ringSize, threatType)
-	-- GetThreatAtPosition() goes nuts if a 5th parameter given to it is nil, and otherwise it calculates overall threat by default
+	-- GetThreatAtPosition() goes nuts if a parameter given to it is nil, and otherwise it calculates overall threat by default
 	if not threatType then
 		threatType = false
 	end
@@ -857,6 +865,7 @@ function AddExperimentalToPlatoon(platoon)
 end
 
 --- Handles a unique platoon of multiple experimentals.
+---@param platoon Platoon
 function MultipleExperimentalsPatrolThread(platoon)
     local brain = platoon:GetBrain()
     local data = platoon.PlatoonData
@@ -903,8 +912,26 @@ function NavalHuntAI(self)
     local PlatoonFormation = self.PlatoonData.UseFormation or 'NoFormation'
     self:SetPlatoonFormationOverride(PlatoonFormation)
 	
-    local atkPri = { 'STRUCTURE ANTINAVY', 'MOBILE NAVAL', 'STRUCTURE NAVAL', 'COMMAND', 'EXPERIMENTAL', 'STRUCTURE STRATEGIC EXPERIMENTAL', 'ARTILLERY EXPERIMENTAL', 'STRUCTURE ARTILLERY TECH3', 'STRUCTURE NUKE TECH3', 'STRUCTURE ANTIMISSILE SILO',
-        'STRUCTURE DEFENSE DIRECTFIRE', 'TECH3 MASSFABRICATION', 'TECH3 ENERGYPRODUCTION', 'STRUCTURE STRATEGIC', 'STRUCTURE DEFENSE', 'STRUCTURE', 'MOBILE', 'ALLUNITS' }
+    local atkPri = { 
+		'STRUCTURE ANTINAVY',
+		'MOBILE NAVAL',
+		'STRUCTURE NAVAL',
+		'COMMAND',
+		'EXPERIMENTAL',
+		'STRUCTURE STRATEGIC EXPERIMENTAL',
+		'ARTILLERY EXPERIMENTAL',
+		'STRUCTURE ARTILLERY TECH3',
+		'STRUCTURE NUKE TECH3',
+		'STRUCTURE ANTIMISSILE SILO',
+        'STRUCTURE DEFENSE DIRECTFIRE',
+		'TECH3 MASSFABRICATION',
+		'TECH3 ENERGYPRODUCTION',
+		'STRUCTURE STRATEGIC',
+		'STRUCTURE DEFENSE',
+		'STRUCTURE',
+		'MOBILE',
+		'ALLUNITS'
+	}
     local atkPriTable = {}
 	
     for k, v in atkPri do
@@ -928,7 +955,7 @@ function NavalHuntAI(self)
             IssueDive({v})
         end
     end
-    WaitSeconds(3)
+    WaitSeconds(1)
 	
 	-- Naval platoons have this very irritating behaviour of refusing to attack-move to very shallow beaches, and land. They just stay in one place, or their command is cancelled outright
 	-- So, instead of attack-move, let's have them directly attack the picked target instead, and see how that performs.
@@ -940,7 +967,7 @@ function NavalHuntAI(self)
         end
         WaitSeconds(5)
         if (not cmd or not self:IsCommandsActive(cmd)) then
-            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ALLUNITS - categories.WALL)
+            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ALLUNITS - categories.WALL - categories.AIR)
             if target and not target.Dead then
                 self:Stop()
                 cmd = self:AttackTarget(target)
@@ -1158,20 +1185,6 @@ function AssistOtherEngineer(eng, engTable, unitBeingBuilt)
     return eng, engTable
 end
 
---- Utility thread
---- Enables Stealth on Cybran ASFs, Strat Bombers, and Soul Rippers periodically
-function EnableStealthOnAir()
-    while true do
-        for _, v in ArmyBrains[Cybran]:GetListOfUnits(categories.ura0303 + categories.ura0304 + categories.ura0401, false) do
-            if not (v.StealthEnabled or v:IsBeingBuilt()) then
-                v:ToggleScriptBit('RULEUTC_StealthToggle')
-                v.StealthEnabled = true	-- Entity IDs get recycled, using a unit-specific flag instead
-            end
-        end
-        WaitSeconds(30)
-    end
-end
-
 ---  Moves to a set of locations, then disbands if desired
 ---  @PlatoonData
 ---      @MoveRoute - List of locations to move to
@@ -1203,11 +1216,11 @@ function EngineersMoveToThread(platoon)
             end
             if data.UseTransports then
                 for _, v in movePositions do
-                cmd = platoon:MoveToLocation(v, data.UseTransports)
+					cmd = platoon:MoveToLocation(v, data.UseTransports)
                 end
             else
                 for _, v in movePositions do
-                cmd = platoon:MoveToLocation(v, false)
+					cmd = platoon:MoveToLocation(v, false)
                 end
             end
         else
@@ -1293,7 +1306,7 @@ function AddMobileFactory(platoon)
 	IssueFactoryRallyPoint({unit}, ScenarioUtils.MarkerToPosition(data.RallyPoint))
 end
 
---- Platoon generates a safe path to the first position of a set of locations, then patrols them by starting at the highest threat location
+--- Platoon generates a safe path to the first position of a set of locations, then patrols them by starting at the lowest threat location
 --- Path is periodically updated until the platoon is close enough to ignore path generation
 --- - PatrolRoute - List of locations to patrol
 --- - PatrolChain - Chain of locations to patrol
@@ -1303,7 +1316,7 @@ function AdvancedPatrolThread(platoon)
     local data = platoon.PlatoonData
 	local AttackPositions = {}			-- Table of locations gathered either from data.PatrolChain, or data.PatrolRoute
 	local cmd
-	local threatValue = 5				-- Defaults to 5, is overwritten if proper threat platoon is obtainable
+	local threatValue = 5				-- Defaults to 5, is overwritten if proper platoon threat is obtainable
 	local platoonThreat = false			-- Used for own threat calculation, should either be 'Air' or 'Surface' depending on platoon layer
 	local threatType = false			-- Used for hostile threat calculation, should either be 'AntiAir' or 'AntiSurface' depending on platoon layer
 	
@@ -1311,7 +1324,7 @@ function AdvancedPatrolThread(platoon)
 	AIAttackUtils.GetMostRestrictiveLayer(platoon)
 	
 	if not platoon.MovementLayer then
-		error('*CUSTOM PLATOON AI ERROR: Couldn\' determine platoon\'s movement layer.', 2)
+		error('*CUSTOM PLATOON AI ERROR: Couldn\'t determine platoon\'s movement layer.', 2)
 	end
 	-- Assign calculation data according to layer type
 	-- If it's not 'Air', treat the platoon as a surface one, which includes surface ships as well
@@ -1349,7 +1362,7 @@ function AdvancedPatrolThread(platoon)
 		error('*CUSTOM PLATOON AI ERROR: Could not create AttackPositions out of PatrolRoute or PatrolChain, they are most likely not defined', 2)
 	end
 	
-	-- Find safest attack location, and path to it, update them every 5 or so seconds until we are close enough to it
+	-- Find safest attack location, and path to it, update them every 10 or so seconds until we are close enough to it
 	-- Also sort AttackPositions by threat
 	local SortedAttackPositions = BrainChooseLowestAttackRoute(aiBrain, AttackPositions, 1, threatType)
 	local startLocation = SortedAttackPositions[1]
@@ -1365,7 +1378,7 @@ function AdvancedPatrolThread(platoon)
 		
 		platoon:Stop()
 		
-		-- '50' is the maximum amount of threat we can still pass by of
+		-- Generate a safe path
 		local safePath = NavUtils.PathToWithThreatThreshold(platoon.MovementLayer, PlatoonPosition, startLocation, aiBrain, NavUtils.ThreatFunctions[threatType], threatValue * 10, aiBrain.IMAPConfig.Rings)
 		
 		if safePath then
@@ -1416,6 +1429,81 @@ function AdvancedPatrolThread(platoon)
 
 			cmd = platoon:Patrol(node)
 		end
+	end
+end
+
+
+--- Utility function, returns false if at least 1 entity inside 'reclaimables' is a wreckage
+---@param reclaimables, Table
+---@return boolean
+function NoWreckageInTable(reclaimables)
+	if table.empty (reclaimables) then
+		return true
+	end
+	
+	for _, entity in reclaimables do
+		if IsProp(entity) then
+			return false
+		end
+	end
+	
+	return true
+end
+
+--- Engineer platoon attack-moves to the nearest wreckage inside its rectangle, that we increase periodically if we can't find any wreck to reclaim
+function EngineerPlatoonReclaim(platoon)
+	local aiBrain = platoon:GetBrain()
+	local position = platoon:GetPlatoonPosition()
+	local rectIncrement = 10
+	local rectDef = Rect(position[1] - rectIncrement, position[3] - rectIncrement, position[1] + rectIncrement, position[3] + rectIncrement)
+	local reclaimRect = {}
+	local closest, distance, targetWreck
+	
+	
+	while aiBrain:PlatoonExists(platoon) do
+		-- Update data
+		reclaimRect = GetReclaimablesInRect(rectDef)
+		closest = nil
+		targetWreck = nil
+		position = platoon:GetPlatoonPosition()
+		
+		if NoWreckageInTable(reclaimRect) then
+			if math.max(ScenarioInfo.size[1], ScenarioInfo.size[2]) > rectIncrement then
+				rectIncrement = rectIncrement + 15
+			elseif rectIncrement > math.max(ScenarioInfo.size[1], ScenarioInfo.size[2]) then
+				rectIncrement = math.max(ScenarioInfo.size[1], ScenarioInfo.size[2])
+			end
+			
+			rectDef = Rect(position[1] - rectIncrement, position[3] - rectIncrement, position[1] + rectIncrement, position[3] + rectIncrement)
+		else
+			for _, prop in reclaimRect do
+				if IsProp(prop) then
+					if not closest then
+						distance = VDist2(position[1], position[3], prop.CachePosition[1], prop.CachePosition[3])
+						closest = prop.CachePosition
+						targetWreck = prop
+					else
+						local tempDist = VDist3(position, prop.CachePosition)
+						if tempDist < distance then
+							distance = tempDist
+							closest = prop.CachePosition
+							targetWreck = prop
+						end
+					end
+				end
+			end
+			
+			-- Attack-move if we are far away, otherwise reclaim it, because wrecks on the edges of the map are not reclaimed even via patrol/attack-move orders
+			if closest and VDist2(position[1], position[3],  closest[1], closest[3]) > 10 then
+				platoon:Stop()
+				platoon:AggressiveMoveToLocation(closest)
+			elseif targetWreck then
+				platoon:Stop()
+				IssueReclaim(platoon:GetPlatoonUnits(), targetWreck)
+			end
+		end
+		
+		WaitSeconds(10)
 	end
 end
 

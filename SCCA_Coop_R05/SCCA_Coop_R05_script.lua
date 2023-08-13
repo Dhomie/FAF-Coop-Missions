@@ -10,19 +10,20 @@
 
 local ScenarioFramework = import('/lua/scenarioframework.lua')
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
-local Objectives = import('/lua/ScenarioFramework.lua').Objectives
-local SimCamera = import('/lua/SimCamera.lua').SimCamera
-local ScenarioPlatoonAI = import('/lua/ScenarioPlatoonAI.lua')
+local Objectives = import('/lua/scenarioframework.lua').Objectives
+local SimCamera = import('/lua/simcamera.lua').SimCamera
+local ScenarioPlatoonAI = import('/lua/scenarioplatoonai.lua')
 local Cinematics = import('/lua/cinematics.lua')
-local OpStrings   = import('/maps/SCCA_Coop_R05/SCCA_Coop_R05_Strings.lua')
-local ScenarioStrings = import('/lua/ScenarioStrings.lua')
-local VizMarker = import('/lua/sim/VizMarker.lua').VizMarker
+local OpStrings   = import('/maps/scca_coop_r05/scca_coop_r05_strings.lua')
+local ScenarioStrings = import('/lua/scenariostrings.lua')
+local VizMarker = import('/lua/sim/vizmarker.lua').VizMarker
 local Utilities = import('/lua/utilities.lua')
-local M1UEFAI = import ('/maps/SCCA_Coop_R05/SCCA_Coop_R05_m1uefai.lua')
-local M2UEFAI = import ('/maps/SCCA_Coop_R05/SCCA_Coop_R05_m2uefai.lua')
-local M3UEFAI = import ('/maps/SCCA_Coop_R05/SCCA_Coop_R05_m3uefai.lua')
+local M1UEFAI = import ('/maps/scca_coop_r05/scca_coop_r05_m1uefai.lua')
+local M2UEFAI = import ('/maps/scca_coop_r05/scca_coop_r05_m2uefai.lua')
+local M3UEFAI = import ('/maps/scca_coop_r05/scca_coop_r05_m3uefai.lua')
+local NavUtils = import('/lua/sim/navutils.lua')
 
-local Buff = import('/lua/sim/Buff.lua')
+local Buff = import('/lua/sim/buff.lua')
 
 ----------
 -- Globals
@@ -72,11 +73,7 @@ local M3_InitGunshipPlatsKilled         = 0
 local M2_DelaySecondNavalAttack         = 290   -- Delay after start of M2 that we begin launcher the occasional secondary naval attacks
 local M2_GunshipAttackDelay             = 10    -- Delay between warning dialogue and launch of attack. Currently, we want delay + travel time to be about 2 minutes
 
-function AdjustDifficulty (table)
-    return table[Difficulty]
-end
-
- --- hard diff stuff
+-- Hard diff stuff
 local M2_OffmapAttack_Land_Inital                   =   300
 local M2_OffmapAttack_Land_Delay                    =   500
 local M2_OffmapAttack_Air_Inital                    =   160
@@ -85,16 +82,16 @@ local M2_OffmapAttack_Air_Delay2                    =   400
 ScenarioInfo.M2_OffmapAirDead                       =   0
 ScenarioInfo.M2_Hard_OffmapAir_Count                =   0
 
-ScenarioInfo.VarTable['M1_UEFAttackBegin'] = false				--Part 1, first stage of attacks, no off-map units
-ScenarioInfo.VarTable['M1_UEFAttackBeginIncrease'] = false		--Part 1, first stage escalates, no off-map units
-ScenarioInfo.VarTable['M1_UEFAttackBegin2'] = false				--Part 1, second stage of attacks, off-map air attacks begin.
-ScenarioInfo.VarTable['M1_UEFAttackBegin3']  = false			--Part 1, third, and final stage of attacks, off-map naval, and transport attacks begin.
-ScenarioInfo.VarTable['M2_DelayedNaval'] = false				--Part 2, Used for scripted spawns
-ScenarioInfo.VarTable['M2_UEF_NavalBase_Operational'] = true   	--Part 2, used by the UEF AI to check if it should build patrols for the naval base
-ScenarioInfo.VarTable['M3_VirusUpload'] = false					--Part 3, secondary objective flag if completed
+ScenarioInfo.VarTable['M1_UEFAttackBegin'] = false				-- Part 1, first stage of attacks, no off-map units
+ScenarioInfo.VarTable['M1_UEFAttackBeginIncrease'] = false		-- Part 1, first stage escalates, no off-map units
+ScenarioInfo.VarTable['M1_UEFAttackBegin2'] = false				-- Part 1, second stage of attacks, off-map air attacks begin.
+ScenarioInfo.VarTable['M1_UEFAttackBegin3']  = false			-- Part 1, third, and final stage of attacks, off-map naval, and transport attacks begin.
+ScenarioInfo.VarTable['M2_DelayedNaval'] = false				-- Part 2, Used for scripted spawns
+ScenarioInfo.VarTable['M2_UEF_NavalBase_Operational'] = true   	-- Part 2, used by the UEF AI to check if it should build patrols for the naval base
+ScenarioInfo.VarTable['M3_VirusUpload'] = false					-- Part 3, secondary objective flag if completed
 
-ScenarioInfo.OperationEnding        = false						--Flag used to ensure only 1 method of completing the operation is being focused on.
-																--The 2 methods are either killing Hex5's prison building near Godwyn's main base, or killing Godwyn himself.
+ScenarioInfo.OperationEnding        = false						-- Flag used to ensure only 1 method of completing the operation is being focused on.
+																-- The 2 methods are either killing Hex5's prison building near Godwyn's main base, or killing Godwyn himself.
 
 ------------------------
 -- AI buffing functions
@@ -112,11 +109,11 @@ function BuffAIBuildPower()
 	buffAffects.BuildRate.Mult = Rate[Difficulty]
 
 	while true do
-		for i, j in AIs do
-			if table.getn(AIs) > 0 then
+		if not table.empty(AIs) then
+			for i, j in AIs do
 				local buildpower = ArmyBrains[j]:GetListOfUnits(BuffCategories.BuildPower, false)
 				-- Check if there is anything to buff
-				if table.getn(buildpower) > 0 then
+				if not table.empty(buildpower) then
 					for k, v in buildpower do
 						-- Apply buff to the entity if it hasn't been buffed yet
 						if not v.BuildBuffed then
@@ -144,17 +141,17 @@ function BuffAIEconomy()
 	buffAffects.MassProduction.Mult = Rate[Difficulty]
 	
 	while true do
-		for i, j in AIs do
-			if table.getn(AIs) > 0 then
+		if not table.empty(AIs) then
+			for i, j in AIs do
 				local economy = ArmyBrains[j]:GetListOfUnits(BuffCategories.Economy, false)
 				-- Check if there is anything to buff
-				if table.getn(economy) > 0 then
+				if not table.empty(economy) then
 					for k, v in economy do
-				-- Apply buff to the entity if it hasn't been buffed yet
+					-- Apply buff to the entity if it hasn't been buffed yet
 						if not v.EcoBuffed then
-					Buff.ApplyBuff(v, 'CheatIncome')
-					-- New Entity flag which is true if the entity has already been buffed
-					v.EcoBuffed = true
+							Buff.ApplyBuff(v, 'CheatIncome')
+							-- New Entity flag which is true if the entity has already been buffed
+							v.EcoBuffed = true
 						end
 					end
 				end
@@ -164,6 +161,7 @@ function BuffAIEconomy()
 		WaitSeconds(60)
 	end
 end
+
 -----------
 -- Startup
 -----------
@@ -177,18 +175,27 @@ function OnPopulate(scenario)
     if ScenarioInfo.Options.Difficulty == 2 then DifficultyConc = 'Medium' end
     if ScenarioInfo.Options.Difficulty == 3 then DifficultyConc = 'Strong' end
 	
+	---------------------------
+    -- Additional UEF Army data
+	---------------------------
+	-- These are essential data we need if we want to use skirmish AI attack functions
+	ArmyBrains[UEF].IMAPConfig = {
+            OgridRadius = 0,
+            IMAPSize = 0,
+            Rings = 0,
+    }
+	ArmyBrains[UEF]:IMAPConfiguration()
+	
 	--------------
     -- M1 UEF Base
 	--------------
-	-- This is needed to make advanced platoon threads work
-	ArmyBrains[UEF]:ForkThread(ArmyBrains[UEF].PickEnemy)
 	M1UEFAI.UEFM1BaseAI()
     ScenarioInfo.UEFGenerators = ScenarioUtils.CreateArmyGroup ('UEF', 'M1_UEFGenerators')
 	ScenarioUtils.CreateArmyGroup('UEF', 'M1_UEFBase_Naval_Defense_D' .. Difficulty)
 
     -- UEF Naval Units
     -- Create patrol 1 through 4, and send them on their same-numbered patrol chain 1 through 4
-    for i = 1,4 do
+    for i = 1, 4 do
         local platoon = ScenarioUtils.CreateArmyGroupAsPlatoon ('UEF', 'M1_UEFNavalPatrol'..i..'_'..DifficultyConc, 'AttackFormation')
         ScenarioFramework.PlatoonPatrolChain(platoon, 'M1_UEF_NavalPatrol_Chain')
     end
@@ -207,12 +214,12 @@ function OnPopulate(scenario)
 	
     -- UEF Base area ground patrols
     -- 3 patrol groups, each given a similarly numbered patrol
-    for i = 1,3 do
+    for i = 1, 3 do
         local platoon = ScenarioUtils.CreateArmyGroupAsPlatoon ('UEF', 'M1_UEFBase_DefensePatrol_'..i.. '_'..DifficultyConc, 'AttackFormation')
         ScenarioFramework.PlatoonPatrolChain(platoon, 'M1_UEFLandPatrolChain_'..i)
     end
 
-    -- M2 Area Eastern Omni Base: factories and infrastructure, as we will use this base to make offmap gunships in M1.
+    -- M2 Area Eastern Omni Base: factories and infrastructure, it will build air attacks from the start
 	M2UEFAI.UEFM2OmniBaseEastAI()
 	-- M2 Area Naval Base: factories and walls, it will build naval attacks from the start.
 	M2UEFAI.UEFM2NavalBaseAI()
@@ -221,7 +228,7 @@ function OnPopulate(scenario)
 	-- M2 Area South Western Omni Base: factories and walls, it will build transport attacks from the start.
 	M2UEFAI.UEFM2OmniBaseSouthWestAI()
 	
-	--AI buffing functions, forkthreaded, they act as coroutines, we want to check for units to buff every 60 seconds.
+	-- AI buffing functions, forkthreaded, they act as coroutines, we want to check for units to buff every 60 seconds.
 	ForkThread(BuffAIBuildPower)
 	ForkThread(BuffAIEconomy)
 end
@@ -266,13 +273,17 @@ end
 
 function SpawnCommanders()
 	-- Use only for debug purposes:
-	-- ScenarioUtils.CreateArmyGroup('Player1', 'PlayerStartingBase')
+	--ScenarioUtils.CreateArmyGroup('Player1', 'PlayerStartingBase')
 	
 	-- Spawn in the players
 	local tblArmy = ListArmies()
+	ScenarioInfo.CoopCDRs = {}
+	
 	local i = 1
 	while tblArmy[ScenarioInfo['Player' .. i]] do
-        ScenarioInfo['Player' .. i .. 'CDR'] = ScenarioFramework.SpawnCommander('Player' .. i, 'Player_' .. i, 'Warp', true, true, PlayerCDRKilled)
+		ScenarioInfo['Player' .. i .. 'CDR'] = ScenarioFramework.SpawnCommander('Player' .. i, 'Player_' .. i, 'Warp', true, true, PlayerCDRKilled)
+		table.insert(ScenarioInfo.CoopCDRs, ScenarioInfo['Player' .. i .. 'CDR'])
+		
         WaitSeconds(1)
         i = i + 1
     end
@@ -347,7 +358,7 @@ function StartMission1()
 			if result then
 				local camInfo = {
 					blendTime = 1,
-					holdTime = 4,
+					holdTime = 3,
 					orientationOffset = { -0.72, 0.35, 0 },
 					positionOffset = { 0, 1.5, 0 },
 					zoomVal = 55,
@@ -358,7 +369,6 @@ function StartMission1()
 			end
         end
    )
-    ScenarioFramework.Dialogue(ScenarioStrings.NewPObj)
 
 	-- Naval patrol intel triggers for VO
     ScenarioFramework.CreateArmyIntelTrigger(M1_PromptNavalDialogue, ArmyBrains[Player1], 'Radar', false, true, categories.NAVAL, true, ArmyBrains[UEF])
@@ -420,7 +430,7 @@ function M1FirstAttackWave()
     ScenarioFramework.CreateTimerTrigger (M1ReinforceFirstAttackWave, delay[Difficulty])
 end
 
---Escalates the 1st wave
+-- Escalates the 1st wave
 function M1ReinforceFirstAttackWave()
     -- Tell PBM to begin reinforcing the 1st wave
     ScenarioInfo.VarTable['M1_UEFAttackBeginIncrease'] = true
@@ -430,7 +440,7 @@ function M1ReinforceFirstAttackWave()
     ScenarioFramework.CreateTimerTrigger (M1SecondAttackWave, delay[Difficulty])
 end
 
- -- Second attack wave, Resource base builds more units, Eastern Omni base sends light 'offmap' air attacks
+-- Second attack wave, Resource base builds more units, Eastern Omni base sends light 'offmap' air attacks
 function M1SecondAttackWave()
     -- Tell PBM to begin building the 2nd wave
     ScenarioInfo.VarTable['M1_UEFAttackBegin2'] = true
@@ -440,10 +450,10 @@ function M1SecondAttackWave()
     ScenarioFramework.CreateTimerTrigger (M1ThirdAttackWave, delay[Difficulty])
 end
 
--- Third Stage of attacks, SW and Northen Omni bases begin landing land units, offmap naval base begins naval attacks
+-- Third, and final attack wave, SW and Northen Omni bases begin transporting land units, offmap naval base begins naval attacks
 -- Some of these received additional build conditions, this only tells the PBM that one of those build conditions is now met
 function M1ThirdAttackWave()
-	-- Tell PBM to begin building the 2nd wave
+	-- Tell PBM to begin building the 3rd wave
     ScenarioInfo.VarTable['M1_UEFAttackBegin3'] = true
 	
 	-- Taunt 4 moved here, to tell the players to get ready.
@@ -481,15 +491,15 @@ function StartMission2()
         categories.ueb2304 + -- T3 SAM Launcher
 		categories.ueb3104 + -- T3 Omni Sensor
 		categories.uel0303 + -- Siege Assault Bot
-        categories.uea0304	 --Strategic Bomber
+        categories.uea0304	 -- Strategic Bomber
 	)
 	
 	-- No cinematics for this part, we're using a different function to spawn in the units
     M2_CreateUnitsForMission()
 	
-	--------------------------------------------
-    --Primary Objective 1 - Destroy Omni Sensors
-	--------------------------------------------
+	---------------------------------------------
+    -- Primary Objective 1 - Destroy Omni Sensors
+	---------------------------------------------
     ScenarioInfo.M2P1 = Objectives.KillOrCapture(
         'primary',                      -- type
         'incomplete',                   -- complete
@@ -502,11 +512,11 @@ function StartMission2()
         }
    )
 	
-	------------------------------------------------
-    --Secondary Objective 1 - Destroy UEF Naval Base
-	------------------------------------------------
+	-------------------------------------------------
+    -- Secondary Objective 1 - Destroy UEF Naval Base
+	-------------------------------------------------
 	ScenarioInfo.M2S1 = Objectives.CategoriesInArea(
-        'secondary',                    	-- type
+        'secondary',                    -- type
         'incomplete',               	-- status
         OpStrings.M2S1Text,  			-- title
         OpStrings.M2S1Detail,  			-- description
@@ -517,22 +527,24 @@ function StartMission2()
                 {Area = 'M2_NavalBase_Area', Category = categories.FACTORY + categories.ENGINEER, CompareOp = '<=', Value = 0, ArmyIndex = UEF},
             },
         }
-   )
+	)
 	ScenarioInfo.M2S1:AddResultCallback(
-        function()
-			ScenarioInfo.VarTable['M2_UEF_NavalBase_Operational'] = false
-			ScenarioFramework.Dialogue(OpStrings.C05_M02_050)
+        function(result)
+			if (result) then
+				ScenarioInfo.VarTable['M2_UEF_NavalBase_Operational'] = false
+				ScenarioFramework.Dialogue(OpStrings.C05_M02_050)
 			
-			-- Navalbase destroyed cam
-			local camInfo = {
-				blendTime = 1,
-				holdTime = 4,
-				orientationOffset = { 0.72, 0.35, 0 },
-				positionOffset = { 0, 0.75, 0 },
-				zoomVal = 65,
-				markerCam = true,
-			}
-			ScenarioFramework.OperationNISCamera(ScenarioUtils.MarkerToPosition('NIS_M2_Navalbase'), camInfo)
+				-- Navalbase destroyed cam
+				local camInfo = {
+					blendTime = 1,
+					holdTime = 4,
+					orientationOffset = { 0.72, 0.35, 0 },
+					positionOffset = { 0, 0.75, 0 },
+					zoomVal = 65,
+					markerCam = true,
+				}
+				ScenarioFramework.OperationNISCamera(ScenarioUtils.MarkerToPosition('NIS_M2_Navalbase'), camInfo)
+			end
         end
    )
 
@@ -602,10 +614,10 @@ function M2_CreateUnitsForMission()
     ScenarioFramework.PlatoonPatrolChain(navalAirDef1, 'M2_UEFNaval_AirPatrolChain')
     ScenarioFramework.PlatoonPatrolChain(navalAirDef2, 'M2_UEFNaval_AirPatrolChain')
 
-    -- 4 general, not-base-specific patrols of gunships
-    for i = 1,4 do
-        local platoon = ScenarioUtils.CreateArmyGroupAsPlatoon ('UEF', 'M2_UEFGunshipsPatrol'..i.. '_'..DifficultyConc, 'NoFormation')
-        ScenarioFramework.PlatoonPatrolChain(platoon, 'M2_UEFGunshipPatrolGeneral_Chain_'..i)
+    -- Gunship attacks
+    for i = 1, 4 do
+        local platoon = ScenarioUtils.CreateArmyGroupAsPlatoon ('UEF', 'M2_UEFGunshipsPatrol'..i.. '_'..DifficultyConc, 'AttackFormation')
+        platoon:ForkAIThread(ScenarioPlatoonAI.PlatoonAttackHighestThreat)
     end
 
     -- Create an offmap generator for Hex5, so when he comes onto the map, he has the power to run his Stealth.
@@ -618,9 +630,13 @@ function M2_CreateUnitsForMission()
 	-- UEF Air Base
 	M3UEFAI.UEFM3AirBaseAI()
 	
+	-- UEF Naval Base
+	M3UEFAI.UEFM3NavalBaseAI()
+	
 	-- Godwyn with some enhancements
 	ScenarioInfo.M3_UEFMainBase_Commander = ScenarioFramework.SpawnCommander('UEF', 'M3_UEFMainBase_Commander', false, (LOC '{i R05_UEFCommander}'), true, false,
 	{'ShieldGeneratorField', 'ResourceAllocation', 'DamageStabilization'})
+	ScenarioInfo.M3_UEFMainBase_Commander:SetVeterancy(Difficulty + 2)
 	ScenarioInfo.M3_UEFMainBase_Commander:SetAutoOvercharge(true)
 end
 
@@ -711,22 +727,28 @@ function M2_Hex5Appears()
 	---------------------------------
     --Primary Objective 2 - Meet Hex5
 	---------------------------------
-	ScenarioInfo.M2P2 = Objectives.CategoriesInArea(
+	ScenarioInfo.M2P2 = Objectives.SpecificUnitsInArea(
         'primary',                    	-- type
         'incomplete',               	-- status
         OpStrings.M2P2Text,  			-- title
         OpStrings.M2P2Detail,  			-- description
-        'move',							-- goal
         {
-            MarkArea = true,
-            Requirements = {
-                {Area = 'M2_Hex5Area', Category = categories.COMMAND * categories.CYBRAN, CompareOp = '>=', Value = 1, ArmyIndex = Player1},
-				{Area = 'M2_Hex5Area', Category = categories.SUBCOMMANDER * categories.CYBRAN, CompareOp = '>=', Value = 1, ArmyIndex = Hex5},
-            },
+            ShowFaction = 'Cybran',
+			Units = ScenarioInfo.CoopCDRs,
+			Area = 'M2_Hex5Area',
+			MarkUnits = true,
+			MarkArea = true,
         }
    )
+   ScenarioInfo.M2P2:AddResultCallback(
+        function(result)
+			if (result) then
+				M2_DownloadToCommander()
+			end
+        end
+   )
 
-	--Genericly spawn the transport and Hex5, then assign them to a platoon.
+	-- Genericly spawn the transport and Hex5, then assign them to a platoon.
 	ScenarioInfo.M2_Hex5_Commander = ScenarioUtils.CreateArmyUnit ('Hex5', 'M2_Hex5_Commander')
 	ScenarioInfo.M2_Hex5_Transport = ScenarioUtils.CreateArmyUnit ('Hex5', 'M2_Hex5_Transport')
 	
@@ -785,9 +807,10 @@ function M2_Hex5UnloadCheckThread()
     -- Move Hex5 away from his transport a bit, and give him a brief time in which to do so
     IssueMove({ScenarioInfo.M2_Hex5_Commander}, ScenarioUtils.MarkerToPosition('M2_Hex5WalkPoint'))
     WaitSeconds(3)
-
-    -- Once Hex5 is in the area and uncloaked etc, create a trigger to see if the player CDR is present.
-    ScenarioFramework.CreateAreaTrigger(M2_DownloadToCommander, ScenarioUtils.AreaToRect('M2_Hex5Area'), categories.COMMAND, true, false, ArmyBrains[Player1], 1, false)
+	
+	--The below is handled by the objective itself now
+		-- Once Hex5 is in the area and uncloaked etc, create a trigger to see if the player CDR is present.
+		--ScenarioFramework.CreateAreaTrigger(M2_DownloadToCommander, ScenarioUtils.AreaToRect('M2_Hex5Area'), categories.COMMAND, true, false, ArmyBrains[Player1], 1, false)
 end
 
 function M2_DownloadToCommander()
@@ -800,10 +823,10 @@ function M2_DownloadToCommanderThread()
     WaitSeconds(3)
     ScenarioFramework.Dialogue(OpStrings.C05_M02_090)
 
--- Hex5 Download Cam
+	-- Hex5 Download Cam
     local camInfo = {
         blendTime = 1.0,
-        holdTime = 4,
+        holdTime = 3,
         orientationOffset = { -2.2, 0.4, 0 },
         positionOffset = { 0, 0.5, 0 },
         zoomVal = 35,
@@ -815,7 +838,6 @@ function M2_DownloadToCommanderThread()
     WaitSeconds(5)
 
     -- Complete the Hex5 Obj, and assign the Gunship Attack objective
-    ScenarioInfo.M2P2:ManualResult(true) -- "Reach Hex5 with Your Commander"
     ScenarioFramework.Dialogue(ScenarioStrings.PObjComp)
 	
 	------------------------------------------------------------
@@ -843,16 +865,17 @@ function M2_DownloadToCommanderThread()
 end
 
 function M2_Hex5ReloadAndLeaveCheckThread()
---    while ScenarioInfo.M2_Hex5Platoon:IsCommandsActive(ScenarioInfo.M2_Hex5LoadToLeaveCommand) == true do
-    WaitSeconds(4)
---    end
-    -- Do Stuff
+    while ScenarioInfo.M2_Hex5Platoon:IsCommandsActive(ScenarioInfo.M2_Hex5LoadToLeaveCommand) == true do
+		WaitSeconds(1)
+    end
+    
+	-- Hex5 is loaded at this point, re-enable cloaking
     ForkThread(M2_ActivateHex5CloakThread)
 end
 
 function M2_ActivateHex5CloakThread()
     -- Pause before we reenable the cloak, so we see the transport begin moving first (purely for effect)
-    WaitSeconds(3)
+    WaitSeconds(2)
     -- Set Hex5 back to neutral, so we lose line-of-site
     SetAlliance(Player1, Hex5, 'Neutral')
     SetAlliance(Hex5, Player1, 'Neutral')
@@ -1030,8 +1053,10 @@ function BeginMission3()
         }
 	)
     ScenarioInfo.M3P1:AddResultCallback(
-        function()
-            M3_UEFCommanderDestroyed()
+        function(result)
+			if (result) then
+				M3_UEFCommanderDestroyed()
+			end
         end
 	)
 	--TODO: Rewrite this from Objectives.Basic to Objectives.Capture
@@ -1066,7 +1091,7 @@ end
 
 function M3_CreateUnitsForMission()	
     -- Spawn 3 smallish groups of gunships, so we definitely see gunships early
-    for i=1,3 do
+    for i = 1,3 do
         local gunshipPlatoon = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF' ,'M3_UEF_GunshipAttack_'..i..'_'..DifficultyConc ,'NoFormation')
         gunshipPlatoon:ForkAIThread (ScenarioPlatoonAI.PlatoonAttackHighestThreat)
         ScenarioFramework.CreatePlatoonDeathTrigger(M3_InitialGunshipTaunt, gunshipPlatoon)
