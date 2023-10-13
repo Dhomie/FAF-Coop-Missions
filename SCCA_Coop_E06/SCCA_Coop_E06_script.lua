@@ -487,7 +487,7 @@ function StartMission1()
 	)
 end
 
--- Dialogue, and spawns the Component
+-- Dialogue prior to spawning the Component
 function ComponentSighted()
     if not ScenarioInfo.M1PlayerSightedComponent then
         ScenarioInfo.M1PlayerSightedComponent = true
@@ -500,10 +500,8 @@ function ComponentSighted()
     end
 end
 
--- Component watch thread, which checks if it's near Black Sun, and also sets any transport it might get attached to invincible
+-- Spawns the Component, and assigns its objective
 function ComponentSightedThread()
-    --ScenarioInfo.ComponentAreaTrigger = ScenarioFramework.CreateAreaTrigger(CheckComponent, 'Black_Sun_Component_Area', categories.ope6003, false, false, ArmyBrains[Player1])
-
     ScenarioInfo.BlackSunComponent = ScenarioUtils.CreateArmyUnit('Component', 'Black_Sun_Component_Unit')
     ScenarioInfo.BlackSunComponent = ScenarioFramework.GiveUnitToArmy(ScenarioInfo.BlackSunComponent, Player1)
     Warp(ScenarioInfo.BlackSunComponent, ScenarioUtils.MarkerToPosition('INTRO_Component_Move'))
@@ -512,20 +510,6 @@ function ComponentSightedThread()
     ScenarioInfo.BlackSunComponent:SetReclaimable(false)
     ScenarioInfo.BlackSunComponent:SetCapturable(false)
 
-
-    --[[ScenarioInfo.M1P2Obj = Objectives.Basic(
-		'primary',
-		'incomplete',
-		OpStrings.M1P2Title,
-		OpStrings.M1P2Description,
-        Objectives.GetActionIcon('move'),
-        {
-            Units = {ScenarioInfo.BlackSunComponent},
-            Area = 'Black_Sun_Component_Area',
-            MarkArea = true,
-            MarkUnits = true,
-        }
-	)]]
 	ScenarioInfo.M1P2Obj = Objectives.SpecificUnitsInArea(
 		'primary',
 		'incomplete',
@@ -539,7 +523,8 @@ function ComponentSightedThread()
             MarkUnits = true,
         }
 	)
-	-- Failed attempt at using SpecificUnitsInArea objective type, unfortunately it can be messed up if the players orde the transport somewhere else during loadoff
+	-- Using a different objective type for this one, it's triggered even if the Component is on a transport
+	-- To avoid any issues, we simply zoom in on Black Sun instead of the Component, and during this time, if the Component is on a transport, the transport will load it off at its current position
 	ScenarioInfo.M1P2Obj:AddResultCallback(
         function(result)
 			ForkThread(
@@ -602,35 +587,6 @@ function ComponentSightedThread()
         end
         WaitSeconds(1)
     end
-end
-
--- Handles the Component moving to Black Sun, and army transfers, along with a cutscene
-function CheckComponent(unit)
-    if unit == ScenarioInfo.BlackSunComponent and not unit:IsUnitState('Attached') then
-        ForkThread(ComponentAtBlackSun)
-        local newUnit = ScenarioFramework.GiveUnitToArmy(unit, BlackSun)
-		
-        local camInfo = {
-            blendTime = 1.0,
-            holdTime = 3,
-            orientationOffset = { 0, 0.3, 0 },
-            positionOffset = { 0, 0.5, 0 },
-            zoomVal = 35,
-        }
-        ScenarioFramework.OperationNISCamera(newUnit, camInfo)
-
-        WaitTicks(1)
-        IssueMove({newUnit}, ScenarioUtils.MarkerToPosition('Component_Move_Marker_1'))
-
-        ScenarioInfo.ComponentAreaTrigger:Destroy()
-    end
-end
-
--- Triggered if the Component reaches Black Sun, starts phase 2
-function ComponentAtBlackSun()
-    ScenarioInfo.M1P2Obj:ManualResult(true)
-    ScenarioFramework.Dialogue(ScenarioStrings.PObjComp)
-	ScenarioFramework.Dialogue(OpStrings.E06_M01_050, StartMission2)
 end
 
 -- function BPlayerBuiltExperimentals()
