@@ -228,36 +228,6 @@ function M2AeonSEBaseTransportAttacks()
         },
     }
     ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
-	
-	--[[Builder = {
-        BuilderName = 'M2_Aeon_Southern_Land_Sweepers',
-        PlatoonTemplate = {
-            'M2_Aeon_Southern_Land_Sweepers_Template',
-            'NoPlan',
-            {'ual0303', 1, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
-            {'ual0304', 1, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
-            {'ual0202', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
-            {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
-            {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
-        },
-        InstanceCount = 3,
-        Priority = 100,
-        PlatoonType = 'Land',
-        RequiresConstruction = true,
-        LocationType = 'M2_Aeon_SE_Base',
-		BuildConditions = {
-			{CustomFunctions, 'HaveGreaterOrEqualThanUnitsInTransportPool', {6, poolName}},
-			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {1}},
-		},
-        PlatoonAIFunction = {AIAttackUtils, 'AttackForceAI'},
-        PlatoonData = {
-            AttackChain = 'Player_Attack_Locations_Chain',
-            --LandingChain = 'Aeon_M2_Land_Assault_Landing_Chain',
-            TransportReturn = 'M2_Aeon_SE_Base_Marker',
-			BaseName = 'M2_Aeon_SE_Base',
-        },
-    }
-    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)]]
 end
 
 function M2AeonSEBaseAirAttacks()
@@ -337,7 +307,7 @@ function M2AeonSEBaseAirDefense()
 	local quantity = {6, 12, 18}	-- Air Factories = [2, 4, 6] depending on the Difficulty
 	local ChildType = {'AirSuperiority', 'StratBombers', 'Gunships', 'TorpedoBombers'}
 	
-	-- Maintains [2, 4, 6] units defined in ChildType
+	-- Maintains [6, 12, 18] units defined in ChildType
 	for k = 1, table.getn(ChildType) do
 		opai = M2AeonSEBase:AddOpAI('AirAttacks', 'M2_Aeon_SouthEastern_AirDefense' .. ChildType[k],
 			{
@@ -370,7 +340,6 @@ function M2AeonSEBaseExperimentalAttacks()
 					'uas0202',	--T2 Cruiser
 				},
 				Formation = 'NoFormation',
-				SitDistance = 180,
 				UnitCount = platoonUnitCount[Difficulty],
 				},
 			BuildCondition = {
@@ -406,7 +375,6 @@ function M3AeonArnoldBaseAI()
 	end
 	
 	M3AeonArnoldBase:SetActive('AirScouting', true)
-    M3AeonArnoldBase:SetActive('LandScouting', true)
 	
 	if ScenarioInfo.Options.FullMapAccess == 2 then
 		M3AeonArnoldBaseAirDefense()
@@ -706,7 +674,7 @@ function M3AeonArnoldBaseTransportAttacks()
             {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
             {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
         },
-        InstanceCount = 2,
+        InstanceCount = 4,
         Priority = 100,
         PlatoonType = 'Land',
         RequiresConstruction = true,
@@ -718,37 +686,6 @@ function M3AeonArnoldBaseTransportAttacks()
         PlatoonAIFunction = {CustomFunctions, 'LandAssaultWithTransports'},       
         PlatoonData = {
 			AttackChain = 'Player_Attack_Locations_Chain',
-            LandingChain = 'Aeon_M3_SW_Landing_Chain',
-            TransportReturn = 'M3_Arnold_Base_Marker',
-			BaseName = 'M3_Arnold_Base',
-			GenerateSafePath = true,
-        },
-    }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
-	
-	Builder = {
-        BuilderName = 'M3_Arnold_Land_Sweepers',
-        PlatoonTemplate = {
-            'M3_Arnold_Land_Sweepers_Template',
-            'NoPlan',
-            {'ual0303', 1, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
-            {'ual0304', 1, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
-            {'ual0202', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
-            {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
-            {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
-        },
-        InstanceCount = 2,
-        Priority = 100,
-        PlatoonType = 'Land',
-        RequiresConstruction = true,
-        LocationType = 'M3_Arnold_Base',
-		BuildConditions = {
-			{CustomFunctions, 'HaveGreaterOrEqualThanUnitsInTransportPool', {4, poolName}},
-			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
-		},
-        PlatoonAIFunction = {CustomFunctions, 'LandAssaultWithTransports'},       
-        PlatoonData = {
-            AttackChain = 'Player_Attack_Locations_Chain',
             LandingChain = 'Aeon_M3_SW_Landing_Chain',
             TransportReturn = 'M3_Arnold_Base_Marker',
 			BaseName = 'M3_Arnold_Base',
@@ -799,7 +736,6 @@ function M3AeonArnoldBaseExperimentalAttacks()
 				'uas0202',	--T2 Cruiser
 			},
 			Formation = 'NoFormation',
-			SitDistance = 180,
 			UnitCount = platoonUnitCount[Difficulty],
 		},
 		BuildCondition = {
@@ -835,7 +771,6 @@ function M3AeonSWBaseAI()
 	end
 	
 	M3AeonSWBase:SetActive('AirScouting', true)
-    M3AeonSWBase:SetActive('LandScouting', true)
 	
 	if ScenarioInfo.Options.FullMapAccess == 2 then
 		M3AeonSWBaseAirDefense()
@@ -1105,7 +1040,7 @@ function M3AeonSWBaseTransportAttacks()
             {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
             {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
         },
-        InstanceCount = 2,
+        InstanceCount = 4,
         Priority = 100,
         PlatoonType = 'Land',
         RequiresConstruction = true,
@@ -1117,37 +1052,6 @@ function M3AeonSWBaseTransportAttacks()
         PlatoonAIFunction = {CustomFunctions, 'LandAssaultWithTransports'},       
         PlatoonData = {
 			AttackChain = 'Player_Attack_Locations_Chain',
-            LandingChain = 'Aeon_M3_SW_Landing_Chain',
-            TransportReturn = 'M3_SW_Base_Marker',
-			BaseName = 'M3_SW_Base',
-			GenerateSafePath = true,
-        },
-    }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
-	
-	Builder = {
-        BuilderName = 'M3_SW_Land_Sweepers',
-        PlatoonTemplate = {
-            'M3_SW_Land_Sweepers_Template',
-            'NoPlan',
-            {'ual0303', 1, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
-            {'ual0304', 1, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
-            {'ual0202', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
-            {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
-            {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
-        },
-        InstanceCount = 2,
-        Priority = 100,
-        PlatoonType = 'Land',
-        RequiresConstruction = true,
-        LocationType = 'M3_SW_Base',
-		BuildConditions = {
-			{CustomFunctions, 'HaveGreaterOrEqualThanUnitsInTransportPool', {4, poolName}},
-			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
-		},
-        PlatoonAIFunction = {CustomFunctions, 'LandAssaultWithTransports'},       
-        PlatoonData = {
-            AttackChain = 'Player_Attack_Locations_Chain',
             LandingChain = 'Aeon_M3_SW_Landing_Chain',
             TransportReturn = 'M3_SW_Base_Marker',
 			BaseName = 'M3_SW_Base',
@@ -1176,7 +1080,6 @@ function M3AeonSWBaseExperimentalAttacks()
 					'uas0202',	--T2 Cruiser
 				},
 				Formation = 'NoFormation',
-				SitDistance = 180,
 				UnitCount = platoonUnitCount[Difficulty],
 			},
 			BuildCondition = {

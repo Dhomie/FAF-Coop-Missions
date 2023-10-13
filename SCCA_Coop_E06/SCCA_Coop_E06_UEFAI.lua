@@ -1,9 +1,9 @@
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------
 --  File     : /maps/SCCA_Coop_E06/SCCA_Coop_E06_UEFAI.lua
 --  Author(s): Dhomie42
 --
 --  Summary  : UEF (BlackSun) army AI for UEF Mission 6 - SCCA_Coop_E06
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------
 local BaseManager = import('/lua/ai/opai/basemanager.lua')
 local AIBuildStructures = import('/lua/ai/aibuildstructures.lua')  
 
@@ -64,9 +64,9 @@ function M3AikoAirStagingBase()
         PlatoonTemplate = {
 			'M3_Aiko_T3_Engineer_Template',
 			'NoPlan',
-			{ 'uel0309', 3, 3, 'Attack', 'NoFormation' },	-- T3 Engineers
+			{ 'uel0309', 1, 1, 'Attack', 'NoFormation' },	-- T3 Engineers
 		},
-        InstanceCount = 1,
+        InstanceCount = 2,
         Priority = 100,
         PlatoonType = 'Any',
         RequiresConstruction = true,
@@ -93,11 +93,11 @@ function M3AikoSEBaseNavalAttacks()
 	local Temp = {
         'M3_Aiko_SouthEastern_Naval_Fleet',
         'NoPlan',
-        { 'ues0302', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'ues0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'ues0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
+        { 'ues0302', 0, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
+        { 'ues0201', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
+        { 'ues0202', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
+		{ 'ues0103', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
+		{ 'ues0203', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
     }
 	local Builder = {
         BuilderName = 'M3_Aiko_SouthEastern_Naval_Fleet_Builder',
@@ -109,6 +109,7 @@ function M3AikoSEBaseNavalAttacks()
         LocationType = 'M3_Aiko_SE_Base',
 		BuildConditions = {
 			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
+			{'/lua/editor/unitcountbuildconditions.lua', 'HaveGreaterThanUnitsWithCategory', {0, categories.ueb0303}},
 		},
         PlatoonAIFunction = {AIAttackUtils, 'NavalForceAI'},
         PlatoonData = {
@@ -126,10 +127,10 @@ function M3AikoSEBaseNavalAttacks()
 	Temp = {
         'M3_Aiko_SouthEastern_Naval_Probe_Attack',
         'NoPlan',
-        { 'ues0201', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'ues0203', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
+        { 'ues0201', 0, 2, 'Attack', 'AttackFormation' }, -- T2 Destroyer
+        { 'ues0202', 0, 2, 'Attack', 'AttackFormation' }, -- T2 Cruiser
+		{ 'ues0103', 0, 3, 'Attack', 'AttackFormation' }, -- T1 Frigate
+		{ 'ues0203', 0, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
     }
 	
 	Builder = {
@@ -142,6 +143,7 @@ function M3AikoSEBaseNavalAttacks()
         LocationType = 'M3_Aiko_SE_Base',
 		BuildConditions = {
 			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}},
+			{'/lua/editor/unitcountbuildconditions.lua', 'HaveGreaterThanUnitsWithCategory', {0, categories.ueb0303}},
 		},
         PlatoonAIFunction = {AIAttackUtils, 'NavalForceAI'},
         PlatoonData = {
@@ -226,8 +228,6 @@ function M3AikoSEBaseTransportAttacks()
         LocationType = 'M3_Aiko_SE_Base',
 		BuildConditions = {
 			{CustomFunctions, 'HaveGreaterOrEqualThanUnitsInTransportPool', {6, poolName}},
-			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}},
-			
 		},
         PlatoonAIFunction = {AIAttackUtils, 'AttackForceAI'},       
         PlatoonData = {
@@ -256,7 +256,6 @@ function M3AikoSEBaseAirAttacks()
     opai:SetChildQuantity('AirSuperiority', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {{'Cybran', 'Aeon'}, trigger[Difficulty], categories.AIR * categories.MOBILE, '>='})
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2})
 	
 	-- Sends [18, 12, 6] Torpedo Bombers to enemies if they have >= 15, 10, 5 naval units
 	trigger = {5, 10, 15}
@@ -278,7 +277,7 @@ function M3AikoSEBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('StratBombers', quantity[Difficulty])
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2})
+	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3})
 	
 	-- Sends [18, 12, 6] Gunships to enemies
 	opai = M3AikoSEBase:AddOpAI('AirAttacks', 'M3_AikoSouthEastern_Gunships_Attack',
@@ -316,7 +315,7 @@ function M3AikoSEBaseAirAttacks()
         RequiresConstruction = true,
         LocationType = 'M3_Aiko_SE_Base',
 		BuildConditions = {
-			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}},
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}
     }

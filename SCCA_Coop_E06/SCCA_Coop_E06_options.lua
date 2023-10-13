@@ -24,6 +24,17 @@ options =
 			{text = "Enabled",	help = "Gain access to the full map during the final part of the operation.", key = 2, },
 		}, 
 	},
+	{ 
+		default = 1, 
+		label = "Black Sun Support AI", 
+		help = "Choose whether you want allied AI support from Aiko via a secondary objective later in the mission.", 
+		key = 'BlackSunSupportAI', 
+		pref = 'BlackSunSupportAI', 
+		values = { 
+			{text = "Disabled",					help = "No allied AI support.", key = 1, },
+			{text = "Enabled",	help = "Add a secondary objective promting Aiko to support you for the rest of the mission.", key = 2, },
+		}, 
+	},
 	{
 		default = 7,
         label = "Black Sun Defense Timer",

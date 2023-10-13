@@ -8,6 +8,7 @@ local AIBehaviors = import("/lua/ai/aibehaviors.lua")
 
 local Cybran = 4
 local Difficulty = ScenarioInfo.Options.Difficulty
+local TableInsert = table.insert
 
 -------------------
 -- Build Conditions
@@ -22,8 +23,21 @@ function HaveGreaterOrEqualThanUnitsInTransportPool(aiBrain, numReq, platoonName
     -- Get either the specific transport platoon, or the universal 'TransportPool' platoon
     local platoon = aiBrain:GetPlatoonUniquelyNamed(platoonName) or aiBrain:GetPlatoonUniquelyNamed('TransportPool')
 	
-	-- In this case we need the platoon to exist, and have enough units to return true
-	return platoon and table.getn(platoon:GetPlatoonUnits()) >= numReq
+	-- If neither exists, we need transports, return false
+	if not platoon then
+		return false
+	end
+	
+	-- The engine version of GetPlatoonUnits() can return with the dead/destroyed units, we gotta check if the units are actually alive
+	local counter = 0
+	local units = platoon:GetPlatoonUnits()
+	for index, unit in units do
+		if not unit:BeenDestroyed() then
+			counter = counter + 1
+		end
+	end
+	
+	return counter >= numReq
 end
 
 --- Build condition used to determine if need transports to be built
@@ -40,7 +54,16 @@ function HaveLessThanUnitsInTransportPool(aiBrain, numReq, platoonName)
 		return true
 	end
 	
-	return table.getn(platoon:GetPlatoonUnits()) < numReq
+	-- The engine version of GetPlatoonUnits() can return with the dead/destroyed units, we gotta check if the units are actually alive
+	local counter = 0
+	local units = platoon:GetPlatoonUnits()
+	for index, unit in units do
+		if not unit:BeenDestroyed() then
+			counter = counter + 1
+		end
+	end
+	
+	return counter < numReq
 end
 
 --- Build condition used to determine if reclaim engineers need to be built
@@ -157,9 +180,9 @@ function LandAssaultWithTransports(platoon)
     else
         for _, v in data.AttackPoints do
             if type(v) == 'string' then
-                table.insert(attackPositions, ScenarioUtils.MarkerToPosition(v))
+                TableInsert(attackPositions, ScenarioUtils.MarkerToPosition(v))
             else
-                table.insert(attackPositions, v)
+                TableInsert(attackPositions, v)
             end
         end
     end
@@ -173,9 +196,9 @@ function LandAssaultWithTransports(platoon)
     else
         for _, v in data.LandingList do
             if type(v) == 'string' then
-                table.insert(landingPositions, ScenarioUtils.MarkerToPosition(v))
+                TableInsert(landingPositions, ScenarioUtils.MarkerToPosition(v))
             else
-                table.insert(landingPositions, v)
+                TableInsert(landingPositions, v)
             end
         end
     end
@@ -297,7 +320,7 @@ function GetLoadTransports(platoon)
         if not transSlotTable[id] then
             transSlotTable[id] = GetNumTransportSlots(unit)
         end
-        table.insert(transportTable,
+        TableInsert(transportTable,
             {
                 Transport = unit,
                 LargeSlots = transSlotTable[id].Large,
@@ -307,46 +330,64 @@ function GetLoadTransports(platoon)
             }
        )
     end
-    local shields = {}
     local remainingSize3 = {}
     local remainingSize2 = {}
     local remainingSize1 = {}
-    for num, unit in platoon:GetPlatoonUnits() do
-        if EntityCategoryContains(categories.url0306 + categories.DEFENSE, unit) then
-            table.insert(shields, unit)
-        elseif unit.Blueprint.Transport.TransportClass == 3 then
-            table.insert(remainingSize3, unit)
+	
+	for num, unit in platoon:GetPlatoonUnits() do
+        if unit.Blueprint.Transport.TransportClass == 3 then
+            TableInsert(remainingSize3, unit)
         elseif unit.Blueprint.Transport.TransportClass == 2 then
-            table.insert(remainingSize2, unit)
+            TableInsert(remainingSize2, unit)
         elseif unit.Blueprint.Transport.TransportClass == 1 then
-            table.insert(remainingSize1, unit)
+            TableInsert(remainingSize1, unit)
         elseif not EntityCategoryContains(categories.TRANSPORTATION, unit) then
-            table.insert(remainingSize1, unit)
+            TableInsert(remainingSize1, unit)
         end
     end
 
-    local needed = GetNumTransports(platoon)
-    local largeHave = 0
-    for num, data in transportTable do
-        largeHave = largeHave + data.LargeSlots
-    end
     local leftoverUnits = {}
     local currLeftovers = {}
-    local leftoverShields = {}
-    transportTable, leftoverShields = SortUnitsOnTransports(transportTable, shields, largeHave - needed.Large)
-    transportTable, leftoverUnits = SortUnitsOnTransports(transportTable, remainingSize3, -1)
-    transportTable, currLeftovers = SortUnitsOnTransports(transportTable, leftoverShields, -1)
-    for _, v in currLeftovers do table.insert(leftoverUnits, v) end
-    transportTable, currLeftovers = SortUnitsOnTransports(transportTable, remainingSize2, -1)
-    for _, v in currLeftovers do table.insert(leftoverUnits, v) end
-    transportTable, currLeftovers = SortUnitsOnTransports(transportTable, remainingSize1, -1)
-    for _, v in currLeftovers do table.insert(leftoverUnits, v) end
-    transportTable, currLeftovers = SortUnitsOnTransports(transportTable, currLeftovers, -1)
+	local counter = 0
 	
-	-- Self-destruct any leftovers
-	for k, v in currLeftovers do
+	-- Assign large units - note how we come back with leftoverunits here
+    transportTable, leftoverUnits = SortUnitsOnTransports(transportTable, remainingSize3, -1)
+	-- Assign medium units - but this time we come back with currleftovers
+    transportTable, currLeftovers = SortUnitsOnTransports(transportTable, remainingSize2, -1)
+	
+	-- We move any currleftovers into the leftoverunits table
+	for k,v in currLeftovers do
 		if not v.Dead then
-			v:Kill()
+            counter = counter + 1
+			leftoverUnits[counter] = v
+		end
+	end
+	
+	currleftovers = {}
+	
+    -- Assign the small units - again coming back with currleftovers
+    transportTable, currLeftovers = SortUnitsOnTransports(transportTable, remainingSize1, -1)
+	
+	-- Again adding currleftovers to the leftoverunits table
+	for k,v in currLeftovers do
+		if not v.Dead then
+            counter = counter + 1
+			leftoverUnits[counter] = v
+		end
+	end
+	
+	currleftovers = {}
+	
+	if leftoverUnits[1] then
+		transportTable, currLeftovers = SortUnitsOnTransports(transportTable, leftoverUnits, -1)
+	end
+	
+	-- Self-destruct any units we couldn't arrange a transport slot for
+	if currleftovers[1] then
+		for k, v in currLeftovers do
+			if not v.Dead then
+				v:Kill()
+			end
 		end
 	end
 
@@ -356,13 +397,13 @@ function GetLoadTransports(platoon)
         if not table.empty(data.Units) then
             IssueClearCommands(data.Units)
             IssueTransportLoad(data.Units, data.Transport)
-            for _, v in data.Units do table.insert(unitsToDrop, v) end
+            for _, v in data.Units do TableInsert(unitsToDrop, v) end
         end
     end
 
     local attached = true
     repeat
-        WaitSeconds(2)
+        WaitSeconds(1)
         if not aiBrain:PlatoonExists(platoon) then
             return false
         end
@@ -375,7 +416,7 @@ function GetLoadTransports(platoon)
         end
     until attached
 	
-	-- Self-destruct any leftovers
+	-- Self-destruct any units that failed to load
     for _, unit in unitsToDrop do
         if not unit.Dead and not unit:IsUnitState('Attached') then
 			unit:Kill()
@@ -396,24 +437,27 @@ end
 function SortUnitsOnTransports(transportTable, unitTable, numSlots)
     local leftoverUnits = {}
     numSlots = numSlots or -1
+	
     for num, unit in unitTable do
         if numSlots == -1 or num <= numSlots then
             local transSlotNum = 0
             local remainingLarge = 0
             local remainingMed = 0
             local remainingSml = 0
+			local TransportClass = 	unit.Blueprint.Transport.TransportClass
+			
             for tNum, tData in transportTable do
-                if tData.LargeSlots > remainingLarge then
+                if tData.LargeSlots >= remainingLarge and TransportClass == 3 then
                     transSlotNum = tNum
                     remainingLarge = tData.LargeSlots
                     remainingMed = tData.MediumSlots
                     remainingSml = tData.SmallSlots
-                elseif tData.LargeSlots == remainingLarge and tData.MediumSlots > remainingMed then
+                elseif tData.MediumSlots >= remainingMed and TransportClass == 2 then
                     transSlotNum = tNum
                     remainingLarge = tData.LargeSlots
                     remainingMed = tData.MediumSlots
                     remainingSml = tData.SmallSlots
-                elseif tData.LargeSlots == remainingLarge and tData.MediumSlots == remainingMed and tData.SmallSlots > remainingSml then
+                elseif tData.SmallSlots >= remainingSml and TransportClass == 1 then
                     transSlotNum = tNum
                     remainingLarge = tData.LargeSlots
                     remainingMed = tData.MediumSlots
@@ -421,26 +465,26 @@ function SortUnitsOnTransports(transportTable, unitTable, numSlots)
                 end
             end
             if transSlotNum > 0 then
-                table.insert(transportTable[transSlotNum].Units, unit)
                 if unit.Blueprint.Transport.TransportClass == 3 and remainingLarge >= 1 then
                     transportTable[transSlotNum].LargeSlots = transportTable[transSlotNum].LargeSlots - 1
                     transportTable[transSlotNum].MediumSlots = transportTable[transSlotNum].MediumSlots - 2
                     transportTable[transSlotNum].SmallSlots = transportTable[transSlotNum].SmallSlots - 4
-                elseif unit.Blueprint.Transport.TransportClass == 2 and remainingMed > 0 then
-                    if transportTable[transSlotNum].LargeSlots > 0 then
-                        transportTable[transSlotNum].LargeSlots = transportTable[transSlotNum].LargeSlots - .5
-                    end
+					TableInsert(transportTable[transSlotNum].Units, unit)
+                elseif unit.Blueprint.Transport.TransportClass == 2 and remainingMed >= 1 then
+                    --if transportTable[transSlotNum].LargeSlots > 0 then
+                        transportTable[transSlotNum].LargeSlots = transportTable[transSlotNum].LargeSlots - 0.5
+                   --end
                     transportTable[transSlotNum].MediumSlots = transportTable[transSlotNum].MediumSlots - 1
                     transportTable[transSlotNum].SmallSlots = transportTable[transSlotNum].SmallSlots - 2
-                elseif unit.Blueprint.Transport.TransportClass == 1 and remainingSml > 0 then
+					TableInsert(transportTable[transSlotNum].Units, unit)
+                elseif unit.Blueprint.Transport.TransportClass == 1 and remainingSml >= 1 then
                     transportTable[transSlotNum].SmallSlots = transportTable[transSlotNum].SmallSlots - 1
-                elseif remainingSml > 0 then
-                    transportTable[transSlotNum].SmallSlots = transportTable[transSlotNum].SmallSlots - 1
+					TableInsert(transportTable[transSlotNum].Units, unit)
                 else
-                    table.insert(leftoverUnits, unit)
+                    TableInsert(leftoverUnits, unit)
                 end
             else
-                table.insert(leftoverUnits, unit)
+                TableInsert(leftoverUnits, unit)
             end
         end
     end
@@ -512,7 +556,7 @@ function GetTransportsThread(platoon)
                             tempNeeded.Small = tempNeeded.Small - 1
                             tempSlots.Small = tempSlots.Small - 1
                         end
-                        if tempNeeded.Small <= 0 and tempNeeded.Medium <= 0 and tempNeeded.Large <= 0 then
+                        if tempNeeded.Small < 1 and tempNeeded.Medium < 1 and tempNeeded.Large < 1 then
                             transportsNeeded = false
                         end
                     end
@@ -526,7 +570,7 @@ function GetTransportsThread(platoon)
                     if EntityCategoryContains(categories.TRANSPORTATION, unit) and not unit:IsUnitState('Busy') then
                         local unitPos = unit:GetPosition()
                         local curr = {Unit = unit, Distance = VDist2(unitPos[1], unitPos[3], location[1], location[3]), Id = unit.UnitId}
-                        table.insert(transports, curr)
+                        TableInsert(transports, curr)
                     end
                 end
                 if not table.empty(transports) then
@@ -575,7 +619,7 @@ function GetTransportsThread(platoon)
                                 tempNeeded.Small = tempNeeded.Small - 1
                                 tempSlots.Small = tempSlots.Small - 1
                             end
-                            if tempNeeded.Small <= 0 and tempNeeded.Medium <= 0 and tempNeeded.Large <= 0 then
+                            if tempNeeded.Small < 1 and tempNeeded.Medium < 1 and tempNeeded.Large < 1 then
                                 transportsNeeded = false
                             end
                         end
@@ -583,7 +627,7 @@ function GetTransportsThread(platoon)
                 end
             end
             if transportsNeeded then
-                WaitSeconds(7)
+                WaitSeconds(5)
                 if not aiBrain:PlatoonExists(platoon) then
                     return false
                 end
@@ -785,11 +829,11 @@ function BrainChooseHighestAttackRoute(aiBrain, locationList, ringSize, threatTy
     local tempRoute = {}
 
     for _, v in locationList do
-        table.insert(tempRoute, v)
+        TableInsert(tempRoute, v)
     end
 
     for i = 1, table.getn(tempRoute) do
-        table.insert(attackRoute, BrainChooseHighestThreatLocation(aiBrain, tempRoute, ringSize, threatType))
+        TableInsert(attackRoute, BrainChooseHighestThreatLocation(aiBrain, tempRoute, ringSize, threatType))
         for k, v in tempRoute do
             if attackRoute[i] == v then
                 table.remove(tempRoute, k)
@@ -812,11 +856,11 @@ function BrainChooseLowestAttackRoute(aiBrain, locationList, ringSize, threatTyp
     local tempRoute = {}
 
     for _, v in locationList do
-        table.insert(tempRoute, v)
+        TableInsert(tempRoute, v)
     end
 
     for i = 1, table.getn(tempRoute) do
-        table.insert(attackRoute, BrainChooseLowestThreatLocation(aiBrain, tempRoute, ringSize, threatType))
+        TableInsert(attackRoute, BrainChooseLowestThreatLocation(aiBrain, tempRoute, ringSize, threatType))
         for k, v in tempRoute do
             if attackRoute[i] == v then
                 table.remove(tempRoute, k)
@@ -935,7 +979,7 @@ function NavalHuntAI(self)
     local atkPriTable = {}
 	
     for k, v in atkPri do
-        table.insert(atkPriTable, ParseEntityCategory(v))
+        TableInsert(atkPriTable, ParseEntityCategory(v))
     end
 	
     self:SetPrioritizedTargetList('Attack', atkPriTable)
@@ -1008,7 +1052,7 @@ function EngineersBuildPlatoon(platoon)
             if not eng then
                 eng = v
             else
-                table.insert(engTable, v)
+                TableInsert(engTable, v)
             end
         end
     end
@@ -1091,7 +1135,7 @@ function EngineersBuildPlatoon(platoon)
                             if not unitBeingBuilt then
                                 unitBeingBuilt = eng.UnitBeingBuilt
                                 if unitBeingBuilt then
-                                    table.insert(newPlatoonUnits, unitBeingBuilt)
+                                    TableInsert(newPlatoonUnits, unitBeingBuilt)
                                 end
                             end
                         end
@@ -1208,9 +1252,9 @@ function EngineersMoveToThread(platoon)
             else
                 for _, v in data.MoveRoute do
                     if type(v) == 'string' then
-                        table.insert(movePositions, ScenarioUtils.MarkerToPosition(v))
+                        TableInsert(movePositions, ScenarioUtils.MarkerToPosition(v))
                     else
-                        table.insert(movePositions, v)
+                        TableInsert(movePositions, v)
                     end
                 end
             end
@@ -1254,56 +1298,6 @@ function AddPlatoonToBaseManager(platoon)
 	end
 	
 	platoon:ForkAIThread(import('/lua/AI/OpAI/BaseManagerPlatoonThreads.lua').BaseManagerEngineerPlatoonSplit)
-end
-
---- Checks if a base with the given name already exists for the given AI
----@param brain aiBrain
----@param locationName string
-function GetBaseLocation(brain, locationName)
-    for _, v in brain.PBM.Locations do
-        if v.LocationType == locationName then
-            return v
-        end
-    end
-    return false
-end
-
---- Adds a unit as the primary factory of the specified type for an AI build location
---- @PlatoonData:
----		@BaseName 		- String, base name we send the Fatboy to, if it doesn't exist, it will be automatically created.
----		@RallyPoint 	- String, rally point name for the Fatboy to send its built units to
----		@MoveRoute 		- String, chain of locations the Fatboy will use to move to its destination
----		@FactoryType 	- String, Factory type, 'Land', 'Air', 'Sea', and 'Gate' are the options
----			The below PlatoonData are only needed if the base doesn't exist yet
----				@BaseMarker	- String, marker name of a new base we want to initially create
----				@BaseRadius	- Number, radius of a new base we want to initially create
----@param platoon Single-unit platoon
-function AddMobileFactory(platoon)
-	local aiBrain = platoon:GetBrain()
-	local data = platoon.PlatoonData
-	local unit = platoon:GetPlatoonUnits()[1] -- Single-unit platoon
-	
-	-- Add build location if it doesn't exist yet
-	if not GetBaseLocation(aiBrain, data.BaseName) then
-		LOG('Creating ' .. data.BaseName .. 'because it doesn\'t exist yet.')
-		aiBrain:PBMAddBuildLocation(data.BaseMarker, data.BaseRadius, data.BaseName)
-	end
-	
-	-- Generic chain of move orders to get the Fatboy where we want it
-	ScenarioFramework.PlatoonMoveRoute(platoon, data.MoveRoute)
-	
-	if not data.FactoryType then
-		error('AI WARNING: AddMobileFactory() requires FactoryType data: Land, Air, Sea, or Gate are the valid ones.', 2)
-	end
-	
-	for num, loc in aiBrain.PBM.Locations do
-		if loc.LocationType == data.BaseName then
-			loc.PrimaryFactories[data.FactoryType] = unit
-			break
-		end
-	end
-	
-	IssueFactoryRallyPoint({unit}, ScenarioUtils.MarkerToPosition(data.RallyPoint))
 end
 
 --- Platoon generates a safe path to the first position of a set of locations, then patrols them by starting at the lowest threat location
@@ -1351,9 +1345,9 @@ function AdvancedPatrolThread(platoon)
 	elseif data.PatrolRoute then
 		for _, v in data.PatrolRoute do
             if type(v) == 'string' then
-                table.insert(AttackPositions, ScenarioUtils.MarkerToPosition(v))
+                TableInsert(AttackPositions, ScenarioUtils.MarkerToPosition(v))
             else
-                table.insert(AttackPositions, v)
+                TableInsert(AttackPositions, v)
             end
         end
 	end
@@ -1442,7 +1436,7 @@ function NoWreckageInTable(reclaimables)
 	end
 	
 	for _, entity in reclaimables do
-		if IsProp(entity) then
+		if entity.IsWreckage then
 			return false
 		end
 	end
@@ -1451,6 +1445,7 @@ function NoWreckageInTable(reclaimables)
 end
 
 --- Engineer platoon attack-moves to the nearest wreckage inside its rectangle, that we increase periodically if we can't find any wreck to reclaim
+---@param platoon Platoon
 function EngineerPlatoonReclaim(platoon)
 	local aiBrain = platoon:GetBrain()
 	local position = platoon:GetPlatoonPosition()
@@ -1458,6 +1453,7 @@ function EngineerPlatoonReclaim(platoon)
 	local rectDef = Rect(position[1] - rectIncrement, position[3] - rectIncrement, position[1] + rectIncrement, position[3] + rectIncrement)
 	local reclaimRect = {}
 	local closest, distance, targetWreck
+	local MaxSize = math.max(ScenarioInfo.size[1], ScenarioInfo.size[2])
 	
 	
 	while aiBrain:PlatoonExists(platoon) do
@@ -1468,16 +1464,16 @@ function EngineerPlatoonReclaim(platoon)
 		position = platoon:GetPlatoonPosition()
 		
 		if NoWreckageInTable(reclaimRect) then
-			if math.max(ScenarioInfo.size[1], ScenarioInfo.size[2]) > rectIncrement then
-				rectIncrement = rectIncrement + 15
+			if MaxSize > rectIncrement then
+				rectIncrement = rectIncrement + 10
 			elseif rectIncrement > math.max(ScenarioInfo.size[1], ScenarioInfo.size[2]) then
-				rectIncrement = math.max(ScenarioInfo.size[1], ScenarioInfo.size[2])
+				rectIncrement = MaxSize
 			end
 			
 			rectDef = Rect(position[1] - rectIncrement, position[3] - rectIncrement, position[1] + rectIncrement, position[3] + rectIncrement)
 		else
 			for _, prop in reclaimRect do
-				if IsProp(prop) then
+				if prop.IsWreckage then
 					if not closest then
 						distance = VDist2(position[1], position[3], prop.CachePosition[1], prop.CachePosition[3])
 						closest = prop.CachePosition

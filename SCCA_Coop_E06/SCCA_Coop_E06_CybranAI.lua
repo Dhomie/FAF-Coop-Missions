@@ -457,7 +457,6 @@ function M3CybranBaseAirDefense()
 		{
 			Amount = Difficulty + 1,
 			KeepAlive = true,
-			-- Forks additional functions once FAF gets updated, it's currently pending as a pull request as of 27/07/2023
 			FormCallbacks = {
 				{SPAIFileName, 'PlatoonEnableStealth'},
 			},
@@ -484,7 +483,6 @@ function M3CybranBaseExperimentals()
 			{
 				Amount = 1,
 				KeepAlive = true,
-				-- Forks additional functions once FAF gets updated, it's currently pending as a pull request as of 27/07/2023
 				FormCallbacks = {
 					{SPAIFileName, 'PlatoonEnableStealth'},
 				},
