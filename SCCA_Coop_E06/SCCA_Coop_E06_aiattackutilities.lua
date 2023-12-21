@@ -5,13 +5,18 @@ local NavUtils = import("/lua/sim/navutils.lua")
 local ScenarioFramework = import("/lua/scenarioframework.lua")
 local ScenarioUtils = import("/lua/sim/scenarioutilities.lua")
 
+-- Upvalued for performance
+local TableEmpty = table.empty
+local TableInsert = table.insert
+local TableRemove = table.remove
+local TableGetn = table.getn
 
 --------------------
 -- Platoon functions
 --------------------
 
 --- Function: NavalForceAI
---- Basic attack logic for boats.  Searches for a good area to go attack, and will use a safe path (if available) to get there.
+--- Basic attack logic for boats. Searches for a good area to attack, and will use a safe path (if available) to get there.
 ---@param self Platoon
 function NavalForceAI(self)
     self:Stop()
@@ -20,7 +25,7 @@ function NavalForceAI(self)
     AIAttackUtils.GetMostRestrictiveLayer(self)
 
     local platoonUnits = self:GetPlatoonUnits()
-    local numberOfUnitsInPlatoon = table.getn(platoonUnits)
+    local numberOfUnitsInPlatoon = TableGetn(platoonUnits)
     local oldNumberOfUnitsInPlatoon = numberOfUnitsInPlatoon
     local stuckCount = 0
 
@@ -51,7 +56,7 @@ function NavalForceAI(self)
 
         -- Rebuild formation
         platoonUnits = self:GetPlatoonUnits()
-        numberOfUnitsInPlatoon = table.getn(platoonUnits)
+        numberOfUnitsInPlatoon = TableGetn(platoonUnits)
         -- If we have a different number of units in our platoon, regather
         if (oldNumberOfUnitsInPlatoon != numberOfUnitsInPlatoon) then
             self:StopAttack()
@@ -79,7 +84,7 @@ function NavalForceAI(self)
         }
 
         local nearDest = false
-        local oldPathSize = table.getn(self.LastAttackDestination)
+        local oldPathSize = TableGetn(self.LastAttackDestination)
         local maxRange = AIAttackUtils.GetNavalPlatoonMaxRange(aiBrain, self)
         if maxRange then maxRange = maxRange + 10 end
 
@@ -100,7 +105,7 @@ function NavalForceAI(self)
             self:AttackTarget(closestTarget)
             cmdQ = {1}
         -- If we have nothing to do, try finding something to do
-        elseif table.empty(cmdQ) then
+        elseif TableEmpty(cmdQ) then
             self:StopAttack()
             cmdQ = AIPlatoonNavalAttackVector(aiBrain, self)
             stuckCount = 0
@@ -124,29 +129,28 @@ function NavalForceAI(self)
 end
 	
 --- Function: AttackForceAI
---- Basic attack logic.  Searches for a good area to go attack, and will use a safe path (if available) to get there.
---- See AIAttackUtils for the bulk of the logic
+--- Basic attack logic.  Searches for a good area to attack, and will use a safe path (if available) to get there.
 ---@param self Platoon
 function AttackForceAI(self)
     self:Stop()
     local aiBrain = self:GetBrain()
 
-    -- Setup the formation based on platoon functionality
-    local enemy = aiBrain:GetCurrentEnemy()
+    -- Engine function, potentially useful to focus a single enemy army at the time, but it's currently not used at all
+    --local enemy = aiBrain:GetCurrentEnemy()
 
     local platoonUnits = self:GetPlatoonUnits()
-    local numberOfUnitsInPlatoon = table.getn(platoonUnits)
+    local numberOfUnitsInPlatoon = TableGetn(platoonUnits)
     local oldNumberOfUnitsInPlatoon = numberOfUnitsInPlatoon
     local stuckCount = 0
 
     self.PlatoonAttackForce = true
 
     while aiBrain:PlatoonExists(self) do
-        local pos = self:GetPlatoonPosition() -- update positions; prev position done at end of loop so not done first time
+        local pos = self:GetPlatoonPosition() -- Update positions; prev position done at end of loop so not done first time
 
         -- Rebuild formation
         platoonUnits = self:GetPlatoonUnits()
-        numberOfUnitsInPlatoon = table.getn(platoonUnits)
+        numberOfUnitsInPlatoon = TableGetn(platoonUnits)
         -- If we have a different number of units in our platoon, regather
         if (oldNumberOfUnitsInPlatoon != numberOfUnitsInPlatoon) then
             self:StopAttack()
@@ -168,18 +172,18 @@ function AttackForceAI(self)
         -- If we're on our final push through to the destination, and we find a unit close to our destination
         local closestTarget = self:FindClosestUnit('Attack', 'Enemy', true, categories.ALLUNITS - categories.WALL)
         local nearDest = false
-        local oldPathSize = table.getn(self.LastAttackDestination)
+        local oldPathSize = TableGetn(self.LastAttackDestination)
         if self.LastAttackDestination then
             nearDest = oldPathSize == 0 or VDist3(self.LastAttackDestination[oldPathSize], pos) < 30
         end
 
         -- if we're near our destination and we have a unit closeby to kill, kill it
-        if table.getn(cmdQ) <= 1 and closestTarget and VDist3(closestTarget:GetPosition(), pos) < 30 and nearDest then
+        if TableGetn(cmdQ) <= 1 and closestTarget and VDist3(closestTarget:GetPosition(), pos) < 30 and nearDest then
             self:StopAttack()
             self:AttackTarget(closestTarget)
             cmdQ = {1}
         -- if we have nothing to do, try finding something to do
-        elseif table.empty(cmdQ) then
+        elseif TableEmpty(cmdQ) then
             self:StopAttack()
             cmdQ = AIPlatoonSquadAttackVector(aiBrain, self, false)
             stuckCount = 0
@@ -197,7 +201,7 @@ function AttackForceAI(self)
 
         self.LastPosition = pos
 			
-        if table.empty(cmdQ) then
+        if TableEmpty(cmdQ) then
             WaitSeconds(10)
         else
 			-- Wait a little longer if we're stuck so that we have a better chance to move
@@ -347,7 +351,7 @@ function GetBestThreatTarget(aiBrain, platoon, bSkipPathability)
     -- If a specific threat is used, it will only report back threat locations of that type
     local threatTable = aiBrain:GetThreatsAroundPosition(platoonPosition, 16, true, 'Overall')
 
-    if table.empty(threatTable) then
+    if TableEmpty(threatTable) then
         return false
     end
 
@@ -512,7 +516,7 @@ function AINavalPlanB(aiBrain, platoon)
 	local path
 	
 	-- If no Naval Area markers are present on the map, return false
-	if not navalAreas or table.empty(navalAreas) then
+	if not navalAreas or TableEmpty(navalAreas) then
 		return false
 	end
 	-- Pick the first position as the default, compare the rest with that
@@ -551,7 +555,7 @@ function AIPlatoonNavalAttackVector(aiBrain, platoon)
         platoon.PlatoonSurfaceThreat = platoon:GetPlatoonThreat('Surface', categories.ALLUNITS)
     end
 
-    local oldPathSize = table.getn(platoon.LastAttackDestination)
+    local oldPathSize = TableGetn(platoon.LastAttackDestination)
     local path
 
     -- if we don't have an old path or our old destination and new destination are different
@@ -566,11 +570,11 @@ function AIPlatoonNavalAttackVector(aiBrain, platoon)
 
     end
 
-    if not path then
+    if not path or TableEmpty(path) then
         path = AINavalPlanB(aiBrain, platoon)
 	end
 	
-	if path then
+	if path and not TableEmpty(path) then
         platoon.LastAttackDestination = path
         -- move to new location
         platoon:IssueAggressiveMoveAlongRoute(path)
@@ -629,7 +633,7 @@ function AIPlatoonSquadAttackVector(aiBrain, platoon, bAggro)
         -- if we're land
         if attackPosHeight >= GetSurfaceHeight(attackPos[1], attackPos[3]) then
             local lookAroundTable = {1,0,-2,-1,2}
-            local squareRadius = (ScenarioInfo.size[1] / 16) / table.getn(lookAroundTable)
+            local squareRadius = (ScenarioInfo.size[1] / 16) / TableGetn(lookAroundTable)
             for ix, offsetX in lookAroundTable do
                 for iz, offsetZ in lookAroundTable do
                     local surf = GetSurfaceHeight(bestPos[1]+offsetX, bestPos[3]+offsetZ)
@@ -646,7 +650,7 @@ function AIPlatoonSquadAttackVector(aiBrain, platoon, bAggro)
         attackPos = bestPos
     end
 
-    local oldPathSize = table.getn(platoon.LastAttackDestination)
+    local oldPathSize = TableGetn(platoon.LastAttackDestination)
 
     -- if we don't have an old path or our old destination and new destination are different
     if oldPathSize == 0 or attackPos[1] != platoon.LastAttackDestination[oldPathSize][1] or attackPos[3] != platoon.LastAttackDestination[oldPathSize][3] then
@@ -669,7 +673,7 @@ function AIPlatoonSquadAttackVector(aiBrain, platoon, bAggro)
 		-- If we couldn't grab transports, try moving anyway
         if not usedTransports then
 			-- We couldn't path there, just try moving straight at the target
-            if not path then
+            if not path or TableEmpty(path) then
 				platoon:AggressiveMoveToLocation(attackPos)
 				-- Force re-evaluation
 				platoon.LastAttackDestination = {attackPos}
@@ -759,7 +763,7 @@ function SendPlatoonWithTransportsNoCheck(aiBrain, platoon, destination)
 			end
 		end
 		
-		if not table.empty(landingPositions) then
+		if not TableEmpty(landingPositions) then
 			transportLocation = CustomFunctions.BrainChooseLowestThreatLocation(aiBrain, landingPositions, 1, 'AntiAir')
 		end
 		
@@ -801,12 +805,12 @@ function SendPlatoonWithTransportsNoCheck(aiBrain, platoon, destination)
 		
 		-- While we are not close enough, re-evaluate our path to the drop zone
 		-- We are not updating the drop zone here, would take too much code refactoring
-		while VDist2(PlatoonPosition[1], PlatoonPosition[3], transportLocation[1], transportLocation[3]) > 105 and not table.empty(platoon:GetSquadUnits('Scout')) do
+		while VDist2(PlatoonPosition[1], PlatoonPosition[3], transportLocation[1], transportLocation[3]) > 105 and not TableEmpty(platoon:GetSquadUnits('Scout')) do
 			platoon:Stop()
 	
 			-- Transports get the 'Scout' role, if other units got it as well, you damn well better change it to something else
 			local threatMax = 10
-			local transportNum = table.getn(platoon:GetSquadUnits('Scout')) or 1
+			local transportNum = TableGetn(platoon:GetSquadUnits('Scout')) or 1
 			
 			threatMax = transportNum * 10
 			
@@ -855,7 +859,7 @@ function SendPlatoonWithTransportsNoCheck(aiBrain, platoon, destination)
 		end
 
         -- We've unloaded at this point, let's shoot stuff
-        if not path or table.empty(path) then
+        if not path or TableEmpty(path) then
             -- If no path, then just move straight at the enemy
             platoon:AggressiveMoveToLocation(destination)
             platoon.LastAttackDestination = {destination}
@@ -863,7 +867,7 @@ function SendPlatoonWithTransportsNoCheck(aiBrain, platoon, destination)
             -- We've got a path, let's do some fancy manouvers, and store our path for future comparison
             platoon.LastAttackDestination = path
 
-            local pathSize = table.getn(path)
+            local pathSize = TableGetn(path)
             -- Move through the path, and attack-move to the final location if desired
             for wpidx, waypointPath in path do
                 if wpidx == pathSize then

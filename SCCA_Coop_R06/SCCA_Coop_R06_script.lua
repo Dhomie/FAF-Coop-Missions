@@ -76,11 +76,11 @@ local SkipIntro = false
 
 -- Buffs AI factory structures, and engineer units
 function BuffAIBuildPower()
-	--Build Rate multiplier values, depending on the Difficulty
+	-- Build Rate multiplier values, depending on the Difficulty
 	local Rate = {1.0, 1.5, 2.0}
-	--Buff definitions
-	buffDef = Buffs['CheatBuildRate']
-	buffAffects = buffDef.Affects
+	-- Buff definitions
+	local buffDef = Buffs['CheatBuildRate']
+	local buffAffects = buffDef.Affects
 	buffAffects.BuildRate.Mult = Rate[Difficulty]
 
 	while true do
@@ -109,8 +109,8 @@ function BuffAIEconomy()
 	-- Resource production multipliers, depending on the Difficulty
 	local Rate = {2.0, 4.0, 8.0}
 	-- Buff definitions
-	buffDef = Buffs['CheatIncome']
-	buffAffects = buffDef.Affects
+	local buffDef = Buffs['CheatIncome']
+	local buffAffects = buffDef.Affects
 	buffAffects.EnergyProduction.Mult = Rate[Difficulty]
 	buffAffects.MassProduction.Mult = Rate[Difficulty]
 	
@@ -158,7 +158,9 @@ end
 function SpawnDebugPlayer()
 	-- Dummy AI base
 	DebugStartingBase = ScenarioUtils.CreateArmyGroup('Cybran', 'Allied_Debug_Base_D' .. Difficulty)
-	
+	local brain = GetArmyBrain('Cybran')
+	brain:GiveStorage('ENERGY', 750000)
+	SetArmyEconomy('Cybran', 75000, 750000)
 	-- Cybran dummy AI
 	M1CybranAI.M1CybranDebugBaseAI()
 	
@@ -169,8 +171,6 @@ function SpawnDebugPlayer()
 	-- Debug RedFog to test stuff, like enhancement building
 	ScenarioInfo.RedFog = ScenarioFramework.SpawnCommander('Cybran', 'Allied_Cybran_ACU', false, 'CDR RedFog', false, false)
     ScenarioFramework.CreateUnitGivenTrigger(JerichoGiven, ScenarioInfo.Jericho)
-	
-	ForkThread(CustomFunctions.EnableStealthOnAir)
 end
 
 -- Used for normal gameplay
@@ -326,15 +326,25 @@ function OnStart(self)
     )
 	
 	-- UEF T1 + T2 Engineers + Expansion Packs units
-	ScenarioFramework.AddRestriction(UEF, categories.uel0105 + categories.uel0208 + categories.PRODUCTFA) -- + categories.PRODUCTDL)
+	ScenarioFramework.AddRestriction(UEF, categories.uel0105 + categories.uel0208 + categories.PRODUCTFA + categories.PRODUCTDL)
 	-- Aeon T1 + T2 Engineers + Expansion Packs units
-	ScenarioFramework.AddRestriction(Aeon, categories.ual0105 + categories.ual0208 + categories.PRODUCTFA) -- + categories.PRODUCTDL)
+	ScenarioFramework.AddRestriction(Aeon, categories.ual0105 + categories.ual0208 + categories.PRODUCTFA + categories.PRODUCTDL)
 	
     ScenarioFramework.SetPlayableArea('M1Area', false)
 
     ScenarioFramework.SetSharedUnitCap(480)
     SetArmyUnitCap(Aeon, 2000)
     SetArmyUnitCap(UEF, 2000)
+	
+	-- Initialize the IMAP configuration for AIs
+	for _, army in AIs do
+		ArmyBrains[army].IMAPConfig = {
+				OgridRadius = 0,
+				IMAPSize = 0,
+				Rings = 0,
+		}
+		ArmyBrains[army]:IMAPConfiguration()
+	end
 	
 	if not SkipIntro then
         ScenarioFramework.StartOperationJessZoom('CDRZoom', IntroMission1)
@@ -345,7 +355,7 @@ end
 
 function JerichoKilled()
     ScenarioFramework.Dialogue(OpStrings.C06_M01_080)
-    ScenarioFramework.CDRDeathNISCamera( ScenarioInfo.Jericho, 7 )
+    ScenarioFramework.CDRDeathNISCamera(ScenarioInfo.Jericho, 7)
 end
 
 function JerichoGiven(oldJericho, newJericho)
@@ -725,21 +735,22 @@ function StartMission2()
 
     -- M2P1 Objective Reminder
     ScenarioFramework.CreateTimerTrigger(M2P1Reminder, ObjectiveReminderTime)
-	--------------------------------------------------------
+	local num = {5, 6, 7}
+	---------------------------------------------------
 	-- Secondary Objective 2 - Build SMDs
 	-- Reward for completion: Cybran T3 Heavy Artillery
-	--------------------------------------------------------
+	---------------------------------------------------
     ScenarioInfo.M2S1 = Objectives.ArmyStatCompare(
         'secondary',                    -- type
         'incomplete',                   -- complete
         OpStrings.OpC06_M2S1_Title,     -- title
-        OpStrings.OpC06_M2S1_Desc,      -- description
+        LOCF(OpStrings.OpC06_M2S1_Desc, num[Difficulty]),	-- description
         'build',                        -- action
         {                               -- target
             Armies = {'HumanPlayers'},
             StatName = 'Units_Active',
             CompareOp = '>=',
-            Value = 5,
+            Value = num[Difficulty],
             Category = (categories.urb4302),
 			ShowProgress = true,
         }
@@ -844,6 +855,7 @@ function DownloadFinished()
 					ScenarioInfo.ControlCenter:SetReclaimable(false)
 					ScenarioInfo.ControlCenter:SetCanBeKilled(false)
 					ScenarioInfo.ControlCenter:SetCapturable(false)
+					ScenarioInfo.ControlCenter:SetCanBeGiven(false)
                 ScenarioFramework.PauseUnitDeath(ScenarioInfo.ControlCenter)
                 ScenarioFramework.CreateUnitDestroyedTrigger(PlayerLose, ScenarioInfo.ControlCenter)
 
@@ -877,8 +889,8 @@ function M2MobileFactoriesThread()
         M2UEFAI.MobileFactoryAI(fatboys[i], i)
     end
 	-- Triggers to begin rebuilding factories if they die
-	ScenarioFramework.CreateUnitDeathTrigger(M3UEFAI.UEFMainFatboyFactory1, fatboys[1])
-	ScenarioFramework.CreateUnitDeathTrigger(M3UEFAI.UEFMainFatboyFactory2, fatboys[2])
+	ScenarioFramework.CreateUnitDestroyedTrigger(M3UEFAI.UEFMainFatboyFactory1, fatboys[1])
+	ScenarioFramework.CreateUnitDestroyedTrigger(M3UEFAI.UEFMainFatboyFactory2, fatboys[2])
 end
 
 function M2JerichoVO()
@@ -951,18 +963,18 @@ function IntroMission3()
 	M3UEFAI.M3UEFMainBuildHeavyArtillery()
 	M3UEFAI.M3UEFSouthWesternBaseAI()
 	
-	--M3 UEF sACU for the South Western island.
+	-- M3 UEF sACU for the South Western island.
 	ScenarioInfo.SouthernUEF_sACU = ScenarioFramework.SpawnCommander('UEF', 'Michael_sACU', false, 'sCDR Michael', false, false,
         {'Shield', 'AdvancedCoolingUpgrade', 'ResourceAllocation'})
 	ScenarioInfo.SouthernUEF_sACU:SetVeterancy(5)
 	
-	--M3 UEF Commander for the South Western island
+	-- M3 UEF Commander for the South Western island
 	ScenarioInfo.Blake = ScenarioFramework.SpawnCommander('UEF', 'Blake_ACU', false, 'CDR Blake', false, BlakeDestroyed,
         {'Shield', 'HeavyAntiMatterCannon', 'T3Engineering'})
 	ScenarioInfo.Blake:SetAutoOvercharge(true)
 	ScenarioInfo.Blake:SetVeterancy(5)
 	
-	--M3 UEF Southern air patrols
+	-- M3 UEF Southern air patrols
 	local M3UEFSouthAirPatrol = ScenarioUtils.CreateArmyGroupAsPlatoon('UEF', 'M3_UEF_Southern_Air_Patrol_D' .. Difficulty, 'NoFormation')
 	for _, v in M3UEFSouthAirPatrol:GetPlatoonUnits() do
         ScenarioFramework.GroupPatrolRoute({v}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('M3_UEF_SouthWestern_Base_Patrol_Chain')))
@@ -975,12 +987,12 @@ function IntroMission3()
 	M1AeonAI.EnableAeonMainNukes()
 	M3AeonAI.M3AeonSouthEasternBaseAI()
 	
-	--M3 Aeon sACU for the South Eastern island
+	-- M3 Aeon sACU for the South Eastern island
 	ScenarioInfo.SouthernAeon_sACU = ScenarioFramework.SpawnCommander('Aeon', 'Matilda_sACU', false, 'sCDR Matilda', false, false,
-        {'Shield', 'ShieldHeavy', 'EngineeringFocusingModule', 'ResourceAllocation'})
+        {'SystemIntegrityCompensator', 'EngineeringFocusingModule', 'ResourceAllocation'})
 	ScenarioInfo.SouthernAeon_sACU:SetVeterancy(5)
 	
-	--M3 Aeon Southern air patrols
+	-- M3 Aeon Southern air patrols
 	local M3AeonSouthAirPatrol = ScenarioUtils.CreateArmyGroupAsPlatoon('Aeon', 'M3_Aeon_Southern_Air_Patrol_D' .. Difficulty, 'NoFormation')
 	for _, v in M3AeonSouthAirPatrol:GetPlatoonUnits() do
         ScenarioFramework.GroupPatrolRoute({v}, ScenarioPlatoonAI.GetRandomPatrolRoute(ScenarioUtils.ChainToPositions('M3_Aeon_SouthEastern_Base_Patrol_Chain')))
@@ -1023,6 +1035,10 @@ function IntroMission3()
         true
     )
 
+	-- Enable nukes for the Cybran debug base
+	if DEBUG then
+		M1CybranAI.EnableCybranDebugNukes()
+	end
     ScenarioFramework.Dialogue(OpStrings.C06_M03_010, StartMission3)
 end
 
@@ -1061,11 +1077,13 @@ function StartMission3()
                     }
                 )
                 unit[1]:AddSpecialToggleEnable(BlackSunFired)
+				unit[1]:AddSpecialToggleDisable(BlackSunFired)
                 unit[1]:SetCanTakeDamage(false)
                 unit[1]:SetCanBeKilled(false)
                 unit[1]:SetReclaimable(false)
                 unit[1]:SetCapturable(false)
                 unit[1]:SetDoNotTarget(true)
+				unit[1]:SetCanBeGiven(false)
 
                 ScenarioFramework.Dialogue(OpStrings.C06_M03_060)
 
@@ -1122,15 +1140,18 @@ function AtlantisAI()
 end
 
 function BlackSunFired()
-    if(not ScenarioInfo.OpEnded) then
-        ScenarioFramework.FlushDialogueQueue()
-        ScenarioFramework.EndOperationSafety()
-        ScenarioInfo.OpComplete = true
-        if ScenarioInfo.M3P2 then
-            ScenarioInfo.M3P2:ManualResult(true)
-        end
-        ScenarioFramework.EndOperation(ScenarioInfo.OpComplete, ScenarioInfo.OpComplete, true)
-    end
+	if not ScenarioInfo.BlackSunFired then
+		ScenarioInfo.BlackSunFired = true
+		if(not ScenarioInfo.OpEnded) then
+			ScenarioFramework.FlushDialogueQueue()
+			ScenarioFramework.EndOperationSafety()
+			ScenarioInfo.OpComplete = true
+			if ScenarioInfo.M3P2 then
+				ScenarioInfo.M3P2:ManualResult(true)
+			end
+			ScenarioFramework.EndOperation(ScenarioInfo.OpComplete, ScenarioInfo.OpComplete, true)
+		end
+	end
 end
 
 function M3AikoVO()

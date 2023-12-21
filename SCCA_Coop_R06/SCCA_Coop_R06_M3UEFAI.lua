@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
---  File     : /maps/SCCA_Coop_R06.remastered/SCCA_Coop_R06_M3UEFAI.lua
+--  File     : /maps/SCCA_Coop_R06/SCCA_Coop_R06_M3UEFAI.lua
 --  Author(s): Dhomie42
 --
---  Summary  : UEF army AI for Mission 3 - SCCA_Coop_R06.remastered
+--  Summary  : UEF army AI for Mission 3 - SCCA_Coop_R06
 --------------------------------------------------------------------------------
 local BaseManager = import('/lua/ai/opai/basemanager.lua')
 
@@ -125,10 +125,10 @@ function UEFMainAirAttacks()
         PlatoonTemplate = {
 			'M3_UEF_Main_AirForce_Template',
 			'NoPlan',
-			{ 'uea0305', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Heavy Gunship
-			{ 'uea0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
-			{ 'uea0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
-			{ 'uea0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation' }, -- T2 Gunship
+			{'uea0305', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Heavy Gunship
+			{'uea0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Strat Bomber
+			{'uea0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 ASF
+			{'uea0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation'}, -- T2 Gunship
 		},
         InstanceCount = Difficulty * 2,
         Priority = 130,
@@ -140,7 +140,7 @@ function UEFMainAirAttacks()
 		},
         PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 		
 	-- Sends [8, 20, 36] Gunships if players have >= 50, 40, 30 Mobile Land units
 	quantity = {4, 10, 18}
@@ -149,8 +149,7 @@ function UEFMainAirAttacks()
 	opai = UEFMainBase:AddOpAI('AirAttacks', 'M2_UEFMain_Gunships_Attack' .. i,
         {
             MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
-
-                Priority = 140,
+			Priority = 140,
         }
     )
     opai:SetChildQuantity('Gunships', quantity[Difficulty])
@@ -168,7 +167,7 @@ function UEFMainAirAttacks()
 			PlatoonData = {
 				CategoryList = {ConditionCategories.GameEnderStructure,}
 			},
-                Priority = 150,
+            Priority = 150,
         }
     )
     opai:SetChildQuantity('StratBombers', quantity[Difficulty])
@@ -184,7 +183,7 @@ function UEFMainAirAttacks()
 			PlatoonData = {
 				CategoryList = {ConditionCategories.ExperimentalLand,}
 			},
-                Priority = 150,
+            Priority = 150,
         }
     )
     opai:SetChildQuantity('HeavyGunships', quantity[Difficulty])
@@ -232,7 +231,7 @@ function UEFMainLandAttacks()
 	local EngineerPlatoonTemplate = {
 		'UEF_Expansion_Engineer_Platoon_Template',
 		'NoPlan',
-		{ 'uel0309', 1, quantity[Difficulty], 'Support', 'AttackFormation' },	-- T3 Engineers
+		{'uel0309', 1, quantity[Difficulty], 'Support', 'AttackFormation'},	-- T3 Engineers
 	}
 	-- UEF Control Center Expansion Engineer platoon
 	local Builder = {
@@ -244,16 +243,16 @@ function UEFMainLandAttacks()
         RequiresConstruction = true,
 		LocationType = 'UEF_Main_Base',
 		BuildConditions = {
-                    {BMBC, 'BaseActive', {'UEF_Control_Center_Base'}},
-					{BMBC, 'NumUnitsLessNearBase', {'UEF_Control_Center_Base', (categories.FACTORY * categories.STRUCTURE), 1}},
-                },
+            {BMBC, 'BaseActive', {'UEF_Control_Center_Base'}},
+			{BMBC, 'NumUnitsLessNearBase', {'UEF_Control_Center_Base', (categories.FACTORY * categories.STRUCTURE), 1}},
+        },
 		PlatoonAIFunction = {CustomFunctions, 'EngineersMoveToThread'},
         PlatoonData = {
 			MoveRoute = {'ControlCenter'},
 			DisbandAfterArrival = true,
 		},
 	}
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	-- UEF Main Naval Base Expansion Engineer platoon
 	Builder = {
@@ -265,51 +264,51 @@ function UEFMainLandAttacks()
         RequiresConstruction = true,
 		LocationType = 'UEF_Main_Base',
 		BuildConditions = {
-                    {BMBC, 'NumUnitsLessNearBase', {'UEF_Main_Naval_Base', (categories.FACTORY * categories.NAVAL * categories.STRUCTURE), 1}},
-                    {BMBC, 'BaseActive', {'UEF_Main_Naval_Base'}},
-                },
+            {BMBC, 'NumUnitsLessNearBase', {'UEF_Main_Naval_Base', (categories.FACTORY * categories.NAVAL * categories.STRUCTURE), 1}},
+            {BMBC, 'BaseActive', {'UEF_Main_Naval_Base'}},
+        },
 		PlatoonAIFunction = {CustomFunctions, 'EngineersMoveToThread'},
         PlatoonData = {
 			MoveRoute = {'UEF_Main_Naval_Base_Marker'},
 			DisbandAfterArrival = true,
 		},
 	}
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	-- Sends random [T2] from Phase 2
 	for i = 1, Difficulty do
-	opai = UEFMainBase:AddOpAI('BasicLandAttack', 'M2_UEFMain_T2_LandAttack_' .. i,
-        {
-            MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
-                PlatoonData = {
-                    PatrolChain = 'M2LandAttack_Chain' .. Random(1, 5),
-                },
-            Priority = 140 + i, --Base gets cluttered with units too much if they all have the same priority.
-        }
-    )
-	opai:SetChildActive('All', false)
-	opai:SetChildrenActive({'MobileFlak', 'MobileMissiles', 'HeavyTanks', 'AmphibiousTanks', 'MobileShields'})
-	opai:SetChildCount(Difficulty)
-	opai:SetFormation('AttackFormation')
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2})
+		opai = UEFMainBase:AddOpAI('BasicLandAttack', 'M2_UEFMain_T2_LandAttack_' .. i,
+			{
+				MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
+				PlatoonData = {
+					PatrolChain = 'M2LandAttack_Chain' .. Random(1, 5),
+				},
+				Priority = 140 + i, --Base gets cluttered with units too much if they all have the same priority.
+			}
+		)
+		opai:SetChildActive('All', false)
+		opai:SetChildrenActive({'MobileFlak', 'MobileMissiles', 'HeavyTanks', 'AmphibiousTanks', 'MobileShields'})
+		opai:SetChildCount(Difficulty)
+		opai:SetFormation('AttackFormation')
+		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2})
 	end
 	
 	for i = 1, Difficulty * 3 do
-    -- Sends random [T3] from Phase 3
-    opai = UEFMainBase:AddOpAI('BasicLandAttack', 'M3_UEFMain_T3_LandAttack_' .. i,
-        {
-             MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
-                PlatoonData = {
-                    PatrolChain = 'M2LandAttack_Chain' .. Random(1, 5),
-                },
-            Priority = 150 + i, --Base gets cluttered with units too much if they all have the same priority.
-        }
-    )
-	opai:SetChildActive('All', false)
-	opai:SetChildrenActive({'SiegeBots', 'MobileHeavyArtillery'})
-	opai:SetChildCount(Difficulty)
-	opai:SetFormation('AttackFormation')
-	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3})
+		-- Sends random [T3] from Phase 3
+		opai = UEFMainBase:AddOpAI('BasicLandAttack', 'M3_UEFMain_T3_LandAttack_' .. i,
+			{
+				MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
+				PlatoonData = {
+					PatrolChain = 'M2LandAttack_Chain' .. Random(1, 5),
+				},
+				Priority = 150 + i, --Base gets cluttered with units too much if they all have the same priority.
+			}
+		)
+		opai:SetChildActive('All', false)
+		opai:SetChildrenActive({'SiegeBots', 'MobileHeavyArtillery'})
+		opai:SetChildCount(Difficulty)
+		opai:SetFormation('AttackFormation')
+		opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3})
 	end
 end
 
@@ -323,11 +322,11 @@ function UEFMainNavalAttacks()
 	local Temp = {
         'M3_UEF_Main_Naval_Attack_To_Player',
         'NoPlan',
-        { 'ues0302', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'ues0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'ues0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
+        {'ues0302', 0, T3Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Battleship
+        {'ues0201', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'ues0202', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'ues0103', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'ues0203', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Submarine
     }
 	local Builder = {
         BuilderName = 'M3_UEF_Main_Naval_Attack_To_Player',
@@ -345,17 +344,16 @@ function UEFMainNavalAttacks()
             PatrolChain = 'M3_UEF_Main_Naval_Attack_Chain',
         },     
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	-- Smaller UEF Naval Fleet for attacking Arnold
 	Temp = {
         'M3_UEF_Main_Naval_Attack_To_Aeon',
         'NoPlan',
-        --{ 'ues0302', 1, 1, 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'ues0201', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'ues0203', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
+        {'ues0201', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'ues0202', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'ues0103', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'ues0203', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Submarine
     }
 	
 	Builder = {
@@ -377,15 +375,15 @@ function UEFMainNavalAttacks()
 			},
         },
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	-- Small UEF Naval Fleet for attacking the players during, and after part 2
 	Temp = {
         'M2_UEF_Main_Naval_Force',
         'NoPlan',
-        { 'ues0201', 1, Difficulty, 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, Difficulty, 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, Difficulty * 2, 'Attack', 'AttackFormation' }, -- T1 Frigate
+        {'ues0201', 0, Difficulty, 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'ues0202', 0, Difficulty, 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'ues0103', 0, Difficulty * 2, 'Attack', 'AttackFormation'}, -- T1 Frigate
     }
 	
 	Builder = {
@@ -406,7 +404,7 @@ function UEFMainNavalAttacks()
 			},
         },
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	--Atlantis attack for Phase 3
 	opai = UEFNavalBase:AddOpAI('M3_UEFMain_Atlantis',
@@ -429,48 +427,48 @@ end
 -- Fatboy factory platoon 1 for Phase 2
 function UEFMainFatboyFactory1()
 	local opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
-            {
-                Amount = 1,
-                KeepAlive = true,
-                PlatoonAIFunction = {CustomFunctions, 'AddMobileFactory'},
-                PlatoonData = {
-					BaseName = 'MobileFactory1',
-					BaseMarker = 'UEF_Mobile_Factory_Marker_1',
-					BaseRadius = 20,
-					FactoryType = 'Land',
-					RallyPoint = 'UEF_Mobile_Factory_Rally_1',
-					MoveRoute = {'MobileFactoryMove1'},
-				},
-				BuildCondition = {
-					{'/lua/editor/miscbuildconditions.lua', 'MissionNumber', {2}}
-				},
-                MaxAssist = 3,
-                Retry = true,
-            }
+        {
+            Amount = 1,
+            KeepAlive = true,
+            PlatoonAIFunction = {CustomFunctions, 'AddMobileFactory'},
+            PlatoonData = {
+				BaseName = 'MobileFactory1',
+				BaseMarker = 'UEF_Mobile_Factory_Marker_1',
+				BaseRadius = 20,
+				FactoryType = 'Land',
+				RallyPoint = 'UEF_Mobile_Factory_Rally_1',
+				MoveRoute = {'MobileFactoryMove1'},
+			},
+			BuildCondition = {
+				{'/lua/editor/miscbuildconditions.lua', 'MissionNumber', {2}}
+			},
+            MaxAssist = 3,
+            Retry = true,
+        }
     )
 end
 
 -- Fatboy factory platoon 2 for Phase 2
 function UEFMainFatboyFactory2()
 	local opai = UEFMainBase:AddOpAI('M2_Fatboy_Factory',
-            {
-                Amount = 1,
-                KeepAlive = true,
-                PlatoonAIFunction = {CustomFunctions, 'AddMobileFactory'},
-                PlatoonData = {
-					BaseName = 'MobileFactory2',
-					BaseMarker = 'UEF_Mobile_Factory_Marker_2',
-					BaseRadius = 20,
-					FactoryType = 'Land',
-					RallyPoint = 'UEF_Mobile_Factory_Rally_2',
-					MoveRoute = {'MobileFactoryMove2'},
-				},
-				BuildCondition = {
-					{'/lua/editor/miscbuildconditions.lua', 'MissionNumber', {2}}
-				},
-                MaxAssist = 3,
-                Retry = true,
-            }
+        {
+            Amount = 1,
+            KeepAlive = true,
+            PlatoonAIFunction = {CustomFunctions, 'AddMobileFactory'},
+            PlatoonData = {
+				BaseName = 'MobileFactory2',
+				BaseMarker = 'UEF_Mobile_Factory_Marker_2',
+				BaseRadius = 20,
+				FactoryType = 'Land',
+				RallyPoint = 'UEF_Mobile_Factory_Rally_2',
+				MoveRoute = {'MobileFactoryMove2'},
+			},
+			BuildCondition = {
+				{'/lua/editor/miscbuildconditions.lua', 'MissionNumber', {2}}
+			},
+            MaxAssist = 3,
+            Retry = true,
+        }
     )
 end
 
@@ -484,7 +482,7 @@ function UEFMainExperimentalAttacks()
         {
             Amount = 1,
             KeepAlive = true,
-            PlatoonAIFunction = {AIBehaviors, 'FatBoyBehavior'},
+            PlatoonAIFunction = {AIBehaviors, 'FatboyBehavior'},
             PlatoonData = {
 				BuildTable = {
 					'uel0202',	--T2 Heavy Tank
@@ -495,12 +493,11 @@ function UEFMainExperimentalAttacks()
 					'uel0304', 	--T3 Mobile Heavy Artillery
 				},
 				Formation = 'AttackFormation',
-				SitDistance = 120,
+				SitDistance = 300,
 				UnitCount = quantity[Difficulty],
 			},
 			BuildCondition = {
-				{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual',
-					{2}}
+				{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}}
 			},
             MaxAssist = Difficulty,
             Retry = true,
@@ -573,11 +570,11 @@ function M3UEFSouthWesternNavalAttacks()
 	local Temp = {
         'M3_UEF_SouthWestern_Naval_Attack_To_Player',
         'NoPlan',
-        { 'ues0302', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'ues0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'ues0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
+        {'ues0302', 0, T3Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Battleship
+        {'ues0201', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'ues0202', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'ues0103', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'ues0203', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Submarine
 	
     }
 	local Builder = {
@@ -596,17 +593,16 @@ function M3UEFSouthWesternNavalAttacks()
             PatrolChain = 'M3_UEF_Southern_Naval_Attack_Chain',
         },     
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	-- Smaller UEF Naval Fleet for attacking Arnold
 	Temp = {
         'M3_UEF_SouthWestern_Naval_Attack_To_Aeon',
         'NoPlan',
-        --{ 'ues0302', 1, 1, 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'ues0201', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'ues0202', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'ues0103', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'ues0203', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
+        {'ues0201', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'ues0202', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'ues0103', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'ues0203', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Submarine
     }
 	
 	Builder = {
@@ -628,7 +624,7 @@ function M3UEFSouthWesternNavalAttacks()
 			},
         },
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 end
 
 function M3UEFSouthWesternLandAttacks()
@@ -637,14 +633,14 @@ function M3UEFSouthWesternLandAttacks()
 	
 	--Sends [8, 16, 24] Amphibious Tanks to the highest threat
 	for i = 1, 2  do
-	opai = M3UEFSouthWesternBase:AddOpAI('BasicLandAttack', 'M3_UEFSouthWestern_Amphibious_Assault' .. i,
-        {
-            MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
-            Priority = 140,
-        }
-    )
-	opai:SetChildQuantity('AmphibiousTanks', quantity[Difficulty])
-	opai:SetFormation('AttackFormation')
+		opai = M3UEFSouthWesternBase:AddOpAI('BasicLandAttack', 'M3_UEFSouthWestern_Amphibious_Assault' .. i,
+			{
+				MasterPlatoonFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+				Priority = 140,
+			}
+		)
+		opai:SetChildQuantity('AmphibiousTanks', quantity[Difficulty])
+		opai:SetFormation('AttackFormation')
 	end
 end
 
@@ -653,13 +649,13 @@ function M3UEFSouthWesternTransportAttacks()
 	local quantity = {2, 4, 6}
 	
 	-- T2 Transport Platoon
-	-- The SW UEF base is the only one producing transport attacks, so we only need to check the amount of transport the army has
+	-- The SW UEF base is the only one producing transport attacks, so we only need to check the amount of transports the army has
 	local Builder = {
         BuilderName = 'M3_UEF_SouthWestern_Transport_Platoon',
         PlatoonTemplate = {
 			'M3_UEF_SouthWestern_Transport_Platoon',
 			'NoPlan',
-			{ 'uea0104', 1, quantity[Difficulty], 'Attack', 'None' }, -- T2 Transport
+			{'uea0104', 1, quantity[Difficulty], 'Attack', 'None'}, -- T2 Transport
 		},
         InstanceCount = 1,
         Priority = 250,
@@ -669,9 +665,9 @@ function M3UEFSouthWesternTransportAttacks()
 		BuildConditions = {
 			{'/lua/editor/unitcountbuildconditions.lua', 'HaveLessThanUnitsWithCategory', {12, categories.uea0104}},
 		},
-        PlatoonAIFunction = {SPAIFileName, 'TransportPool'},    
+        PlatoonAIFunction = {SPAIFileName, 'TransportPool'},
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	-- Sends random amounts of [T2]
 	for i = 1, Difficulty + 1 do
@@ -681,7 +677,6 @@ function M3UEFSouthWesternTransportAttacks()
                 PlatoonData = {
                     AttackChain = 'M2LandAttack_Chain' .. Random(1, 5),
                     LandingChain = 'UEFBase_Landing_Chain',
-					--MovePath = 'M2_UEF_Transport_Move_Chain',
                     TransportReturn = 'M3_UEF_SouthWestern_Base_Marker'
                 },
                 Priority = 150 + i,
@@ -727,21 +722,19 @@ function M3UEFSouthWesternAirAttacks()
         PlatoonTemplate = {
 			'M3_UEF_SouthWestern_AirForce_Template',
 			'NoPlan',
-			{ 'uea0305', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Heavy Gunship
-			{ 'uea0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
-			{ 'uea0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
-			{ 'uea0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation' }, -- T2 Gunship
+			{'uea0305', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Heavy Gunship
+			{'uea0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Strat Bomber
+			{'uea0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 ASF
+			{'uea0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation'}, -- T2 Gunship
 		},
         InstanceCount = Difficulty * 2,
         Priority = 100,
         PlatoonType = 'Air',
         RequiresConstruction = true,
         LocationType = 'M3_UEF_SouthWestern_Base',
-		BuildConditions = {
-		},
         PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
     }
-    ArmyBrains[UEF]:PBMAddPlatoon( Builder )
+    ArmyBrains[UEF]:PBMAddPlatoon(Builder)
 	
 	-- Sends [6, 12, 18] Gunships to the players
 	quantity = {6, 12, 18}
@@ -751,7 +744,7 @@ function M3UEFSouthWesternAirAttacks()
             PlatoonData = {
                 PatrolChain = 'M3_UEF_Southern_Naval_Attack_Chain',
             },
-                Priority = 140,
+            Priority = 140,
         }
     )
     opai:SetChildQuantity('Gunships', quantity[Difficulty])
@@ -765,7 +758,7 @@ function M3UEFSouthWesternAirAttacks()
             PlatoonData = {
                 PatrolChain = 'M3_UEF_Southern_Naval_Attack_Chain',
             },
-                Priority = 130,
+            Priority = 130,
         }
     )
     opai:SetChildQuantity('TorpedoBombers', quantity[Difficulty])
@@ -781,7 +774,7 @@ function M3UEFSouthWesternAirAttacks()
 			PlatoonData = {
 				CategoryList = {ConditionCategories.ExperimentalAir,}
 			},
-                Priority = 150,
+            Priority = 150,
         }
     )
     opai:SetChildQuantity('AirSuperiority', quantity[Difficulty])
@@ -797,7 +790,7 @@ function M3UEFSouthWesternAirAttacks()
 			PlatoonData = {
 				CategoryList = {ConditionCategories.ExperimentalLand,}
 			},
-                Priority = 150,
+            Priority = 150,
         }
     )
     opai:SetChildQuantity('HeavyGunships', quantity[Difficulty])
@@ -813,7 +806,7 @@ function M3UEFSouthWesternAirAttacks()
 			PlatoonData = {
 				CategoryList = {ConditionCategories.GameEnderStructure,}
 			},
-                Priority = 150,
+            Priority = 150,
         }
     )
     opai:SetChildQuantity('StratBombers', quantity[Difficulty])

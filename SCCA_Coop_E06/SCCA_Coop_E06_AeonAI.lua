@@ -117,7 +117,6 @@ function M2AeonSEBaseNavalAttacks()
         { 'uas0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
 		{ 'uas0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
 		{ 'uas0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
-	
     }
 	local Builder = {
         BuilderName = 'M2_Aeon_SouthEastern_Naval_Fleet_Builder',
@@ -145,9 +144,7 @@ function M2AeonSEBaseNavalAttacks()
         { 'uas0202', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Cruiser
 		{ 'uas0103', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Frigate
 		{ 'uas0203', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
-	
     }
-	
 	Builder = {
         BuilderName = 'M2_Aeon_SouthEastern_Naval_Probe_Attack_Builder',
         PlatoonTemplate = Temp,
@@ -165,7 +162,6 @@ function M2AeonSEBaseNavalAttacks()
         },
     }
     ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
-		
 end
 
 function M2AeonSEBaseTransportAttacks()
@@ -370,13 +366,11 @@ function M3AeonArnoldBaseAI()
 	M3AeonArnoldBase:SetSupportACUCount(1)
 	M3AeonArnoldBase:SetSACUUpgrades({'SystemIntegrityCompensator', 'ResourceAllocation', 'EngineeringFocusingModule'}, false)
 	
-	if ScenarioInfo.Options.FullMapAccess == 2 then
-		M3AeonArnoldBase:AddBuildGroup('M3_Arnold_Base_D' .. Difficulty, 90)
-	end
-	
 	M3AeonArnoldBase:SetActive('AirScouting', true)
 	
+	-- Additional stuff if players chose full map access in the lobby
 	if ScenarioInfo.Options.FullMapAccess == 2 then
+		M3AeonArnoldBase:AddBuildGroup('M3_Arnold_Base_D' .. Difficulty, 90)
 		M3AeonArnoldBaseAirDefense()
 		M3AeonArnoldBaseExperimentalAttacks()
 	end
@@ -766,13 +760,11 @@ function M3AeonSWBaseAI()
 	M3AeonSWBase:SetSupportACUCount(1)
 	M3AeonSWBase:SetSACUUpgrades({'SystemIntegrityCompensator', 'ResourceAllocation', 'EngineeringFocusingModule'}, false)
 	
-	if ScenarioInfo.Options.FullMapAccess == 2 then
-		M3AeonSWBase:AddBuildGroup('M3_SW_Base_D' .. Difficulty, 90)
-	end
-	
 	M3AeonSWBase:SetActive('AirScouting', true)
 	
+	-- Additional stuff if players chose full map access in the lobby
 	if ScenarioInfo.Options.FullMapAccess == 2 then
+		M3AeonSWBase:AddBuildGroup('M3_SW_Base_D' .. Difficulty, 90)
 		M3AeonSWBaseAirDefense()
 		M3AeonSWBaseExperimentalAttacks()
 	end
@@ -785,7 +777,7 @@ function M3AeonSWBaseAirDefense()
     local opai = nil
 	local quantity = {4, 6, 8}
 	local ChildType = {'AirSuperiority', 'StratBombers', 'Gunships', 'TorpedoBombers'}
-		
+
 	-- Maintains [4, 6, 8] units defined in ChildType
 	for k = 1, table.getn(ChildType) do
 		opai = M3AeonSWBase:AddOpAI('AirAttacks', 'M3_SW_AirDefense_' .. ChildType[k],
@@ -806,7 +798,7 @@ function M3AeonSWBaseAirAttacks()
     local opai = nil
 	local quantity = {}
 	local trigger = {}
-		
+
 	-- Probe attacks
 	opai = M3AeonSWBase:AddOpAI('AirAttacks', 'M3_SW_AntiGround_Attack',
         {
@@ -1113,5 +1105,4 @@ function M3AeonSWBaseExperimentalAttacks()
             }
         )
     end
-	
 end

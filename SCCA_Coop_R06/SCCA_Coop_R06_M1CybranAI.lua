@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  File     : /maps/SCCA_Coop_R06.remastered/SCCA_Coop_R06_M1CybranAI.lua
+--  File     : /maps/SCCA_Coop_R06/SCCA_Coop_R06_M1CybranAI.lua
 --  Author(s): Dhomie42
 --
 --  Summary  : Cybran Debug army AI for Mission 1 - SCCA_Coop_R06
@@ -19,7 +19,6 @@ local CustomFunctions = '/maps/SCCA_Coop_R06/SCCA_Coop_R06_CustomFunctions.lua'
 local M1CybranDebugBase = BaseManager.CreateBaseManager()
 
 function M1CybranDebugBaseAI()
-
 	-- -----------
     -- Player1 Base
     -- -----------
@@ -31,15 +30,10 @@ function M1CybranDebugBaseAI()
 	
 	M1CybranDebugBase:SetACUUpgrades({'CoolingUpgrade', 'MicrowaveLaserGenerator', 'CloakingGenerator'}, false)
 	
-	--M1CybranDebugBase:StartNonZeroBase({4, 4, 3})
 	M1CybranDebugBase:StartEmptyBase({15, 14, 13})
 	M1CybranDebugBase:SetMaximumConstructionEngineers(15)
-	ArmyBrains[Cybran]:PBMSetCheckInterval(10)
 	
     M1CybranDebugBase:SetActive('AirScouting', true)
-	--M1CybranDebugBase:SetActive('Transports', true)
-	--M1CybranDebugBase:SetTransportsNeeded(6)
-	--M1CybranDebugBase:SetTransportsTech(2)
 	
 	M1CybranDebugBaseLandAttacks()
 	M1CybranDebugBaseAirAttacks()
@@ -56,8 +50,8 @@ function M1CybranDebugBaseLandAttacks()
 		opai = M1CybranDebugBase:AddOpAI('BasicLandAttack', 'Cybran_Debug_T2_RandomLandAttack_' .. i,
         {
 			MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
-				PlatoonData = {
-					PatrolChain = 'M3_Allied_Land_Chain_' .. Random(1, 3),
+			PlatoonData = {
+				PatrolChain = 'M3_Allied_Land_Chain_' .. Random(1, 3),
 			},     
             Priority = 150 + i,
         }
@@ -71,8 +65,8 @@ function M1CybranDebugBaseLandAttacks()
 		opai = M1CybranDebugBase:AddOpAI('BasicLandAttack', 'Cybran_Debug_T3_RandomLandAttack_' .. i,
         {
             MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
-                PlatoonData = {
-                    PatrolChain = 'M3_Allied_Land_Chain_' .. Random(1, 3),
+            PlatoonData = {
+                PatrolChain = 'M3_Allied_Land_Chain_' .. Random(1, 3),
                 },
             Priority = 120 + i,
         }
@@ -105,7 +99,10 @@ function M1CybranDebugBaseAirAttacks()
 		BuildConditions = {
 			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {'default_brain', 2}},
 		},
-        PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
+        PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'},
+		PlatoonAddFunctions = {
+			{SPAIFileName, 'PlatoonEnableStealth'},
+		},
     }
     ArmyBrains[Cybran]:PBMAddPlatoon( Builder )
 end
@@ -119,11 +116,11 @@ function M1CybranDebugBaseNavaAttacks()
 	local Temp = {
         'Cybran_Debug_Naval_Attacks',
         'NoPlan',
-        { 'urs0302', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'urs0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'urs0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'urs0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'urs0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
+        { 'urs0302', 0, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
+        { 'urs0201', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
+        { 'urs0202', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
+		{ 'urs0103', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
+		{ 'urs0203', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
 	
     }
 	local Builder = {
@@ -165,6 +162,7 @@ function M1CybranDebugBaseAirDefense()
 			}
 		)
 		opai:SetChildQuantity(ChildType[k], quantity[Difficulty])
+		opai:AddFormCallback(SPAIFileName, 'PlatoonEnableStealth')
 		opai:SetLockingStyle('DeathRatio', {Ratio = 0.5})
 	end
 end
@@ -198,4 +196,9 @@ function M1CybranDebugBaseExperimentals()
 			)
 		end
     end
+end
+
+function EnableCybranDebugNukes()
+	-- Enable nukes
+	M1CybranDebugBase:SetActive('Nuke', true)
 end

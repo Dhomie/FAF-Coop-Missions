@@ -8,7 +8,12 @@ local AIBehaviors = import("/lua/ai/aibehaviors.lua")
 
 local Cybran = 4
 local Difficulty = ScenarioInfo.Options.Difficulty
+
+-- Upvalued for performance
+local TableEmpty = table.empty
 local TableInsert = table.insert
+local TableRemove = table.remove
+local TableGetn = table.getn
 
 -------------------
 -- Build Conditions
@@ -23,7 +28,7 @@ function HaveGreaterOrEqualThanUnitsInTransportPool(aiBrain, numReq, platoonName
     -- Get either the specific transport platoon, or the universal 'TransportPool' platoon
     local platoon = aiBrain:GetPlatoonUniquelyNamed(platoonName) or aiBrain:GetPlatoonUniquelyNamed('TransportPool')
 	
-	-- If neither exists, we need transports, return false
+	-- If neither exists, the platoon has yet to be built, return false
 	if not platoon then
 		return false
 	end
@@ -214,7 +219,7 @@ function LandAssaultWithTransports(platoon)
 	local PlatoonPosition = platoon:GetPlatoonPosition()
 	
 	-- Make sure we actually still have transports in our platoon
-	while VDist2(PlatoonPosition[1], PlatoonPosition[3], landingLocation[1], landingLocation[3]) > 105 and not table.empty(platoon:GetSquadUnits('Scout')) do
+	while VDist2(PlatoonPosition[1], PlatoonPosition[3], landingLocation[1], landingLocation[3]) > 105 and not TableEmpty(platoon:GetSquadUnits('Scout')) do
 		-- Update landing location at the start of the loop, otherwise the platoon might pick a different landing zone at the very last second.
 		-- This can result in retarded behaviour, and we want to avoid that, if we are about to unload in 1 second, then UNLOAD, and not get yeeted because we just got a completely fresh set of commands
 		landingLocation = BrainChooseLowestThreatLocation(aiBrain, landingPositions, 1, 'AntiAir')
@@ -223,7 +228,7 @@ function LandAssaultWithTransports(platoon)
 	
 		-- Transports get the 'Scout' role, if other units got it as well, you damn well better change it to something else
 		local threatMax = 10
-		local transportNum = table.getn(platoon:GetSquadUnits('Scout'))
+		local transportNum = TableGetn(platoon:GetSquadUnits('Scout'))
 			
 		if transportNum > 0 then
 			threatMax = transportNum * 10
@@ -301,7 +306,6 @@ end
 ---@return boolean
 function GetLoadTransports(platoon)
     local numTransports = GetTransportsThread(platoon)
-	
     if not numTransports then
         return false
     end
@@ -394,7 +398,7 @@ function GetLoadTransports(platoon)
     -- Old load transports
     local unitsToDrop = {}
     for num, data in transportTable do
-        if not table.empty(data.Units) then
+        if not TableEmpty(data.Units) then
             IssueClearCommands(data.Units)
             IssueTransportLoad(data.Units, data.Transport)
             for _, v in data.Units do TableInsert(unitsToDrop, v) end
@@ -573,10 +577,10 @@ function GetTransportsThread(platoon)
                         TableInsert(transports, curr)
                     end
                 end
-                if not table.empty(transports) then
+                if not TableEmpty(transports) then
                     local sortedList = {}
                     -- Sort distances
-                    for k = 1, table.getn(transports) do
+                    for k = 1, TableGetn(transports) do
                         local lowest = -1
                         local key, value
                         for j, u in transports do
@@ -588,10 +592,10 @@ function GetTransportsThread(platoon)
                         end
                         sortedList[k] = value
                         -- Remove from unsorted table
-                        table.remove(transports, key)
+                        TableRemove(transports, key)
                     end
                     -- Take transports as needed
-                    for i = 1, table.getn(sortedList) do
+                    for i = 1, TableGetn(sortedList) do
                         if transportsNeeded then
                             local id = sortedList[i].Id
                             aiBrain:AssignUnitsToPlatoon(platoon, {sortedList[i].Unit}, 'Scout', 'GrowthFormation')
@@ -685,29 +689,58 @@ function GetNumTransportSlots(unit)
         Medium = 0,
         Small = 0,
     }
-
-    -- compute count based on bones
-    for i = 1, unit:GetBoneCount() do
-        if unit:GetBoneName(i) ~= nil then
-            if string.find(unit:GetBoneName(i), 'Attachpoint_Lrg') then
-                bones.Large = bones.Large + 1
-            elseif string.find(unit:GetBoneName(i), 'Attachpoint_Med') then
-                bones.Medium = bones.Medium + 1
-            elseif string.find(unit:GetBoneName(i), 'Attachpoint') then
-                bones.Small = bones.Small + 1
-            end
-        end
-    end
-
-    -- retrieve number of slots set by blueprint, if it is set
-    local largeSlotsByBlueprint = unit.Blueprint.Transport.SlotsLarge or bones.Large 
-    local mediumSlotsByBlueprint = unit.Blueprint.Transport.SlotsMedium or bones.Medium 
-    local smallSlotsByBlueprint = unit.Blueprint.Transport.SlotsSmall or bones.Small 
-
-    -- take the minimum of the two
-    bones.Large = math.min(bones.Large, largeSlotsByBlueprint)
-    bones.Medium = math.min(bones.Medium, mediumSlotsByBlueprint)
-    bones.Small = math.min(bones.Small, smallSlotsByBlueprint)
+	
+	-- I'm not a fan of having to hardcode these values, but the blueprint, and even engine method are unreliable
+	if EntityCategoryContains(categories.xea0306, unit) then
+		bones.Large = 8
+		bones.Medium = 10
+		bones.Small = 24
+	elseif EntityCategoryContains(categories.uea0203, unit) then
+		bones.Large = 0
+		bones.Medium = 1
+		bones.Small = 1
+	elseif EntityCategoryContains(categories.uea0104, unit) then
+		bones.Large = 3
+		bones.Medium = 6
+		bones.Small = 14
+	elseif EntityCategoryContains(categories.uea0107, unit) then
+		bones.Large = 1
+		bones.Medium = 2
+		bones.Small = 6
+	elseif EntityCategoryContains(categories.uaa0107, unit) then
+		bones.Large = 1
+		bones.Medium = 3
+		bones.Small = 6
+	elseif EntityCategoryContains(categories.uaa0104, unit) then
+		bones.Large = 3
+		bones.Medium = 6
+		bones.Small = 12
+	elseif EntityCategoryContains(categories.ura0107, unit) then
+		bones.Large = 1
+		bones.Medium = 2
+		bones.Small = 6
+	elseif EntityCategoryContains(categories.ura0104, unit) then
+		bones.Large = 2
+		bones.Medium = 4
+		bones.Small = 10
+	elseif EntityCategoryContains(categories.xsa0107, unit) then
+		bones.Large = 1
+		bones.Medium = 4
+		bones.Small = 8
+	elseif EntityCategoryContains(categories.xsa0104, unit) then
+		bones.Large = 4
+		bones.Medium = 8
+		bones.Small = 16
+	else
+		-- If all else fails, try to get the slots from the unit's blueprint
+		local largeSlotsByBlueprint = unit.Blueprint.Transport.SlotsLarge
+		local mediumSlotsByBlueprint = unit.Blueprint.Transport.SlotsMedium
+		local smallSlotsByBlueprint = unit.Blueprint.Transport.SlotsSmall
+		
+		bones.Large = largeSlotsByBlueprint
+		bones.Medium = mediumSlotsByBlueprint
+		bones.Small = smallSlotsByBlueprint
+	end
 
     return bones
 end
@@ -731,7 +764,7 @@ function ReturnTransportsToPool(platoon)
 		poolName = BaseName .. '_TransportPool'
 	end
 
-    if table.empty(transports) then
+    if TableEmpty(transports) then
         return
     end
 
@@ -832,11 +865,11 @@ function BrainChooseHighestAttackRoute(aiBrain, locationList, ringSize, threatTy
         TableInsert(tempRoute, v)
     end
 
-    for i = 1, table.getn(tempRoute) do
+    for i = 1, TableGetn(tempRoute) do
         TableInsert(attackRoute, BrainChooseHighestThreatLocation(aiBrain, tempRoute, ringSize, threatType))
         for k, v in tempRoute do
             if attackRoute[i] == v then
-                table.remove(tempRoute, k)
+                TableRemove(tempRoute, k)
                 break
             end
         end
@@ -859,11 +892,11 @@ function BrainChooseLowestAttackRoute(aiBrain, locationList, ringSize, threatTyp
         TableInsert(tempRoute, v)
     end
 
-    for i = 1, table.getn(tempRoute) do
+    for i = 1, TableGetn(tempRoute) do
         TableInsert(attackRoute, BrainChooseLowestThreatLocation(aiBrain, tempRoute, ringSize, threatType))
         for k, v in tempRoute do
             if attackRoute[i] == v then
-                table.remove(tempRoute, k)
+                TableRemove(tempRoute, k)
                 break
             end
         end
@@ -1062,19 +1095,19 @@ function EngineersBuildPlatoon(platoon)
 
     -- Wait for eng to stop moving
     while eng:IsUnitState('Moving') do
-        WaitSeconds(3)
+        WaitSeconds(1)
         if not aiBrain:PlatoonExists(platoon) then
             return
         end
     end
 
     -- Have all engineers guard main engineer
-    if not table.empty(engTable) then
+    if not TableEmpty(engTable) then
         if eng.Dead then -- Must check if a death occured since platoon was forked
             for num, unit in engTable do
                 if not unit.Dead then
-                    eng = table.remove(engTable, num)
-                    if not table.empty(engTable) then
+                    eng = TableRemove(engTable, num)
+                    if not TableEmpty(engTable) then
                         IssueGuard(engTable, eng)
                     end
                     break
@@ -1156,13 +1189,14 @@ function EngineersBuildPlatoon(platoon)
             end
 			
             buildingPlatoon = false
-            if not table.empty(plat:GetPlatoonUnits()) then
+            if not TableEmpty(plat:GetPlatoonUnits()) then
 				-- Assign platoon data
                 if buildingData.PlatoonData then
                     plat.PlatoonData = buildingData.PlatoonData
                 end
 				
-				-- This part is probably not needed
+				-- We can theoretically use this to actually combine factory-built, and engineer-built platoons via the AttackManager
+				-- So, I'm keeping this part
                 if plat.PlatoonData.AMPlatoons then
                     plat:SetPartOfAttackForce()
                 end
@@ -1209,11 +1243,11 @@ end
 ---@return EngineerManager|false
 ---@return table
 function AssistOtherEngineer(eng, engTable, unitBeingBuilt)
-    if engTable and not table.empty(engTable) then
+    if engTable and not TableEmpty(engTable) then
         for num, unit in engTable do
             if not unit.Dead then
-                eng = table.remove(engTable, num)
-                if not table.empty(engTable) then
+                eng = TableRemove(engTable, num)
+                if not TableEmpty(engTable) then
                     IssueGuard(engTable, eng)
                 end
                 if unitBeingBuilt and not unitBeingBuilt.Dead then
@@ -1237,7 +1271,6 @@ end
 ---		@DisbandAfterArrival - boolean, if true, platoon disbands at the destination.
 ---  @param platoon Platoon
 function EngineersMoveToThread(platoon)
-
 	local cmd = false
     local data = platoon.PlatoonData
 	local aiBrain = platoon:GetBrain()
@@ -1352,7 +1385,7 @@ function AdvancedPatrolThread(platoon)
         end
 	end
 	
-	if table.empty(AttackPositions) then
+	if TableEmpty(AttackPositions) then
 		error('*CUSTOM PLATOON AI ERROR: Could not create AttackPositions out of PatrolRoute or PatrolChain, they are most likely not defined', 2)
 	end
 	
@@ -1426,12 +1459,11 @@ function AdvancedPatrolThread(platoon)
 	end
 end
 
-
 --- Utility function, returns false if at least 1 entity inside 'reclaimables' is a wreckage
 ---@param reclaimables, Table
 ---@return boolean
 function NoWreckageInTable(reclaimables)
-	if table.empty (reclaimables) then
+	if TableEmpty (reclaimables) then
 		return true
 	end
 	
@@ -1453,6 +1485,7 @@ function EngineerPlatoonReclaim(platoon)
 	local rectDef = Rect(position[1] - rectIncrement, position[3] - rectIncrement, position[1] + rectIncrement, position[3] + rectIncrement)
 	local reclaimRect = {}
 	local closest, distance, targetWreck
+	-- Max value for the rectangle, we don't want to increase it indefinitely
 	local MaxSize = math.max(ScenarioInfo.size[1], ScenarioInfo.size[2])
 	
 	
@@ -1554,7 +1587,7 @@ function AreaReclaimCleanUp()
 	
 	local Reclaimables = GetReclaimablesInRect(ScenarioUtils.AreaToRect('M3NewArea'))
 		--Check if there are any reclaimables
-		if not table.empty(Reclaimables) then
+		if not TableEmpty(Reclaimables) then
 			LOG('*DEBUG: Reclaimables found, their current count:' .. table.getsize(Reclaimables))
 			for k, v in Reclaimables do
 				if v and v.IsWreckage and not v.IsUnit then	--IsUnit(unit) is the same as unit.IsUnit, the latter being added by FAF in 'Unit.lua'

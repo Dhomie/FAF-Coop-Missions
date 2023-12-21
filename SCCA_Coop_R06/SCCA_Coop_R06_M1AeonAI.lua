@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
---  File     : /maps/SCCA_Coop_R06.remastered/SCCA_Coop_R06_M1AeonAI
+--  File     : /maps/SCCA_Coop_R06/SCCA_Coop_R06_M1AeonAI
 --  Author(s): Dhomie42
 --
---  Summary  : Aeon army AI for Mission 1 - SCCA_Coop_R06.remastered
+--  Summary  : Aeon army AI for Mission 1 - SCCA_Coop_R06
 --------------------------------------------------------------------------------
 local BaseManager = import('/lua/ai/opai/basemanager.lua')
 
@@ -41,8 +41,6 @@ function AeonMainBaseAI()
 	ArmyBrains[Aeon]:PBMSetCheckInterval(5)
 	
 	AeonMainBase:AddBuildGroup('MainBaseStructuresPostBuilt_D' .. Difficulty, 200)
-	
-	-- AeonMainBase:SetACUUpgrades({'CrysalisBeam', 'ShieldHeavy', 'HeatSink'}, false)
 	
 	AeonMainBase:SetActive('AirScouting', true)
     AeonMainBase:SetActive('LandScouting', true)
@@ -104,10 +102,10 @@ function AeonMainAirAttacks()
 	opai = AeonMainBase:AddOpAI('AirAttacks', 'M1_Aeon_TorpedoBombers_Attack',
         {
             MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
-                PlatoonData = {
-                    PatrolChain = 'PlayerNavalAttack_Chain',
-                },
-				Priority = 130,
+            PlatoonData = {
+                PatrolChain = 'PlayerNavalAttack_Chain',
+            },
+			Priority = 130,
         }
     )
     opai:SetChildQuantity('TorpedoBombers', quantity[Difficulty])
@@ -121,9 +119,9 @@ function AeonMainAirAttacks()
         PlatoonTemplate = {
 			'M2_Aeon_Main_AirForce_Template',
 			'NoPlan',
-			{ 'uaa0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
-			{ 'uaa0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
-			{ 'uaa0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation' }, -- T2 Gunship
+			{'uaa0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Strat Bomber
+			{'uaa0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 ASF
+			{'uaa0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation'}, -- T2 Gunship
 		},
         InstanceCount = Difficulty * 2,
         Priority = 100,
@@ -135,7 +133,7 @@ function AeonMainAirAttacks()
 		},
         PlatoonAIFunction = {SPAIFileName, 'PlatoonAttackHighestThreat'}    
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 	
 	-- Builds [4, 8, 12] Strategic Bombers if players have >= 3, 2, 1 active SMLs, T3 Artillery, etc., and attacks said structures.
 	quantity = {4, 8, 12}
@@ -215,11 +213,11 @@ function AeonMainNavalAttacks()
 	local Temp = {
         'M2_Aeon_Main_Naval_Fleet',
         'NoPlan',
-        { 'uas0302', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'uas0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'uas0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'uas0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'uas0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
+        {'uas0302', 0, T3Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Battleship
+        {'uas0201', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'uas0202', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'uas0103', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'uas0203', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Submarine
     }
 	local Builder = {
         BuilderName = 'M2_Aeon_Main_Naval_Fleet_Builder',
@@ -230,23 +228,23 @@ function AeonMainNavalAttacks()
         RequiresConstruction = true,
         LocationType = 'M1_Aeon_Main_Base',
 		BuildConditions = {
-			{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}},
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PatrolThread'},
 		PlatoonData = {
             PatrolChain = 'PlayerNavalAttack_Chain',
         },     
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 	
 	-- Small Naval Fleet for attacking Aiko at Phase 3
 	Temp = {
         'M3_Aeon_Main_Naval_Attack_To_UEF',
         'NoPlan',
-        { 'uas0201', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'uas0202', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'uas0103', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'uas0203', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
+        {'uas0201', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'uas0202', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'uas0103', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'uas0203', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Submarine
     }
 	
 	Builder = {
@@ -258,17 +256,17 @@ function AeonMainNavalAttacks()
         RequiresConstruction = true,
         LocationType = 'M1_Aeon_Main_Base',
 		BuildConditions = {
-			{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PatrolChainPickerThread'},
-            PlatoonData = {
-				PatrolChains = {
+        PlatoonData = {
+			PatrolChains = {
 				'M3_AeonToUEF_Naval_Chain',
 				'M3_AeonNorthWest_To_UEFSouthWest_Naval_Chain',
-				},
-            },
+			},
+        },
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 	
 	-- Maintains [2/2, 4/2, 8/4] Destroyers/Cruisers respectively
 	for i = 1, 2 do
@@ -282,7 +280,6 @@ function AeonMainNavalAttacks()
         }
     )
 	opai:SetChildQuantity({'Destroyers', 'Cruisers'}, {PatrolDestroyerQuantity[Difficulty], PatrolCruiserQuantity[Difficulty]})
-	--opai:SetFormation('AttackFormation')
 	opai:SetLockingStyle('DeathRatio', {Ratio = 0.5})
 	end
 	-- Maintains [2/2, 4/2, 8/4] Destroyers/Cruisers respectively North of Arnold's base
@@ -297,7 +294,6 @@ function AeonMainNavalAttacks()
         }
     )
 	opai:SetChildQuantity({'Destroyers', 'Cruisers'}, {PatrolDestroyerQuantity[Difficulty], PatrolCruiserQuantity[Difficulty]})
-	--opai:SetFormation('AttackFormation')
 	opai:SetLockingStyle('DeathRatio', {Ratio = 0.5})
 	end
 end
@@ -314,7 +310,7 @@ function AeonMainTransportAttacks()
         PlatoonTemplate = {
 			'M1_Aeon_Main_Transport_Platoon',
 			'NoPlan',
-			{ 'uaa0104', 1, 4, 'Attack', 'None' }, -- T2 Transport
+			{'uaa0104', 1, 4, 'Attack', 'None'}, -- T2 Transport
 		},
         InstanceCount = 1,
         Priority = 300,
@@ -329,18 +325,18 @@ function AeonMainTransportAttacks()
 			BaseName = 'M1_Aeon_Main_Base',
 		},
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 	
 	Builder = {
         BuilderName = 'M1_Aeon_Main_Land_Assault',
         PlatoonTemplate = {
             'M1_Aeon_Main_Land_Assault_Template',
             'NoPlan',
-            {'ual0303', 1, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
-            {'ual0304', 1, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
-            {'ual0202', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
-            {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
-            {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
+            {'ual0303', 0, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
+            {'ual0304', 0, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
+            {'ual0202', 0, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
+            {'ual0205', 0, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
+            {'ual0307', 0, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
         },
         InstanceCount = 2,
         Priority = 100,
@@ -358,18 +354,18 @@ function AeonMainTransportAttacks()
 			BaseName = 'M1_Aeon_Main_Base',
         },
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 	
 	Builder = {
         BuilderName = 'M2_Aeon_Main_Land_Sweepers',
         PlatoonTemplate = {
             'M2_Aeon_Main_Land_Sweepers_Template',
             'NoPlan',
-            {'ual0303', 1, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
-            {'ual0304', 1, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
-            {'ual0202', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
-            {'ual0205', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
-            {'ual0307', 1, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
+            {'ual0303', 0, T3Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T3 Siege Bot
+            {'ual0304', 0, T3Quantity[Difficulty], 'Artillery', 'GrowthFormation'}, -- T3 Artillery
+            {'ual0202', 0, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Heavy Tank
+            {'ual0205', 0, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile AA
+            {'ual0307', 0, T2Quantity[Difficulty], 'Attack', 'GrowthFormation'},    -- T2 Mobile Shield
         },
         InstanceCount = 2,
         Priority = 100,
@@ -388,7 +384,7 @@ function AeonMainTransportAttacks()
 			BaseName = 'M1_Aeon_Main_Base',
         },
     }
-    ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
+    ArmyBrains[Aeon]:PBMAddPlatoon(Builder)
 end
 
 -- Tempest platoon, for Phase 3

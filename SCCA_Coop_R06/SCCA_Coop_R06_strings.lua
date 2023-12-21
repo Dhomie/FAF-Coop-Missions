@@ -325,7 +325,7 @@ OpC06_M2P3_Desc = '<LOC C06_M02_OBJ_010_232>The QAI must integrate itself with t
 OpC06_M2S1_Title = '<LOC C06_M02_OBJ_010_241>The Star Wars Project'
 
 -- Secondary Objectives
-OpC06_M2S1_Desc = '<LOC C06_M02_OBJ_010_242>The gloves are coming off. Both Aeon and UEF forces will resort to extreme measures to secure victory for themselves, including Strategic Missiles. Construct at least %s Guardian SMDs (in close proximity) to prepare for a potential Nuclear strike once you\'ve captured the Control Center.'
+OpC06_M2S1_Desc = '<LOC C06_M02_OBJ_010_242>The gloves are coming off, and both Aeon and UEF forces will use Strategic Missiles, if it helps securing victory for themselves. Construct at least %s Guardian SMDs (in close proximity) to prepare for a potential Nuclear strike once you\'ve captured the Control Center.'
 
 
 

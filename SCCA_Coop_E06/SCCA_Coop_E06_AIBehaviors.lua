@@ -247,12 +247,6 @@ function FatboyBuildCheck(self)
     local aiBrain = self:GetBrain()
 	local unitToBuild = nil
 
-	-- Add callback when the structure starts building something
-	if not factory.AddedUpgradeCallback then
-		factory:AddOnStartBuildCallback(ExperimentalOnStartBuild)
-		factory.AddedUpgradeCallback = true
-	end
-
 	-- If we received a list of units to build from, let's use that.
 	if data.BuildTable then
 		unitToBuild = table.random(data.BuildTable)
@@ -443,12 +437,6 @@ function TempestBuildCheck(self)
     local aiBrain = self:GetBrain()
 	local unitToBuild = nil
 	
-	-- Add callback when the structure starts building something
-	if not factory.AddedUpgradeCallback then
-		factory:AddOnStartBuildCallback(ExperimentalOnStartBuild)
-		factory.AddedUpgradeCallback = true
-	end
-
 	--If we received a list of units to build from, let's use that.
 	if data.BuildTable then
 		unitToBuild = table.random(data.BuildTable)

@@ -69,18 +69,16 @@ function M3CybranBaseAI()
 	M3CybranBase:SetDefaultEngineerPatrolChain('M3_Cybran_Base_Engineer_Patrol_Chain')
 	ArmyBrains[Cybran]:PBMSetCheckInterval(7)
 	
-	if ScenarioInfo.Options.FullMapAccess == 2 then
-		M3CybranBase:AddBuildGroup('M3_Cybran_Base_D' .. Difficulty, 90)
-	end
-	
     M3CybranBase:SetActive('AirScouting', true)
 	
+	-- Additional stuff if players chose full map access in the lobby
+	if ScenarioInfo.Options.FullMapAccess == 2 then
+		M3CybranBase:AddBuildGroup('M3_Cybran_Base_D' .. Difficulty, 90)
+		M3CybranBaseAirDefense()
+	end
 	M3CybranBaseLandAttacks()
 	M3CybranBaseAirAttacks()
 	M3CybranBaseNavalAttacks()
-	if ScenarioInfo.Options.FullMapAccess == 2 then
-		M3CybranBaseAirDefense()
-	end
 	M3CybranBaseExperimentals()
 end
 
@@ -159,9 +157,9 @@ function M3CybranBaseLandAttacks()
             'M3_Cybran_Main_Land_Assault_Platoon',
             'NoPlan',
             {'url0303', 1, DirectQuantity[Difficulty], 'Attack', 'AttackFormation'},    	-- T3 Siege Bot
-            {'url0304', 1, ArtilleryQuantity[Difficulty], 'Attack', 'AttackFormation'}, 	-- T3 Mobile Heavy Artillery
+            {'url0304', 1, ArtilleryQuantity[Difficulty], 'Artillery', 'AttackFormation'}, 	-- T3 Mobile Heavy Artillery
             {'url0202', 1, DirectQuantity[Difficulty], 'Attack', 'AttackFormation'},    	-- T2 Heavy Tank
-			{'url0111', 1, ArtilleryQuantity[Difficulty], 'Attack', 'AttackFormation'},    	-- T2 Mobile Missile Launcher
+			{'url0111', 1, ArtilleryQuantity[Difficulty], 'Artillery', 'AttackFormation'},    	-- T2 Mobile Missile Launcher
 			{'url0205', 1, SupportQuantity[Difficulty], 'Attack', 'AttackFormation'},   	-- T2 Mobile AA
             {'url0306', 1, SupportQuantity[Difficulty], 'Attack', 'AttackFormation'},    	-- T2 Stealth
         },
@@ -191,8 +189,7 @@ end
 function M3CybranBaseAirAttacks()
 	local quantity = {6, 12, 18}
 	local trigger = {30, 25, 20}
-	
-	
+
 	-- Sends [6, 12, 18] Air Superiority Fighters to players if they have >= 30, 25, 20 air units
 	opai = M3CybranBase:AddOpAI('AirAttacks', 'M3_Cybran_AirSuperiority_Attack',
         {
@@ -205,7 +202,7 @@ function M3CybranBaseAirAttacks()
         'BrainsCompareNumCategory', {{'HumanPlayers'}, trigger[Difficulty], categories.AIR * categories.MOBILE, '>='})
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2})
 	opai:AddFormCallback(SPAIFileName, 'PlatoonEnableStealth')
-	
+
 	-- Sends [6, 12, 18] Torpedo Bombers to players if they have >= 15, 10, 5 naval units
 	trigger = {15, 10, 5}
 	opai = M3CybranBase:AddOpAI('AirAttacks', 'M3_Cybran_TorpedoBombers_Attack',
@@ -228,7 +225,7 @@ function M3CybranBaseAirAttacks()
     opai:SetChildQuantity('StratBombers', quantity[Difficulty])
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3})
 	opai:AddFormCallback(SPAIFileName, 'PlatoonEnableStealth')
-	
+
 	-- Sends [6, 12, 18] Gunships to players
 	opai = M3CybranBase:AddOpAI('AirAttacks', 'M3_Cybran_Gunships_Attack',
         {
@@ -237,7 +234,7 @@ function M3CybranBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('Gunships', quantity[Difficulty])
-	
+
 	-- Sends [6, 12, 18] Bombers to players
 	opai = M3CybranBase:AddOpAI('AirAttacks', 'M3_Cybran_Bomber_Attack',
         {
@@ -246,7 +243,7 @@ function M3CybranBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('Bombers', quantity[Difficulty])
-	
+
 	-- Sends [6, 12, 18] Bombers to players
 	opai = M3CybranBase:AddOpAI('AirAttacks', 'M3_Cybran_Interceptor_Attack',
         {
@@ -255,7 +252,7 @@ function M3CybranBaseAirAttacks()
         }
     )
     opai:SetChildQuantity('Interceptors', quantity[Difficulty])
-	
+
 	-- Builds [6, 9, 12] Strategic Bombers if players have >= 3, 2, 1 active SMLs, T3 Artillery, etc., and attacks said structures.
 	quantity = {6, 9, 12}
 	trigger = {3, 2, 1}
@@ -289,7 +286,7 @@ function M3CybranBaseAirAttacks()
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {{'HumanPlayers'}, trigger[Difficulty], ConditionCategories.ExperimentalLand, '>='})
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2})
-	
+
 	-- Builds, [8, 16, 24] Air Superiority Fighters if players have >= 150, 125, 75 active T3/Experimental Air units, and attacks said units
 	quantity = {8, 16, 24}
 	trigger = {150, 125, 75}
@@ -306,7 +303,7 @@ function M3CybranBaseAirAttacks()
 	opai:AddBuildCondition('/lua/editor/otherarmyunitcountbuildconditions.lua',
         'BrainsCompareNumCategory', {{'HumanPlayers'}, trigger[Difficulty], ConditionCategories.MassedAir, '>='})
 	opai:AddBuildCondition('/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {2})
-	
+
 	-- Cybran generic filler Air platoon
 	local Builder = {
         BuilderName = 'M3_Cybran_AirForce_Builder',

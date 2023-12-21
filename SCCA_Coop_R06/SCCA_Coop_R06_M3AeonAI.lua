@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
---  File     : /maps/SCCA_Coop_R06.remastered/SCCA_Coop_R06_M3AeonAI.lua
+--  File     : /maps/SCCA_Coop_R06/SCCA_Coop_R06_M3AeonAI.lua
 --  Author(s): Dhomie42
 --
---  Summary  : Aeon army AI for Mission 3 - SCCA_Coop_R06.remastered
+--  Summary  : Aeon army AI for Mission 3 - SCCA_Coop_R06
 --------------------------------------------------------------------------------
 local BaseManager = import('/lua/ai/opai/basemanager.lua')
 
@@ -58,12 +58,11 @@ function M3AeonSouthEasternNavalAttacks()
 	local Temp = {
         'M3_Aeon_SouthEastern_Naval_Fleet',
         'NoPlan',
-        { 'uas0302', 1, T3Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'uas0201', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'uas0202', 1, T2Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'uas0103', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'uas0203', 1, T1Quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T1 Submarine
-	
+        {'uas0302', 0, T3Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Battleship
+        {'uas0201', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'uas0202', 0, T2Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'uas0103', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'uas0203', 0, T1Quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T1 Submarine
     }
 	local Builder = {
         BuilderName = 'M3_Aeon_SouthEastern_Naval_Fleet_Builder',
@@ -74,7 +73,7 @@ function M3AeonSouthEasternNavalAttacks()
         RequiresConstruction = true,
         LocationType = 'M3_Aeon_SouthEastern_Base',
 		BuildConditions = {
-			{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PatrolChainPickerThread'},
 		PlatoonData = {
@@ -90,12 +89,10 @@ function M3AeonSouthEasternNavalAttacks()
 	Temp = {
         'M3_Aeon_SouthEastern_Naval_Attack_To_UEF',
         'NoPlan',
-        --{ 'uas0302', 1, 1, 'Attack', 'AttackFormation' }, -- T3 Battleship
-        { 'uas0201', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Destroyer
-        { 'uas0202', 1, 2, 'Attack', 'AttackFormation' }, -- T2 Cruiser
-		{ 'uas0103', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Frigate
-		{ 'uas0203', 1, 3, 'Attack', 'AttackFormation' }, -- T1 Submarine
-	
+        {'uas0201', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Destroyer
+        {'uas0202', 0, 2, 'Attack', 'AttackFormation'}, -- T2 Cruiser
+		{'uas0103', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Frigate
+		{'uas0203', 0, 3, 'Attack', 'AttackFormation'}, -- T1 Submarine
     }
 	
 	Builder = {
@@ -107,7 +104,7 @@ function M3AeonSouthEasternNavalAttacks()
         RequiresConstruction = true,
         LocationType = 'M3_Aeon_SouthEastern_Base',
 		BuildConditions = {
-			{ '/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
+			{'/lua/editor/miscbuildconditions.lua', 'MissionNumberGreaterOrEqual', {3}},
 		},
         PlatoonAIFunction = {SPAIFileName, 'PatrolThread'},
         PlatoonData = {
@@ -115,7 +112,6 @@ function M3AeonSouthEasternNavalAttacks()
         },
     }
     ArmyBrains[Aeon]:PBMAddPlatoon( Builder )
-		
 end
 
 function M3AeonSouthEasternTransportAttacks()
@@ -129,7 +125,7 @@ function M3AeonSouthEasternTransportAttacks()
 	local Temp = {
         'M3_Aeon_SouthEastern_Transport_Platoon',
         'NoPlan',
-        { 'uaa0104', 1, quantity[Difficulty], 'Attack', 'None' }, -- T2 Transport
+        {'uaa0104', 1, quantity[Difficulty], 'Attack', 'None'}, -- T2 Transport
     }
 	local Builder = {
         BuilderName = 'M3_Aeon_SouthEastern_Transport_Platoon',
@@ -234,9 +230,9 @@ function M3AeonSouthEasternAirAttacks()
 	opai = M3AeonSouthEasternBase:AddOpAI('AirAttacks', 'M3_AeonSouthEastern_Gunships_Attack',
         {
             MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
-                PlatoonData = {
-                    PatrolChain = 'M3_AeonSouthEast_To_Player_Naval_Chain1',
-                },
+            PlatoonData = {
+                PatrolChain = 'M3_AeonSouthEast_To_Player_Naval_Chain1',
+            },
             Priority = 140,
         }
     )
@@ -260,9 +256,9 @@ function M3AeonSouthEasternAirAttacks()
 	opai = M3AeonSouthEasternBase:AddOpAI('AirAttacks', 'M3_AeonSouthEastern_TorpedoBombers_Attack',
         {
             MasterPlatoonFunction = {SPAIFileName, 'PatrolThread'},
-                PlatoonData = {
-                    PatrolChain = 'M3_AeonSouthEast_To_Player_Naval_Chain1',
-                },
+            PlatoonData = {
+                PatrolChain = 'M3_AeonSouthEast_To_Player_Naval_Chain1',
+            },
             Priority = 120,
         }
     )
@@ -275,9 +271,9 @@ function M3AeonSouthEasternAirAttacks()
         PlatoonTemplate = {
 			'M3_Aeon_Main_AirForce_Template',
 			'NoPlan',
-			{ 'uaa0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 Strat Bomber
-			{ 'uaa0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation' }, -- T3 ASF
-			{ 'uaa0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation' }, -- T2 Gunship
+			{'uaa0304', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 Strat Bomber
+			{'uaa0303', 1, quantity[Difficulty], 'Attack', 'AttackFormation'}, -- T3 ASF
+			{'uaa0203', 1, quantity[Difficulty] * 2, 'Attack', 'AttackFormation'}, -- T2 Gunship
 		},
         InstanceCount = Difficulty * 2,
         Priority = 100,
@@ -329,9 +325,8 @@ function M3AeonSouthEasternExperimentalAttacks()
 					'uas0202',	--T2 Cruiser
 				},
 				Formation = 'NoFormation',
-				SitDistance = 90,
 				UnitCount = quantity[Difficulty],
-				},
+			},
             MaxAssist = Difficulty,
             Retry = true,
         }
